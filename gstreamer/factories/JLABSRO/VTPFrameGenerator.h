@@ -1,33 +1,36 @@
+#ifndef DAQ_VTP_VTPFRAMEGENERATOR_HPP
+#define DAQ_VTP_VTPFRAMEGENERATOR_HPP
+
+#include "f_dataformat_vtp.h"
+#include <random>
 #include <vector>
 
-class VTPFrameGenerator
+class FrameGenerator
 {
-	//static constexpr int header_offset_ = sizeof(DataFrameHeader) / 4;
-	std::vector<unsigned int> frame_data;
+	static constexpr int header_offset_ = sizeof(DataFrameHeader) / 4;
+	std::vector<unsigned int> frame_data_;
 
-	unsigned int crateid;
-	unsigned int slots;
-	unsigned int channels;
+	unsigned int crateid_;
+	unsigned int slots_;
+	unsigned int channels_;
 
-	//std::default_random_engine gen_;
-	//std::exponential_distribution<> time_gen_;
+	std::default_random_engine gen_;
+	std::exponential_distribution<> time_gen_;
 
 	void init_header(unsigned int counter);
-	//void update_frame_length();
-	//void make_payload_data(unsigned int slot);
+	void update_frame_length();
+	void make_payload_data(unsigned int slot);
 
 public:
 
-	VTPFrameGenerator(std::vector<unsigned int> header_offset,
-							unsigned int crateid,
-							unsigned int slots,
-							unsigned int channels,
-							double hit_rate);
-
+	FrameGenerator(unsigned int crateid, unsigned int slots,
+			unsigned int channels, double hit_rate);
 	void generate_data(unsigned int counter);
-	//void update_counter(unsigned int counter);
+	void update_counter(unsigned int counter);
 
-	//  DataFrameHeader const& get_header() const;
-	std::vector<unsigned int> const& get_frame_data() const {return frame_data;}
-	//PayloadPrinter payload_printer(int nFADC, bool verbose, int rc) const;
+	DataFrameHeader const& get_header() const;
+	std::vector<unsigned int> const& get_frame_data() const;
+	PayloadPrinter payload_printer(int nFADC, bool verbose, int rc) const;
 };
+
+#endif
