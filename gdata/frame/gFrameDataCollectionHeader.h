@@ -9,7 +9,7 @@
 #include "gutsConventions.h"  // gLogClassConstruct
 
 //VTP
-#include "../../gstreamer/factories/JLABSRO/f_dataformat_vtp.h"
+#include "f_dataformat_vtp.h"
 
 // c++
 #include <iostream>

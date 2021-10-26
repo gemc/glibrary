@@ -5,9 +5,6 @@
 #include "Configuration.h"
 
 // c++
-//#include <boost/asio.hpp>
-//#include <boost/filesystem.hpp>
-//#include <boost/program_options.hpp>
 #include <chrono>
 #include <iostream>
 #include <random>
@@ -22,10 +19,10 @@ bool GstreamerJSROFactory::publishFrameHeader(const GFrameDataCollectionHeader *
 	if(ofile == nullptr) return false;
 
 
-//	*ofile << GTAB << "Frame Header  {" << endl;
+	*ofile << GTAB << "Frame Header  {" << endl;
 //	*ofile << GTABTAB << " frameID: " << gframeHeader->getFrameID() << endl;
-//	*ofile << GTAB << "}" << endl;	
-
+	*ofile << GTAB << "}" << endl;	
+/*
 	vector<std::uint32_t> const super_magic = {0xC0DA2019, 0XC0DA0001};
 
 	ofile->write(reinterpret_cast<const char*>(super_magic.data()), sizeof(std::uint32_t) * 2);
@@ -33,7 +30,7 @@ bool GstreamerJSROFactory::publishFrameHeader(const GFrameDataCollectionHeader *
 	vector<unsigned int> const& frame = gframeHeader->get_frame_data();
 	ofile->write(reinterpret_cast<const char*>(frame.data()),
 					 sizeof(unsigned int) * frame.size());
-
+*/
 
 	return true;
 

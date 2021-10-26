@@ -8,6 +8,8 @@
 
 // c++
 #include <vector>
+#include <random>
+
 using std::vector;
 
 class GFrameDataCollection
@@ -44,6 +46,13 @@ public:
 	inline const GFrameDataCollectionHeader* getHeader()         const { return gheader; }
 	inline const vector<GIntegralPayload*>* getIntegralPayload() const { return integralPayload; }
 	inline const long int getFrameID()                           const { return gheader->getFrameID(); }
+	void make_payload_data(unsigned int slot);
+	void update_frame_length();
+
+	
+	std::default_random_engine gen_;
+        std::exponential_distribution<> time_gen_;
+
 
 private:
 	int verbosity;

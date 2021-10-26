@@ -5,6 +5,9 @@ bool GstreamerJSROFactory::publishPayload(const vector<GIntegralPayload*> *paylo
 {
 	if(ofile == nullptr) return false;
 
+	ofile->write(reinterpret_cast<const char*>(payload->data()),
+					 sizeof(unsigned int) * payload->size());
+
 	return true;
 }
 
