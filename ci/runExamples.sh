@@ -58,4 +58,4 @@ export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 ./ci/build.sh # build and install plugins to $GPLUGIN_PATH
 
 
-
+# git clone 
