@@ -3,7 +3,7 @@
 # Purpose: compiles the Cadmesh glibrary libraries
 
 # Container run example:
-# docker run -it --rm jeffersonlab/gemc:3.0-clas12 bash
+# docker run -it --rm jeffersonlab/gemc:3.0 bash
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/build.sh
 
@@ -12,10 +12,6 @@
 TERM=xterm # source script use tput for colors, TERM needs to be specified
 FILE=/etc/profile.d/jlab.sh
 test -f $FILE && source $FILE keepmine
-
-# using the checked out GLIBRARY
-export GLIBRARY=`pwd`
-echo GLIBRARY is $GLIBRARY
 
 function compileGLibrary {
 	# getting number of available CPUS
@@ -70,7 +66,7 @@ function checkLibsExistence {
 }
 
 
-function buildGEMC {
+function compileGEMC {
 	# getting number of available CPUS
 	copt=" -j"`getconf _NPROCESSORS_ONLN`" OPT=1"
 	echo
@@ -83,7 +79,15 @@ function buildGEMC {
 
 }
 
+# using the checked out GLIBRARY
+# for some reason DYLD_LIBRARY_PATH is not passed to this script
+export GLIBRARY=`pwd`
+echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
+export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
+
 ./compileCmesh
 compileGLibrary
 checkLibsExistence
+compileGEMC
 
+cp $GLIBRARY/lib/gstreamer*.gplugin $GPLUGIN_PATH

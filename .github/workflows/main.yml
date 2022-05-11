@@ -25,7 +25,26 @@ jobs:
       # you need to check it out.
       - name: Checkout
         uses: actions/checkout@main
-      - name: Build geo
+      - name: Build libs
         run: |
           ./ci/build.sh
 
+jobs:
+  runExamples:
+    runs-on: ubuntu-latest
+    container: jeffersonlab/gemc:3.0
+    name: Run ${{ matrix.example }}
+    strategy:
+      fail-fast: false
+      matrix:
+        examples:
+          - simple_flux
+          - dosimeter
+    steps:
+      # GitHub Actions do not automatically checkout your projects. If you need the code
+      # you need to check it out.
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Run Example
+        run: |
+          ./ci/runExamples ${{ matrix.example }}
