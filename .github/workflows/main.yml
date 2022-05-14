@@ -46,4 +46,4 @@ jobs:
         uses: actions/checkout@main
       - name: Run Example
         run: |
-          ./ci/runExamples ${{ matrix.example }}
+          ./ci/runExamples.sh -e ${{ matrix.example }}

@@ -55,7 +55,8 @@ export GLIBRARY=`pwd`
 echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
-./ci/build.sh # build and install plugins to $GPLUGIN_PATH
+./ci/build.sh # build glibrary / gemc and install plugins to $GPLUGIN_PATH
 
 
+git clone https://github.com/gemc/sci-g.git
 
