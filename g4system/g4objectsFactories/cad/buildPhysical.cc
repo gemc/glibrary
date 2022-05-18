@@ -7,9 +7,8 @@
 // TODO: print everything about this volume if verbosity
 G4VPhysicalVolume* G4CadSystemFactory::buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
-	string vname = s->getName();
-	string vMapname = s->getG4Name();
-	bool verbosity = getVerbosity(gopt, vname);
+	string g4name = s->getG4Name();
+	bool verbosity = getVerbosity(gopt, g4name);
 
 	// check dependencies first
 	// gvolume
@@ -51,13 +50,13 @@ G4VPhysicalVolume* G4CadSystemFactory::buildPhysical(GOptions* gopt, GVolume *s,
 	bool checkForOverlaps = false;
 	if(gopt->getInt("checkOverlaps") > 0) checkForOverlaps = true;
 
-	G4Volume *thisG4Volume = (*g4s)[vMapname];
+	G4Volume *thisG4Volume = (*g4s)[g4name];
 
 	if(thisG4Volume->getPhysical() == nullptr) {
 		thisG4Volume->setPhysical(new G4PVPlacement(getRotation(s),
 																  getPosition(s),
 																  thisG4Volume->getLogical(),
-																  vMapname,
+																  g4name,
 																  getLogicalFromMap(s->getG4MotherName(), g4s),
 																  false,
 																  s->getPCopyNo(),

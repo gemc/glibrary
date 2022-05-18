@@ -17,9 +17,8 @@ using namespace gutilities;
 
 G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
-	string vname    = s->getName();
-	string vMapname = s->getG4Name();
-	bool verbosity = getVerbosity(gopt, vname);
+	string g4name = s->getG4Name();
+	bool verbosity = getVerbosity(gopt, g4name);
 
 	// check dependencies first
 	if(!checkSolidDependencies(verbosity, s, g4s)) return nullptr;
@@ -28,14 +27,14 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 	G4Volume *thisG4Volume = nullptr;
 
 	// check if g4s already exists
-	if(g4s->find(vMapname) != g4s->end()) {
-		thisG4Volume = (*g4s)[vMapname];
+	if(g4s->find(g4name) != g4s->end()) {
+		thisG4Volume = (*g4s)[g4name];
 		// if the solid is already built, returning it
 		if (thisG4Volume->getSolid() != nullptr) return thisG4Volume->getSolid();
 	} else {
 		thisG4Volume = new G4Volume();
 		// adding volume to the map
-		(*g4s)[vMapname] = thisG4Volume;
+		(*g4s)[g4name] = thisG4Volume;
 	}
 
 	// the order of these objects is the same as on the geant4 website
@@ -47,7 +46,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 	string type = s->getType();
 
 	if(type == "G4Box") {
-		thisG4Volume->setSolid(new G4Box(vMapname,      ///< name
+		thisG4Volume->setSolid(new G4Box(g4name,      ///< name
 													pars[0],    ///< half length in X
 													pars[1],    ///< half length in Y
 													pars[2]     ///< half length in Z
@@ -57,7 +56,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Tubs") {
-		thisG4Volume->setSolid(new G4Tubs(vMapname,     ///< name
+		thisG4Volume->setSolid(new G4Tubs(g4name,     ///< name
 													 pars[0],   ///< Inner radius
 													 pars[1],   ///< Outer radius
 													 pars[2],   ///< Half length in z
@@ -69,7 +68,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Sphere") {
-		thisG4Volume->setSolid(new G4Sphere(vMapname, ///< name
+		thisG4Volume->setSolid(new G4Sphere(g4name, ///< name
 													 pars[0],    ///< Inner radius
 													 pars[1],    ///< Outer radius
 													 pars[2],    ///< Starting phi angle
@@ -82,7 +81,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4CutTubs") {
-		thisG4Volume->setSolid(new G4CutTubs(vMapname,     ///< name
+		thisG4Volume->setSolid(new G4CutTubs(g4name,     ///< name
 														 pars[0],   ///< Inner radius
 														 pars[1],   ///< Outer radius
 														 pars[2],   ///< Half length in z
@@ -96,7 +95,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Cons") {
-		thisG4Volume->setSolid(new G4Cons(vMapname,     ///< name
+		thisG4Volume->setSolid(new G4Cons(g4name,     ///< name
 													 pars[0],   ///< Inside radius at -pDz
 													 pars[1],   ///< Outside radius at -pDz
 													 pars[2],   ///< Inside radius at +pDz
@@ -110,7 +109,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Para") {
-		thisG4Volume->setSolid(new G4Para(vMapname,     ///< name
+		thisG4Volume->setSolid(new G4Para(g4name,     ///< name
 													 pars[0],   ///< Half length in x
 													 pars[1],   ///< Half length in y
 													 pars[2],   ///< Half length in z
@@ -123,7 +122,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Trd") {
-		thisG4Volume->setSolid(new G4Trd(vMapname,     ///< name
+		thisG4Volume->setSolid(new G4Trd(g4name,     ///< name
 													pars[0],   ///< Half-length along x at the surface positioned at -dz
 													pars[1],   ///< Half-length along x at the surface positioned at +dz
 													pars[2],   ///< Half-length along y at the surface positioned at -dz
@@ -150,7 +149,7 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 			rOuter[zpl] = pars[3 + 2*zplanes + zpl] ;
 		}
 
-		thisG4Volume->setSolid(new G4Polycone(vMapname,       ///< name
+		thisG4Volume->setSolid(new G4Polycone(g4name,         ///< name
 														  phistart,       ///< Initial Phi starting angle
 														  phitotal,       ///< Total Phi angle
 														  zplanes,        ///< Number of z planes
@@ -162,12 +161,12 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 
 		return thisG4Volume->getSolid();
 	} else {
-		G4cerr << " " << vname << " solid " << type << " unknown! " << G4endl;
+		G4cerr << " " << g4name << " solid " << type << " unknown! " << G4endl;
 	}
 
 	// if we are at this point the solid is not built
 	if(verbosity) {
-		G4cout << " " << vname << " solid is not built." << G4endl;
+		G4cout << " " << g4name << " solid is not built." << G4endl;
 	}
 
 	return nullptr;
