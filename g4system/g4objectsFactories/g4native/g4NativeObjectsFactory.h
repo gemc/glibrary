@@ -5,6 +5,8 @@
 #include "g4systemConventions.h"
 #include "g4objectsFactories/g4objectsFactory.h"
 
+#include "gutilities.h"
+
 // system factory
 class G4NativeSystemFactory : G4ObjectsFactory
 {
@@ -26,9 +28,9 @@ public:
 		G4VPhysicalVolume* pbuild = buildPhysical(gopt, s, g4s);
 
 		if(verbosity >= GVERBOSITY_DETAILS) {
-			string solid = sbuild != nullptr ? " solid build, "    : " solid not build, ";
-			string logic = lbuild != nullptr ? " logical build, "  : " logical not not build, ";
-			string physi = pbuild != nullptr ? " physical build. " : " physical not build. ";
+			string solid = sbuild != nullptr ? " solid "    + string(KGRN) + "build," + string(RST) : " solid "   + string(KRED) + "not build," + string(RST);
+			string logic = lbuild != nullptr ? " logical "  + string(KGRN) + "build," + string(RST) : " logical " + string(KRED) + "not build," + string(RST);
+			string physi = pbuild != nullptr ? " physical " + string(KGRN) + "build," + string(RST) : " physical "+ string(KRED) + "not build," + string(RST);
 			G4cout << G4SYSTEMLOGHEADER << "g4volume <" << vname << "> " << solid << logic << physi << " with pointers: " << sbuild << ", " << lbuild << ", " << pbuild << G4endl;
 		}
 

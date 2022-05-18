@@ -93,22 +93,24 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 
 		// looping over system in the gsystemsMap
 		for(auto &system : *gworld->getSystemsMap()) {
+
 			string systemName = system.first;
-			string factory = system.second->getFactoryName();
+			string factory   = system.second->getFactoryName();
+
 			string g4Factory = g4FactoryNameFromSystemFactory(factory);
 
 			// looping over getGVolumesMap in that system
-			for(auto &gvolume : *system.second->getGVolumesMap()) {
+			for(auto& [volumeName, gvolume] : *system.second->getGVolumesMap() ) {
 				if(g4systemFactory.find(g4Factory) != g4systemFactory.end()) {
 
 					if(verbosity == GVERBOSITY_DETAILS) {
-						G4cout << G4SYSTEMLOGHEADER << "using factory <" << KYEL << g4Factory << RST << ">, to build g4volume <" << KYEL << gvolume.first << RST << ">" << endl;
+						G4cout << G4SYSTEMLOGHEADER << "using factory <" << KYEL << g4Factory << RST << ">, to build g4volume <" << KYEL << gvolume->getG4Name() << RST << ">" << endl;
 					}
 
 					// calling loadG4System
 					// if a new system cannot be loaded, false is returned and the volumes added to thisIterationRemainingVolumes
-					if(g4systemFactory[g4Factory]->loadG4System(opt, gvolume.second, g4volumesMap) == false) {
-						thisIterationRemainingVolumes.push_back(gvolume.second);
+					if(g4systemFactory[g4Factory]->loadG4System(opt, gvolume, g4volumesMap) == false) {
+						thisIterationRemainingVolumes.push_back(gvolume);
 					}
 				} else {
 					G4cerr << FATALERRORL << "g4systemFactory factory <" << g4Factory << "> not found in map." << endl;
@@ -118,7 +120,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 			if(verbosity == GVERBOSITY_DETAILS) {
 				G4cout << G4SYSTEMLOGHEADER << system.first << " : " << thisIterationRemainingVolumes.size() << " remaining motherless g4volumes to be built: " <<  endl;
 				for (auto &gvolumeLeft: thisIterationRemainingVolumes) {
-					G4cout << GTAB << "- " << gvolumeLeft->getG4Name() << " with g4 mother " << gvolumeLeft->getG4MotherName() << endl;
+					G4cout << GTAB << "- " << gvolumeLeft->getG4Name() << " with g4 mother <" << gvolumeLeft->getG4MotherName() << ">" << endl;
 				}
 			}
 		}
@@ -344,10 +346,10 @@ void G4World::buildDefaultMaterialsElementsAndIsotopes(int verbosity) {
 	d = 0.1650*mg/cm3;
 	T = 294.25*kelvin;
 	(*g4materialsMap)[HELIUM3GAS_MATERIAL] = new G4Material(HELIUM3GAS_MATERIAL,
-																		d,
-																		1,
-																		kStateGas,
-																		T);
+																			  d,
+																			  1,
+																			  kStateGas,
+																			  T);
 	(*g4materialsMap)[HELIUM3GAS_MATERIAL]->AddElement(Helium3, 1);
 
 
@@ -368,9 +370,9 @@ void G4World::buildDefaultMaterialsElementsAndIsotopes(int verbosity) {
 	d = 0.0034*g/cm3;
 	T = 40.0*kelvin;
 	(*g4materialsMap)[TRITIUMGAS_MATERIAL] = new G4Material(TRITIUMGAS_MATERIAL,
-																		d,
-																		1,
-																		kStateGas, T);
+																			  d,
+																			  1,
+																			  kStateGas, T);
 	(*g4materialsMap)[TRITIUMGAS_MATERIAL]->AddElement(Tritium, 1);
 
 
