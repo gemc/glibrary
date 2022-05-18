@@ -20,8 +20,15 @@ GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 		// size is already checked in addVolume, the only interface to volume
 		int i=0;
 		
-		name         = trimSpacesFromString(pars[i++]);
-		mother       = trimSpacesFromString(pars[i++]);
+		name = trimSpacesFromString(pars[i++]);
+		
+		// checking that name does not contain GSYSTEM_DELIMITER
+		if (name.find(GSYSTEM_DELIMITER) != string::npos) {
+			cerr << FATALERRORL << "the gVolume name <" << name << "> contains the invalid characther: <" << GSYSTEM_DELIMITER << ">. Exiting." << endl;
+			gexit(EC__GVOLUMENAMECONTAINSINVALID);
+		}
+		
+		motherName   = trimSpacesFromString(pars[i++]);
 		type         = trimSpacesFromString(pars[i++]);
 		parameters   = trimSpacesFromString(pars[i++]);
 		material     = trimSpacesFromString(pars[i++]);
@@ -41,6 +48,10 @@ GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 		string pexists = trimSpacesFromString(pars[i++]);
 		exist = (pexists == "1") ? true : false;
 
+		// these will be assigned later
+		g4name       = UNINITIALIZEDSTRINGQUANTITY;
+		g4motherName = UNINITIALIZEDSTRINGQUANTITY;
+		
 		description  = trimSpacesFromString(pars[i++]);
 
 		// modifiers - accessed through options/jcard
@@ -68,7 +79,7 @@ ostream &operator<<(ostream &stream, GVolume gVol)
 	
 	stream  << endl;
 	stream << "   - Name:            "    << gVol.name     << "  -  " <<  gVol.description << endl;
-	stream << "   - Mother:          "    << gVol.mother      << endl;
+	stream << "   - Mother:          "    << gVol.motherName      << endl;
 	stream << "   - Type:            "    << gVol.type        << endl;
 	stream << "   - Parameters:      "    << gVol.parameters  << endl;
 	stream << "   - Material:        "    << gVol.material << endl;
@@ -96,7 +107,7 @@ GVolume::GVolume(string rootVolumeDefinition) {
 	}
 
 	name         = ROOTWORLDGVOLUMENAME;
-	mother       = MOTHEROFUSALL;
+	motherName       = MOTHEROFUSALL;
 	type         = rootDefinitions[0];
 	parameters   = volumeParameters;
 	material     = rootDefinitions.back();

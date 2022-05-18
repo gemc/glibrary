@@ -20,6 +20,7 @@
 #define EC__GDIRNOTFOUND                     205
 #define EC__GMATERIALOPTICALPROPERTYMISMATCH 206
 #define EC__GMATERIALNOTFOUND                207
+#define EC__GVOLUMENAMECONTAINSINVALID       208
 
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
 #define GSYSTEMNOMODIFIER          "noModifier"
@@ -32,6 +33,7 @@
 
 #define ROOTWORLDGVOLUMENAME "root"
 #define MOTHEROFUSALL        "akasha"
+#define GSYSTEM_DELIMITER    "/"
 
 #define GSYSTEMTEXTFACTORY   "text"
 #define GSYSTEMCADTFACTORY   "cad"

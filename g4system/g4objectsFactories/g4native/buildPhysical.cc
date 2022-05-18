@@ -8,7 +8,7 @@
 G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname = s->getName();
-	string vMapname = s->getMapName();
+	string vMapname = s->getG4Name();
 	bool verbosity = getVerbosity(gopt, vname);
 
 	// check dependencies first
@@ -58,7 +58,7 @@ G4VPhysicalVolume* G4NativeSystemFactory::buildPhysical(GOptions* gopt, GVolume 
 																  getPosition(s),
 																  thisG4Volume->getLogical(),
 																  vMapname,
-																  getLogicalFromMap(s->getMotherMapName(), g4s),
+																  getLogicalFromMap(s->getG4MotherName(), g4s),
 																  false,
 																  s->getPCopyNo(),
 																  checkForOverlaps

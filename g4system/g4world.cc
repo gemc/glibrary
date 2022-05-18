@@ -118,7 +118,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 			if(verbosity == GVERBOSITY_DETAILS) {
 				G4cout << G4SYSTEMLOGHEADER << system.first << " : " << thisIterationRemainingVolumes.size() << " remaining motherless g4volumes to be built: " <<  endl;
 				for (auto &gvolumeLeft: thisIterationRemainingVolumes) {
-					G4cout << GTAB << "- " << gvolumeLeft->getName() << " with mother " << gvolumeLeft->getMother() << endl;
+					G4cout << GTAB << "- " << gvolumeLeft->getG4Name() << " with g4 mother " << gvolumeLeft->getG4MotherName() << endl;
 				}
 			}
 		}
@@ -126,7 +126,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 			if(allRemainingVolumes >= thisIterationRemainingVolumes.size()) {
 				G4cerr << FATALERRORL << "dependencies are not being resolved: their number should diminish. Outstanding gvolumes:" << endl;
 				for (auto &gvolumeLeft: thisIterationRemainingVolumes) {
-					cerr << GTAB << "- <" << gvolumeLeft->getName() << "> with mother <" << gvolumeLeft->getMother() << ">" << endl;
+					cerr << GTAB << "- <" << gvolumeLeft->getName() << "> with mother <" << gvolumeLeft->getG4MotherName() << ">" << endl;
 				}
 				gexit(EC__G4DEPENDENCIESNOTSOLVED);
 			}

@@ -12,7 +12,7 @@
 G4LogicalVolume* G4CadSystemFactory::buildLogical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	string vname = s->getName();
-	string vMapname = s->getMapName();
+	string vMapname = s->getG4Name();
 	bool verbosity = getVerbosity(gopt, vname);
 
 	// if it's a component, do nothing

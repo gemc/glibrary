@@ -122,9 +122,23 @@ GWorld::GWorld(GOptions* gopts) {
 		for (auto& [volumeName, gvolume] : *system.second->getGVolumesMap() ) {
 			// will exit with error if not found
 			// skipping world volume
-			string motherVolumeName = gvolume->getMother();
+			string motherVolumeName = gvolume->getMotherName();
 			if (motherVolumeName != MOTHEROFUSALL ) {
-				searchForVolume(motherVolumeName, "mother of <" + gvolume->getName() + ">");
+				
+				auto motherVolume = searchForVolume(motherVolumeName, "mother of <" + gvolume->getName() + ">");
+
+				string g4name       = gvolume->getSystem()      + GSYSTEM_DELIMITER + volumeName;
+				string g4motherName = motherVolume->getSystem() + GSYSTEM_DELIMITER + motherVolumeName;
+				
+				if (motherVolumeName == ROOTWORLDGVOLUMENAME ) {
+					g4motherName = ROOTWORLDGVOLUMENAME;
+				}
+				
+				gvolume->assignG4Names(g4name, g4motherName);
+				
+			} else {
+				gvolume->assignG4Names(ROOTWORLDGVOLUMENAME, MOTHEROFUSALL);
+
 			}
 		}
 	}

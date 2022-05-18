@@ -12,7 +12,7 @@ G4VSolid* G4CadSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string,
 {
 
 	string vname    = s->getName();
-	string vMapname = s->getMapName();
+	string vMapname = s->getG4Name();
 	bool verbosity = getVerbosity(gopt, vname);
 
 	// check dependencies first
