@@ -11,9 +11,8 @@
 G4VSolid* G4CadSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
 
-	string vname    = s->getName();
-	string vMapname = s->getMapName();
-	bool verbosity = getVerbosity(gopt, vname);
+	string g4name = s->getG4Name();
+	bool verbosity = getVerbosity(gopt, g4name);
 
 	// check dependencies first
 	if(!checkSolidDependencies(verbosity, s, g4s)) return nullptr;
@@ -22,14 +21,14 @@ G4VSolid* G4CadSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string,
 	G4Volume *thisG4Volume = nullptr;
 
 	// check if g4s already exists
-	if(g4s->find(vMapname) != g4s->end()) {
-		thisG4Volume = (*g4s)[vMapname];
+	if(g4s->find(g4name) != g4s->end()) {
+		thisG4Volume = (*g4s)[g4name];
 		// if the solid is already built, returning it
 		if (thisG4Volume->getSolid() != nullptr) return thisG4Volume->getSolid();
 	} else {
 		thisG4Volume = new G4Volume();
 		// adding volume to the map
-		(*g4s)[vMapname] = thisG4Volume;
+		(*g4s)[g4name] = thisG4Volume;
 	}
 
 	string fileName  = s->getDescription();

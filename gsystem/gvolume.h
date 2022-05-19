@@ -23,7 +23,7 @@ public:
 private:
 	string         system; ///< System of provenience
 	string           name; ///< Name of the volume
-	string         mother; ///< Mother Volume name
+	string     motherName; ///< Mother Volume name
 	string    description; ///< Volume Description, for documentation
 	string importFilename; ///< For imports, filename with path, set with the import factory
 	
@@ -60,25 +60,20 @@ private:
 	// mirrors
 	string       mirror;
 
+	// the map key names used in geant4 contains the system name
+	// these are assigned by gworld after all voumes are loaded
+	string g4name;          ///< Name of the g4volume
+	string g4motherName;    ///< Name of the g4 Mother volume
+
 	friend ostream &operator<<(ostream &stream, GVolume); ///< Logs infos on screen.
 
 public:
-	inline const string getName() const {return name;}
-	inline const string getMapName() const {
-		if (mother == MOTHEROFUSALL) {
-			return ROOTWORLDGVOLUMENAME;
-		}
-		return system + "__" + name;
-	}
-	inline const string getMother() const {return mother;}
-	inline const string getMotherMapName() const {
-		if (mother == ROOTWORLDGVOLUMENAME) {
-			return ROOTWORLDGVOLUMENAME;
-		} else if (mother == MOTHEROFUSALL) {
-			return MOTHEROFUSALL;
-		}
-		return system + "__" + mother;
-	}
+	inline const string getSystem()       const {return system;}
+	
+	inline const string getName()         const {return name;}
+	inline const string getMotherName()   const {return motherName;}
+	inline const string getG4Name()       const {return g4name;}
+	inline const string getG4MotherName() const {return g4motherName;}
 
 	inline vector<double> getDetectorDimensions() const {return getG4NumbersFromString(parameters);}
 
@@ -112,6 +107,10 @@ public:
 
 	// imported volumes
 	string getImportedFile() {return importFilename;}
+	
+	// assign g4names
+	inline void assignG4Names(string g4n, string g4m) {g4name = g4n; g4motherName=g4m;}
+
 };
 
 

@@ -1,6 +1,9 @@
 #ifndef  GSYSTEM_CONVENTIONS_H
 #define  GSYSTEM_CONVENTIONS_H  1
 
+// Assumptions:
+// The volumes and materials in each system must have an unique name
+
 // number of database pars defining a gvolume and a gmaterial
 #define GVOLUMENUMBEROFPARS    19
 #define GMATERIALNUMBEROFPARS  18
@@ -20,6 +23,7 @@
 #define EC__GDIRNOTFOUND                     205
 #define EC__GMATERIALOPTICALPROPERTYMISMATCH 206
 #define EC__GMATERIALNOTFOUND                207
+#define EC__GVOLUMENAMECONTAINSINVALID       208
 
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
 #define GSYSTEMNOMODIFIER          "noModifier"
@@ -32,6 +36,7 @@
 
 #define ROOTWORLDGVOLUMENAME "root"
 #define MOTHEROFUSALL        "akasha"
+#define GSYSTEM_DELIMITER    "/"
 
 #define GSYSTEMTEXTFACTORY   "text"
 #define GSYSTEMCADTFACTORY   "cad"

@@ -56,10 +56,13 @@ G4RotationMatrix* G4ObjectsFactory::getRotation(GVolume *s)
 		rot->rotateY(rotPars[1]);
 		rot->rotateZ(rotPars[2]);
 		// custom ordered rotation
-	} else if(rotDef.size() == 5) {
-		if(rotDef[0] == "ordered:" || rotDef[0] == "Ordered:") {
-			string order = rotDef[1];
-			vector<double> rotPars = getG4NumbersFromStringVector({rotDef[2], rotDef[3], rotDef[4]});
+	} else if(rotDef.size() == 4) {
+		vector<string> orderDefinitions = getStringVectorFromStringWithDelimiter(rotDef[0], " ");
+
+		if(orderDefinitions[0] == "ordered:" || orderDefinitions[0] == "Ordered:") {
+			string order = orderDefinitions[1];
+
+			vector<double> rotPars = getG4NumbersFromStringVector({rotDef[1], rotDef[2], rotDef[3]});
 
 			if(order == "xzy") {
 				rot->rotateX(rotPars[0]);

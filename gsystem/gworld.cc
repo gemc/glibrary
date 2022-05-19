@@ -48,9 +48,9 @@ GWorld::GWorld(GOptions* gopts) {
 	gSystemManager.RegisterObjectFactory<GSystemTextFactory>(GSYSTEMTXTFACTORY);
 	systemFactory[GSYSTEMTEXTFACTORY] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTXTFACTORY);
 
-	for (auto& system: *gsystemsMap) {
+	for (auto& [gsystemName, gsystem] : *gsystemsMap) {
 		
-		string factoryName = system.second->getFactoryName();
+		string factoryName = gsystem->getFactoryName();
 
 		if(factoryName == GSYSTEMCADTFACTORY) {
 			if(systemFactory.find(factoryName) == systemFactory.end()) {
@@ -69,15 +69,14 @@ GWorld::GWorld(GOptions* gopts) {
 	gSystemManager.clearDLMap();
 
 	// now loading gvolumes definitions for all systems
-	for (auto& system: *gsystemsMap) {
-		string systemName = system.first;
-		string factory = system.second->getFactoryName();
+	for (auto& [gsystemName, gsystem] : *gsystemsMap) {
+		string factory = gsystem->getFactoryName();
 
 		if(systemFactory.find(factory) != systemFactory.end()) {
 			systemFactory[factory]->addPossibleFileLocation(getDirFromPath(gopts->jcardFilename));
-			systemFactory[factory]->loadSystem(system.second, verbosity);
+			systemFactory[factory]->loadSystem(gsystem, verbosity);
 		} else {
-			cerr << FATALERRORL << "systemFactory factory <" << factory << "> not found for " << systemName << endl;
+			cerr << FATALERRORL << "systemFactory factory <" << factory << "> not found for " << gsystemName << endl;
 			gexit(EC__FACTORYNOTFOUND);
 		}
 
@@ -86,10 +85,10 @@ GWorld::GWorld(GOptions* gopts) {
 	}
 
 	if(verbosity == GVERBOSITY_DETAILS) {
-		for (auto system: *gsystemsMap) {
+		for (auto& [gsystemName, gsystem] : *gsystemsMap) {
 			// first collect all volume names
-			for (auto& [volumeName, gvolume] : *system.second->getGVolumesMap() ) {
-				cout << GSYSTEMLOGHEADER << "System <" << system.first << "> volume " << volumeName << endl;
+			for (auto& [volumeName, gvolume] : *gsystem->getGVolumesMap() ) {
+				cout << GSYSTEMLOGHEADER << "System <" << gsystemName << "> volume " << volumeName << endl;
 			}
 		}
 	}
@@ -122,9 +121,23 @@ GWorld::GWorld(GOptions* gopts) {
 		for (auto& [volumeName, gvolume] : *system.second->getGVolumesMap() ) {
 			// will exit with error if not found
 			// skipping world volume
-			string motherVolumeName = gvolume->getMother();
+			string motherVolumeName = gvolume->getMotherName();
 			if (motherVolumeName != MOTHEROFUSALL ) {
-				searchForVolume(motherVolumeName, "mother of <" + gvolume->getName() + ">");
+				
+				auto motherVolume = searchForVolume(motherVolumeName, "mother of <" + gvolume->getName() + ">");
+
+				string g4name       = gvolume->getSystem()      + GSYSTEM_DELIMITER + volumeName;
+				string g4motherName = motherVolume->getSystem() + GSYSTEM_DELIMITER + motherVolumeName;
+				
+				if (motherVolumeName == ROOTWORLDGVOLUMENAME ) {
+					g4motherName = ROOTWORLDGVOLUMENAME;
+				}
+				
+				gvolume->assignG4Names(g4name, g4motherName);
+				
+			} else {
+				gvolume->assignG4Names(ROOTWORLDGVOLUMENAME, MOTHEROFUSALL);
+
 			}
 		}
 	}

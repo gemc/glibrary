@@ -26,13 +26,6 @@ private:
 	string factoryName;             // Name of actory that builds the detector
 	string variation = "default";   // Variation of the detector. Default is "default"
 
-	inline const string formVolumeKey(string detectorName) const {
-		if (detectorName == ROOTWORLDGVOLUMENAME) {
-			return ROOTWORLDGVOLUMENAME;
-		}
-		return name + "__" + detectorName;
-	}
-
 	// map containing the volumes
 	// the key is system + volume name;
 	// the names must be unique in each system

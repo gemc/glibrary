@@ -93,7 +93,7 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 		// parse error
 		if (thisException.find("parse_error") != string::npos) {
 			cerr << FATALERRORL << "parsing " << jcardFilename
-			<< " failed. Try validating the jcard at: " << " https://codebeautify.org/jsonvalidator" << endl;
+			<< " failed. Try validating the jcard by copying its content in: " << " https://codebeautify.org/jsonvalidator" << endl;
 		} else {
 			cerr << FATALERRORL << "exception: " << thisException << endl;
 		}
