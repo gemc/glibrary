@@ -1,0 +1,29 @@
+name: Compile
+
+on:
+  # Triggers the workflow on all pushes
+  push:
+  pull_request:
+    types:
+      # only run workflow when a commit is pushed to a PR branch
+      # instead of running for all other PR events
+      - synchronize
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: jeffersonlab/gemc:3.0
+    name: Compile
+    strategy:
+      fail-fast: false
+    steps:
+      # GitHub Actions do not automatically checkout your projects. If you need the code
+      # you need to check it out.
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Compile
+        run: |
+          ./ci/build.sh

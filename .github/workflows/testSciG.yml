@@ -1,5 +1,4 @@
-
-name: glibrary
+name: Test SciG
 
 on:
   # Triggers the workflow on all pushes
@@ -14,36 +13,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  testSciG:
     runs-on: ubuntu-latest
     container: jeffersonlab/gemc:3.0
-    name: Build
-    strategy:
-      fail-fast: false
-    steps:
-      # GitHub Actions do not automatically checkout your projects. If you need the code
-      # you need to check it out.
-      - name: Checkout
-        uses: actions/checkout@main
-      - name: Build libs
-        run: |
-          ./ci/build.sh
-
-  runExamples:
-    runs-on: ubuntu-latest
-    container: jeffersonlab/gemc:3.0
-    name: Run ${{ matrix.example }}
+    name: Run ${{ matrix.examples }}
     strategy:
       fail-fast: false
       matrix:
         examples:
-          - simple_flux
-          - dosimeter
+          - examples/geometry/dosimeter
+          - examples/geometry/simple_flux
     steps:
       # GitHub Actions do not automatically checkout your projects. If you need the code
       # you need to check it out.
       - name: Checkout
         uses: actions/checkout@main
-      - name: Run Example
+      - name: Test ${{ matrix.examples }}
         run: |
-          ./ci/runExamples.sh -e ${{ matrix.example }}
+          ./ci/testSciG.sh -e ${{ matrix.examples }} 

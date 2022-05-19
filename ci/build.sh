@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# Purpose: compiles the Cadmesh glibrary libraries
+# Purpose: compiles the Cadmesh, glibrary libraries and gemc
 
 # Container run example:
 # docker run -it --rm jeffersonlab/gemc:3.0 bash
@@ -33,18 +33,6 @@ function checkLibsExistence {
 
 	# cadmesh
 	for lib in assimp cadmesh
-	do
-		ls lib/lib$lib$libExtension
-		if [ $? -ne 0 ]; then
-			echo $lib not present
-			exit 1
-		fi
-	done
-
-	# glibrary
-	libExtension=".a"
-	for lib in eventDispenser g4display g4system gQtButtonsWidget gdata gdynamic ghit goptions \
-	           gparticle gsplash gstreamer gsystem gtouchable gtranslationTable guts textProgressBar
 	do
 		ls lib/lib$lib$libExtension
 		if [ $? -ne 0 ]; then
