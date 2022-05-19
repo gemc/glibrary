@@ -16,7 +16,7 @@ jobs:
   testSciG:
     runs-on: ubuntu-latest
     container: jeffersonlab/gemc:3.0-clas12
-    name: Run ${{ matrix.examples }}
+    name: Run ${{ matrix.detector }}
     strategy:
       fail-fast: false
       matrix:
@@ -30,4 +30,4 @@ jobs:
         uses: actions/checkout@main
       - name: Test ${{ matrix.detector }}
         run: |
-          ./ci/testC12.sh -e ${{ matrix.examples }}
+          ./ci/testC12.sh -e ${{ matrix.detector }}
