@@ -5,7 +5,7 @@
 # Container run example:
 # docker run -it --rm jeffersonlab/gemc:3.0 bash
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
-# ./ci/runExamples.sh dosimeter
+# ./ci/runExamples.sh -e dosimeter
 
 # load environment if we're on the container
 # notice the extra argument to the source command
@@ -57,6 +57,6 @@ export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 ./ci/build.sh # build glibrary / gemc and install plugins to $GPLUGIN_PATH
 
+cd $JLAB_ROOT/$JLAB_VERSION/noarch/sci-g/$SCIG_VERSION
 
-git clone https://github.com/gemc/sci-g.git
-
+./ci/tests.sh -e $detector -t
