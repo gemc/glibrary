@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 
-# Purpose: Runs the examples in sci-g
+# Purpose: Runs the examples in clas12-system
 
 # Container run example:
 # docker run -it --rm jeffersonlab/gemc:3.0 bash
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
-# ./ci/testSciG.sh -e examples/geometry/dosimeter
+# ./ci/runExamples.sh -e dosimeter
 
 # load environment if we're on the container
 # notice the extra argument to the source command
@@ -57,6 +57,6 @@ export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 ./ci/build.sh # build glibrary / gemc and install plugins to $GPLUGIN_PATH
 
-cd $JLAB_ROOT/$JLAB_VERSION/noarch/sci-g/$SCIG_VERSION
+cd $JLAB_SOFTWARE/clas12-systems/$G3CLAS12_VERSION
 
-./ci/tests.sh -e $detector -t
+./ci/tests.sh -s $detector -t

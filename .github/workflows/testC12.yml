@@ -1,4 +1,4 @@
-name: Test SciG
+name: Test CLAS12
 
 on:
   # Triggers the workflow on all pushes
@@ -15,19 +15,19 @@ on:
 jobs:
   testSciG:
     runs-on: ubuntu-latest
-    container: jeffersonlab/gemc:3.0
+    container: jeffersonlab/gemc:3.0-clas12
     name: Run ${{ matrix.examples }}
     strategy:
       fail-fast: false
       matrix:
-        examples:
-          - examples/geometry/dosimeter
-          - examples/geometry/simple_flux
+        detector:
+          - ftof
+          - ft/ft_cal
     steps:
       # GitHub Actions do not automatically checkout your projects. If you need the code
       # you need to check it out.
       - name: Checkout
         uses: actions/checkout@main
-      - name: Test ${{ matrix.examples }}
+      - name: Test ${{ matrix.detector }}
         run: |
-          ./ci/testSciG.sh -e ${{ matrix.examples }} 
+          ./ci/testC12.sh -e ${{ matrix.examples }}
