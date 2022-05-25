@@ -2,8 +2,4 @@
 - what is random number system
 - implement rule of 5 and use messages to check which copy/move constructor is used in the example
 - do data in digitized hit need to be value or reference?
-
-- streamData instead of EventData. How to organize this?
-  add class hardware that transform sensitive identifier to crate / slot / channel
-  add class that collects crate / slot / channel into a single stream
-  stream using gstreamer
+- split ADC and TDC outputs
