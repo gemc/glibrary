@@ -16,7 +16,7 @@ public:
 		int verbosity = gopt->getInt(G4SYSTEMVERBOSITY);
 		string vname = s->getG4Name();
 
-		if(verbosity >= GVERBOSITY_SUMMARY) {
+		if(verbosity >= GVERBOSITY_DETAILS) {
 			G4cout << G4SYSTEMLOGHEADER << "Importing cad volumes <" << vname << ">" << G4endl;
 		}
 
