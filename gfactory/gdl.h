@@ -11,13 +11,10 @@
 #include <sys/stat.h> // to check if file exists
 #include <string>
 #include <iostream>
-using std::cout;
-using std::cerr;
-using std::endl;
 
 typedef void* dlhandle;
 
-static dlhandle load_lib(const string& path);
+static dlhandle load_lib(const std::string& path);
 static void close_lib(dlhandle handle);
 
 #define DLLOGITEM  " ⁍"
@@ -34,7 +31,7 @@ static void close_lib(dlhandle handle);
 struct DynamicLib {
 
 private:
-	string   dlFileName;  ///< dynamic library file
+	std::string   dlFileName;  ///< dynamic library file
 	int verbosity = 0;
 
 	bool doesFileExists(const std::string& name) {
@@ -48,20 +45,20 @@ public:
 	DynamicLib() = default;
 	dlhandle handle = nullptr;   ///< posix handle of the dynamic library
 
-	DynamicLib(string path, int v = 0) : dlFileName(path), verbosity(v), handle(nullptr) {
+	DynamicLib(std::string path, int v = 0) : dlFileName(path), verbosity(v), handle(nullptr) {
 
 		if(doesFileExists(dlFileName)) {
 			if ( verbosity ) {
-				cout << DLLOGITEM <<  " Loading Dynamic Library " << dlFileName << endl;
+				std::cout << DLLOGITEM <<  " Loading Dynamic Library " << dlFileName << std::endl;
 			}
 			handle = load_lib(dlFileName);
 			if(handle == nullptr) {
-				cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR "found, but could not be loaded" << endl;
+				std::cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR "found, but could not be loaded" << std::endl;
 				gexit(EC__DLNOTFOUND);
 			}
 
 		} else {
-			cerr << FATALERRORL  << "couldn't load " << YELLOWHHL << dlFileName << RSTHHR  << endl;
+			std::cerr << FATALERRORL  << "couldn't load " << YELLOWHHL << dlFileName << RSTHHR  << std::endl;
 			gexit(EC__DLNOTFOUND);
 		}
 	}
@@ -70,7 +67,7 @@ public:
 		if (handle != nullptr) {
 			close_lib(handle);
 			if ( verbosity ) {
-				cout << DLLOGITEM << " Closing DL " << dlFileName << endl;
+				std::cout << DLLOGITEM << " Closing DL " << dlFileName << std::endl;
 			}
 		}
 	}
@@ -79,7 +76,7 @@ public:
 };
 
 
-static dlhandle load_lib(const string& path) {
+static dlhandle load_lib(const std::string& path) {
 
 	return dlopen(path.data(), RTLD_NOW);
 	// get a handle to the lib, may be nullptr.

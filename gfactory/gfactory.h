@@ -48,14 +48,14 @@ class GManager
 private:
 
 	// the map of GFactoryBase is kept on GManager
-	std::map<string, GFactoryBase*> factoryMap;
+	std::map<std::string, GFactoryBase*> factoryMap;
 
 	// the reason to keep this map is to keep the (DynamicLib?) pointers in memory
 	// for some reason declaring a dynamic_lib local variable in LoadAndRegisterObjectFromLibrary
 	// scope does not work
 	std::map<std::string, DynamicLib*> dlMap;
 
-	string gname; // manager name
+	std::string gname; // manager name
 	int verbosity;
 
 	/**
@@ -64,11 +64,11 @@ private:
 	 *
 	 * The full filename is OS dependent
 	 */
-	void registerDL(string name) {
+	void registerDL(std::string name) {
 		// PRAGMA TODO: make it OS independent?
 		dlMap[name] = new DynamicLib( name + ".gplugin", verbosity);
 		if(verbosity > 0) {
-			cout  << GFACTORYLOGITEM << " GManager: Loading DL " << name  << endl;
+			std::cout  << GFACTORYLOGITEM << " GManager: Loading DL " << name  << std::endl;
 		}
 	}
 
@@ -78,9 +78,9 @@ public:
 	 - 0: no not print any log
 	 - 1: print gmanager registering and instantiating classes
 	 */
-	GManager( string name, int v = 0 ) : gname(name), verbosity(v) {
+	GManager( std::string name, int v = 0 ) : gname(name), verbosity(v) {
 		if (verbosity > 0 ) {
-			cout  << GFACTORYLOGITEM << " GPlugin: Instantiating " << gname << " GManager" << endl;
+			std::cout  << GFACTORYLOGITEM << " GPlugin: Instantiating " << gname << " GManager" << std::endl;
 		}
 	}
 
@@ -93,11 +93,11 @@ public:
 	 * Derived is the derived class, i.e. "Triangle" : "Shape".\n
 	 * The client knows about the derived class (through header)
 	 */
-	template <class Derived> void RegisterObjectFactory(string name) {
+	template <class Derived> void RegisterObjectFactory(std::string name) {
 		factoryMap[name] = new GFactory<Derived>();
 		if(verbosity > 0) {
-			cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Registering <" << name << "> factory. ";
-			cout << "Factory has now: " << factoryMap.size() << " plugin " << endl;
+			std::cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Registering <" << name << "> factory. ";
+			std::cout << "Factory has now: " << factoryMap.size() << " plugin " << std::endl;
 		}
 	}
 
@@ -110,14 +110,14 @@ public:
 	 * c++ polymorphism is used to called the client methods derived
 	 * from the base pure virtual methods.
 	 */
-	template <class Base> Base* CreateObject(string name) const {
+	template <class Base> Base* CreateObject(std::string name) const {
 		auto factory = factoryMap.find(name);
 		if(factory == factoryMap.end()) {
-			cerr << FATALERRORL  << "couldn't find factory " << YELLOWHHL << name << RSTHHR << " in factoryMap." << endl;
+			std::cerr << FATALERRORL  << "couldn't find factory " << YELLOWHHL << name << RSTHHR << " in factoryMap." << std::endl;
 			gexit(EC__FACTORYNOTFOUND);
 		}
 		if(verbosity > 0) {
-			cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Creating instance of <" << name << "> factory." << endl;
+			std::cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Creating instance of <" << name << "> factory." << std::endl;
 		}
 		return static_cast<Base*>(factory->second->Create());
 	}
@@ -130,7 +130,7 @@ public:
 	 * Instantiate client derived class.\n
 	 * Notice the base class must have the static method instantiate
 	 */
-	template <class T> T* LoadAndRegisterObjectFromLibrary(string name) {
+	template <class T> T* LoadAndRegisterObjectFromLibrary(std::string name) {
 
 		registerDL(name);
 

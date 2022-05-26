@@ -5,6 +5,9 @@
 #include "gtranslationTableConventions.h"
 #include "gdataConventions.h"
 
+// c++
+using std::cerr;
+using std::endl;
 
 // notice: if the energy deposited is very low (~50eV)
 // the rounding error on the averave calculations could be up to 10^-3

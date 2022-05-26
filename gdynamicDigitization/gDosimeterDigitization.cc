@@ -1,6 +1,9 @@
 #include "ginternalDigitization.h"
 
-
+// c++
+using std::cerr;
+using std::cout;
+using std::endl;
 
 bool GDosimeterDigitization::defineReadoutSpecs() {
 	float     timeWindow = 10;                  // electronic readout time-window of the detector

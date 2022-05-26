@@ -98,17 +98,14 @@
 #define YELLOWHHL       KYEL HHL
 #define BOLDWHHL        "\x1B[1m" HHL
 
-// exiting with error, print error on screen.
-// should this be part of a namespace ?
 #include <string>
-using std::string;
 
 // thread safe message systems
 void gexit(int error);
-void gLogClassConstruct(string className);
-void gLogCopyConstruct(string className);
-void gLogMoveConstruct(string className);
-void gLogDestruct(string className);
-void gLogMessage(string message);
+void gLogClassConstruct(std::string className);
+void gLogCopyConstruct(std::string className);
+void gLogMoveConstruct(std::string className);
+void gLogDestruct(std::string className);
+void gLogMessage(std::string message);
 
 #endif
