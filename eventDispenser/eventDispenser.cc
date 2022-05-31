@@ -145,15 +145,18 @@ int EventDispenser::processEvents()
 		}
 
 		// loads the constants
-		for(auto [digitizationName, digiRoutine]: (*gDigitizationGlobal)) {
-			if(verbosity >= GVERBOSITY_DETAILS) {
-				cout << EVENTDISPENSERLOGMSGITEM << " Calling " << digitizationName << "digitization loadConstants for run " << runNumber << endl;
-			}
-			if ( runNumber != currentRunno ) {
+		if ( runNumber != currentRunno ) {
+			for(auto [digitizationName, digiRoutine]: (*gDigitizationGlobal)) {
+				if(verbosity >= GVERBOSITY_DETAILS) {
+					cout << EVENTDISPENSERLOGMSGITEM << " Calling " << digitizationName << "digitization loadConstants for run " << runNumber << endl;
+				}
 				digiRoutine->loadConstants(runNumber, variation);
+				if(verbosity >= GVERBOSITY_DETAILS) {
+					cout << EVENTDISPENSERLOGMSGITEM << " Calling " << digitizationName << "digitization loadTT for run " << runNumber << endl;
+				}
 				digiRoutine->loadTT(runNumber, variation);
-				currentRunno = runNumber;
 			}
+			currentRunno = runNumber;
 		}
 
 		// I think we may need this here

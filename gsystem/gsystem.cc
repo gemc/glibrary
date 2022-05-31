@@ -35,7 +35,7 @@ void GSystem::addGVolume(vector<string> pars, int verbosity) {
 
 	if(gvolumesMap->find(voumeName) == gvolumesMap->end()) {
 
-		if(verbosity >= GVERBOSITY_SUMMARY) {
+		if(verbosity >= GVERBOSITY_DETAILS) {
 			cout << GSYSTEMLOGHEADER << "Adding gVolume <" << voumeName << "> to gvolumesMap with name as key"<< endl;
 		}
 		(*gvolumesMap)[voumeName] = new GVolume(name, pars);

@@ -10,6 +10,10 @@
 #include "gsystemFactories/cad/systemCadFactory.h"
 #include "gsystemFactories/gdml/systemGdmlFactory.h"
 
+// c++
+using std::cerr;
+using std::endl;
+
 GWorld::GWorld(GOptions* gopts) {
 
 	gsystemsMap   = new map<string, GSystem*>;

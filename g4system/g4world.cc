@@ -12,6 +12,11 @@
 #include "G4NistManager.hh"
 using namespace CLHEP;
 
+// c++
+using std::cerr;
+using std::cout;
+using std::endl;
+
 G4World::G4World(GWorld *gworld, GOptions* opt) {
 
 
@@ -204,14 +209,14 @@ bool G4World::createG4Material(const GMaterial *gmaterial, int verbosity) {
 	for ( auto& componentName: components ) {
 		if ( isChemical ) {
 			if ( NISTman->FindOrBuildElement(componentName) == nullptr ) {
-				if(verbosity == GVERBOSITY_DETAILS) {
+				if(verbosity == GVERBOSITY_SUMMARY) {
 					G4cout << G4SYSTEMLOGHEADER << " element component " << componentName << " needed by material " << materialName << " not found yet " << endl;
 				}
 				return  false;
 			}
 		} else {
 			if ( NISTman->FindOrBuildMaterial(componentName) == nullptr ) {
-				if(verbosity == GVERBOSITY_DETAILS) {
+				if(verbosity == GVERBOSITY_SUMMARY) {
 					G4cout << G4SYSTEMLOGHEADER << " material component " << componentName << " needed by material " << materialName << " not found yet " << endl;
 				}
 				return  false;
