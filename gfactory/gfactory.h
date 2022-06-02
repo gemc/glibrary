@@ -9,8 +9,6 @@
 // dynamic loading
 #include "gdl.h"
 
-#define GFACTORYLOGITEM  " ⎆"
-
 /*
  * @class GFactoryBase
  * @brief Base class. Use polymorphism to run Create on the
@@ -68,7 +66,7 @@ private:
 		// PRAGMA TODO: make it OS independent?
 		dlMap[name] = new DynamicLib( name + ".gplugin", verbosity);
 		if(verbosity > 0) {
-			std::cout  << GFACTORYLOGITEM << " GManager: Loading DL " << name  << std::endl;
+			std::cout  << PLUGINITEM << " GManager: Loading DL " << YELLOWHHL << name  << RSTHHR << std::endl;
 		}
 	}
 
@@ -80,7 +78,7 @@ public:
 	 */
 	GManager( std::string name, int v = 0 ) : gname(name), verbosity(v) {
 		if (verbosity > 0 ) {
-			std::cout  << GFACTORYLOGITEM << " GPlugin: Instantiating " << gname << " GManager" << std::endl;
+			std::cout  << PLUGINITEM << " GPlugin: Instantiating " << YELLOWHHL << gname << RSTHHR << " GManager" << std::endl;
 		}
 	}
 
@@ -96,7 +94,7 @@ public:
 	template <class Derived> void RegisterObjectFactory(std::string name) {
 		factoryMap[name] = new GFactory<Derived>();
 		if(verbosity > 0) {
-			std::cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Registering <" << name << "> factory. ";
+			std::cout << PLUGINITEM << " GPlugin: " << gname << " Manager: Registering <" << KYEL << name << RST << "> factory. ";
 			std::cout << "Factory has now: " << factoryMap.size() << " plugin " << std::endl;
 		}
 	}
@@ -111,13 +109,15 @@ public:
 	 * from the base pure virtual methods.
 	 */
 	template <class Base> Base* CreateObject(std::string name) const {
+		
 		auto factory = factoryMap.find(name);
+		
 		if(factory == factoryMap.end()) {
 			std::cerr << FATALERRORL  << "couldn't find factory " << YELLOWHHL << name << RSTHHR << " in factoryMap." << std::endl;
 			gexit(EC__FACTORYNOTFOUND);
 		}
 		if(verbosity > 0) {
-			std::cout << GFACTORYLOGITEM << " GPlugin: " << gname << " Manager: Creating instance of <" << name << "> factory." << std::endl;
+			std::cout << PLUGINITEM << " GPlugin: " << gname << " Manager: Creating instance of <" << KYEL << name << RST << "> factory." << std::endl;
 		}
 		return static_cast<Base*>(factory->second->Create());
 	}

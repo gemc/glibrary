@@ -91,7 +91,7 @@
 // item highlight
 #define HHL "→"
 #define HHR "←"
-#define RSTHHR          HHR RST // rest color after right arrow
+#define RSTHHR          HHR RST   // rest color after right arrow
 #define GREENHHL        KGRN HHL  // notice this will highlight the item green
 #define REDHHL          KRED HHL
 #define GREENHHL        KGRN HHL  // notice this will highlight the item green

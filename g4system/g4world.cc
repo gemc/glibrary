@@ -49,7 +49,10 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 				g4SystemManager.RegisterObjectFactory<G4CadSystemFactory>(g4Factory);
 			}
 		}
-		g4systemFactory[g4Factory] = g4SystemManager.CreateObject<G4ObjectsFactory>(g4Factory);
+		
+		if ( g4systemFactory.find(g4Factory) == g4systemFactory.end() ) {
+			g4systemFactory[g4Factory] = g4SystemManager.CreateObject<G4ObjectsFactory>(g4Factory);
+		}
 	}
 
 	// done with g4SystemManager

@@ -148,11 +148,11 @@ int EventDispenser::processEvents()
 		if ( runNumber != currentRunno ) {
 			for(auto [digitizationName, digiRoutine]: (*gDigitizationGlobal)) {
 				if(verbosity >= GVERBOSITY_DETAILS) {
-					cout << EVENTDISPENSERLOGMSGITEM << " Calling " << digitizationName << "digitization loadConstants for run " << runNumber << endl;
+					gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Calling " + string(KMAG) + digitizationName  +  string(RST) + " digitization loadConstants for run " + to_string(runNumber));
 				}
 				digiRoutine->loadConstants(runNumber, variation);
 				if(verbosity >= GVERBOSITY_DETAILS) {
-					cout << EVENTDISPENSERLOGMSGITEM << " Calling " << digitizationName << "digitization loadTT for run " << runNumber << endl;
+					gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Calling " + string(KMAG) + digitizationName  +  string(RST) + " digitization loadTT for run " + to_string(runNumber));
 				}
 				digiRoutine->loadTT(runNumber, variation);
 			}
