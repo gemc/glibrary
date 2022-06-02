@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-# Purpose: Runs the examples in sci-g
+# Purpose: Runs the example in sci-g
 
-# Container run example:
-# docker run -it --rm jeffersonlab/gemc:3.0 bash
+# Container run:
+# docker run -it --rm jeffersonlab/gemc:3.0 sh
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/testSciG.sh -e examples/geometry/dosimeter
 
@@ -38,7 +38,7 @@ while getopts ":he:" option; do
          exit
          ;;
       e)
-         detector=$OPTARG
+         example=$OPTARG
          ;;
      \?) # Invalid option
          echo "Error: Invalid option"
@@ -59,4 +59,4 @@ export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 cd $JLAB_ROOT/$JLAB_VERSION/noarch/sci-g/$SCIG_VERSION
 
-./ci/tests.sh -e $detector -t
+./ci/tests.sh -e $example -t

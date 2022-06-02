@@ -17,7 +17,7 @@ typedef void* dlhandle;
 static dlhandle load_lib(const std::string& path);
 static void close_lib(dlhandle handle);
 
-#define DLLOGITEM  " ⁍"
+#define PLUGINITEM   " ⎆"
 
 // exit codes: 1000s
 #define EC__DLNOTFOUND       1001
@@ -48,12 +48,9 @@ public:
 	DynamicLib(std::string path, int v = 0) : dlFileName(path), verbosity(v), handle(nullptr) {
 
 		if(doesFileExists(dlFileName)) {
-			if ( verbosity ) {
-				std::cout << DLLOGITEM <<  " Loading Dynamic Library " << dlFileName << std::endl;
-			}
 			handle = load_lib(dlFileName);
 			if(handle == nullptr) {
-				std::cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR "found, but could not be loaded" << std::endl;
+				std::cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR << "found, but could not be loaded" << std::endl;
 				gexit(EC__DLNOTFOUND);
 			}
 
@@ -66,8 +63,8 @@ public:
 	~DynamicLib() {
 		if (handle != nullptr) {
 			close_lib(handle);
-			if ( verbosity ) {
-				std::cout << DLLOGITEM << " Closing DL " << dlFileName << std::endl;
+			if ( verbosity > 1 ) {
+				std::cout << PLUGINITEM << " Closing DL " << YELLOWHHL << dlFileName << RSTHHR << std::endl;
 			}
 		}
 	}

@@ -79,3 +79,6 @@ void GDynamicDigitization::chargeAndTimeAtHardware(int time, int q, GHit *ghit, 
 	}
 }
 
+void GDynamicDigitization::gDLogMessage(std::string message) {
+	gLogMessage(gdMessageHeader + message);
+}

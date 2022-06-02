@@ -2,8 +2,8 @@
 
 # Purpose: compiles the Cadmesh, glibrary libraries and gemc
 
-# Container run example:
-# docker run -it --rm jeffersonlab/gemc:3.0 bash
+# Container run:
+# docker run -it --rm jeffersonlab/gemc:3.0 sh
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/build.sh
 

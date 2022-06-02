@@ -1,4 +1,4 @@
-name: Test SciG
+name: Build, SciG Tests
 
 on:
   # Triggers the workflow on all pushes
@@ -16,7 +16,7 @@ jobs:
   testSciG:
     runs-on: ubuntu-latest
     container: jeffersonlab/gemc:3.0
-    name: Run ${{ matrix.examples }}
+    name: ${{ matrix.examples }}
     strategy:
       fail-fast: false
       matrix:
@@ -28,6 +28,6 @@ jobs:
       # you need to check it out.
       - name: Checkout
         uses: actions/checkout@main
-      - name: Test ${{ matrix.examples }}
+      - name: ${{ matrix.examples }}
         run: |
           ./ci/testSciG.sh -e ${{ matrix.examples }} 

@@ -1,4 +1,4 @@
-name: Compile GLibrary
+name: Build GLibrary and Gemc
 
 on:
   # Triggers the workflow on all pushes
@@ -24,6 +24,6 @@ jobs:
       # you need to check it out.
       - name: Checkout
         uses: actions/checkout@main
-      - name: Compile
+      - name: Build GLibrary and Gemc
         run: |
           ./ci/build.sh

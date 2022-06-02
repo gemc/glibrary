@@ -65,7 +65,7 @@ public:
 				
 		if (handle == nullptr) return nullptr;
 
-		void *maker = dlsym(handle , "GDynamicFactory");
+		void *maker = dlsym(handle , "GDynamicDigitizationFactory");
 
 		if (maker == nullptr) return nullptr;
 
@@ -78,6 +78,10 @@ public:
 
 		return func();
 	}
+
+	// logging: using
+	string gdMessageHeader = "   ⎍ ";
+	void gDLogMessage(std::string message);
 
 };
 

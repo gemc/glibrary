@@ -50,8 +50,11 @@ GWorld::GWorld(GOptions* gopts) {
 
 	// text factory created no matter what, needed to create ROOT volume
 	gSystemManager.RegisterObjectFactory<GSystemTextFactory>(GSYSTEMTXTFACTORY);
-	systemFactory[GSYSTEMTEXTFACTORY] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTXTFACTORY);
-
+	
+	if ( systemFactory.find(GSYSTEMTEXTFACTORY) == systemFactory.end() ) {
+		systemFactory[GSYSTEMTEXTFACTORY] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTXTFACTORY);
+	}
+	
 	for (auto& [gsystemName, gsystem] : *gsystemsMap) {
 		
 		string factoryName = gsystem->getFactoryName();

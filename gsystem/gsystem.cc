@@ -22,7 +22,7 @@ variation(v) {
 	gmaterialsMap = new map<string, GMaterial*>;
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << GSYSTEMLOGHEADER << "Instantiating GSystem <" << KWHT << name  << RST << "> using path <" << KWHT << path << RST << ">" << endl;
+		cout << GSYSTEMLOGHEADER << "Instantiating GSystem <" << KWHT << name  << RST << "> " << endl;
 	}
 }
 
@@ -113,7 +113,7 @@ void GSystem::addGMaterial(vector<string> pars, int verbosity) {
 	if(gmaterialsMap->find(materialName) == gmaterialsMap->end()) {
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
-			cout << GSYSTEMLOGHEADER << "Adding gMaterial <" << materialName << "> to gmaterialsMap with name as key" << endl;
+			cout << GSYSTEMLOGHEADER << "Adding gMaterial <" << materialName << "> to gmaterialsMap" << endl;
 		}
 		(*gmaterialsMap)[materialName] = new GMaterial(name, pars);
 		if(verbosity >= GVERBOSITY_DETAILS) {
