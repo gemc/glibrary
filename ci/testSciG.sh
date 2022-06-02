@@ -38,7 +38,7 @@ while getopts ":he:" option; do
          exit
          ;;
       e)
-         detector=$OPTARG
+         example=$OPTARG
          ;;
      \?) # Invalid option
          echo "Error: Invalid option"
@@ -59,4 +59,4 @@ export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 cd $JLAB_ROOT/$JLAB_VERSION/noarch/sci-g/$SCIG_VERSION
 
-./ci/tests.sh -e $detector -t
+./ci/tests.sh -e $example -t

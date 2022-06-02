@@ -5,7 +5,7 @@
 # Container run example:
 # docker run -it --rm jeffersonlab/gemc:3.0 bash
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
-# ./ci/runExamples.sh -e dosimeter
+# ./ci/testC12.sh -s ft
 
 # load environment if we're on the container
 # notice the extra argument to the source command
@@ -17,12 +17,12 @@ Help()
 {
 	# Display Help
 	echo
-	echo "Syntax: runExamples.sh [-h|e]"
+	echo "Syntax: runExamples.sh [-h|s]"
 	echo
 	echo "Options:"
 	echo
 	echo "-h: Print this Help."
-	echo "-e <example>: runs sci-g examples"
+	echo "-s <system>: test CLAS12 system"
 	echo
 }
 
@@ -31,13 +31,13 @@ if [ $# -eq 0 ]; then
 	exit 1
 fi
 
-while getopts ":he:" option; do
+while getopts ":hs:" option; do
    case $option in
       h)
          Help
          exit
          ;;
-      e)
+      s)
          detector=$OPTARG
          ;;
      \?) # Invalid option

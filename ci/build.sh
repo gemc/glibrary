@@ -73,7 +73,7 @@ export GLIBRARY=`pwd`
 echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
-./compileCmesh
+#./compileCmesh
 compileGLibrary
 checkLibsExistence
 compileGEMC

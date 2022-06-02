@@ -1,4 +1,4 @@
-name: Test SciG
+name: Build, SciG Tests
 
 on:
   # Triggers the workflow on all pushes
