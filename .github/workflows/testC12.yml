@@ -30,4 +30,4 @@ jobs:
         uses: actions/checkout@main
       - name: Test ${{ matrix.detector }}
         run: |
-          ./ci/testC12.sh -e ${{ matrix.detector }}
+          ./ci/testC12.sh -s ${{ matrix.detector }}
