@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-# Purpose: Runs the examples in clas12-system
+# Purpose: Runs the CLAS12 test in clas12-system
 
-# Container run example:
-# docker run -it --rm jeffersonlab/gemc:3.0 bash
+# Container run:
+# docker run -it --rm jeffersonlab/gemc:3.0 sh
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/testC12.sh -s ft
 

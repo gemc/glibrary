@@ -93,9 +93,8 @@ public:
 	 */
 	template <class Derived> void RegisterObjectFactory(std::string name) {
 		factoryMap[name] = new GFactory<Derived>();
-		if(verbosity > 0) {
-			std::cout << PLUGINITEM << " GPlugin: " << gname << " Manager: Registering <" << KYEL << name << RST << "> factory. ";
-			std::cout << "Factory has now: " << factoryMap.size() << " plugin " << std::endl;
+		if(verbosity > 1) {
+			std::cout << PLUGINITEM << gname << " Manager: Registering <" << KYEL << name << RST << "> factory. ";
 		}
 	}
 
@@ -116,7 +115,8 @@ public:
 			std::cerr << FATALERRORL  << "couldn't find factory " << YELLOWHHL << name << RSTHHR << " in factoryMap." << std::endl;
 			gexit(EC__FACTORYNOTFOUND);
 		}
-		if(verbosity > 0) {
+		if(verbosity > 1) {
+			std::cout << "Factory has " << factoryMap.size() << " registered plugin(s) " << std::endl;
 			std::cout << PLUGINITEM << " GPlugin: " << gname << " Manager: Creating instance of <" << KYEL << name << RST << "> factory." << std::endl;
 		}
 		return static_cast<Base*>(factory->second->Create());

@@ -141,8 +141,8 @@ int EventDispenser::processEvents()
 		int nevents   = run.second;
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
-			cout << EVENTDISPENSERLOGMSGITEM << " Starting Run Number ∙" << runNumber << "∙,  processing " << nevents << " events." << endl;
-		}
+			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Starting " + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST) + ", processing " + to_string(nevents) + " events" );
+	}
 
 		// loads the constants
 		if ( runNumber != currentRunno ) {
@@ -164,7 +164,7 @@ int EventDispenser::processEvents()
 		g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
 		
 		if(verbosity >= GVERBOSITY_SUMMARY) {
-			cout << EVENTDISPENSERLOGMSGITEM << " Run Number ∙" << runNumber << "∙ done with " << nevents << " events." << endl << endl;
+			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST) + " done with " + to_string(nevents) + " events" );
 		}
 	}
 
