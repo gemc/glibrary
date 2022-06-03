@@ -36,6 +36,9 @@ public:
 	const map<string, int>    getIntObservablesMap(int which) const;
 	const map<string, float>  getFltObservablesMap(int which) const;
 
+	// returns -1 if TIMEATELECTRONICS is not added to the digitization
+	int getTimeAtElectronics();
+
 	int getIntObservable(string varName);
 	float getFltObservable(string varName);
 

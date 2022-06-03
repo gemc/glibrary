@@ -65,6 +65,16 @@ void GDigitizedData::includeVariable(string vname, float value) {
 	fltObservablesMap[vname] = value;
 }
 
+// returns -1 if TIMEATELECTRONICS is not added to the digitization
+int GDigitizedData::getTimeAtElectronics() {
+	if ( intObservablesMap.find(TIMEATELECTRONICS) == intObservablesMap.end() ) {
+		return TIMEATELECTRONICSNOTDEFINED;
+	}
+	return intObservablesMap[TIMEATELECTRONICS];
+
+}
+
+
 int GDigitizedData::getIntObservable(string varName) {
 
 	if ( intObservablesMap.find(varName) == intObservablesMap.end() ) {
@@ -72,7 +82,6 @@ int GDigitizedData::getIntObservable(string varName) {
 		gexit(EC__VARIABLENOTFOUND);
 	}
 	return intObservablesMap[varName];
-
 }
 
 float GDigitizedData::getFltObservable(string varName) {
