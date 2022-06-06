@@ -14,6 +14,7 @@
 #define CHANNELSTRINGID "channel"
 #define CHARGEATELECTRONICS "chargeAtElectronics"
 #define TIMEATELECTRONICS   "timeAtElectronics"
+#define TIMEATELECTRONICSNOTDEFINED   -123456
 
 
 #endif
