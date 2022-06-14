@@ -4,15 +4,18 @@
 
 // glibrary
 #include "gutilities.h"
-
 using namespace std;
 
+#include <math.h>       /* fabs */
+
 // contructor from digitization and gidentity strings
+// called in GDetectorConstruction::ConstructSDandField
+// to register a new gtouchable in the sensitive detector gtouchable map
 GTouchable::GTouchable(string digitization, string gidentityString, vector<double> dimensions, bool verb) :
 verbosity(verb),
 trackId(0),
 eMultiplier(1),
-gridTimeIndex(0),
+timeAtElectronics(0),
 detectorDimenions(dimensions) {
 
 	// gtype from digitization
@@ -39,6 +42,30 @@ detectorDimenions(dimensions) {
 		gidentity.push_back(GIdentifier(idName, idValue));
 	}
 
+}
+
+// copy constructor called in processTouchable
+// weight and time can be set by processTouchable
+GTouchable::GTouchable(const GTouchable& baseGT, vector<GIdentifier> gid, float weight) :
+gidentity(gid),
+eMultiplier(weight) {
+	gType             = baseGT.gType;
+	verbosity         = baseGT.verbosity;
+	trackId           = baseGT.trackId;
+	timeWindow        = baseGT.timeWindow;
+	timeAtElectronics = baseGT.timeAtElectronics;
+}
+
+// copy constructor called in processTouchable
+// weight and time can be set by processTouchable
+GTouchable::GTouchable(const GTouchable& baseGT, vector<GIdentifier> gid, float weight, float t) :
+gidentity(gid),
+eMultiplier(weight),
+timeAtElectronics(t) {
+	gType         = baseGT.gType;
+	verbosity     = baseGT.verbosity;
+	trackId       = baseGT.trackId;
+	timeWindow    = baseGT.timeWindow;
 }
 
 
@@ -72,7 +99,7 @@ bool GTouchable::operator == (const GTouchable& that) const
 
 	switch (this->gType) {
 		case readout:
-			return this->gridTimeIndex == that.gridTimeIndex;
+			return fabs(this->timeAtElectronics - that.timeAtElectronics) < this->timeWindow;
 		case flux:
 			return this->trackId == that.trackId;
 		case dosimeter:
@@ -86,14 +113,28 @@ bool GTouchable::operator == (const GTouchable& that) const
 
 // ostream GTouchable
 ostream &operator<<(ostream &stream, GTouchable gtouchable) {
+
+	stream << " GTouchable: " << std::endl;
+	stream << "   ・ ";
 	for ( auto& gid: gtouchable.gidentity ) {
-		stream << gid << std::endl;
+
+		stream << gid ;
+		if ( gid.getName() != gtouchable.gidentity.back().getName() ) {
+			stream << ", ";
+		} else {
+			stream << std::endl;
+		}
 	}
+
+	stream << "   ・ energy multiplier: " << gtouchable.eMultiplier << std::endl;
+	stream << "   ・ time: " << gtouchable.timeAtElectronics << std::endl;
+	stream << "   ・ time window: " << gtouchable.timeWindow << std::endl;
+	stream << "   ・ g4 track id: " << gtouchable.trackId << std::endl;
 	return stream;
 }
 
 // ostream GIdentifier
 ostream &operator<<(ostream &stream, GIdentifier gidentifier) {
-	stream << " idName: " << gidentifier.idName << ", idValue " <<  gidentifier.idValue ;
+	stream << gidentifier.idName << ": " <<  gidentifier.idValue ;
 	return stream;
 }

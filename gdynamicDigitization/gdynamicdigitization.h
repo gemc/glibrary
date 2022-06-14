@@ -19,6 +19,50 @@
 // geant4
 #include "G4Step.hh"
 
+class GTouchableModifiers {
+
+public:
+	// abstract destructor
+	GTouchableModifiers(vector<string> touchableNames);
+
+private:
+	// only one of these maps can be filled with values:
+	// the size of the map is used by processGTouchableModifiers
+
+	// vector is pair: (id, weight)
+	map<string, vector<double> > modifierWeightsMap;
+
+	// vector is triplet: (id, weight, time)
+	map<string, vector<double> > modifierWeightsAndTimesMap;
+
+// api
+public:
+
+	// insert new values
+	void insertIdAndWeight(string touchableName, int idValue, double weight);
+	void insertIdWeightAndTime(string touchableName, int idValue, double weight, double time);
+
+	// normalize a map using totalWeight
+	void assignOverallWeight(string touchableName, double totalWeight);
+
+	inline bool isWeightsOnly() {
+		return modifierWeightsMap.size() > 0;
+	}
+
+	// get vectors from modifierWeightsMap using touchableName
+	inline vector<double> getModifierWeightsVector(string touchableName) {
+		// this will crash if user request a key not declared in the constructor
+		return modifierWeightsMap[touchableName];
+	}
+
+	// get vectors from modifierWeightsAndTimesMap using touchableName
+	inline vector<double> getModifierWeightsAndTimeVector(string touchableName) {
+		// this will crash if user request a key not declared in the constructor
+		return modifierWeightsAndTimesMap[touchableName];
+	}
+};
+
+
 class GDynamicDigitization {
 
 public:
@@ -28,8 +72,10 @@ public:
 	// change the GTouchable in sensitiveDetector::ProcessHit
 	// by default the touchable is not changed
 	// this function is loaded by plugin methods
-	// notice that this returns a vector of touchables, one g4step can produce multiple hits
+	// notice that this returns a vector of touchables, as one g4step can produce multiple hits
 	virtual vector<GTouchable*> processTouchable(GTouchable *gTouchID, G4Step* thisStep) {return { gTouchID } ;}
+
+	vector<GTouchable*> processGTouchableModifiers(GTouchable *gTouchID, GTouchableModifiers gmods);
 
 	// filter true information into GTrueInfoHit
 	// this integrates all available information built in GHit::addHitInfosForBitset

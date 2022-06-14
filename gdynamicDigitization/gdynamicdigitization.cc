@@ -82,3 +82,61 @@ void GDynamicDigitization::chargeAndTimeAtHardware(int time, int q, GHit *ghit, 
 void GDynamicDigitization::gDLogMessage(std::string message) {
 	gLogMessage(gdMessageHeader + message);
 }
+
+
+GTouchableModifiers::GTouchableModifiers(vector<string> touchableNames) {
+	for ( auto tname: touchableNames ) {
+		modifierWeightsMap[tname] = {} ;
+	}
+}
+
+
+void GTouchableModifiers::insertIdAndWeight(string touchableName, int idValue, double weight) {
+	modifierWeightsMap[touchableName].push_back(idValue);
+	modifierWeightsMap[touchableName].push_back(weight);
+}
+
+void GTouchableModifiers::insertIdWeightAndTime(string touchableName, int idValue, double weight, double time) {
+	modifierWeightsAndTimesMap[touchableName].push_back(idValue);
+	modifierWeightsAndTimesMap[touchableName].push_back(weight);
+	modifierWeightsAndTimesMap[touchableName].push_back(time);
+}
+
+
+// normalize a map using totalWeight
+void GTouchableModifiers::assignOverallWeight(string tname, double totalWeight) {
+
+	size_t modifierWeightsMapCount = modifierWeightsMap[tname].size() / 2;
+
+	for (auto h = 0;  h < modifierWeightsMapCount; h++) {
+		modifierWeightsMap[tname][h*2+1] = modifierWeightsMap[tname][h*2+1] / totalWeight;
+	}
+
+	modifierWeightsMapCount = modifierWeightsAndTimesMap[tname].size() / 2;
+
+	for (auto h = 0;  h < modifierWeightsMapCount; h++) {
+		modifierWeightsAndTimesMap[tname][h*2+1] = modifierWeightsMap[tname][h*2+1] / totalWeight;
+	}
+
+}
+
+
+vector<GTouchable*> GDynamicDigitization::processGTouchableModifiers(GTouchable *gTouchID, GTouchableModifiers gmods) {
+
+	vector<GTouchable*> touchables;
+//	if ( gmods.isWeightsOnly() ) {
+//
+//		vector<GIdentifier> originalGIDS = gTouchID->getIdentity();
+//		for ( auto originalGID: originalGIDS ) {
+//			// create a new
+//			if ( gmods.getModifierWeightsVector(originalGID.getName()).size() > 0 ) {
+//
+//			}
+//		}
+//
+//	} else {
+//
+//	}
+
+	return touchables;
+}
