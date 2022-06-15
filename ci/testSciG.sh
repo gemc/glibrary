@@ -56,6 +56,10 @@ echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 ./ci/build.sh # build glibrary / gemc and install plugins to $GPLUGIN_PATH
+if [ $? -ne 0 ]; then
+	echo building gemc / glibrary failed
+	exit 1
+fi
 
 cd $JLAB_ROOT/$JLAB_VERSION/noarch/sci-g/$SCIG_VERSION
 

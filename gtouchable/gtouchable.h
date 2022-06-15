@@ -9,7 +9,8 @@ using std::string;
 using std::ostream;
 using std::vector;
 
-// - readout: electronic Time Window is the discriminating factor. True infos variable determined by defineReadoutSpecs in the plugin
+// - readout: electronic Time Window is the discriminating factor.
+//   True infos variable determined by defineReadoutSpecs in the plugin
 // - flux: track id is the discriminating factor, standard true infos variable
 // - particleCounter: no other discriminating factors, standard true infos variable
 // - dosimeter: track id is the discriminating factor, radiation digitization
@@ -40,8 +41,10 @@ public:
 
 };
 
-// GTouchable: always use the detector identifier (gidentifier) as the discriminating factor.
-// If the identifier is the same gType is used
+// GTouchable:
+// 1. Always use gidentifier as the main discriminating factor.
+// 2. If the gidentifier are the same, gType is used
+// Criteria in the overloaded == 
 class GTouchable
 {
 	
@@ -49,6 +52,16 @@ public:
 	// constructor called in GDetectorConstruction::ConstructSDandField
 	// to register a new gtouchable in the sensitive detector gtouchable map
 	GTouchable(string digitization, string gidentityString, vector<double> dimensions, bool verb = false);
+
+	// copy constructor called in processTouchable
+	// used for energy sharing (keeps time as is)
+	// need to provide the gidentity
+	GTouchable(const GTouchable& baseGT, vector<GIdentifier> gidentity, float weight);
+
+	// copy constructor called in processTouchable
+	// used for energy sharing and time propagation
+	// need to provide the gidentity
+	GTouchable(const GTouchable& baseGT, vector<GIdentifier> gidentity, float weight, float t);
 
 
 private:
@@ -65,9 +78,12 @@ private:
 	// Energy Multiplier. By default it is 1, but energy could be shared (or created) among volumes
 	float  eMultiplier;
 	
-	// used to determine if a hit is within the same detector electronic time window for readout electronic
-	// set using placeInTimeWindow in ProcessHits
-	int gridTimeIndex;
+	// timeWindow and timeAtElectronics are used to determine if a hit is within
+	// the same detector readout electronic time window
+	// timeAtElectronics is set using step time using assignTimeAtElectronics in GSensitiveDetector::ProcessHits
+	// but can be modified (i.e. time propagation) by processTouchable
+	float timeWindow;
+	float timeAtElectronics;
 
 	// to print it out
 	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
@@ -79,8 +95,9 @@ public:
 	// Overloaded "==" operator for the class 'GTouchable'
 	bool operator== (const GTouchable& gtouchable) const;
 	
-	// called in ProcessHits
-	void placeInTimeWindow(int twindex) {gridTimeIndex = twindex;}
+	// called in GSensitiveDetector::ProcessHits
+	void assignTimeAtElectronics(float t) {timeAtElectronics = t;}
+	void assignTrackId(int tid) {trackId = tid;}
 
 	inline const float getEnergyMultiplier() const {return eMultiplier;}
 
@@ -90,9 +107,9 @@ public:
 	inline const vector<GIdentifier> getIdentity() const {return gidentity;}
 	inline const vector<double> getDetectorDimensions() const {return detectorDimenions;}
 
-
-
 };
+
+
 
 
 #endif

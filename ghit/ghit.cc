@@ -13,13 +13,14 @@
 // https://twiki.cern.ch/twiki/bin/view/Geant4/QuickMigrationGuideForGeant4V10
 G4ThreadLocal G4Allocator<GHit>* GHitAllocator = 0;
 
-//GHit::GHit(GTouchable* gt) : G4VHit() {
 GHit::GHit(GTouchable *gt, const G4Step* thisStep, const HitBitSet hbs, string cScheme) : G4VHit(),
 colorSchema(cScheme),
 gtouchable(gt) {
+
+	// initialize quantities based on HitBitSet, like globalPositions
 	addHitInfosForBitset(hbs, thisStep);
 
-	// unitialized quantities
+	// unitialized quantities. To be calculated at the end of the steps by collectTrueInformation
 	// bit 0: always there
 	totalEnergyDeposited = UNINITIALIZEDNUMBERQUANTITY;
 	averageTime          = UNINITIALIZEDNUMBERQUANTITY;
