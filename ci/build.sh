@@ -75,7 +75,16 @@ export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 ./compileCmesh
 compileGLibrary
+if [ $? -ne 0 ]; then
+	echo building glibrary failed
+	exit 1
+fi
+
 checkLibsExistence
 compileGEMC
+if [ $? -ne 0 ]; then
+	echo building gemc failed
+	exit 1
+fi
 
 cp $GLIBRARY/lib/gstreamer*.gplugin $GPLUGIN_PATH

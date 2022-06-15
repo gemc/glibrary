@@ -108,13 +108,13 @@ void GTouchableModifiers::assignOverallWeight(string tname, double totalWeight) 
 
 	size_t modifierWeightsMapCount = modifierWeightsMap[tname].size() / 2;
 
-	for (auto h = 0;  h < modifierWeightsMapCount; h++) {
+	for (size_t h = 0;  h < modifierWeightsMapCount; h++) {
 		modifierWeightsMap[tname][h*2+1] = modifierWeightsMap[tname][h*2+1] / totalWeight;
 	}
 
 	modifierWeightsMapCount = modifierWeightsAndTimesMap[tname].size() / 2;
 
-	for (auto h = 0;  h < modifierWeightsMapCount; h++) {
+	for (size_t h = 0;  h < modifierWeightsMapCount; h++) {
 		modifierWeightsAndTimesMap[tname][h*2+1] = modifierWeightsMap[tname][h*2+1] / totalWeight;
 	}
 
