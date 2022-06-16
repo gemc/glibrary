@@ -23,14 +23,14 @@ public:
 	charge(q),
 	time(t) {
 
-		if ( verbosity >= GVERBOSITY_DETAILS ) {
-			gLogClassConstruct("GIntegralPayload");
+		if ( verbosity >= GVERBOSITY_CLASSES ) {
+			gLogClassConstruct("GIntegralPayload Construct");
 		}
 	}
 
 	~GIntegralPayload() {
-		if ( verbosity >= GVERBOSITY_DETAILS) {
-			gLogDestruct("GIntegralPayload");
+		if ( verbosity >= GVERBOSITY_CLASSES) {
+			gLogClassDestruct("GIntegralPayload Destruct");
 		}
 	}
 

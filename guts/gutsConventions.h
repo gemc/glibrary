@@ -105,7 +105,7 @@ void gexit(int error);
 void gLogClassConstruct(std::string className);
 void gLogCopyConstruct(std::string className);
 void gLogMoveConstruct(std::string className);
-void gLogDestruct(std::string className);
+void gLogClassDestruct(std::string className);
 void gLogMessage(std::string message);
 
 #endif

@@ -100,7 +100,7 @@ void EventDispenser::distributeEvents(int nevts)
 // TODO: fix this as ntot is not used
 void EventDispenser::printRunsDetails(int neventsToProcess)
 {
-//	int ntot = 0;
+	//	int ntot = 0;
 
 	cout << EVENTDISPENSERLOGMSGITEM << " EventDispenser initialized with " << neventsToProcess << " events distributed among " << runWeights.size() << " runs:" << endl;
 
@@ -109,7 +109,7 @@ void EventDispenser::printRunsDetails(int neventsToProcess)
 		for(const auto &weight : runWeights) {
 			cout << GTAB << EVENTDISPENSERLOGMSGITEM << " run: " << weight.first << "\t weight: " << runWeights[weight.first] ;
 			cout << "\t  n. events: " << runEvents[weight.first] << endl;
-//			ntot += runEvents[weight.first];
+			//			ntot += runEvents[weight.first];
 		}
 	}
 }
@@ -142,7 +142,7 @@ int EventDispenser::processEvents()
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
 			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Starting " + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST) + ", processing " + to_string(nevents) + " events" );
-	}
+		}
 
 		// loads the constants
 		if ( runNumber != currentRunno ) {
@@ -159,8 +159,17 @@ int EventDispenser::processEvents()
 			currentRunno = runNumber;
 		}
 
-		// I think we may need this here
-		//g4uim->ApplyCommand("/run/initialize");
+//		for ( int i=0 ; i<10 ; i++) {
+//
+//			gLogMessage( " ASD RUN ITERATION " + to_string(i) );
+//
+//			// I think we may need this here
+//			// g4uim->ApplyCommand("/run/initialize");
+//			//		g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
+//			g4uim->ApplyCommand("/run/beamOn 100" );
+//
+//		}
+
 		g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
 		
 		if(verbosity >= GVERBOSITY_SUMMARY) {

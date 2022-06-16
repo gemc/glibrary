@@ -6,7 +6,7 @@ bool GstreamerTextFactory::startEvent(const GEventDataCollection* eventData)
 	if(ofile == nullptr) return false;
 
 	auto eventNumber = eventData->getHeader()->getG4LocalEvn();
-	*ofile  << "Event n. " << eventNumber << "{" << endl;
+	*ofile  << "Event n. " << eventNumber << " {" << endl;
 	
 	return true;
 }

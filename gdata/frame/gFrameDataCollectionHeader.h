@@ -17,16 +17,16 @@ class GFrameDataCollectionHeader
 public:
 	GFrameDataCollectionHeader(long int frameID_, float frameDuration_, int v = 0) : verbosity(v), frameID(frameID_), frameDuration(frameDuration_)  {
 		
-		if ( verbosity >= GVERBOSITY_DETAILS ) {
+		if ( verbosity >= GVERBOSITY_CLASSES ) {
 			string log = "GFrameHeader id " + to_string(frameID) + ", time: " + to_string(time_ns()) + "ns";
 			gLogClassConstruct(log);
 		}
 	}
 	
 	~GFrameDataCollectionHeader() {
-		if ( verbosity >= GVERBOSITY_DETAILS) {
+		if ( verbosity >= GVERBOSITY_CLASSES) {
 			string log = "GFrameHeader id " + to_string(frameID);
-			gLogDestruct(log);
+			gLogClassDestruct(log);
 		}
 	}
 	
