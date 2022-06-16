@@ -153,7 +153,7 @@ int EventDispenser::processEvents()
 		}
 
 		if(verbosity >= GVERBOSITY_SUMMARY) {
-			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Starting " + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST));
+			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Starting " + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST) + ", event buffer is: " + to_string(nEventBuffer));
 		}
 
 		if ( nevents <= nEventBuffer) {
