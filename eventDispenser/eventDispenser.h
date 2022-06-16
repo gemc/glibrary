@@ -17,6 +17,7 @@ private:
 	int verbosity;
 	int neventsToProcess;
 	int userRunno;
+	int nEventBuffer;
 	int currentRunno = -1;
 	string variation;
 

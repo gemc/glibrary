@@ -18,9 +18,8 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	verbosity        = gopt->getInt("eventDistributionv");
 	string filename  = gopt->getString("runWeightsFile");
 	variation        = gopt->getString("digitizationVariation");
-	//	userRunno        = gopt->getInt("userRunno");
-	int userRunno        = 1;
-
+	userRunno        = gopt->getInt("userRunno");
+	nEventBuffer     = gopt->getInt("maxebuffer");
 	neventsToProcess = gopt->getInt("n");
 
 	// nothing to do here
@@ -63,9 +62,7 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	}
 }
 
-// TODO: Get runno
 void EventDispenser::setNumberOfEvents(int nevts) {
-	int userRunno        = 1;
 	runEvents.clear();
 	runEvents[userRunno] = nevts;
 }
@@ -140,10 +137,6 @@ int EventDispenser::processEvents()
 		int runNumber = run.first;
 		int nevents   = run.second;
 
-		if(verbosity >= GVERBOSITY_SUMMARY) {
-			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Starting " + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST) + ", processing " + to_string(nevents) + " events" );
-		}
-
 		// loads the constants
 		if ( runNumber != currentRunno ) {
 			for(auto [digitizationName, digiRoutine]: (*gDigitizationGlobal)) {
@@ -159,19 +152,38 @@ int EventDispenser::processEvents()
 			currentRunno = runNumber;
 		}
 
-//		for ( int i=0 ; i<10 ; i++) {
-//
-//			gLogMessage( " ASD RUN ITERATION " + to_string(i) );
-//
-//			// I think we may need this here
-//			// g4uim->ApplyCommand("/run/initialize");
-//			//		g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
-//			g4uim->ApplyCommand("/run/beamOn 100" );
-//
-//		}
+		if(verbosity >= GVERBOSITY_SUMMARY) {
+			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Starting " + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST));
+		}
 
-		g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
-		
+		if ( nevents <= nEventBuffer) {
+			if(verbosity >= GVERBOSITY_SUMMARY) {
+				gLogMessage("  " + string(EVENTDISPENSERLOGMSGITEM) + " Processing " + to_string(nevents) + " events");
+			}
+			g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
+		} else {
+			int nsubRuns = nevents / nEventBuffer ;
+			int totalSoFar = 0;
+			for ( int s = 0; s < nsubRuns; s++ ) {
+				if(verbosity >= GVERBOSITY_SUMMARY) {
+					string log = "  " + string(EVENTDISPENSERLOGMSGITEM) + " Sub run: " + to_string(s+1) + "/" + to_string(nsubRuns + 1)
+					+ ", processing events " + to_string(totalSoFar) + " → " + to_string(nEventBuffer);
+					gLogMessage(log);
+				}
+				g4uim->ApplyCommand("/run/beamOn " + to_string(nEventBuffer));
+				totalSoFar += nEventBuffer;
+			}
+			int lastSubRunNEvents = nevents%nEventBuffer;
+			if ( lastSubRunNEvents > 0 ) {
+				if(verbosity >= GVERBOSITY_SUMMARY) {
+					string log = "  " + string(EVENTDISPENSERLOGMSGITEM) + " Sub run: " + to_string(nsubRuns + 1) + "/" + to_string(nsubRuns + 1)
+					                  + ", processing events " + to_string(totalSoFar) + " → " + to_string(lastSubRunNEvents);
+					gLogMessage(log);
+				}
+				g4uim->ApplyCommand("/run/beamOn " + to_string(lastSubRunNEvents));
+			}
+		}
+
 		if(verbosity >= GVERBOSITY_SUMMARY) {
 			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST) + " done with " + to_string(nevents) + " events" );
 		}
