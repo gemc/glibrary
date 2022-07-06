@@ -216,13 +216,21 @@ bool G4World::createG4Material(const GMaterial *gmaterial, int verbosity) {
 					G4cout << G4SYSTEMLOGHEADER << " element component " << componentName << " needed by material " << materialName << " not found yet " << endl;
 				}
 				return  false;
+			}  else {
+				if(verbosity == GVERBOSITY_SUMMARY) {
+					G4cout << G4SYSTEMLOGHEADER << "material component " << componentName << " needed by material " << materialName << " now found" << endl;
+				}
 			}
 		} else {
 			if ( NISTman->FindOrBuildMaterial(componentName) == nullptr ) {
 				if(verbosity == GVERBOSITY_SUMMARY) {
-					G4cout << G4SYSTEMLOGHEADER << " material component " << componentName << " needed by material " << materialName << " not found yet " << endl;
+					G4cout << G4SYSTEMLOGHEADER << "material component " << componentName << " needed by material " << materialName << " not found yet " << endl;
 				}
 				return  false;
+			} else {
+				if(verbosity == GVERBOSITY_SUMMARY) {
+					G4cout << G4SYSTEMLOGHEADER << "material component " << componentName << " needed by material " << materialName << " now found" << endl;
+				}
 			}
 		}
 	}
