@@ -1,4 +1,4 @@
-name: Build GLibrary and Gemc
+name: Build GLibrary
 
 on:
   # Triggers the workflow on all pushes

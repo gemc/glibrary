@@ -47,6 +47,20 @@ namespace eventDispenser {
 		};
 		goptions.push_back(GOption(jsonNEvents));
 
+		json jsonUserRunno = {
+			{GNAME, "userRunno"},
+			{GDESC, "User Run Number"},
+			{GDFLT, 1}
+		};
+		goptions.push_back(GOption(jsonUserRunno));
+
+		json jsonNEventsBuffer = {
+			{GNAME, "maxebuffer"},
+			{GDESC, "Max number of events to keep in memory before writing out the output."},
+			{GDFLT, 100}
+		};
+		goptions.push_back(GOption(jsonNEventsBuffer));
+		
 		return goptions;
 	}
 

@@ -40,7 +40,7 @@ void gLogMoveConstruct(string className) {
 }
 
 // destructor
-void gLogDestruct(string className) {
+void gLogClassDestruct(string className) {
 	mu.lock();
 	cout << KRED << DESTRUCTORLOG <<  className << KWHT << " destructor" << RST << endl;
 	mu.unlock();

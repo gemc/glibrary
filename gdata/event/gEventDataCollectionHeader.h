@@ -22,17 +22,15 @@ public:
 
 		timeStamp = assignTimeStamp();
 
-		if ( verbosity >= GVERBOSITY_DETAILS ) {
-			string log = "GEventHeader evn " + to_string(g4localEventNumber);
-			gLogClassConstruct(log);
+		if ( verbosity >= GVERBOSITY_CLASSES ) {
+			gLogClassConstruct("GEventHeader evn " + to_string(g4localEventNumber));
 			print();
 		}
 	}
 
 	~GEventDataCollectionHeader() {
-		if ( verbosity >= GVERBOSITY_DETAILS) {
-			string log = "GEventHeader evn " + to_string(g4localEventNumber);
-			gLogDestruct(log);
+		if ( verbosity >= GVERBOSITY_CLASSES) {
+			gLogClassDestruct("GEventHeader evn " + to_string(g4localEventNumber));
 		}
 	}
 	

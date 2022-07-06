@@ -15,7 +15,7 @@ class GFrameDataCollection
 public:
 	// construct event data using a GEventHeader
 	GFrameDataCollection(GFrameDataCollectionHeader* header, int v = 0 ) : verbosity(v), gheader(header) {
-		if ( verbosity >= GVERBOSITY_DETAILS) {
+		if ( verbosity >= GVERBOSITY_CLASSES) {
 			gLogClassConstruct("GFrameDataCollection");
 		}
 		integralPayloads = new vector<GIntegralPayload*>();
@@ -23,8 +23,8 @@ public:
 
 	~GFrameDataCollection() {
 
-		if ( verbosity >= GVERBOSITY_DETAILS) {
-			gLogDestruct("GFrameDataCollection");
+		if ( verbosity >= GVERBOSITY_CLASSES) {
+			gLogClassDestruct("GFrameDataCollection");
 		}
 
 		delete gheader;

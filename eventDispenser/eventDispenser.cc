@@ -18,9 +18,8 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	verbosity        = gopt->getInt("eventDistributionv");
 	string filename  = gopt->getString("runWeightsFile");
 	variation        = gopt->getString("digitizationVariation");
-	//	userRunno        = gopt->getInt("userRunno");
-	int userRunno        = 1;
-
+	userRunno        = gopt->getInt("userRunno");
+	nEventBuffer     = gopt->getInt("maxebuffer");
 	neventsToProcess = gopt->getInt("n");
 
 	// nothing to do here
@@ -63,9 +62,7 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	}
 }
 
-// TODO: Get runno
 void EventDispenser::setNumberOfEvents(int nevts) {
-	int userRunno        = 1;
 	runEvents.clear();
 	runEvents[userRunno] = nevts;
 }
@@ -100,7 +97,7 @@ void EventDispenser::distributeEvents(int nevts)
 // TODO: fix this as ntot is not used
 void EventDispenser::printRunsDetails(int neventsToProcess)
 {
-//	int ntot = 0;
+	//	int ntot = 0;
 
 	cout << EVENTDISPENSERLOGMSGITEM << " EventDispenser initialized with " << neventsToProcess << " events distributed among " << runWeights.size() << " runs:" << endl;
 
@@ -109,7 +106,7 @@ void EventDispenser::printRunsDetails(int neventsToProcess)
 		for(const auto &weight : runWeights) {
 			cout << GTAB << EVENTDISPENSERLOGMSGITEM << " run: " << weight.first << "\t weight: " << runWeights[weight.first] ;
 			cout << "\t  n. events: " << runEvents[weight.first] << endl;
-//			ntot += runEvents[weight.first];
+			//			ntot += runEvents[weight.first];
 		}
 	}
 }
@@ -140,10 +137,6 @@ int EventDispenser::processEvents()
 		int runNumber = run.first;
 		int nevents   = run.second;
 
-		if(verbosity >= GVERBOSITY_SUMMARY) {
-			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Starting " + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST) + ", processing " + to_string(nevents) + " events" );
-	}
-
 		// loads the constants
 		if ( runNumber != currentRunno ) {
 			for(auto [digitizationName, digiRoutine]: (*gDigitizationGlobal)) {
@@ -159,10 +152,39 @@ int EventDispenser::processEvents()
 			currentRunno = runNumber;
 		}
 
-		// I think we may need this here
-		//g4uim->ApplyCommand("/run/initialize");
-		g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
-		
+		if(verbosity >= GVERBOSITY_SUMMARY) {
+			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + " Starting " + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST) + ", event buffer is: " + to_string(nEventBuffer));
+		}
+
+		if ( nevents <= nEventBuffer) {
+			if(verbosity >= GVERBOSITY_SUMMARY) {
+				gLogMessage("  " + string(EVENTDISPENSERLOGMSGITEM) + " Processing " + to_string(nevents) + " events");
+			}
+			g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
+		} else {
+			int nsubRuns = nevents / nEventBuffer ;
+			int totalSoFar = 0;
+			int lastSubRunNEvents = nevents%nEventBuffer;
+			int ntotalSubRuns = ( lastSubRunNEvents > 0 ? nsubRuns + 1 : nsubRuns);
+			for ( int s = 0; s < nsubRuns; s++ ) {
+				if(verbosity >= GVERBOSITY_SUMMARY) {
+					string log = "  " + string(EVENTDISPENSERLOGMSGITEM) + " Sub run: " + to_string(s+1) + "/" + to_string(ntotalSubRuns)
+					+ ", processing events " + to_string(totalSoFar) + " → " + to_string(nEventBuffer);
+					gLogMessage(log);
+				}
+				g4uim->ApplyCommand("/run/beamOn " + to_string(nEventBuffer));
+				totalSoFar += nEventBuffer;
+			}
+			if ( lastSubRunNEvents > 0 ) {
+				if(verbosity >= GVERBOSITY_SUMMARY) {
+					string log = "  " + string(EVENTDISPENSERLOGMSGITEM) + " Sub run: " + to_string(nsubRuns + 1) + "/" + to_string(nsubRuns + 1)
+					                  + ", processing events " + to_string(totalSoFar) + " → " + to_string(lastSubRunNEvents);
+					gLogMessage(log);
+				}
+				g4uim->ApplyCommand("/run/beamOn " + to_string(lastSubRunNEvents));
+			}
+		}
+
 		if(verbosity >= GVERBOSITY_SUMMARY) {
 			gLogMessage(string(EVENTDISPENSERLOGMSGITEM) + string(KBLU) + " Run Number "  +  to_string(runNumber) + string(RST) + " done with " + to_string(nevents) + " events" );
 		}
