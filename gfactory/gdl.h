@@ -22,6 +22,7 @@ static void close_lib(dlhandle handle);
 // exit codes: 1000s
 #define EC__DLNOTFOUND       1001
 #define EC__FACTORYNOTFOUND  1002
+#define EC__DLHANDLENOTFOUND 1003
 
 
 /**
@@ -50,8 +51,11 @@ public:
 		if(doesFileExists(dlFileName)) {
 			handle = load_lib(dlFileName);
 			if(handle == nullptr) {
-				std::cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR << "found, but could not be loaded" << std::endl;
-				gexit(EC__DLNOTFOUND);
+				char const * const dlopen_error = dlerror();
+
+				std::cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR << "found, but handle dlopenened is null" << std::endl;
+				std::cerr << "dlopen error: " << dlopen_error << std::endl;
+				gexit(EC__DLHANDLENOTFOUND);
 			}
 
 		} else {
