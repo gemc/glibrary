@@ -7,11 +7,15 @@
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/testC12.sh -s ft
 
-# load environment if we're on the container
-# notice the extra argument to the source command
-TERM=xterm # source script use tput for colors, TERM needs to be specified
-FILE=/etc/profile.d/jlab.sh
-test -f $FILE && source $FILE keepmine
+if [[ -z "${G3CLAS12_VERSION}" ]]; then
+	# load environment if we're on the container
+	# notice the extra argument to the source command
+	TERM=xterm # source script use tput for colors, TERM needs to be specified
+	FILE=/etc/profile.d/jlab.sh
+	test -f $FILE && source $FILE keepmine
+else
+  echo environment already defined
+fi
 
 Help()
 {
