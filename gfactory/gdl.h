@@ -53,7 +53,7 @@ public:
 			if(handle == nullptr) {
 				char const * const dlopen_error = dlerror();
 
-				std::cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR << "found, but handle dlopenened is null" << std::endl;
+				std::cerr << FATALERRORL  << "File " << YELLOWHHL << dlFileName << RSTHHR << " found, but handle dlopenened is null" << std::endl;
 				std::cerr << "dlopen error: " << dlopen_error << std::endl;
 				gexit(EC__DLHANDLENOTFOUND);
 			}
