@@ -8,11 +8,13 @@
 // glibrary
 #include "goptions.h"
 
-class  G4Display
+// class used to initialize G4UImanager
+// notice: this can be 
+class  G4DisplayProperties
 {
 
 public:
-	G4Display(GOptions* gopt);
+	G4DisplayProperties(GOptions* gopt);
 
 };
 

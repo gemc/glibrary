@@ -3,7 +3,7 @@
 
 #define GDEFAULTVIEWERDRIVER "OGL"
 #define GDEFAULTVIEWERSIZE   "800x800"
-#define GDEFAULTVIEWERPOS    "+400+100"
+#define GDEFAULTVIEWERPOS    "-400+100"
 
 
 extern std::vector<std::string> AVAILABLEG4VIEWERS;

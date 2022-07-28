@@ -2,10 +2,16 @@
 #include "g4displayOptions.h"
 #include "g4displayConventions.h"
 
+// full list from /vis/list
+// ASCIITree ATree DAWNFILE G4HepRepFile HepRepFile RayTracer VRML2FILE gMocrenFile OpenGLImmediateQt OGLIQt OGLI OpenGLStoredQt OGLSQt OGL OGLS
 vector<string> AVAILABLEG4VIEWERS = {
-	"OGLSQt",
+	"OpenGLImmediateQt",
 	"OGLIQt",
-	"OGL"} ;
+	"OGLI",
+	"OpenGLStoredQt",
+	"OGLSQt",
+	"OGL",
+	"OGLS"} ;
 
 // namespace to define options
 namespace g4display {
@@ -112,7 +118,7 @@ namespace g4display {
 		};
 
 		help.clear();
-		help.push_back("Defines the geant4 camera");
+		help.push_back("Defines the geant4 camera view point");
 		help.push_back("");
 		help.push_back("Example: -g4camera={phi: 20*deg; theta: 15*deg;}");
 
