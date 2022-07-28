@@ -14,7 +14,7 @@ if [[ -z "${G3CLAS12_VERSION}" ]]; then
 	FILE=/etc/profile.d/jlab.sh
 	test -f $FILE && source $FILE keepmine
 else
-  echo environment already defined
+	echo glibrary ci/build: environment already defined
 fi
 
 function compileGLibrary {
