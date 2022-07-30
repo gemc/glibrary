@@ -10,11 +10,11 @@
 
 // class used to initialize G4UImanager
 // notice: this can be 
-class  G4DisplayProperties
+class  G4SceneProperties
 {
 
 public:
-	G4DisplayProperties(GOptions* gopt);
+	G4SceneProperties(GOptions* gopt);
 
 };
 

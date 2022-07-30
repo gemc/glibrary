@@ -13,7 +13,7 @@ namespace eventDispenser {
 		vector<GOption> goptions;
 
 		json jsonEDVerbosity = {
-			{GNAME, "eventDistributionv"},
+			{GNAME, "runweightsv"},
 			{GDESC, GVERBOSITY_DESCRIPTION},
 			{GDFLT, 0}
 		};
