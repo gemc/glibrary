@@ -155,7 +155,7 @@ namespace gsystem {
 
 		// world volume, to be done in g4volume
 		json jsonWorldVolumeOption = {
-			{GNAME, "worldVolumeDefinition"},
+			{GNAME, "worldVolume"},
 			{GDESC, "geant4 definition for the world volume <root>. Default is G4Box, 15*m, 15*m, 15*m, G4_Air"},
 			{GDFLT, "G4Box, 15*m, 15*m, 15*m, G4_AIR"}
 		};

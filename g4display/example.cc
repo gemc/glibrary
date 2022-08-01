@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 	QApplication app(argc, argv);
 
 	GOptions *gopts = new GOptions(argc, argv, g4display::defineOptions());
-	G4Display *g4Display = new G4Display(gopts);
+	G4DisplayProperties *g4Display = new G4DisplayProperties(gopts);
 
 	// main window
 	QMainWindow *window = new QMainWindow();

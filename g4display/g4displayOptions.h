@@ -9,32 +9,36 @@ namespace g4display {
 
 
 	// G4View
-	// ------
-
 	struct JView {
 		string viewer;
 		string dimension;
 		string position;
+		int segsPerCircle;
 	};
 
 	void from_json(const json& j, JView& jview);
-
-	// get JView from options
 	JView getJView(GOptions *gopts);
 
 
 	// G4Camera
-	// --------
-
 	struct JCamera {
 		string phi;
 		string theta;
 	};
 
 	void from_json(const json& j, JCamera& jcamera);
-
-	// get JCamera from options
 	JCamera getJCamera(GOptions *gopts);
+
+
+	// Dawn
+	struct JDawn {
+		string phi;
+		string theta;
+	};
+
+	void from_json(const json& j, JDawn& jdawn);
+	JDawn getJDawn(GOptions *gopts);
+
 
 
 	// returns the array of options definitions

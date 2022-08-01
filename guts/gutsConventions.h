@@ -42,7 +42,7 @@
 #define DESTRUCTORLOG " ↓ "
 
 // list bullets
-#define POINTITEM  " ・ "
+#define POINTITEM  " • "
 #define CIRCLEITEM " ◦ "
 #define SQUAREITEM " ◻︎ "
 #define ARROWITEM " ➤ "

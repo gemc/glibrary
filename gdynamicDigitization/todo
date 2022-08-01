@@ -5,3 +5,6 @@
 - Add initialize constant message: "entering loadConstants"
 - add digitization function: fastSimulation
 
+
+- check primitive scorers: https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/Detector/commandScore.html#id9
+

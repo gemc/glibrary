@@ -1,6 +1,7 @@
 {
 	"g4view": {
 		"viewer": "OGLSQt",
-		"dimension": "200x1200"
+		"dimension": "200x1200",
+		"segsPerCircle": 50
 	}
 }

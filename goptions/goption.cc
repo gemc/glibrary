@@ -486,7 +486,8 @@ void GOption::printOptionHelp()
 	} else {
 		helpString += "=<value>" ;
 	}
-
+	helpString += " ";
+	
 	cout  << KGRN << ARROWITEM  ;
 	cout << left;
 	cout.width(helpSize);

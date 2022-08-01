@@ -4,7 +4,7 @@ Import('env')
 
 sources = [
 			  'g4displayOptions.cc',
-			  'g4display.cc',
+			  'g4SceneProperties.cc',
 			  'g4controls.cc',
 			  'tabs/g4displaycamera.cc',
 			  'tabs/g4displayslice.cc'
