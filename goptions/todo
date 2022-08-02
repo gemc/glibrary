@@ -1,3 +1,7 @@
+- command line options should be w/o the quotes? or match exactly the jcard
+
+- search for help.push_back( and
+
 - add help as vector<string> for non structured option n the constructor
 
 - parse command line

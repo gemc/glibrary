@@ -58,7 +58,7 @@ namespace g4display {
 
 
 		// JView
-		string VIEWERCHOICES = "g4 viewer. Available choice:\n";
+		string VIEWERCHOICES = "g4 viewer. Available choices:\n\n";
 		for (auto c: AVAILABLEG4VIEWERS) {
 			VIEWERCHOICES += "\t\t\t\t- " + c + "\n";
 		}
@@ -97,7 +97,7 @@ namespace g4display {
 		help.push_back(" - screen position");
 		help.push_back(" - resolution in terms of segments per circle");
 		help.push_back("");
-		help.push_back("Example: -g4view={viewer: OGL; dimension: 1100x800; position: +200+100; segsPerCircle: 100}");
+		help.push_back("Example: -g4view={viewer: \"OGL\", dimension: \"1100x800\", position: \"+200+100\", segsPerCircle: 100}");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("g4view", "geant4 viewer properties", jsonViewOption, help, false));
@@ -122,14 +122,28 @@ namespace g4display {
 		help.clear();
 		help.push_back("Defines the geant4 camera view point");
 		help.push_back("");
-		help.push_back("Example: -g4camera={phi: 20*deg; theta: 15*deg;}");
+		help.push_back("Example: -g4camera={phi: \"20*deg\"; theta: \"15*deg\";}");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("g4camera", "geant4 camera", jsonCameraOption, help, false));
 
-
 		// dawn switch
 		goptions.push_back(GOption("dawn", "takes a screenshot of the loaded scene using the dawn driver"));
+
+		// "gui" switch
+		goptions.push_back(GOption("gui", "use Graphical User Interface"));
+
+		// g4display verbosity
+		json jsonMessageVerbosity = {
+			{GNAME, "g4displayv"},
+			{GDESC, GVERBOSITY_DESCRIPTION},
+			{GDFLT, 0}
+		};
+		goptions.push_back(GOption(jsonMessageVerbosity));
+
+
+		goptions += addSceneTextsOptions();
+		goptions += addViewTextsOptions();
 
 		return goptions;
 	}

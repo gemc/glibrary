@@ -22,7 +22,7 @@ G4SceneProperties::G4SceneProperties(GOptions* gopts)
 	// notice gui and verbosity are not set in g4display but in main()
 	bool gui   = gopts->getSwitch("gui");
 	bool dawn  = gopts->getSwitch("dawn");
-	int verbosity = gopts->getInt("verbosity");
+	int verbosity = gopts->getInt("g4displayv");
 
 	G4UImanager* g4uim = G4UImanager::GetUIpointer();
 
@@ -36,11 +36,11 @@ G4SceneProperties::G4SceneProperties(GOptions* gopts)
 
 		commands.push_back("/vis/scene/create gemc");
 
+
 		if (dawn) {
 			commands.push_back("/vis/open DAWNFILE");
 			commands.push_back("/vis/geometry/set/visibility World 0 false");
 			commands.push_back("/vis/viewer/set/style surface");
-
 		}
 
 		if ( gui ) {
@@ -48,7 +48,15 @@ G4SceneProperties::G4SceneProperties(GOptions* gopts)
 		}
 
 		commands.push_back("/vis/viewer/set/autoRefresh false");
+
+
 		commands.push_back("/vis/drawVolume");
+
+
+		// scene texts
+		for ( string c: addSceneTexts(gopts) ) {
+			commands.push_back(c);
+		}
 
 
 		// Disable auto refresh and quieten vis messages whilst scene is established:

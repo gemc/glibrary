@@ -98,7 +98,7 @@ namespace gsystem {
 		vector<string> help;
 		help.push_back("A system definition includes the geometry location, factory and variation");
 		help.push_back("");
-		help.push_back("Example: +gsystem={detector: \"experiments/clas12/targets\"; factory: \"TEXT\"; variation: \"bonus\";}");
+		help.push_back("Example: +gsystem={detector: \"experiments/clas12/targets\", factory: \"TEXT\", variation: \"bonus\"}");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gsystem", "defines a group of detectors", jsonDetectorOption, help, true));
@@ -140,7 +140,7 @@ namespace gsystem {
 		help.clear();
 		help.push_back("The volume modifer can shift, tilt, or delete a volume from the gworld");
 		help.push_back("");
-		help.push_back("Example: +gmodifier={volume: targetCell; tilt: 0*deg, 0*deg, -10*deg }");
+		help.push_back("Example: +gmodifier={volume: \"targetCell\", tilt: \"0*deg, 0*deg, -10*deg\" }");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gmodifier", "modify volume existance or placement", jsonModifierOption, help, true));

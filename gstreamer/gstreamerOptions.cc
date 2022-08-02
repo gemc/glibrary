@@ -79,7 +79,7 @@ namespace gstreamer {
 		vector<string> help;
 		help.push_back("Define a Output format and name");
 		help.push_back("");
-		help.push_back("Example: +output={format: TEXT; name: output.txt; type: event; }");
+		help.push_back("Example: +output={format: \"TEXT\", name: \"output.txt\", type: \"event\" }");
 		help.push_back("");
 		help.push_back("Current available formats:");
 		help.push_back("");
