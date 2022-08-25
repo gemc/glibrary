@@ -24,6 +24,8 @@ GDigitizedData* GFluxDigitization::digitizeHit(GHit *ghit, size_t hitn) {
 	gdata->includeVariable("hitn",             (int) hitn                      );
 	gdata->includeVariable("eTot",             ghit->getTotalEnergyDeposited() );
 	gdata->includeVariable("time",             ghit->getAverageTime()          );
+	gdata->includeVariable("pid",              ghit->getPid()                  );
+	gdata->includeVariable("kine",             ghit->getE()                    );
 
 	return gdata;
 }

@@ -46,10 +46,9 @@ G4SceneProperties::G4SceneProperties(GOptions* gopts)
 		if ( gui ) {
 			commands.push_back("/vis/open " + jview.viewer + " " + jview.dimension  + jview.position);
 		}
-
+		
+		// Disable auto refresh and quieten vis messages whilst scene is established:
 		commands.push_back("/vis/viewer/set/autoRefresh false");
-
-
 		commands.push_back("/vis/drawVolume");
 
 
@@ -59,8 +58,6 @@ G4SceneProperties::G4SceneProperties(GOptions* gopts)
 		}
 
 
-		// Disable auto refresh and quieten vis messages whilst scene is established:
-		//commands.push_back("/vis/viewer/set/autoRefresh false");
 
 		double toDegrees  = 180/3.1415;
 		double thetaValue = getG4Number(jcamera.theta)*toDegrees;
