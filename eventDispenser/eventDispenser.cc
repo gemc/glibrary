@@ -21,6 +21,7 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	userRunno        = gopt->getInt("userRunno");
 	nEventBuffer     = gopt->getInt("maxebuffer");
 	neventsToProcess = gopt->getInt("n");
+	elog             = gopt->getInt("elog");
 
 	// nothing to do here
 	if(neventsToProcess == 0) return;
@@ -131,6 +132,7 @@ int EventDispenser::getTotalNumberOfEvents()
 int EventDispenser::processEvents()
 {
 	G4UImanager *g4uim = G4UImanager::GetUIpointer();
+	g4uim->ApplyCommand("/run/printProgress " + to_string(elog));
 
 	for(auto &run : runEvents) {
 

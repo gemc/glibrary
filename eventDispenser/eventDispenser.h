@@ -19,6 +19,7 @@ private:
 	int userRunno;
 	int nEventBuffer;
 	int currentRunno = -1;
+	int elog;
 	string variation;
 
 	// internal use
