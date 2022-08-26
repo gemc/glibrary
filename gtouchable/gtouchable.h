@@ -63,7 +63,6 @@ public:
 	// need to provide the gidentity
 	GTouchable(const GTouchable& baseGT, vector<GIdentifier> gidentity, float weight, float t);
 
-
 private:
 	// set by sensitive detector constructor
 	GTouchableType  gType;
@@ -94,7 +93,9 @@ private:
 public:
 	// Overloaded "==" operator for the class 'GTouchable'
 	bool operator== (const GTouchable& gtouchable) const;
-	
+	// Overloaded < to use set.find()
+	bool operator<(const GTouchable& gtouchable) const {return this->trackId < gtouchable.trackId; }
+
 	// called in GSensitiveDetector::ProcessHits
 	void assignTimeAtElectronics(float t) {timeAtElectronics = t;}
 	void assignTrackId(int tid) {trackId = tid;}

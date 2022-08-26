@@ -54,11 +54,20 @@ void GHit::Draw()
 	// only care about schema if we are interactie
 	if(pVVisManager) {
 		setColorSchema();
-
+		
 		G4Circle circle(globalPositions[0]);
 		circle.SetFillStyle(G4Circle::filled);
-		circle.SetScreenSize(10);
-		circle.SetVisAttributes(G4VisAttributes(colour_hit));
+
+		double etot = getTotalEnergyDeposited();
+
+		if( etot > 0 ) {
+			circle.SetScreenSize(10);
+			circle.SetVisAttributes(G4VisAttributes(colour_hit));
+		} else if( etot == 0) {
+			circle.SetScreenSize(8);
+			circle.SetVisAttributes(G4VisAttributes(colour_passby));
+		}
+		
 		pVVisManager->Draw(circle);
 
 	}
@@ -69,7 +78,6 @@ void GHit::Draw()
 // notice: colorSchema should drive this
 bool GHit::setColorSchema()
 {
-	colour_touch  = G4Colour(0.0, 0.0, 1.0);
 	colour_hit    = G4Colour(1.0, 0.0, 0.0);
 	colour_passby = G4Colour(0.0, 1.0, 0.0);
 
