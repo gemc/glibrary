@@ -1,14 +1,13 @@
-#ifndef  GTRANSLATIONTABLE_H_OPTIONS
-#define  GTRANSLATIONTABLE_H_OPTIONS 1
+#ifndef  GPHYSICS_H_OPTIONS
+#define  GPHYSICS_H_OPTIONS 1
 
 // glibrary
 #include "goptions.h" 
 
-namespace gtranslationTable {
+namespace gphysics {
 
 // returns array of options definitions
 vector<GOption> defineOptions();
 
 }
-
 #endif

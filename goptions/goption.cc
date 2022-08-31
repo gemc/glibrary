@@ -446,7 +446,6 @@ void GOption::printOption(bool withDefaults)
 
 	// structured option
 
-
 	cout << KGRN << ARROWITEM << name << RST << ":" << endl << endl;
 
 	for (auto& jValue: jOptionAssignedValues) {
