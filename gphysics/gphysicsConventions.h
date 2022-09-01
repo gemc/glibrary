@@ -3,5 +3,6 @@
 
 #define GPHYSVERBOSITY "gphysv"
 #define GPHYSLOGHEADER " ⚙︎ GPhysics ▸ "
+#define DEFAULTPHYSICSLIST "FTFP_BERT"
 
 #endif

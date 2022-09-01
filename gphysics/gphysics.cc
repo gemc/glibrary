@@ -2,7 +2,7 @@
 #include "gphysics.h"
 #include "gphysicsConventions.h"
 
-
+using namespace std;
 
 // geant4
 
@@ -22,13 +22,21 @@
 #include "G4PhysicsConstructorFactory.hh"
 
 
-GPhysics::GPhysics(GOptions* opt) : G4VModularPhysicsList() {
+GPhysics::GPhysics(GOptions* gopts) : G4VModularPhysicsList() {
 	
-	G4cout << GPHYSLOGHEADER << " Constructor " << G4endl;
+	int verbosity  = gopts->getInt(GPHYSVERBOSITY);
+	bool showPhys  = gopts->getSwitch("showAvailablePhysics");
+	bool showPhysX = gopts->getSwitch("showAvailablePhysicsX");
 
-	int verbosity = opt->getInt(GPHYSVERBOSITY);
-
-	printAvailable(verbosity);
+	if ( showPhys || showPhysX ) {
+		printAvailable();
+	}
+	if ( showPhysX ) {
+		return ;
+	}
+	
+	
+	
 	
 }
 
@@ -37,12 +45,16 @@ GPhysics::~GPhysics() {}
 
 // calls PrintAvailablePhysLists
 // if verbosity is > 0 calls PrintAvailablePhysicsConstructors
-void GPhysics::printAvailable(int verbosity) {
+void GPhysics::printAvailable() {
 	
-	G4cout << GPHYSLOGHEADER << " Geant4 Available Modules: " << G4endl;
-
 	g4alt::G4PhysListFactory factory;
 	factory.PrintAvailablePhysLists();
+	
+	G4cout << GPHYSLOGHEADER << " Geant4 available physics constructor that can be added to physicsList:" << G4endl;
+	G4PhysicsConstructorRegistry* g4pctorFactory = G4PhysicsConstructorRegistry::Instance();
+	g4pctorFactory->PrintAvailablePhysicsConstructors();
+
+	
 	
 }
 

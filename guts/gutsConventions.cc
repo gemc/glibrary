@@ -13,7 +13,9 @@ using namespace std;
 // exiting with error, print error on screen.
 void gexit(int error) {
 	mu.lock();
-	cerr << KBOLD << KRED << " Exiting with error " << error << RST << endl;
+	if ( error != EXIT_SUCCESS ) {
+		cerr << KBOLD << KRED << " Exiting with error " << error << RST << endl;
+	}
 	mu.unlock();
 	exit(error);
 }

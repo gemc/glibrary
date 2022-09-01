@@ -1,5 +1,9 @@
 // gphysics
 #include "gphysics.h"
+#include "gphysicsOptions.h"
+
+// goptions
+#include "goptions.h"
 
 // c++
 #include <iostream>
@@ -8,8 +12,10 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+	GOptions *gopts = new GOptions(argc, argv, gphysics::defineOptions());
+	
+	auto gphysics = new GPhysics(gopts);
 
-
-	return 1;
+	return EXIT_SUCCESS;
 }
 

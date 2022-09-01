@@ -13,7 +13,7 @@ class G4World
 {
 public:
 	// constructor from a GWorld, using verbosity
-	G4World(GWorld *gworld, GOptions* opt);
+	G4World(GWorld *gworld, GOptions* gopts);
 
 	~G4World() {
 		// the deletion of g4 volumes and materials

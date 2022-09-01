@@ -13,11 +13,9 @@
 using namespace CLHEP;
 
 // c++
-using std::cerr;
-using std::cout;
-using std::endl;
+using namespace std;
 
-G4World::G4World(GWorld *gworld, GOptions* opt) {
+G4World::G4World(GWorld *gworld, GOptions* gopts) {
 
 
 	// instantiating volumes map
@@ -25,7 +23,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 	g4materialsMap = new map<string, G4Material*>;
 
 	// instantiating gSystemManager
-	int verbosity = opt->getInt(G4SYSTEMVERBOSITY);
+	int verbosity = gopts->getInt(G4SYSTEMVERBOSITY);
 	GManager g4SystemManager("G4World", verbosity);
 
 	buildDefaultMaterialsElementsAndIsotopes(verbosity);
@@ -117,7 +115,7 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 
 					// calling loadG4System
 					// if a new system cannot be loaded, false is returned and the volumes added to thisIterationRemainingVolumes
-					if(g4systemFactory[g4Factory]->loadG4System(opt, gvolume, g4volumesMap) == false) {
+					if(g4systemFactory[g4Factory]->loadG4System(gopts, gvolume, g4volumesMap) == false) {
 						thisIterationRemainingVolumes.push_back(gvolume);
 					}
 				} else {
@@ -146,11 +144,11 @@ G4World::G4World(GWorld *gworld, GOptions* opt) {
 	} while (thisIterationRemainingVolumes.size() > 0);
 
 
-	if ( opt->getSwitch("logG4Materials") ) {
+	if ( gopts->getSwitch("logG4Materials") ) {
 		G4NistManager::Instance()->ListMaterials("all");
 	}
 
-	if ( opt->getSwitch("printSystemsMaterials") ) {
+	if ( gopts->getSwitch("printSystemsMaterials") ) {
 		G4MaterialTable* matTable = (G4MaterialTable*) G4Material::GetMaterialTable();
 		for(unsigned i=0; i<matTable->size(); ++i) {
 

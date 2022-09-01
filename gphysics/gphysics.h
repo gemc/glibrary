@@ -11,13 +11,12 @@ class  GPhysics : public G4VModularPhysicsList
 {
 public:
 	
-	GPhysics(GOptions* opt);
+	GPhysics(GOptions* gopts);
 	~GPhysics();
 
 private:
-	// calls PrintAvailablePhysLists
-	// if verbosity is > 0 calls PrintAvailablePhysicsConstructors
-	void printAvailable(int verbosity);
+	// logs physics modules and constructors
+	void printAvailable();
 
 };
 

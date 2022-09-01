@@ -60,61 +60,61 @@ vector<GOption> defineOptions() {
 	// gparticle is cumulative structured (groupable): can use -add
 	json jpname = {
 		{GNAME, "pname"},
-		{GDESC, "Particle name, for example \"proton\". "},
+		{GDESC, "Particle name, for example \"proton\""},
 		{GDFLT, NODFLT}
 	};
 	
 	json jmulti = {
 		{GNAME, "multiplicity"},
-		{GDESC, "How many copies of this particle will be generated in each event."},
+		{GDESC, "How many copies of this particle will be generated in each event"},
 		{GDFLT, 1}
 	};
 	
 	json jp = {
 		{GNAME, "p"},
-		{GDESC, "Particle momentum."},
+		{GDESC, "Particle momentum"},
 		{GDFLT, 0}
 	};
 	
 	json jtheta = {
 		{GNAME, "theta"},
-		{GDESC, "Particle polar angle. Default: 0. "},
+		{GDESC, "Particle polar angle. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jphi = {
 		{GNAME, "phi"},
-		{GDESC, "Particle azimuthal angle. Default: 0. "},
+		{GDESC, "Particle azimuthal angle. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jdelta_p = {
 		{GNAME, "delta_p"},
-		{GDESC, "Particle momentum range, centered on p. Default: 0. "},
+		{GDESC, "Particle momentum range, centered on p. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jdelta_theta = {
 		{GNAME, "delta_theta"},
-		{GDESC, "Particle polar angle range, centered on theta. Default: 0. "},
+		{GDESC, "Particle polar angle range, centered on theta. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jdelta_phi = {
 		{GNAME, "delta_phi"},
-		{GDESC, "Particle azimuthal angle range, centered on phi. Default: 0. "},
+		{GDESC, "Particle azimuthal angle range, centered on phi. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jthetaModel = {
 		{GNAME, "thetaModel"},
-		{GDESC, "Distribute cos(theta) or theta. 'ct' (default): cosTheta is uniform. 'flat': theta is uniform."},
+		{GDESC, "Distribute cos(theta) or theta. 'ct' (default): cosTheta is uniform. 'flat': theta is uniform"},
 		{GDFLT, "ct"}
 	};
 	
 	json jrandomMomentumModel = {
 		{GNAME, "randomMomentumModel"},
-		{GDESC, "Momentum randomization. Default: uniform distribution. 'gaussian': use deltas as sigmas."},
+		{GDESC, "Momentum randomization. Default: uniform distribution. 'gaussian': use deltas as sigmas"},
 		{GDFLT, "uniform"}
 	};
 	
@@ -132,49 +132,49 @@ vector<GOption> defineOptions() {
 	
 	json jvx = {
 		{GNAME, "vx"},
-		{GDESC, "Particle vertex x component. Default: 0. "},
+		{GDESC, "Particle vertex x component. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jvy = {
 		{GNAME, "vy"},
-		{GDESC, "Particle vertex y component. Default: 0. "},
+		{GDESC, "Particle vertex y component. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jvz = {
 		{GNAME, "vz"},
-		{GDESC, "Particle vertex z component. Default: 0."},
+		{GDESC, "Particle vertex z component. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jdelta_vx = {
 		{GNAME, "delta_vx"},
-		{GDESC, "Particle vertex range of the x component. Default: 0. "},
+		{GDESC, "Particle vertex range of the x component. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jdelta_vy = {
 		{GNAME, "delta_vy"},
-		{GDESC, "Particle vertex range of the y component. Default: 0. "},
+		{GDESC, "Particle vertex range of the y component. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jdelta_vz = {
 		{GNAME, "delta_vz"},
-		{GDESC, "Particle vertex range of the z component. Default: 0. "},
+		{GDESC, "Particle vertex range of the z component. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jdelta_VR = {
 		{GNAME, "delta_VR"},
-		{GDESC, "Particle vertex is generated within a sphere of radius delta_R. Default: 0. "},
+		{GDESC, "Particle vertex is generated within a sphere of radius delta_R. Default: 0"},
 		{GDFLT, 0}
 	};
 	
 	json jrandomVertexModel = {
 		{GNAME, "randomVertexModel"},
-		{GDESC, "Vertex randomization. Default: uniform distribution. 'gaussian': use deltas as sigmas."},
+		{GDESC, "Vertex randomization. Default: uniform distribution. 'gaussian': use deltas as sigmas"},
 		{GDFLT, "uniform"}
 	};
 	
