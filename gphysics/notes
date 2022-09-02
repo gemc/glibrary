@@ -1,0 +1,6 @@
+open $G4ROOT/$GEANT4_VERSION/lib
+
+	- global
+	- run
+	- physicslist
+

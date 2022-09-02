@@ -1,3 +1,14 @@
+In general from scratch:
+
+- new project
+- remove project file from folder, put one dir up
+- target: add library or command line executable, remove dirs/files created, add files to build phases manually
+- add settings.xconfig to target settings
+- Build Active Architecture only: yes
+- debug info: DWARF
+- Enable Testability: yes
+
+
 ## Create project:
 
 - Start with with  Cross-platform Empty project: "COMMAND-SHIFT-N". Do no create local git repos.
@@ -7,12 +18,9 @@
 - Add macos Library target "libraryName". Dynamic. Currently 2 type of "Library" targets, choose second one, make sure it's STL C++
 - remove libraryName directory
 - add sources libraryName.cc in Compile Sources "Build Phases"
-- build settings: Build Active Architecture only: set to YES otherwise it will try to build arm64
-- "Enable Testability" for release should be set to "yes"
-- search at the workspace level for: 'active' and 'dwarf' and 'Testability'
 - make sure the scheme is set to build "Release" so that archiving build the exact same way as normal build
 - unless there is a developer account, everything should be signed to run locally
-- disable "Harneder Runtime" to allow non signed code (both debug and release)
+- disable "Hardened Runtime" to allow non signed code (both debug and release)
 - also, in Signing and Capabilities, disable library validation
 - notice: test scheme should also be release
 - make sure any needed library is "linked to" and not "embedded" in the frameworks

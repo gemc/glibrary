@@ -10,7 +10,7 @@
 #define GDFLT          "jsonTagDefault"
 #define NODFLT          "NODFLT"
 
-#define IMPORTJCARD "import jcard"
+#define IMPORTJCARD "importJcards"
 
 #define GDEBUGSTRING  "-gdebug"
 #define GSTRICTSTRING "-gstrict"

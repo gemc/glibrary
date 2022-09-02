@@ -6,8 +6,8 @@ l $ROOTSYS
 
 example: /usr/local/Cellar/root/6.26.02/lib
 
-open libs
-
+ open $ROOTSYS/lib/root
+ 
 	- Core
 	- RIO
 	- Tree

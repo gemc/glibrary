@@ -2,6 +2,11 @@
 #include "gphysics.h"
 #include "gphysicsConventions.h"
 
+// glibrary
+#include "gutilities.h"
+using namespace gutilities;
+
+// c++
 using namespace std;
 
 // geant4
@@ -24,7 +29,7 @@ using namespace std;
 
 GPhysics::GPhysics(GOptions* gopts) : G4VModularPhysicsList() {
 	
-	int verbosity  = gopts->getInt(GPHYSVERBOSITY);
+//	int verbosity  = gopts->getInt(GPHYSVERBOSITY);
 	bool showPhys  = gopts->getSwitch("showAvailablePhysics");
 	bool showPhysX = gopts->getSwitch("showAvailablePhysicsX");
 
@@ -35,9 +40,25 @@ GPhysics::GPhysics(GOptions* gopts) : G4VModularPhysicsList() {
 		return ;
 	}
 	
+	// g4alt::G4PhysListFactoryAlt is the extensible factory
+	// including the G4PhysListFactoryAlt.hh header and the line:
+	//    using namespace g4alt;
+	// would make this a drop-in replacement, but we'll list the explicit
+	// namespace here just for clarity
+	g4alt::G4PhysListFactory factory;
+	G4VModularPhysicsList* physList = nullptr;
+
+	string gphysList = gopts->getString("physicsList");
+	string g4physList = trimSpacesFromString(gphysList);
 	
+	physList = factory.GetReferencePhysList(g4physList);
+
+	if ( ! physList ) {		
+		cerr << FATALERRORL << "physics list <" << gphysList << "> could not be loaded." << endl;
+		gexit(EC__PHYSLISTERROR);
+	}
 	
-	
+	cout << GPHYSLOGHEADER << "Geant4 physics list: <" << g4physList << ">" << endl;
 }
 
 GPhysics::~GPhysics() {}
