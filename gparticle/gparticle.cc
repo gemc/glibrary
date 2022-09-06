@@ -66,10 +66,10 @@ Gparticle::Gparticle(gparticle::JParticle jparticle) {
 void Gparticle::shootParticle(G4ParticleGun* particleGun, G4Event* anEvent) {
 
 	auto particleDef = G4ParticleTable::GetParticleTable()->FindParticle(name);
-	float mass = particleDef->GetPDGMass();
 
 	if ( particleDef ) {
 
+		float mass = particleDef->GetPDGMass();
 		particleGun->SetParticleDefinition(particleDef);
 
 		for ( int i=0; i<multiplicity; i++) {
@@ -81,7 +81,7 @@ void Gparticle::shootParticle(G4ParticleGun* particleGun, G4Event* anEvent) {
 		}
 
 	} else {
-		cerr << FATALERRORL << " particle " << name << " not found in G4ParticleTable." << endl;
+		cerr << FATALERRORL << " particle >" << name << "< not found in G4ParticleTable." << endl;
 		gexit(EC__GPARTICLENOTFOUND);
 	}
 	
