@@ -10,7 +10,7 @@
 #define GDFLT          "jsonTagDefault"
 #define NODFLT          "NODFLT"
 
-#define IMPORTJCARD "import jcard"
+#define IMPORTJCARD "importJcards"
 
 #define GDEBUGSTRING  "-gdebug"
 #define GSTRICTSTRING "-gstrict"
@@ -23,7 +23,7 @@
 #define GVERBOSITY_SUMMARY 1 // prints only summary message
 #define GVERBOSITY_DETAILS 2 // print all details
 #define GVERBOSITY_CLASSES 3 // print all details and class constructors / destructors messages
-#define GVERBOSITY_DESCRIPTION "Possible values: 0: shush; 1: summary message; 2: log detaills; 3: log class constructor and destructors."   //
+#define GVERBOSITY_DESCRIPTION "Possible values: 0: shush; 1: summary; 2: details; 3: everything"   //
 
 // exit codes: 100s
 #define EC__NOOPTIONFOUND               101

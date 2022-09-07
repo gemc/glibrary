@@ -1,3 +1,14 @@
+In general from scratch:
+
+- new project
+- remove project file from folder, put one dir up
+- target: add library or command line executable, remove dirs/files created, add files to build phases manually
+- add settings.xconfig to target settings
+- Build Active Architecture only: yes
+- debug info: DWARF
+- Enable Testability: yes
+
+
 ## Create project:
 
 - Start with with  Cross-platform Empty project: "COMMAND-SHIFT-N". Do no create local git repos.
@@ -7,12 +18,9 @@
 - Add macos Library target "libraryName". Dynamic. Currently 2 type of "Library" targets, choose second one, make sure it's STL C++
 - remove libraryName directory
 - add sources libraryName.cc in Compile Sources "Build Phases"
-- build settings: Build Active Architecture only: set to YES otherwise it will try to build arm64
-- "Enable Testability" for release should be set to "yes"
-- search at the workspace level for: 'active' and 'dwarf' and 'Testability'
 - make sure the scheme is set to build "Release" so that archiving build the exact same way as normal build
 - unless there is a developer account, everything should be signed to run locally
-- disable "Harneder Runtime" to allow non signed code (both debug and release)
+- disable "Hardened Runtime" to allow non signed code (both debug and release)
 - also, in Signing and Capabilities, disable library validation
 - notice: test scheme should also be release
 - make sure any needed library is "linked to" and not "embedded" in the frameworks
@@ -33,25 +41,6 @@ FRAMEWORK_SEARCH_PATHS = $QTFRAMES
 - May have to clean LIBRARY_SEARCH as it may point to wrong version dirs
 
 
-## QT Objects derived classes
-
-Make sure the headers are added as source. A bug in XCODE 13.3.1 show them in the target membership but that's not enough.
-It has to be in Build Phases > Compile Sources
-
-Select your project target and in Build Rules make a new custom rule ("+" button).
-Set the "Process" drop down to "Source files with names matching" and type in *.h next to that.
-Set the "Using" drop down to "Custom script:" and in the script type (find path to moc):
-
-$QTDIR/bin/moc ${INPUT_FILE_PATH} -o ${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}_moc.cpp
-
-Now add the "Output files" ("+" button):
-
-${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}_moc.cpp
-
-Remember to add the header to "Compile Sources"
-
-Xcode will then run moc on the headers in Build Phases and it will understand
-that the output from moc is a .cpp and needs to be compiled and linked into you app and do that for you.
 
 ## Cocoa plugin not found
 
@@ -72,17 +61,24 @@ Also, when you add widgets to the layout, it reparents them to the widget the la
 
 ## QT Resources
 
-resources is the executable name, for example argv[0]
+resources could be the executable name to retrieve the path, for example argv[0]:
 
-QFileInfo qrcFileInfoExecutable(resources.c_str());
+QFileInfo qrcFileInfoExecutable(argv[0]);
 QString rccPath = qrcFileInfoExecutable.absolutePath() + "/" + "gemcResources.rcc";
 QResource::registerResource(rccPath);
 
 The rcc file (i.e. gemcResources.rcc) is obtained with:
 rcc -binary exampleResources.qrc -o exampleResources.rcc
+
+In xcode:
+
+Solution 1:
+
 add to the rcc file to the project and copy it in product directory
 scons on the other hand knows about it because the qt module
 compiles exampleResources.qrc directly
+
+Solution 2:
 
 In xcode: change type of qrc file to "C++ Source"
 
@@ -103,31 +99,6 @@ ${DERIVED_FILE_DIR}/qrc_${INPUT_FILE_BASE}.cc
 - can use std::cout 
 - can be inside scopes
 
-
-## Framework and library dir of interest
-
-	open $QTDIR/lib/
-	open $G4ROOT/$GEANT4_VERSION/lib/
-	open $CLHEP_BASE_DIR/lib/
-	open $ROOTSYS/lib/
-	open $XERCESCROOT/lib/
-	open $GLIBRARY/lib
-	open $CCDB_HOME/lib/
-
-	Geant4 Environment:
-	
-	echo " \
-G4LEDATA           $G4LEDATA \
-G4LEVELGAMMADATA   $G4LEVELGAMMADATA \
-G4NEUTRONHPDATA    $G4NEUTRONHPDATA \
-G4PIIDATA          $G4PIIDATA \
-G4RADIOACTIVEDATA  $G4RADIOACTIVEDATA \
-G4REALSURFACEDATA  $G4REALSURFACEDATA \
-G4SAIDXSDATA       $G4SAIDXSDATA \
-G4ABLADATA         $G4ABLADATA \
-G4ENSDFSTATEDATA   $G4ENSDFSTATEDATA \
-G4PARTICLEXSDATA   $G4PARTICLEXSDATA \
-"
 
 
 ## Shared schemes:

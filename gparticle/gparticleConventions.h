@@ -6,6 +6,7 @@
 // error codes in the 900s
 #define EC__GPARTICLENOTFOUND        901
 #define EC__GPARTICLEWRONGTHETAMODEL 902
+#define EC__GPARTICLETABLENOTFOUND   903
 
 
 #endif

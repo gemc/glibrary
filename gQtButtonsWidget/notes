@@ -2,8 +2,8 @@
 
 open $QTDIR/lib
 
-  - QtCore
-  - QtGUI
-  - QtWidgets
+  - QtCore.framework
+  - QtGUI.framework
+  - QtWidgets.framework
 
 

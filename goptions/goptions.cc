@@ -397,7 +397,7 @@ void GOptions::printOptionsHelp()
 
 	for (auto& s: switches) {
 
-		string help = "-" +  s.first + RST  ;
+		string help = "-" +  s.first + RST + " " ;
 		cout  << KGRN << ARROWITEM  ;
 		cout << left;
 		cout.width(helpSize);

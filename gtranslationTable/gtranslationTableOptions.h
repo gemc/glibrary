@@ -6,8 +6,8 @@
 
 namespace gtranslationTable {
 
-	// returns array of options definitions
-	vector<GOption> defineOptions();
+// returns array of options definitions
+vector<GOption> defineOptions();
 
 }
 

@@ -49,10 +49,10 @@ Gparticle::Gparticle(gparticle::JParticle jparticle) {
 							);
 
 	delta_v = G4ThreeVector(
-							getG4Number(jparticle.delta_vx, jparticle.vunit),
-							getG4Number(jparticle.delta_vy, jparticle.vunit),
-							getG4Number(jparticle.delta_vz, jparticle.vunit)
-							);
+									getG4Number(jparticle.delta_vx, jparticle.vunit),
+									getG4Number(jparticle.delta_vy, jparticle.vunit),
+									getG4Number(jparticle.delta_vz, jparticle.vunit)
+									);
 
 	delta_VR = getG4Number(jparticle.delta_VR, jparticle.vunit);
 
@@ -65,26 +65,34 @@ Gparticle::Gparticle(gparticle::JParticle jparticle) {
 // https://geant4.kek.jp/lxr/source/event/src/G4ParticleGun.cc
 void Gparticle::shootParticle(G4ParticleGun* particleGun, G4Event* anEvent) {
 
-	auto particleDef = G4ParticleTable::GetParticleTable()->FindParticle(name);
-	float mass = particleDef->GetPDGMass();
+	auto particleTable = G4ParticleTable::GetParticleTable();
 
-	if ( particleDef ) {
+	if ( particleTable ) {
+		auto particleDef = particleTable->FindParticle(name);
 
-		particleGun->SetParticleDefinition(particleDef);
+		if ( particleDef ) {
 
-		for ( int i=0; i<multiplicity; i++) {
-			particleGun->SetParticleEnergy(calculateKinEnergy(mass));
-			
-			particleGun->SetParticleMomentumDirection(calculateBeamDirection());
-			particleGun->SetParticlePosition(calculateVertex());
-			particleGun->GeneratePrimaryVertex(anEvent);
+			float mass = particleDef->GetPDGMass();
+			particleGun->SetParticleDefinition(particleDef);
+
+			for ( int i=0; i<multiplicity; i++) {
+				particleGun->SetParticleEnergy(calculateKinEnergy(mass));
+
+				particleGun->SetParticleMomentumDirection(calculateBeamDirection());
+				particleGun->SetParticlePosition(calculateVertex());
+				particleGun->GeneratePrimaryVertex(anEvent);
+			}
+
+		} else {
+			cerr << FATALERRORL << " particle >" << name << "< not found in G4ParticleTable* " << particleTable << endl;
+			gexit(EC__GPARTICLENOTFOUND);
 		}
 
 	} else {
-		cerr << FATALERRORL << " particle " << name << " not found in G4ParticleTable." << endl;
-		gexit(EC__GPARTICLENOTFOUND);
+		cerr << FATALERRORL << "G4ParticleTable not found - G4ParticleGun*: " << particleGun << endl;
+		gexit(EC__GPARTICLETABLENOTFOUND);
 	}
-	
+
 }
 
 
@@ -124,10 +132,10 @@ G4ThreeVector Gparticle::calculateBeamDirection() {
 
 
 	G4ThreeVector pdir = G4ThreeVector(
-								cos(phiRad)*sin(thetaRad),
-								sin(phiRad)*sin(thetaRad),
-								cos(thetaRad)
-								);
+												  cos(phiRad)*sin(thetaRad),
+												  sin(phiRad)*sin(thetaRad),
+												  cos(thetaRad)
+												  );
 	
 	return pdir;
 }

@@ -6,9 +6,9 @@
 
 namespace g4system {
 
-	// returns array of options definitions
-	vector<GOption> defineOptions();
-	
+// returns array of options definitions
+vector<GOption> defineOptions();
+
 }
 
 

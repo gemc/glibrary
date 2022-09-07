@@ -1,5 +1,9 @@
+// geant4
+#include "G4VisExecutive.hh"
+
+
 // g4display
-#include "g4display.h"
+#include "g4SceneProperties.h"
 #include "g4controls.h"
 #include "g4displayOptions.h"
 
@@ -16,7 +20,11 @@ int main(int argc, char* argv[])
 	QApplication app(argc, argv);
 
 	GOptions *gopts = new GOptions(argc, argv, g4display::defineOptions());
-	G4DisplayProperties *g4Display = new G4DisplayProperties(gopts);
+
+	G4VisManager* visManager = new G4VisExecutive;
+	visManager->Initialize();
+
+	G4SceneProperties *g4SceneProperties = new G4SceneProperties(gopts);
 
 	// main window
 	QMainWindow *window = new QMainWindow();
@@ -29,7 +37,7 @@ int main(int argc, char* argv[])
 
 
 	window->show();
-	delete g4Display;
+	delete g4SceneProperties;
 
 	return app.exec();
 

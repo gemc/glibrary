@@ -2,9 +2,9 @@
 
 open $QTDIR/lib
 
-  - QtCore
-  - QtGui
-  - QtWidgets
+  - QtCore.framework
+  - QtGui.framework
+  - QtWidgets.framework
 
 
 open $G4ROOT/$GEANT4_VERSION/lib

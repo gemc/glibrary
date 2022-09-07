@@ -1,5 +1,5 @@
 // location of libraries
-JLAB_SOFTWARE = /opt/jlab_software/2.5/Darwin_macosx12.3-clang13.1.6
+JLAB_SOFTWARE = /opt/jlab_software/2.6/Darwin_macosx12.5.1-clang13.1.6
 
 // build directory is on the home dir
 MYBUILDDIR = /Users/ungaro/builds
@@ -40,13 +40,13 @@ CCDB_HEADS   = $CCDB_ROOT/include
 
 // CLHEP
 // for libraries: open $CLHEP_BASE_DIR/lib/
-CLHEP_VERSION = 2.4.4.2
+CLHEP_VERSION = 2.4.5.1
 CLHEP_ROOT    = $JLAB_SOFTWARE/clhep/$CLHEP_VERSION
 CLHEP_HEADS   = $CLHEP_ROOT/include $CLHEP_ROOT/include/CLHEP
 
 // GEANT4
 // for libraries: open $G4LIB/
-GEANT4_VERSION = 4.10.07.p03
+GEANT4_VERSION = 11.0.2
 GEANT4_ROOT    = $JLAB_SOFTWARE/geant4/$GEANT4_VERSION
 GEANT4_HEADS   = $GEANT4_ROOT/include/Geant4
 
@@ -55,18 +55,19 @@ GEANT4_HEADS   = $GEANT4_ROOT/include/Geant4
 // - core
 // - RIO for files
 // - TTree for trees
-ROOT_VERSION = 6.26.02
+ROOT_VERSION = 6.26.06
 ROOTSYS      = $JLAB_SOFTWARE/root/$ROOT_VERSION
 ROOT_HEADS   = $ROOTSYS/include/root
 
 
 // GLIBRARY
-// adding includes here
+// adding includes here -  $GLIB_ROOT/include is for cadmesh
 GLIB_ROOT   = /opt/projects/gemc/glibrary
 GLIB_HEADS1 = $GLIB_ROOT/guts $GLIB_ROOT/goptions $GLIB_ROOT/gsplash
 GLIB_HEADS2 = $GLIB_ROOT/gdata $GLIB_ROOT/gtouchable $GLIB_ROOT/gfactory $GLIB_ROOT/ghit $GLIB_ROOT/gdynamicDigitization
 GLIB_HEADS3 = $GLIB_ROOT/gsystem $GLIB_ROOT/g4system $GLIB_ROOT/gstreamer $GLIB_ROOT/textProgressBar $GLIB_ROOT/eventDispenser
 GLIB_HEADS4 = $GLIB_ROOT/gQtButtonsWidget $GLIB_ROOT/g4display $GLIB_ROOT/gtranslationTable $GLIB_ROOT/gparticle $GLIB_ROOT/include
+GLIB_HEADS5 = $GLIB_ROOT/gphysics
 
 //GLIB_CMESH    = $GLIB_ROOT/cadmesh/include $GLIB_ROOT/cadmesh/external/tetgen $GLIB_ROOT/cadmesh/external/assimp/include/
-GLIB_HEADS = $GLIB_HEADS1 $GLIB_HEADS2 $GLIB_HEADS3 $GLIB_HEADS4
+GLIB_HEADS = $GLIB_HEADS1 $GLIB_HEADS2 $GLIB_HEADS3 $GLIB_HEADS4  $GLIB_HEADS5

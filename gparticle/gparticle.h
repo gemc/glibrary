@@ -39,7 +39,8 @@ private:
 	G4ThreeVector v;
 	G4ThreeVector delta_v;
 	float delta_VR;
-	bool vertexGaussianSpread;  // true: gaussian around values, using the deltas as sigmas. false: uniform distribution in speficied range
+	bool vertexGaussianSpread;  // true: gaussian around values, using the deltas as sigmas.
+										 // false: uniform distribution in speficied range
 
 
 public:

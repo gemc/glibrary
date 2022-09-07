@@ -124,19 +124,6 @@ void GTouchableModifiers::assignOverallWeight(string tname, double totalWeight) 
 vector<GTouchable*> GDynamicDigitization::processGTouchableModifiers(GTouchable *gTouchID, GTouchableModifiers gmods) {
 
 	vector<GTouchable*> touchables;
-//	if ( gmods.isWeightsOnly() ) {
-//
-//		vector<GIdentifier> originalGIDS = gTouchID->getIdentity();
-//		for ( auto originalGID: originalGIDS ) {
-//			// create a new
-//			if ( gmods.getModifierWeightsVector(originalGID.getName()).size() > 0 ) {
-//
-//			}
-//		}
-//
-//	} else {
-//
-//	}
 
 	return touchables;
 }

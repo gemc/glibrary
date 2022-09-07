@@ -74,7 +74,7 @@ namespace gdetector {
 		help.push_back("The geometry and variation are mandatory fields");
 		help.push_back("The variation is optional, with \"default\" as default");
 		help.push_back("");
-		help.push_back("Example: +gsetup={detector: experiments/clas12/targets; factory: TEXT; variation: bonus;}");
+		help.push_back("Example: +gsetup={detector: \"experiments/clas12/targets\", factory: \"TEXT\", \"variation\": \"bonus\"}");
 
 		// the last argument refers to "cumulative"
 		goptions.push_back(GOption("gsetup", "define a group of detectors", jsonDetectorOption, help, true));

@@ -3,13 +3,13 @@
 
 open $QTDIR/lib
 
-	- QtCore
-	- QtGui
-	- QtWidgets
+	- QtCore.framework
+	- QtGui.framework
+	- QtWidgets.framework
 
 
 >> For the example:
 
-	- QtCore
-	- QtWidgets
+	- QtCore.framework
+	- QtWidgets.framework
 

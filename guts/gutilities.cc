@@ -2,24 +2,16 @@
 #include "gutilities.h"
 
 // c++
+// algorithm for the erase/remove combo
 #include <sstream>
+#include<algorithm>
 using namespace std;
 
 //! Trim Both leading and trailing spaces
-string gutilities::trimSpacesFromString(string in)
+string gutilities::trimSpacesFromString(string str)
 {
-	string out;
-	
-	size_t leapos = in.find_first_not_of(" \t"); // Find the first character position after excluding leading blank spaces
-	size_t endpos = in.find_last_not_of(" \t");  // Find the first character position from reverse af
-	
-	// if all spaces or empty return an empty string
-	if(( leapos == string::npos) || ( endpos == string::npos))
-		out = "";
-	else
-		out = in.substr( leapos, endpos-leapos+1 );
-	
-	return out;
+	str.erase(remove(str.begin(), str.end(), ' '), str.end());
+	return str;
 }
 
 //! Get the filename from the path (currently only posix)

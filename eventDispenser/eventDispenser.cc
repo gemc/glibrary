@@ -15,12 +15,13 @@ using namespace std;
 
 
 EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*> *gDDGlobal) : gDigitizationGlobal(gDDGlobal) {
-	verbosity        = gopt->getInt("runweightsv");
+	verbosity        = gopt->getInt("edistv");
 	string filename  = gopt->getString("runWeightsFile");
 	variation        = gopt->getString("dVariation");
 	userRunno        = gopt->getInt("userRunno");
 	nEventBuffer     = gopt->getInt("maxebuffer");
 	neventsToProcess = gopt->getInt("n");
+	elog             = gopt->getInt("elog");
 
 	// nothing to do here
 	if(neventsToProcess == 0) return;
@@ -131,6 +132,7 @@ int EventDispenser::getTotalNumberOfEvents()
 int EventDispenser::processEvents()
 {
 	G4UImanager *g4uim = G4UImanager::GetUIpointer();
+	g4uim->ApplyCommand("/run/printProgress " + to_string(elog));
 
 	for(auto &run : runEvents) {
 
@@ -160,6 +162,7 @@ int EventDispenser::processEvents()
 			if(verbosity >= GVERBOSITY_SUMMARY) {
 				gLogMessage("  " + string(EVENTDISPENSERLOGMSGITEM) + " Processing " + to_string(nevents) + " events");
 			}
+			g4uim->ApplyCommand("/run/initialize");
 			g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
 		} else {
 			int nsubRuns = nevents / nEventBuffer ;
@@ -172,6 +175,7 @@ int EventDispenser::processEvents()
 					+ ", processing events " + to_string(totalSoFar) + " → " + to_string(nEventBuffer);
 					gLogMessage(log);
 				}
+				g4uim->ApplyCommand("/run/initialize");
 				g4uim->ApplyCommand("/run/beamOn " + to_string(nEventBuffer));
 				totalSoFar += nEventBuffer;
 			}

@@ -20,6 +20,7 @@ g4display            = SConscript('g4display/SConscript',            exports='en
 gparticle            = SConscript('gparticle/SConscript',            exports='env')
 gdynamicDigitization = SConscript('gdynamicDigitization/SConscript', exports='env')
 gtranslationTable    = SConscript('gtranslationTable/SConscript',    exports='env')
+gphysics             = SConscript('gphysics/SConscript',             exports='env')
 
 # output plugins
 libsTextDLL    = SConscript('gstreamer/SConscriptTEXTDLL')

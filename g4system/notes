@@ -2,7 +2,7 @@
 
 open $CLHEP_BASE_DIR/lib
 
-	- libCLHEP-2.4.4.2.dylib
+	- libCLHEP-version.dylib
 
 
 
@@ -10,7 +10,7 @@ open $G4ROOT/$GEANT4_VERSION/lib
 
 	- geometry
 	- global
-	- graphics
+	- graphics_reps
 	- materials
 
 
