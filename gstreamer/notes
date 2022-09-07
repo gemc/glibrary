@@ -8,9 +8,9 @@ example: /usr/local/Cellar/root/6.26.02/lib
 
  open $ROOTSYS/lib/root
  
-	- Core
-	- RIO
-	- Tree
+	- libCore.so
+	- libRIO.so
+	- libTree.so
 
 These are symlinks so they should come from the correct place, i.e. /usr/local/Cellar/root/6.24.04/lib
 

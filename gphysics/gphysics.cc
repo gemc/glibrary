@@ -47,6 +47,7 @@ GPhysics::GPhysics(GOptions* gopts) : G4VModularPhysicsList() {
 	// namespace here just for clarity
 	g4alt::G4PhysListFactory factory;
 	G4VModularPhysicsList* physList = nullptr;
+	factory.SetDefaultReferencePhysList("FTFP_BERT");
 
 	string gphysList = gopts->getString("physicsList");
 	string g4physList = trimSpacesFromString(gphysList);
@@ -75,8 +76,6 @@ void GPhysics::printAvailable() {
 	G4PhysicsConstructorRegistry* g4pctorFactory = G4PhysicsConstructorRegistry::Instance();
 	g4pctorFactory->PrintAvailablePhysicsConstructors();
 
-	
-	
 }
 
 
