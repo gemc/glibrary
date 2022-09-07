@@ -90,11 +90,8 @@ void Gparticle::shootParticle(G4ParticleGun* particleGun, G4Event* anEvent) {
 
 	} else {
 		cerr << FATALERRORL << "G4ParticleTable not found - G4ParticleGun*: " << particleGun << endl;
-		particleTable->DumpTable("ALL");
 		gexit(EC__GPARTICLETABLENOTFOUND);
 	}
-
-
 
 }
 
