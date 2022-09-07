@@ -2,7 +2,9 @@
 #include "gutilities.h"
 
 // c++
+// algorithm for the erase/remove combo
 #include <sstream>
+#include<algorithm>
 using namespace std;
 
 //! Trim Both leading and trailing spaces
