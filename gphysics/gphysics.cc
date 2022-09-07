@@ -27,11 +27,12 @@ using namespace std;
 #include "G4PhysicsConstructorFactory.hh"
 
 
-GPhysics::GPhysics(GOptions* gopts) : G4VModularPhysicsList() {
+GPhysics::GPhysics(GOptions* gopts) : physList(nullptr) {
 	
 //	int verbosity  = gopts->getInt(GPHYSVERBOSITY);
-	bool showPhys  = gopts->getSwitch("showAvailablePhysics");
-	bool showPhysX = gopts->getSwitch("showAvailablePhysicsX");
+	bool showPhys    = gopts->getSwitch("showAvailablePhysics");
+	bool showPhysX   = gopts->getSwitch("showAvailablePhysicsX");
+	string gphysList = gopts->getString("physicsList");
 
 	if ( showPhys || showPhysX ) {
 		printAvailable();
@@ -46,12 +47,8 @@ GPhysics::GPhysics(GOptions* gopts) : G4VModularPhysicsList() {
 	// would make this a drop-in replacement, but we'll list the explicit
 	// namespace here just for clarity
 	g4alt::G4PhysListFactory factory;
-	G4VModularPhysicsList* physList = nullptr;
-	factory.SetDefaultReferencePhysList("FTFP_BERT");
-
-	string gphysList = gopts->getString("physicsList");
 	string g4physList = trimSpacesFromString(gphysList);
-	
+
 	physList = factory.GetReferencePhysList(g4physList);
 
 	if ( ! physList ) {		

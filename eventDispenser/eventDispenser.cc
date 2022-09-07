@@ -162,6 +162,7 @@ int EventDispenser::processEvents()
 			if(verbosity >= GVERBOSITY_SUMMARY) {
 				gLogMessage("  " + string(EVENTDISPENSERLOGMSGITEM) + " Processing " + to_string(nevents) + " events");
 			}
+			g4uim->ApplyCommand("/run/initialize");
 			g4uim->ApplyCommand("/run/beamOn " + to_string(nevents));
 		} else {
 			int nsubRuns = nevents / nEventBuffer ;
@@ -174,6 +175,7 @@ int EventDispenser::processEvents()
 					+ ", processing events " + to_string(totalSoFar) + " → " + to_string(nEventBuffer);
 					gLogMessage(log);
 				}
+				g4uim->ApplyCommand("/run/initialize");
 				g4uim->ApplyCommand("/run/beamOn " + to_string(nEventBuffer));
 				totalSoFar += nEventBuffer;
 			}

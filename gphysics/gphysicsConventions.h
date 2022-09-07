@@ -3,8 +3,7 @@
 
 #define GPHYSVERBOSITY "gphysv"
 #define GPHYSLOGHEADER " ⚙︎ GPhysics ▸ "
-#define DEFAULTPHYSICSLIST "FTFP_BERT_EMV"
-
+#define DEFAULTPHYSICSLIST "FTFP_BERT"
 
 #define EC__PHYSLISTERROR 401
 

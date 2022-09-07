@@ -149,6 +149,7 @@ G4World::G4World(GWorld *gworld, GOptions* gopts) {
 	}
 
 	if ( gopts->getSwitch("printSystemsMaterials") ) {
+		cout << endl;
 		G4MaterialTable* matTable = (G4MaterialTable*) G4Material::GetMaterialTable();
 		for(unsigned i=0; i<matTable->size(); ++i) {
 
@@ -163,11 +164,12 @@ G4World::G4World(GWorld *gworld, GOptions* gopts) {
 			auto nelements = int(thisMat->GetNumberOfElements());
 			for ( int e=0; e<nelements; e++  ) {
 				auto element = thisMat->GetElement(e);
-				cout << GTAB << " element " << element->GetName() <<  " number of atoms" << element->GetN() <<  endl;
+				cout << GTAB << " element " << element->GetName() <<  " number of atoms: " << element->GetN() <<  endl;
 			}
 
 			cout << endl;
 		}
+		G4cout << *(G4Material::GetMaterialTable()) << G4endl;
 
 	}
 
