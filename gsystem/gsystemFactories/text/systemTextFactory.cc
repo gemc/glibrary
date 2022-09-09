@@ -29,7 +29,7 @@ ifstream* GSystemTextFactory::gSystemTextFileStream(GSystem *system, string SYST
 	ifstream *IN = new ifstream(fname.c_str());
 	
 	if( IN->good() ) {
-		if( verbosity == GVERBOSITY_DETAILS ) {
+		if( verbosity == GVERBOSITY_SUMMARY ) {
 			cout << GSYSTEMLOGHEADER << "Opening file " <<  KMAG << fname << RST  << endl;
 		}
 		return IN;

@@ -213,7 +213,10 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 		return answer;
 	}
 	
-	return EXIT_SUCCESS;
+	cerr << FATALERRORL << " gutilities: could not convert string to double. ";
+	gexit(EC__G4NUMBERERROR);
+
+	//return EXIT_SUCCESS;
 }
 
 
