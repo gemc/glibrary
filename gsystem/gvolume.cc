@@ -20,7 +20,7 @@ GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 		// size is already checked in addVolume, the only interface to volume
 		int i=0;
 		
-		name = trimSpacesFromString(pars[i++]);
+		name = removeAllSpacesFromString(pars[i++]);
 		
 		// checking that name does not contain GSYSTEM_DELIMITER
 		if (name.find(GSYSTEM_DELIMITER) != string::npos) {
@@ -28,31 +28,31 @@ GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 			gexit(EC__GVOLUMENAMECONTAINSINVALID);
 		}
 		
-		motherName   = trimSpacesFromString(pars[i++]);
-		type         = trimSpacesFromString(pars[i++]);
-		parameters   = trimSpacesFromString(pars[i++]);
-		material     = trimSpacesFromString(pars[i++]);
-		pos          = trimSpacesFromString(pars[i++]);
-		rot          = trimSpacesFromString(pars[i++]);
-		emfield      = trimSpacesFromString(pars[i++]);
-		string pvis  = trimSpacesFromString(pars[i++]);
+		motherName   = removeAllSpacesFromString(pars[i++]);
+		type         = removeAllSpacesFromString(pars[i++]);
+		parameters   = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+		material     = removeAllSpacesFromString(pars[i++]);
+		pos          = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+		rot          = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+		emfield      = removeAllSpacesFromString(pars[i++]);
+		string pvis  = removeAllSpacesFromString(pars[i++]);
 		visible      = (pvis == "1") ? true : false;
-		style        = stoi(trimSpacesFromString(pars[i++]));
-		color        = trimSpacesFromString(pars[i++]);
-		digitization = trimSpacesFromString(pars[i++]);
-		gidentity    = trimSpacesFromString(pars[i++]);
-		copyOf       = trimSpacesFromString(pars[i++]);
-		replicaOf    = trimSpacesFromString(pars[i++]);
-		solidsOpr    = trimSpacesFromString(pars[i++]);
-		mirror       = trimSpacesFromString(pars[i++]);
-		string pexists = trimSpacesFromString(pars[i++]);
+		style        = stoi(removeAllSpacesFromString(pars[i++]));
+		color        = removeAllSpacesFromString(pars[i++]);
+		digitization = removeAllSpacesFromString(pars[i++]);
+		gidentity    = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+		copyOf       = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+		replicaOf    = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+		solidsOpr    = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+		mirror       = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+		string pexists = removeAllSpacesFromString(pars[i++]);
 		exist = (pexists == "1") ? true : false;
 
 		// these will be assigned later
 		g4name       = UNINITIALIZEDSTRINGQUANTITY;
 		g4motherName = UNINITIALIZEDSTRINGQUANTITY;
 		
-		description  = trimSpacesFromString(pars[i++]);
+		description  = removeLeadingAndTrailingSpacesFromString(pars[i++]);
 
 		// modifiers - accessed through options/jcard
 		shift = GSYSTEMNOMODIFIER;

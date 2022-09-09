@@ -7,7 +7,6 @@
 // geant4
 #include "G4VModularPhysicsList.hh"
 
-// The gemc physics use directly the geant4 extensibleFactory
 // GPhysics Builds and provide a new G4VModularPhysicsList
 // rather than being a class derived from G4VModularPhysicsList
 class  GPhysics 

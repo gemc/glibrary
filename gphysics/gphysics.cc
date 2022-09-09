@@ -47,7 +47,7 @@ GPhysics::GPhysics(GOptions* gopts) : physList(nullptr) {
 	// would make this a drop-in replacement, but we'll list the explicit
 	// namespace here just for clarity
 	g4alt::G4PhysListFactory factory;
-	string g4physList = trimSpacesFromString(gphysList);
+	string g4physList = removeAllSpacesFromString(gphysList);
 
 	physList = factory.GetReferencePhysList(g4physList);
 

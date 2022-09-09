@@ -16,7 +16,11 @@ namespace gutilities {
 	using std::map;
 
 	// Removes leading and trailing spaces
-	string trimSpacesFromString(string);
+	string removeLeadingAndTrailingSpacesFromString(string);
+
+	// Removes all spaces from string
+	string removeAllSpacesFromString(string);
+
 
 	// get the filename from the path (currently only posix)
 	string getFileFromPath(string);

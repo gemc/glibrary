@@ -8,7 +8,29 @@
 using namespace std;
 
 //! Trim Both leading and trailing spaces
-string gutilities::trimSpacesFromString(string str)
+string gutilities::removeLeadingAndTrailingSpacesFromString(string in)
+{
+	//	str.erase(remove(str.begin(), str.end(), ' '), str.end());
+	//	return str;
+	
+	string out;
+	
+	size_t leapos = in.find_first_not_of(" \t"); // Find the first character position after excluding leading blank spaces
+	size_t endpos = in.find_last_not_of(" \t");  // Find the first character position from reverse af
+	
+	// if all spaces or empty return an empty string
+	if(( leapos == string::npos) || ( endpos == string::npos)) {
+		out = "";
+	} else {
+		out = in.substr( leapos, endpos-leapos+1 );
+	}
+	return out;
+	
+}
+
+
+//! Remove all spaces from string
+string gutilities::removeAllSpacesFromString(string str)
 {
 	str.erase(remove(str.begin(), str.end(), ' '), str.end());
 	return str;
@@ -35,7 +57,7 @@ vector<string> gutilities::getStringVectorFromString(string input)
 	while(!plist.eof()) {
 		string tmp;
 		plist >> tmp;
-		string toPut = trimSpacesFromString(tmp);
+		string toPut = removeLeadingAndTrailingSpacesFromString(tmp);
 		if(toPut != "")
 			pvalues.push_back(toPut);
 	}
@@ -122,7 +144,7 @@ using namespace CLHEP;
 /// \return value with correct G4 unit.
 double gutilities::getG4Number(string v, bool warnIfNotUnit)
 {
-	string value = trimSpacesFromString(v);
+	string value = removeLeadingAndTrailingSpacesFromString(v);
 	
 	// no * found
 	if(value.find("*") == string::npos) {
@@ -191,7 +213,6 @@ double gutilities::getG4Number(string v, bool warnIfNotUnit)
 		return answer;
 	}
 	
-	return EXIT_SUCCESS;
 }
 
 
@@ -285,14 +306,14 @@ vector<string> gutilities::getStringVectorFromStringWithDelimiter(string input, 
 			tmp += input[i];
 		} else {
 			if(tmp != "") {
-				pvalues.push_back(trimSpacesFromString(tmp));
+				pvalues.push_back(removeLeadingAndTrailingSpacesFromString(tmp));
 			}
 			tmp = "";
 		}
 		
 		// end of line
 		if(i==input.size() - 1 && tmp != "") {
-			pvalues.push_back(trimSpacesFromString(tmp));
+			pvalues.push_back(removeLeadingAndTrailingSpacesFromString(tmp));
 		}
 	}
 	
@@ -327,7 +348,7 @@ vector<string> gutilities::getListOfFilesInDirectory(string dirName, vector<stri
 			}
 		}
 	}
-
+	
 	return fileList;
 }
 
