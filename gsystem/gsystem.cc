@@ -17,12 +17,19 @@ variation(v) {
 
 	path = gutilities::getDirFromPath(n);
 	name = gutilities::getFileFromPath(n);
+	
+	// if the name of the system does not have a path
+	// getDirFromPath will return the name
+	// in that case reset the path to an empty string
+	if ( name == path ) {
+		path = "";
+	}
 
 	gvolumesMap   = new map<string, GVolume*>;
 	gmaterialsMap = new map<string, GMaterial*>;
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << GSYSTEMLOGHEADER << "Instantiating GSystem <" << KWHT << name  << RST << "> " << endl;
+		cout << GSYSTEMLOGHEADER << "Instantiating GSystem <" << KGRN << name  << RST << "> using path <" << KGRN << path  << RST << ">" << endl;
 	}
 }
 

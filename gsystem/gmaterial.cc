@@ -20,9 +20,9 @@ GMaterial::GMaterial(string s, vector<string> pars) : system(s)
 		// size is already checked in addVolume, the only interface to volume
 		int i=0;
 		
-		name         = trimSpacesFromString(pars[i++]);
+		name         = removeAllSpacesFromString(pars[i++]);
 		description  = pars[i++];
-		density      = stod(trimSpacesFromString(pars[i++]));
+		density      = stod(removeAllSpacesFromString(pars[i++]));
 
 		// sets components and amounts
 		setComponentsFromString(pars[i++]);
@@ -35,12 +35,12 @@ GMaterial::GMaterial(string s, vector<string> pars) : system(s)
 		getMaterialPropertyFromString(pars[i++], "fastcomponent");
 		getMaterialPropertyFromString(pars[i++], "slowcomponent");
 
-		scintillationyield = stod(trimSpacesFromString(pars[i++]));
-		resolutionscale    = stod(trimSpacesFromString(pars[i++]));
-		fasttimeconstant   = stod(trimSpacesFromString(pars[i++]));
-		slowtimeconstant   = stod(trimSpacesFromString(pars[i++]));
-		yieldratio         = stod(trimSpacesFromString(pars[i++]));
-		birkConstant       = stod(trimSpacesFromString(pars[i++]));
+		scintillationyield = stod(removeLeadingAndTrailingSpacesFromString(pars[i++]));
+		resolutionscale    = stod(removeLeadingAndTrailingSpacesFromString(pars[i++]));
+		fasttimeconstant   = stod(removeLeadingAndTrailingSpacesFromString(pars[i++]));
+		slowtimeconstant   = stod(removeLeadingAndTrailingSpacesFromString(pars[i++]));
+		yieldratio         = stod(removeLeadingAndTrailingSpacesFromString(pars[i++]));
+		birkConstant       = stod(removeLeadingAndTrailingSpacesFromString(pars[i++]));
 
 		getMaterialPropertyFromString(pars[i++], "rayleigh");
 
@@ -84,7 +84,7 @@ void GMaterial::setComponentsFromString(string composition) {
 void GMaterial::getMaterialPropertyFromString(string parameter, string propertyName) {
 
 	// nothing to do if the parameter is not assigned
-	if ( trimSpacesFromString(parameter) == GMATERIALNOTASSIGNEDPROPERTYSTRING ) {
+	if ( removeLeadingAndTrailingSpacesFromString(parameter) == GMATERIALNOTASSIGNEDPROPERTYSTRING ) {
 		return;
 	}
 
@@ -95,7 +95,7 @@ void GMaterial::getMaterialPropertyFromString(string parameter, string propertyN
 		parameterComponents >> component ;
 
 		// removing whitespaces
-		string trimmedComponent = trimSpacesFromString(component);
+		string trimmedComponent = removeLeadingAndTrailingSpacesFromString(component);
 
 		if( propertyName == "photonEnergy" ) {
 			photonEnergy.push_back(getG4Number(trimmedComponent));
