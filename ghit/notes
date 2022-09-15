@@ -1,17 +1,16 @@
-open $G4ROOT/$GEANT4_VERSION/lib
-
-	- digits_hits
-	- global
-	- graphics_reps
-
-For the example:
-
-	- global
-	- track
-	- gtouchable
-
-
 
 open $CLHEP_BASE_DIR/lib
 
-	- libCLHEP-version.a
+	- libCLHEP-version.dylib
+
+open $G4ROOT/$GEANT4_VERSION/lib
+
+	- libG4digits_hits.dylib
+	- libG4global.dylib
+	- ibG4graphics_reps.dylib
+
+For the example:
+
+	- libG4global.dylib
+	- track
+	- gtouchable

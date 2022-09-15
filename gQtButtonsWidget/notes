@@ -7,3 +7,6 @@ open $QTDIR/lib
   - QtWidgets.framework
 
 
+$QTDIR/bin/moc
+
+ - gQtButtonsWidget.h

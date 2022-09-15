@@ -1,6 +1,5 @@
 open $G4ROOT/$GEANT4_VERSION/lib
 
 	- libG4global.dylib
-	- libG4run.dylib
-	- libG4physicslists.dylib
-
+	- libG4physicslists.dylib	
+	- libG4processes.dylib

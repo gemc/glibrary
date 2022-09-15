@@ -5,14 +5,12 @@ open $CLHEP_BASE_DIR/lib
 	- libCLHEP-version.dylib
 
 
-
 open $G4ROOT/$GEANT4_VERSION/lib
 
-	- geometry
-	- global
-	- graphics_reps
-	- materials
-
+	- libG4geometry.dylib
+	- libG4global.dylib
+	- ibG4graphics_reps.dylib
+	- libG4materials.dylib
 
 
 open $GLIBRARY/lib

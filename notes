@@ -7,6 +7,7 @@ In general from scratch:
 - Build Active Architecture only: yes
 - debug info: DWARF
 - Enable Testability: yes
+- make sure Deployment target version is deleted (this will revert it to default) on both projects and settings. 
 
 
 ## Create project:
