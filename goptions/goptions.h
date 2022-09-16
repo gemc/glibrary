@@ -185,6 +185,11 @@ private:
 	// with any of these flags: -h --h -help --help
 	bool printHelp = false;
 
+	// print option web formatted help and exit if set to true
+	// with any of these flags: -hweb
+	bool printWHelp = false;
+
+
 	// GOption array
 	vector<GOption> goptions;
 
@@ -213,6 +218,9 @@ private:
 
 	// loops over all options and print help
 	void printOptionsHelp();
+
+	// loops over all options and print web formattd help
+	void printOptionsWebHelp();
 
 public:
 

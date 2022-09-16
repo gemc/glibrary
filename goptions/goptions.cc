@@ -27,6 +27,8 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 			gdebug = true;
 		} else if ( strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--h") == 0  || strcmp(argv[i], "-help") == 0  || strcmp(argv[i], "--help") == 0 ) {
 			printHelp = true;
+		} else if ( strcmp(argv[i], "-hweb") == 0 ) {
+			printWHelp = true;
 		}
 	}
 
@@ -57,6 +59,12 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 	if ( printHelp ) {
 		printOptionsHelp();
 	}
+
+	// print web formatted help and exit if printWHelp
+	if ( printWHelp ) {
+		printOptionsWebHelp();
+	}
+
 
 
 	// parsing command line to check if any switch is turned on
@@ -409,6 +417,37 @@ void GOptions::printOptionsHelp()
 	for(auto& jOption: goptions) {
 		jOption.printOptionHelp();
 	//	cout << endl;
+	}
+
+	cout << RST << endl;
+	exit(EXIT_SUCCESS);
+}
+
+
+
+// print only the non default settings set by users
+void GOptions::printOptionsWebHelp()
+{
+
+	long int helpSize = string(HELPFILLSPACE).size() + 1;
+	cout.fill('.');
+
+	cout  << KGRN << " Usage: " << RST << endl << endl;
+
+	for (auto& s: switches) {
+
+		string help = "-" +  s.first + RST + " " ;
+		cout  << KGRN << ARROWITEM  ;
+		cout << left;
+		cout.width(helpSize);
+		cout << help;
+		cout  << s.second.getDescription()  << endl;
+
+	}
+
+	for(auto& jOption: goptions) {
+		jOption.printOptionHelp();
+		//	cout << endl;
 	}
 
 	cout << RST << endl;
