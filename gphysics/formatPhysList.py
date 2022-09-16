@@ -8,6 +8,7 @@
 import sys, os, argparse, subprocess
 
 
+g4VersionStringCatcher    = 'Geant4 Version Name'
 moduleStringCatcher       = 'Base G4VModularPhysicsLists in G4PhysListRegistry are:'
 replaceMapStringCatcher   = 'Replacement mappings in G4PhysListRegistry are:'
 constructorsStringCatcher = 'G4VPhysicsConstructors in G4PhysicsConstructorRegistry are:'
@@ -37,9 +38,12 @@ def main():
 	example = subprocess.run(['./example', '-showAvailablePhysicsX'], env=d, capture_output=True, text=True)
 	lines = example.stdout.split('\n')
 	logType = 'none'
-
+	version = ''
 	for l in lines:
-		if l == moduleStringCatcher:
+		if g4VersionStringCatcher in l:
+			version = l
+			print(version)
+		elif l == moduleStringCatcher:
 			logType = 'module'
 		elif l == replaceMapStringCatcher:
 			logType = 'rmap'
@@ -67,7 +71,7 @@ def main():
 		printGemcHelp()
 
 	if args.web:
-		printGemcMD()
+		printGemcMD(version)
 
 def addModule(module, type):
 
@@ -112,8 +116,8 @@ def printGemcHelp():
 
 # prints jekyll output
 # notice we print directly on ../../home/_documentation
-def printGemcMD():
-		
+def printGemcMD(version):
+
 	jekyllFileName='../../home/_documentation/physistExtList.md'
 	with open(jekyllFileName, 'w') as dn:
 		lstr = '---\n'
@@ -122,6 +126,7 @@ def printGemcMD():
 		lstr += 'order: 2\n'
 		lstr += '---\n'
 		lstr += '\n'
+		lstr += f'{version}\n\n'
 		lstr += 'The Geant4 Physics is determined with the option **physicsList**. If the option is not used, gemc will use **FTFP_BERT** as default.\n'
 		lstr += '\n<br/>\n'
 		lstr += '#### Usage:\n'

@@ -22,7 +22,8 @@ vector<GOption> defineOptions() {
 	};
 	goptions.push_back(GOption(jsonGPhysVerbosity));
 	
-	string physicsListHelp = "Geant4 version " + to_string(G4VERSION_NUMBER) ;
+	string physicsListHelp = "Geant4 Version " + string(G4VERSION_TAG) ;
+	
 	physicsListHelp += " Physics List: it contains a Geant4 physics module, optional e.m. replacement, and optional physics constructors\n";
 	// below is the output of ./formatPhysList.py -gemc
 	physicsListHelp += string(HELPFILLSPACE) + "The available geant4 modules are:\n\n";

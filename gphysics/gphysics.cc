@@ -6,6 +6,9 @@
 #include "gutilities.h"
 using namespace gutilities;
 
+// geant4 version
+#include "G4Version.hh"
+
 // c++
 using namespace std;
 
@@ -65,6 +68,8 @@ GPhysics::~GPhysics() {}
 // calls PrintAvailablePhysLists
 // if verbosity is > 0 calls PrintAvailablePhysicsConstructors
 void GPhysics::printAvailable() {
+	
+	cout << endl << "Geant4 Version " <<  replaceCharInStringWithChars(G4Version, "$", "") << "  " << G4Date << endl << endl;
 	
 	g4alt::G4PhysListFactory factory;
 	factory.PrintAvailablePhysLists();
