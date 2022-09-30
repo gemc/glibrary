@@ -3,11 +3,6 @@ Note: the scons gplugin CANNOT be used when running xcode to load the gplugins, 
 
 The comments below do not apply if scons is used.
 
-xcode notes:
-############
-
-Go to build settings > Packaging and assing gplugin extension, remove "lib" prefix
-
 
 // the gdl header is based on this tutorial:
 // https://0x00sec.org/t/c-dynamic-loading-of-shared-objects-at-runtime/1498

@@ -15,6 +15,7 @@ GTouchable::GTouchable(string digitization, string gidentityString, vector<doubl
 verbosity(verb),
 trackId(0),
 eMultiplier(1),
+timeWindow(0),
 timeAtElectronics(0),
 detectorDimenions(dimensions) {
 
@@ -70,6 +71,7 @@ timeAtElectronics(t) {
 
 
 // todo: optimize the algorithm
+// Overloaded "==" operator for the class 'GTouchable'
 bool GTouchable::operator == (const GTouchable& that) const
 {
 
@@ -104,6 +106,40 @@ bool GTouchable::operator == (const GTouchable& that) const
 			return this->trackId == that.trackId;
 		case dosimeter:
 			return this->trackId == that.trackId;
+		case particleCounter:
+			return true;
+	}
+
+	return false;
+}
+
+// todo: optimize the algorithm
+// Overloaded < to use set.find()
+bool GTouchable::operator < (const GTouchable& that) const
+{
+	
+	// first, compare size of identity
+	// this should never happen because the same sensitivity should be assigned the same identifier structure
+	if (this->gidentity.size() != that.gidentity.size()) {
+		if (verbosity) {
+			cout << " Touchable sizes are different " << endl;
+		}
+		return true;
+	}
+		
+	switch (this->gType) {
+		case readout:
+			// now compare that the identity vector
+			for (size_t i=0; i<that.gidentity.size(); i++) {
+				if (this->gidentity[i] < that.gidentity[i]) {
+					return true;
+				}
+			}
+			
+		case flux:
+			return this->trackId < that.trackId;
+		case dosimeter:
+			return this->trackId < that.trackId;
 		case particleCounter:
 			return true;
 	}
