@@ -91,7 +91,10 @@ private:
 	vector<double> detectorDimenions;
 
 public:
-	// Overloaded < used in set.find()
+	// Overloaded "==" operator for the class 'GTouchable'
+	bool operator== (const GTouchable& gtouchable) const;
+	
+	// Overloaded < to use set.find()
 	bool operator<(const GTouchable& gtouchable) const;
 
 	// called in GSensitiveDetector::ProcessHits
