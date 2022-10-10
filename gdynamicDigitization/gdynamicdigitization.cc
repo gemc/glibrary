@@ -41,11 +41,9 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, size_t h
 	return trueInfoData;
 }
 
-// this will set the ghit:
-// - chargeAtElectronics
-// - timeAtElectronics
-// and will update ghit's gtouchable to include the GElectronic using the translation table (hardware address crate/slot/channel)
-// this will exit with error if the TT is not defined, or if
+// this will set the gdata variable TIMEATELECTRONICS used by RunAction to identify the eventFrameIndex
+// and will include in gdata the translation table (hardware address crate/slot/channel)
+// this will exit with error if the TT is not defined
 // notice time is an int (assumed unit: ns)
 void GDynamicDigitization::chargeAndTimeAtHardware(int time, int q, GHit *ghit, GDigitizedData *gdata)
 {
@@ -120,10 +118,33 @@ void GTouchableModifiers::assignOverallWeight(string tname, double totalWeight) 
 
 }
 
+// if not overloaded, the time used in processTouchable is simply the step time
+float GDynamicDigitization:: processStepTime(GTouchable *gTouchID, G4Step* thisStep) {
+	return thisStep->GetPostStepPoint()->GetGlobalTime();
+}
+
+
+// if not overloaded, returns a vector with a single touchable, with cell time index based on processStepTime
+vector<GTouchable*> GDynamicDigitization::processTouchable(GTouchable *gTouchID, G4Step* thisStep) {
+	
+	float stepTimeAtElectronics = processStepTime(gTouchID, thisStep);
+	
+	gTouchID->assignStepTimeAtElectronicsIndex(readoutSpecs->timeCellIndex(stepTimeAtElectronics));
+	
+	return { gTouchID };
+	
+}
+
+
 
 vector<GTouchable*> GDynamicDigitization::processGTouchableModifiers(GTouchable *gTouchID, GTouchableModifiers gmods) {
 
 	vector<GTouchable*> touchables;
+	
+	
+	
+	
+	
 
 	return touchables;
 }
