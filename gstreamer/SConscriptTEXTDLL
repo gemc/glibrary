@@ -13,7 +13,7 @@ env = init_environment('glibrary geant4 clhep')
 
 
 env.Append(CPPPATH = [Dir('factories/TEXT')])
-env.Append(CXXFLAGS=['-std=c++17'])
+env.Append(CXXFLAGS=['-std=c++20'])
 # needed for the plugin so we can use install_name_tool to change path for DMG installation
 env.Append(SHLINKFLAGS=['-headerpad_max_install_names'])
 

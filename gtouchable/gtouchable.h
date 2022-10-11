@@ -31,9 +31,8 @@ private:
 
 public:
 
-	//  Overloaded "!=" and "<": comparing idValues
-	bool operator != (const GIdentifier& gid) const {return this->idValue != gid.idValue;}
-	bool operator < (const GIdentifier& gid)  const {return this->idValue < gid.idValue;}
+	//  Overloaded "==" 
+	bool operator == (const GIdentifier& gid)  const {return this->idValue == gid.idValue;}
 
 // api
 public:
@@ -94,9 +93,6 @@ public:
 	// Overloaded "==" operator for the class 'GTouchable'
 	bool operator== (const GTouchable& gtouchable) const;
 	
-	// Overloaded < to use set.find()
-	bool operator<(const GTouchable& gtouchable) const;
-
 	// called in GSensitiveDetector::ProcessHits
 	// void assignTimeAtElectronics(float t) {timeAtElectronics = t;}
 	inline void assignTrackId(int tid) {trackId = tid;}

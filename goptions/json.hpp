@@ -794,11 +794,11 @@ struct position_t
 #endif
 #if defined(__cplusplus)
 #  if JSON_HEDLEY_HAS_WARNING("-Wc++98-compat")
-#    if JSON_HEDLEY_HAS_WARNING("-Wc++17-extensions")
+#    if JSON_HEDLEY_HAS_WARNING("-Wc++20-extensions")
 #      define JSON_HEDLEY_DIAGNOSTIC_DISABLE_CPP98_COMPAT_WRAP_(xpr) \
     JSON_HEDLEY_DIAGNOSTIC_PUSH \
     _Pragma("clang diagnostic ignored \"-Wc++98-compat\"") \
-    _Pragma("clang diagnostic ignored \"-Wc++17-extensions\"") \
+    _Pragma("clang diagnostic ignored \"-Wc++20-extensions\"") \
     xpr \
     JSON_HEDLEY_DIAGNOSTIC_POP
 #    else
@@ -10821,7 +10821,7 @@ class iter_impl
 
   public:
 
-    /// The std::iterator class template (used as a base class to provide typedefs) is deprecated in C++17.
+    /// The std::iterator class template (used as a base class to provide typedefs) is deprecated in c++20.
     /// The C++ Standard has never required user-defined iterators to derive from std::iterator.
     /// A user-defined iterator should provide publicly accessible typedefs named
     /// iterator_category, value_type, difference_type, pointer, and reference.
@@ -21323,7 +21323,7 @@ class basic_json
 
     The `items()` function also allows to use
     [structured bindings](https://en.cppreference.com/w/cpp/language/structured_binding)
-    (C++17):
+    (c++20):
 
     @code{cpp}
     for (auto& [key, val] : j_object.items())

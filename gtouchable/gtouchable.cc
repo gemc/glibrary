@@ -91,51 +91,20 @@ bool GTouchable::operator == (const GTouchable& that) const
 	// now compare that the identity is actuallty the same
 	// return false if something is different
 	for (size_t i=0; i<that.gidentity.size(); i++) {
-		if (this->gidentity[i] != that.gidentity[i]) {
+		if ( this->gidentity[i].getValue() != that.gidentity[i].getValue() ) {
 			return false;
 		}
 	}
 
+	// all identities are the same
+	// now using gtouchable type
 	switch (this->gType) {
 		case readout:
-			return (this->stepTimeAtElectronicsIndex - that.stepTimeAtElectronicsIndex) == 0;
+			return this->stepTimeAtElectronicsIndex == that.stepTimeAtElectronicsIndex ;
 		case flux:
 			return this->trackId == that.trackId;
 		case dosimeter:
 			return this->trackId == that.trackId;
-		case particleCounter:
-			return true;
-	}
-
-	return false;
-}
-
-// Overloaded < used by set.find()
-bool GTouchable::operator < (const GTouchable& that) const
-{
-	
-	// first, compare size of identity
-	// this should never happen because the same sensitivity should be assigned the same identifier structure
-	if (this->gidentity.size() != that.gidentity.size()) {
-		cout << " Touchable sizes are different, this should never happen " << endl;
-		return true;
-	}
-		
-	// now compare that the identity vector
-	for (size_t i=0; i<that.gidentity.size(); i++) {
-		if (this->gidentity[i] < that.gidentity[i]) {
-			return true;
-		}
-	}
-
-	switch (this->gType) {
-		case readout:
-			// compare the time cell
-			return this->stepTimeAtElectronicsIndex < that.stepTimeAtElectronicsIndex ;
-		case flux:
-			return this->trackId < that.trackId;
-		case dosimeter:
-			return this->trackId < that.trackId;
 		case particleCounter:
 			return true;
 	}
@@ -146,7 +115,6 @@ bool GTouchable::operator < (const GTouchable& that) const
 // ostream GTouchable
 ostream &operator<<(ostream &stream, GTouchable gtouchable) {
 
-	stream << " GTouchable: " << std::endl;
 	stream << "   ・ ";
 	for ( auto& gid: gtouchable.gidentity ) {
 
