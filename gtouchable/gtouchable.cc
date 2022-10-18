@@ -15,7 +15,7 @@ GTouchable::GTouchable(string digitization, string gidentityString, vector<doubl
 verbosity(verb),
 trackId(0),
 eMultiplier(1),
-timeAtElectronics(0),
+stepTimeAtElectronicsIndex(0),
 detectorDimenions(dimensions) {
 
 	// gtype from digitization
@@ -46,30 +46,29 @@ detectorDimenions(dimensions) {
 
 // copy constructor called in processTouchable
 // weight and time can be set by processTouchable
-GTouchable::GTouchable(const GTouchable& baseGT, vector<GIdentifier> gid, float weight) :
-gidentity(gid),
-eMultiplier(weight) {
-	gType             = baseGT.gType;
-	verbosity         = baseGT.verbosity;
-	trackId           = baseGT.trackId;
-	timeWindow        = baseGT.timeWindow;
-	timeAtElectronics = baseGT.timeAtElectronics;
-}
+//GTouchable::GTouchable(const GTouchable& baseGT, vector<GIdentifier> gid, float weight) :
+//gidentity(gid),
+//eMultiplier(weight) {
+//	gType             = baseGT.gType;
+//	verbosity         = baseGT.verbosity;
+//	trackId           = baseGT.trackId;
+//	stepTimeAtElectronics = baseGT.stepTimeAtElectronics;
+//}
 
 // copy constructor called in processTouchable
 // weight and time can be set by processTouchable
-GTouchable::GTouchable(const GTouchable& baseGT, vector<GIdentifier> gid, float weight, float t) :
-gidentity(gid),
-eMultiplier(weight),
-timeAtElectronics(t) {
-	gType         = baseGT.gType;
-	verbosity     = baseGT.verbosity;
-	trackId       = baseGT.trackId;
-	timeWindow    = baseGT.timeWindow;
-}
+//GTouchable::GTouchable(const GTouchable& baseGT, vector<GIdentifier> gid, float weight, float t) :
+//gidentity(gid),
+//eMultiplier(weight),
+//stepTimeAtElectronics(t) {
+//	gType         = baseGT.gType;
+//	verbosity     = baseGT.verbosity;
+//	trackId       = baseGT.trackId;
+//}
 
 
 // todo: optimize the algorithm
+// Overloaded "==" operator for the class 'GTouchable'
 bool GTouchable::operator == (const GTouchable& that) const
 {
 
@@ -92,14 +91,16 @@ bool GTouchable::operator == (const GTouchable& that) const
 	// now compare that the identity is actuallty the same
 	// return false if something is different
 	for (size_t i=0; i<that.gidentity.size(); i++) {
-		if (this->gidentity[i] != that.gidentity[i]) {
+		if ( this->gidentity[i].getValue() != that.gidentity[i].getValue() ) {
 			return false;
 		}
 	}
 
+	// all identities are the same
+	// now using gtouchable type
 	switch (this->gType) {
 		case readout:
-			return fabs(this->timeAtElectronics - that.timeAtElectronics) < this->timeWindow;
+			return this->stepTimeAtElectronicsIndex == that.stepTimeAtElectronicsIndex ;
 		case flux:
 			return this->trackId == that.trackId;
 		case dosimeter:
@@ -114,7 +115,6 @@ bool GTouchable::operator == (const GTouchable& that) const
 // ostream GTouchable
 ostream &operator<<(ostream &stream, GTouchable gtouchable) {
 
-	stream << " GTouchable: " << std::endl;
 	stream << "   ・ ";
 	for ( auto& gid: gtouchable.gidentity ) {
 
@@ -125,10 +125,24 @@ ostream &operator<<(ostream &stream, GTouchable gtouchable) {
 			stream << std::endl;
 		}
 	}
+	switch (gtouchable.gType) {
+		case readout:
+			// compare the time cell
+			stream << "   ・ type: readout " << std::endl;
+			break;
+		case flux:
+			stream << "   ・ type: flux " << std::endl;
+			break;
+		case dosimeter:
+			stream << "   ・ type: dosimeter " << std::endl;
+			break;
+		case particleCounter:
+			stream << "   ・ type: particleCounter " << std::endl;
+			break;
+	}
 
 	stream << "   ・ energy multiplier: " << gtouchable.eMultiplier << std::endl;
-	stream << "   ・ time: " << gtouchable.timeAtElectronics << std::endl;
-	stream << "   ・ time window: " << gtouchable.timeWindow << std::endl;
+	stream << "   ・ time cell index: " << gtouchable.stepTimeAtElectronicsIndex << std::endl;
 	stream << "   ・ g4 track id: " << gtouchable.trackId << std::endl;
 	return stream;
 }

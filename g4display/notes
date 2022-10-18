@@ -1,28 +1,20 @@
 
-
 open $QTDIR/lib
 
   - QtCore.framework
   - QtGui.framework
   - QtWidgets.framework
 
-
 open $G4ROOT/$GEANT4_VERSION/lib
 
-  - intercoms
+  - libG4intercoms.dylib
 
 For the example, need to satisfy g4 libraries needed:
  
 	- copy g4 libraries and clhep to build dir
-	- copy 
-
-Compilation errors (gcc):
-
-scons 4.2.0 will not work due to  bug: https://bugs.gentoo.org/806085
-works on fedora34 because it's scons 4.1.0
-scons 4.3 works on the mac but not on fedora37
 
 
+$QTDIR/bin/moc
 
-
-
+- g4displayslice.h
+- g4displaycamera.h

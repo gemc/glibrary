@@ -16,7 +16,7 @@ void GHit::addHitInfosForBitset(const HitBitSet hbs, const G4Step* thisStep) {
 	localPositions.push_back(xyzL);
 
 	// explicit variable for documentation
-	float edep = thisStep->GetTotalEnergyDeposit()*gtouchable->getEnergyMultiplier();
+	float edep = ( thisStep->GetTotalEnergyDeposit() ) * ( gtouchable->getEnergyMultiplier() );
 	float time = poststep->GetGlobalTime();
 
 	edeps.push_back(edep);

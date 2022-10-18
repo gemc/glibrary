@@ -4,8 +4,7 @@
 // glibrary
 #include "ghitConventions.h"
 
-#include <math.h>       /* floor */
-
+#include <math.h>  /* floor */
 
 // properties of the readout electronics, used in GTouchable and GHit.
 // they are defined here so that the plugin can define it
@@ -15,7 +14,7 @@ private:
 	// readout specs, set by plugin function loadReadoutSpecs
 	float     timeWindow;       // electronic readout time-window of the detector
 	float     gridStartTime;    // defines the windows grid
-	HitBitSet hitBitSet;       // defines what information to be stored in the hit
+	HitBitSet hitBitSet;        // defines what information to be stored in the hit
 	bool      verbosity;
 
 public:

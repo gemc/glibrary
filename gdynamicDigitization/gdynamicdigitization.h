@@ -69,14 +69,20 @@ public:
 	// abstract destructor
 	virtual ~GDynamicDigitization() = default;
 
+	// the time used in processTouchable
+	virtual float processStepTime(GTouchable *gTouchID, G4Step* thisStep);
+	
 	// change the GTouchable in sensitiveDetector::ProcessHit
-	// by default the touchable is not changed
-	// this function is loaded by plugin methods
+	// by default the touchable is not changed and the gtouchable is assigned a time index based
+	// on the readout specs and the step time
+	// this function can be overloaded by plugin methods
 	// notice that this returns a vector of touchables, as one g4step can produce multiple hits
-	virtual vector<GTouchable*> processTouchable(GTouchable *gTouchID, G4Step* thisStep) {return { gTouchID } ;}
+	virtual vector<GTouchable*> processTouchable(GTouchable *gTouchID, G4Step* thisStep);
 
+	// need to document exactly what this does and if it's still needed
 	vector<GTouchable*> processGTouchableModifiers(GTouchable *gTouchID, GTouchableModifiers gmods);
 
+	
 	// filter true information into GTrueInfoHit
 	// this integrates all available information built in GHit::addHitInfosForBitset
 	GTrueInfoData *collectTrueInformation(GHit *ghit, size_t hitn);
@@ -92,14 +98,13 @@ public:
 	// return false for failure
 	virtual bool loadTT(int runno, string variation) { return false; }
 
-	// this will set the ghit:
-	// - chargeAtElectronics
-	// - timeAtElectronics
-	// and will update ghit's gtouchable to include the GElectronic using the translation table (hardware address crate/slot/channel)
+	// this will set the gdata variable TIMEATELECTRONICS used by RunAction to identify the eventFrameIndex
+	// and will include in gdata the translation table (hardware address crate/slot/channel)
 	// this will exit with error if the TT is not defined
 	// notice time is an int (assumed unit: ns)
 	void chargeAndTimeAtHardware(int time, int q, GHit *ghit, GDigitizedData *gdata);
 
+		
 	// mandatory initialization of readout specs
 	virtual bool defineReadoutSpecs() = 0;
 

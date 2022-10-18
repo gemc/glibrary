@@ -67,11 +67,11 @@ void GDigitizedData::includeVariable(string vname, float value) {
 
 // returns -1 if TIMEATELECTRONICS is not added to the digitization
 int GDigitizedData::getTimeAtElectronics() {
+	
 	if ( intObservablesMap.find(TIMEATELECTRONICS) == intObservablesMap.end() ) {
 		return TIMEATELECTRONICSNOTDEFINED;
 	}
 	return intObservablesMap[TIMEATELECTRONICS];
-
 }
 
 

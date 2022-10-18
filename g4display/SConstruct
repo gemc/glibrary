@@ -3,7 +3,7 @@ from init_env import init_environment
 
 # load needed environment for this library
 env = init_environment('glibrary geant4 clhep qt5')
-env.Append(CXXFLAGS=['-std=c++17'])
+env.Append(CXXFLAGS=['-std=c++20'])
 
 # we build the library in ../lib
 # by default, targets outside the current tree are not selected.
