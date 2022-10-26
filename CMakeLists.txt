@@ -7,15 +7,22 @@ project(glibrary VERSION 1.0
         DESCRIPTION "A set of c++ libraries for general use"
         LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
-
-cmake_print_variables(CMAKE_CXX_STANDARD)
+#set(CMAKE_CXX_STANDARD 20)
+#cmake_print_variables(CMAKE_CXX_STANDARD)
 
 # add cmake to the module path
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-include(clhep)
-#include(xercesc)
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    include(clhep)
+    #include(xercesc)
 
-# add glibraries
-add_subdirectory(gtranslationTable)
+    # Run tests before compiling the libraries
+    # include(CTest)
+    add_subdirectory(tests)
+
+    # add glibraries
+    #add_subdirectory(gtranslationTable)
+endif()
+
+

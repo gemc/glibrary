@@ -7,7 +7,7 @@ include(CMakePrintHelpers) # to print variables with cmake_print_variables
          GIT_TAG CLHEP_2_4_5_1
  )
 
-find_package(CLHEP 2.4.5.1 REQUIRED)
+find_package(CLHEP REQUIRED)
 
 if(CLHEP_FOUND)
     message(STATUS "")
@@ -22,4 +22,5 @@ endif()
 
 cmake_print_variables(CLHEP_INCLUDE_DIRS)
 cmake_print_variables(CLHEP_LIBRARIES)
+message(STATUS "")
 

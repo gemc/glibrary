@@ -1,5 +1,6 @@
 include(FetchContent)
 include(CMakePrintHelpers) # to print variables with cmake_print_variables
+# https://cmake.org/cmake/help/latest/module/FindXercesC.html
 
 FetchContent_Declare(
         xercesc
@@ -7,11 +8,12 @@ FetchContent_Declare(
         GIT_TAG v3.2.3
 )
 
+
 # try local installation if USE_LOCAL_INSTALL is set
 if(USE_LOCAL_INSTALL STREQUAL "ON")
     # set variables from environment
     set(XERCESCROOT     $ENV{XERCESCROOT}     CACHE PATH "Path to XercesC")
-    set(XercesC_VERSION $ENV{XercesC_VERSION} CACHE STRING "XercesC version")
+    get_filename_component(XercesC_VERSION ${XERCESCROOT} NAME)
 
     # sets XercesC_LIBRARY and XercesC_INCLUDE_DIR
     find_library(
@@ -29,6 +31,7 @@ if(USE_LOCAL_INSTALL STREQUAL "ON")
             PATH_SUFFIXES include
             NO_DEFAULT_PATH
     )
+
 endif()
 
 # find XercesC
@@ -41,10 +44,11 @@ if(XercesC_FOUND)
 else()
     message(STATUS "")
     message(STATUS "* XercesC was not found - Fetching and installing it *")
-    FetchContent_MakeAvailable(xercesc)
+    # FetchContent_MakeAvailable(xercesc)
     message(STATUS "")
 endif()
 
 cmake_print_variables(XercesC_INCLUDE_DIRS)
 cmake_print_variables(XercesC_LIBRARIES)
+message(STATUS "")
 
