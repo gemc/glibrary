@@ -1,5 +1,3 @@
-include(CMakePrintHelpers) # to print variables with cmake_print_variables
-
 # minimum version of CMake
 cmake_minimum_required(VERSION 3.16...3.24)
 project(clhep_test VERSION 1.0
@@ -8,13 +6,9 @@ project(clhep_test VERSION 1.0
 
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    # only if this is the main project
-    # add the CLHEP package
     set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../../cmake" ${CMAKE_MODULE_PATH})
-
     include(clhep)
-
-
+    enable_testing()
 endif()
 
 # add the clhep_test main executable
@@ -27,14 +21,13 @@ target_include_directories(clhep_test PRIVATE ${CLHEP_INCLUDE_DIRS})
 target_link_libraries(clhep_test PRIVATE CLHEP::CLHEP)
 
 # set the C++ standard
-target_compile_features(clhep_test PRIVATE cxx_std_17)
-
-enable_testing()
+target_compile_features(clhep_test PRIVATE cxx_std_20)
 
 # define test
 add_test(
         NAME clhep_test
-        COMMAND $<TARGET_FILE:clhep_test>
+        #COMMAND $<TARGET_FILE:clhep_test>
+        COMMAND clhep_test
 )
 
 

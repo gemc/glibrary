@@ -15,10 +15,10 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(clhep)
-    #include(xercesc)
+    include(xercesc)
 
     # Run tests before compiling the libraries
-    # include(CTest)
+    enable_testing()
     add_subdirectory(tests)
 
     # add glibraries

@@ -35,7 +35,7 @@ if(USE_LOCAL_INSTALL STREQUAL "ON")
 endif()
 
 # find XercesC
-find_package(XercesC)
+find_package(XercesC REQUIRED)
 
 if(XercesC_FOUND)
     message(STATUS "")
@@ -49,6 +49,6 @@ else()
 endif()
 
 cmake_print_variables(XercesC_INCLUDE_DIRS)
-cmake_print_variables(XercesC_LIBRARIES)
+cmake_print_variables(XercesC_LIBRARY)
 message(STATUS "")
 
