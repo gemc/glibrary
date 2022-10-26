@@ -7,19 +7,19 @@ various utility libraries for gemc
 
 ## Build 
 
-By default cmake will try to use a local installation of the dependencies
-(turn off by adding `-DUSE_LOCAL_INSTALL=OFF`) using the required environment below:
+By default, cmake will try to use a local installation of the dependencies 
+using the required environment below:
 
 
-| Library | List of required environment variables |                Other Assumptions                |
-|:-------:|:--------------------------------------:|:-----------------------------------------------:|
-|  CLHEP  |               CLHEP_DIR                |                                                 | 
-| XercesC |              XERCESCROOT               | XercesC version is the last dir in $XERCESCROOT | 
-| Geant4  |               CLHEP_DIR                |                                                 | 
-| cadmesh |               CLHEP_DIR                |                                                 | 
-|   qt5   |               CLHEP_DIR                |                                                 | 
+| Library | List of required environment variables |                     Assumptions                      |
+|:-------:|:--------------------------------------:|:----------------------------------------------------:|
+|  CLHEP  |               CLHEP_DIR                |                                                      | 
+| XercesC |              XERCESCROOT               | Version (i.e. 3.2.3) is the last dir in $XERCESCROOT | 
+| Geant4  |               CLHEP_DIR                |                                                      | 
+| cadmesh |               CLHEP_DIR                |                                                      | 
+|   qt5   |               CLHEP_DIR                |                                                      | 
 
-
+(turn off by adding `-DUSE_LOCAL_INSTALL=OFF`)
 
 To configure cmake and compile the libraries using 12 cores:
 
@@ -28,6 +28,8 @@ To configure cmake and compile the libraries using 12 cores:
 `cmake --build build -j 12`
 
 ### CTests
+
+If some dependencies are not found, the corresponding tests will be disabled - re-run cmake to enable them.
 
 To run the tests using 12 cores:
 

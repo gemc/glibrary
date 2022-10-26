@@ -35,7 +35,7 @@ if(USE_LOCAL_INSTALL STREQUAL "ON")
 endif()
 
 # find XercesC
-find_package(XercesC REQUIRED)
+find_package(XercesC)
 
 if(XercesC_FOUND)
     message(STATUS "")
@@ -44,7 +44,7 @@ if(XercesC_FOUND)
 else()
     message(STATUS "")
     message(STATUS "* XercesC was not found - Fetching and installing it *")
-    # FetchContent_MakeAvailable(xercesc)
+    FetchContent_MakeAvailable(xercesc)
     message(STATUS "")
 endif()
 

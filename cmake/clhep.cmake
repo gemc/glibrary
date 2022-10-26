@@ -7,7 +7,7 @@ include(CMakePrintHelpers) # to print variables with cmake_print_variables
          GIT_TAG CLHEP_2_4_5_1
  )
 
-find_package(CLHEP REQUIRED)
+find_package(CLHEP)
 
 if(CLHEP_FOUND)
     message(STATUS "")
@@ -16,7 +16,7 @@ if(CLHEP_FOUND)
 else()
     message(STATUS "")
     message(STATUS "* CLHEP was not found - Fetching and installing it *")
-   # FetchContent_MakeAvailable(CLHEP)
+    FetchContent_MakeAvailable(CLHEP)
     message(STATUS "")
 endif()
 

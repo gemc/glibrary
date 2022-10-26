@@ -30,5 +30,12 @@ add_test(
         COMMAND clhep_test
 )
 
-
-
+# only if this is the main project
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    # run test after build
+    add_custom_command(TARGET clhep_test POST_BUILD
+        COMMAND ${CMAKE_CTEST_COMMAND} --verbose
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMENT "Running xercesc test"
+        )
+endif()
