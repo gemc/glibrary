@@ -27,6 +27,14 @@ To configure cmake and compile the libraries using 12 cores:
 
 `cmake --build build -j 12`
 
+### CTests
+
+To run the tests using 12 cores:
+
+`cd build`
+`ctest -j 12`
+
+
 
 
 

@@ -20,12 +20,22 @@ endif()
 # add the clhep_test main executable
 add_executable(clhep_test clhep_test.cc)
 
+# add clhep include directories
+target_include_directories(clhep_test PRIVATE ${CLHEP_INCLUDE_DIRS})
+
 # link the clhep_test executable with CLHEP
 target_link_libraries(clhep_test PRIVATE CLHEP::CLHEP)
 
 # set the C++ standard
 target_compile_features(clhep_test PRIVATE cxx_std_17)
 
+enable_testing()
+
+# define test
+add_test(
+        NAME clhep_test
+        COMMAND $<TARGET_FILE:clhep_test>
+)
 
 
 
