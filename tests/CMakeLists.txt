@@ -24,3 +24,7 @@ endif()
 if(XercesC_FOUND)
     add_subdirectory(xercesc)
 endif()
+
+if(Geant4_FOUND)
+    add_subdirectory(geant4)
+endif()

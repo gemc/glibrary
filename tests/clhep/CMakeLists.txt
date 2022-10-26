@@ -26,8 +26,7 @@ target_compile_features(clhep_test PRIVATE cxx_std_20)
 # define test
 add_test(
         NAME clhep_test
-        #COMMAND $<TARGET_FILE:clhep_test>
-        COMMAND clhep_test
+        COMMAND $<TARGET_FILE:clhep_test>
 )
 
 # only if this is the main project

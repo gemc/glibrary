@@ -29,8 +29,7 @@ configure_file(rga.xml rga.xml COPYONLY)
 # define test
 add_test(
         NAME xercesc_test
-        #COMMAND $<TARGET_FILE:xercesc_test>
-        COMMAND xercesc_test
+        COMMAND $<TARGET_FILE:xercesc_test>
 )
 
 # only if this is the main project

@@ -26,7 +26,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     add_subdirectory(tests)
 
     # add glibraries
-    #add_subdirectory(gtranslationTable)
+    add_subdirectory(gtranslationTable)
 endif()
 
 
