@@ -1,8 +1,9 @@
 include(FetchContent)
 include(CMakePrintHelpers) # to print variables with cmake_print_variables
+set(PACKAGE_TO_FIND "Geant4")
 
 FetchContent_Declare(
-        Geant4
+        ${PACKAGE_TO_FIND}
         GIT_REPOSITORY https://github.com/Geant4/geant4
         GIT_TAG v11.0.3
         SOURCE_DIR   ${CMAKE_BINARY_DIR}/Geant4
@@ -18,29 +19,29 @@ FetchContent_Declare(
                     -DGEANT4_USE_SYSTEM_EXPAT=OFF
                     -DGEANT4_INSTALL_EXAMPLES=OFF
                     -DGEANT4_USE_QT=ON
-        BUILD_COMMAND    ${CMAKE_MAKE_PROGRAM}
-
+        BUILD_COMMAND ${CMAKE_MAKE_PROGRAM}
 )
 
 
-
-# find geant4
 find_package(Geant4 QUIET COMPONENTS vis_all ui_all qt gdml)
-
 # TODO: FetchContent_MakeAvailable does not work
 if(Geant4_FOUND)
-    message(STATUS "")
-    message(STATUS "* A local install of Geant4 was found - using it*")
+    message(STATUS "\n*** ${PACKAGE_TO_FIND} found ***")
+    cmake_print_variables(Geant4_VERSION)
+    cmake_print_variables(Geant4_DIR)
+    cmake_print_variables(Geant4_LIBRARIES)
     message(STATUS "")
 else()
-    message(STATUS "")
-    message(STATUS "* Geant4 was not found - Fetching and installing it *")
-    FetchContent_MakeAvailable(Geant4)
-    add_dependencies(Geant4 CLHEP)
-    add_dependencies(Geant4 xercesc)
+    message(STATUS "\n")
+    message(STATUS "\n* Fetching and configuring ${PACKAGE_TO_FIND} *")
+    #FetchContent_MakeAvailable(Geant4)
+    # cmake_print_variables(XercesC_LIBRARY)
+    # cmake_print_variables(XercesC_INCLUDE_DIR)
+
+    #add_dependencies(Geant4 CLHEP)
+    #add_dependencies(Geant4 xercesc)
     message(STATUS "")
 endif()
-
 
 cmake_print_variables(Geant4_INCLUDE_DIR)
 cmake_print_variables(Geant4_LIBRARIES)

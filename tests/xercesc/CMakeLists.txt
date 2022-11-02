@@ -1,44 +1,49 @@
 # minimum version of CMake
 cmake_minimum_required(VERSION 3.16...3.24)
-project(xercesc_test VERSION 1.0
+set(TEST_NAME "xercesc_glibrary_test")
+
+project(${TEST_NAME} VERSION 1.0
         DESCRIPTION "Testing XercesC installation"
         LANGUAGES CXX)
 
 
+### Only do these if this is the main project, and not if it is included through add_subdirectory
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    set(USE_LOCAL_INSTALL "ON" CACHE STRING "Use Local Install")
+    include(CTest)
     set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../../cmake" ${CMAKE_MODULE_PATH})
-    include(xercesc)
-    enable_testing()
+    include(XercesC)
 endif()
 
-# add the xercesc_test main executable
-add_executable(xercesc_test xercesc_test.cc)
+# define test
+add_test(
+        NAME ${TEST_NAME}
+        COMMAND $<TARGET_FILE:${TEST_NAME}>
+)
 
-# add xercesc include directories
-target_include_directories(xercesc_test PRIVATE ${XercesC_INCLUDE_DIRS})
+# add executable
+add_executable(${TEST_NAME} xercesc_test.cc)
 
+# add include directories
+target_include_directories(${TEST_NAME} PRIVATE ${XercesC_INCLUDE_DIRS})
 
-# link the xercesc_test executable with xercesc
-target_link_libraries(xercesc_test PRIVATE ${XercesC_LIBRARIES})
+# add linked libraries
+target_link_libraries(${TEST_NAME} PRIVATE ${XercesC_LIBRARIES})
+
+# set the C++ standard
+target_compile_features(${TEST_NAME} PRIVATE cxx_std_20)
+
 
 # copy rga.xml to the build directory
 configure_file(rga.xml rga.xml COPYONLY)
 
 
-# define test
-add_test(
-        NAME xercesc_test
-        COMMAND $<TARGET_FILE:xercesc_test>
-)
-
 # only if this is the main project
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     # run test after build
-    add_custom_command(TARGET xercesc_test POST_BUILD
+    add_custom_command(TARGET xercesc_glibrary_test POST_BUILD
             COMMAND ${CMAKE_CTEST_COMMAND} --verbose
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMENT "Running xercesc test"
+            COMMENT "Running xercesc glibrary test"
             )
 endif()
 

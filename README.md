@@ -19,7 +19,7 @@ using the required environment below:
 | cadmesh |               CLHEP_DIR                |                                                      | 
 |   qt5   |               CLHEP_DIR                |                                                      | 
 
-(turn off by adding `-DUSE_LOCAL_INSTALL=OFF`)
+(turn off by adding at configure time: `-DUSE_LOCAL_INSTALL=OFF`)
 
 To configure cmake and compile the libraries using 12 cores:
 
@@ -29,7 +29,6 @@ To configure cmake and compile the libraries using 12 cores:
 
 ### CTests
 
-If some dependencies are not found, the corresponding tests will be disabled - re-run cmake to enable them.
 
 To run the tests using 12 cores:
 

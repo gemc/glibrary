@@ -1,8 +1,8 @@
 #!/bin/csh -f
 
 # making sure we're using the right compiler
-setenv CC gcc
-setenv CXX g++
+#setenv CC gcc
+#setenv CXX g++
 
 rm -rf cadmeshBuild
 mkdir cadmeshBuild
@@ -16,7 +16,7 @@ echo
 echo Compiling Cadmesh: make $opt install
 echo
 
-cmake ../cadmesh -DCMAKE_INSTALL_PREFIX:PATH=$GLIBRARY
+cmake ../cadmesh -DCMAKE_INSTALL_PREFIX:PATH=$GLIBRARY -DCMAKE_CXX_STANDARD=17
 make $opt install
 echo done
 
