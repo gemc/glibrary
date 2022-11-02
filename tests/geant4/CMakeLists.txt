@@ -7,7 +7,7 @@ project(${TEST_NAME} VERSION 1.0
         LANGUAGES CXX)
 
 
-### Only do these if this is the main project, and not if it is included through add_subdirectory
+### Only do this for the main project, and not if it is included through add_subdirectory
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(CTest)
     set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../../cmake" ${CMAKE_MODULE_PATH})

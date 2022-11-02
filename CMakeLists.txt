@@ -23,16 +23,20 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(clhep)
     include(xercesc)
     include(geant4)
+    include(glibrary)
 endif()
 
 ### tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME  AND BUILD_TESTING)
-    add_subdirectory(tests)
+    #add_subdirectory(tests)
 endif()
 
 ### glibraries
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     add_subdirectory(guts)
+    add_subdirectory(goptions)
+    add_subdirectory(gtouchable)
+    add_subdirectory(gtranslationTable)
 endif()
 
 
