@@ -1,6 +1,6 @@
 # minimum version of CMake
 cmake_minimum_required(VERSION 3.16...3.24)
-set(TEST_NAME "clhep_glibrary_test")
+set(TEST_NAME clhep_glibrary_test)
 
 project(${TEST_NAME} VERSION 1.0
         DESCRIPTION "Testing CLHEP installation"
@@ -20,14 +20,14 @@ add_test(
         COMMAND $<TARGET_FILE:${TEST_NAME}>
 )
 
-# add executable
+
 add_executable(${TEST_NAME} clhep_test.cc)
 
-# add include directories
-target_include_directories(${TEST_NAME} PRIVATE ${CLHEP_INCLUDE_DIRS})
+# add include directories, nothing depends on this test so it's private
+target_include_directories(${TEST_NAME} PRIVATE ${CLHEP_INCLUDE_DIRS} ${CMAKE_BINARY_DIR}/clhep-build)
 
-# add linked libraries
-target_link_libraries(${TEST_NAME} PRIVATE CLHEP::CLHEP)
+# add linked libraries, nothing depends on this test so it's private
+target_link_libraries(${TEST_NAME} PRIVATE ${CLHEP_LIBRARIES})
 
 # set the C++ standard
 target_compile_features(${TEST_NAME} PRIVATE cxx_std_20)

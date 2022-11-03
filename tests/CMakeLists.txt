@@ -1,6 +1,6 @@
 # minimum version of CMake
 cmake_minimum_required(VERSION 3.16...3.24)
-project(gtests VERSION 1.0
+project(glibrary_tests VERSION 1.0
         DESCRIPTION "A set of tests for glibrary"
         LANGUAGES CXX)
 
@@ -14,9 +14,9 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 # only run if the proper library is found
-if(CLHEP_FOUND)
+#if(CLHEP_FOUND)
     add_subdirectory(clhep)
-endif()
+#endif()
 
 if(XercesC_FOUND)
     add_subdirectory(xercesc)

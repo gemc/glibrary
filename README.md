@@ -11,15 +11,9 @@ By default, cmake will try to use a local installation of the dependencies
 using the required environment below:
 
 
-| Library | List of required environment variables |                     Assumptions                      |
-|:-------:|:--------------------------------------:|:----------------------------------------------------:|
-|  CLHEP  |               CLHEP_DIR                |                                                      | 
-| XercesC |              XERCESCROOT               | Version (i.e. 3.2.3) is the last dir in $XERCESCROOT | 
-| Geant4  |               CLHEP_DIR                |                                                      | 
-| cadmesh |               CLHEP_DIR                |                                                      | 
-|   qt5   |               CLHEP_DIR                |                                                      | 
-
-(turn off by adding at configure time: `-DUSE_LOCAL_INSTALL=OFF`)
+| [CLHEP](https://proj-clhep.web.cern.ch/proj-clhep/) | [XercesC](https://xerces.apache.org) | [Geant4](https://geant4.web.cern.ch) | [Cadmesh](https://github.com/christopherpoole/CADMesh) | [qt5](https://www.qt.io) |
+|:---------------------------------------------------:|:------------------------------------:|:------------------------------------:|:------------------------------------------------------:|:------------------------:|
+ 
 
 To configure cmake and compile the libraries using 12 cores:
 
