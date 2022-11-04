@@ -10,16 +10,13 @@ project(glibrary VERSION 1.0
 ### add cmake to the module path
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-### Require out-of-source builds
-file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
-if(EXISTS "${LOC_PATH}")
-    message(FATAL_ERROR "You cannot build in a source directory (or any directory with a CMakeLists.txt file).
-    Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles.")
-endif()
 
 ### dependencies
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    include(CTest)
+    #include(CTest)
+
+    include(glibrary_functions)
+    require_out_of_source_build()
 
     include(clhep)
     #include(xercesc)
@@ -27,8 +24,10 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(glibrary)
 endif()
 
+
+
 ### tests
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME  AND BUILD_TESTING)
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     add_subdirectory(tests)
 endif()
 

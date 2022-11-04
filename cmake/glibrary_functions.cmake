@@ -20,3 +20,13 @@ function(GLIBRARY_FIND_PACKAGE PACKAGE_TO_FIND)
     message(STATUS "")
 
 endfunction()
+
+function(REQUIRE_OUT_OF_SOURCE_BUILD)
+
+    file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
+    if(EXISTS "${LOC_PATH}")
+        message(FATAL_ERROR "\nYou cannot build in a source directory (or any directory with a CMakeLists.txt file)\nPlease make a build subdirectory or use -B <build_dir> with cmake\n")
+    endif()
+
+endfunction()
+
