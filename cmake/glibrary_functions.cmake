@@ -1,8 +1,8 @@
 include(CMakePrintHelpers) # to print variables with cmake_print_variables
+set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL TRUE)
 
-function(GLIBRARY_FIND_PACKAGE PACKAGE_TO_FIND)
+function(GLIBRARY_FETCH_IF_NOT_FOUND PACKAGE_TO_FIND)
 
-    find_package(${PACKAGE_TO_FIND} QUIET)
     # cmake_print_variables("${PACKAGE_TO_FIND}_FOUND")
 
     if(${PACKAGE_TO_FIND}_FOUND)
@@ -39,3 +39,35 @@ function(PRINT_ALL_VARIABLES)
 
 endfunction()
 
+
+
+
+
+function(CHECK_GLIBRARY_DEPS REQUEST)
+
+    message(STATUS "Checking Dependencies for <${REQUEST}>")
+    set(SOMETHING_MISSING FALSE)
+
+    if(NOT CLHEP_FOUND)
+        message(STATUS "CLHEP for <${REQUEST}>: ❌")
+        set(SOMETHING_MISSING TRUE)
+    endif()
+
+    if(NOT XercesC_FOUND)
+        message(STATUS "XercesC for <${REQUEST}>:  ❌")
+        set(SOMETHING_MISSING TRUE)
+    endif()
+
+    if(NOT GEANT4_FOUND)
+        message(STATUS "GEANT4 for <${REQUEST}>:  ❌")
+        set(SOMETHING_MISSING TRUE)
+    endif()
+
+    if(SOMETHING_MISSING)
+        message(STATUS "Some dependencies for <${REQUEST}> are not yet built.
+   After they are built, re-run:
+   \n\n\t cmake -S . -B <build_dir>
+   \t cmake --build <build_dir> -j <ncpu>\n")
+    endif()
+
+endfunction()

@@ -9,6 +9,7 @@ project(glibrary VERSION 1.0
 
 ### add cmake to the module path
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL TRUE)
 
 
 ### dependencies
@@ -19,13 +20,12 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     require_out_of_source_build()
 
     include(clhep)
-    #include(xercesc)
+    include(xercesc)
     #include(geant4)
     include(glibrary)
 endif()
 
 
-# make clhep available to the rest of the project
 
 
 ### tests

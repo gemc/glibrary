@@ -27,12 +27,8 @@ add_executable(${TEST_NAME} clhep_test.cc)
 target_include_directories(${TEST_NAME} PUBLIC ${CLHEP_INCLUDE_DIRS} ${CMAKE_BINARY_DIR}/clhep-build)
 
 
-# make sure clhep is build before this test
-# add_dependencies(${TEST_NAME} clhep)
-
-
 # add linked libraries, nothing depends on this test so it's private
-target_link_libraries(${TEST_NAME} PUBLIC "${CLHEP_LIBRARIES}")
+target_link_libraries(${TEST_NAME} PUBLIC ${CLHEP_LIBRARIES})
 
 # set the C++ standard
 target_compile_features(${TEST_NAME} PRIVATE cxx_std_20)

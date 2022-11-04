@@ -14,10 +14,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(glibrary)
 endif()
 
-include(clhep)
-
-glibrary_find_package(CLHEP)
-cmake_print_variables(CLHEP_INCLUDE_DIRS)
+#cmake_print_variables(CLHEP_FOUND)
 
 
 
@@ -28,7 +25,7 @@ add_library(${LIBRARY_NAME} SHARED)
 target_include_directories(${LIBRARY_NAME} PUBLIC ${CLHEP_INCLUDE_DIRS} ${CMAKE_BINARY_DIR}/clhep-build)
 
 # add link library, public so who depends on this library will also link to them
-target_link_libraries(${LIBRARY_NAME} PUBLIC ${CLHEP_LIBRARIES})
+# target_link_libraries(${LIBRARY_NAME} PUBLIC ${CLHEP_LIBRARIES})
 
 # set the C++ standard
 target_compile_features(${LIBRARY_NAME} PRIVATE cxx_std_20)
