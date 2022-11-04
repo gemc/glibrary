@@ -14,7 +14,7 @@ FetchContent_Declare(
         # CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/xercesc -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-Wno-dev
 )
 
-# CMAKE_PREFIX_PATH set here so libraries depending on this package can find it
+# Adding XERCESCROOT and local build directories to the search path
 set(CMAKE_PREFIX_PATH $ENV{XERCESCROOT} ${CMAKE_BINARY_DIR}/xercesc-build ${CMAKE_PREFIX_PATH})
 
 

@@ -14,10 +14,11 @@ set(PACKAGE_TO_FIND CLHEP)
          # CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/clhep-build -DCMAKE_CXX_FLAGS=-Wno-dev
  )
 
+# Adding local build directories to the search path
+set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/clhep-build ${CMAKE_PREFIX_PATH})
 
 
-
-
+find_package(${PACKAGE_TO_FIND} QUIET)
 
 
 

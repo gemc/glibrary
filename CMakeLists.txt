@@ -13,7 +13,7 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 ### dependencies
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    #include(CTest)
+    include(CTest)
 
     include(glibrary_functions)
     require_out_of_source_build()
@@ -25,9 +25,11 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 
+# make clhep available to the rest of the project
+
 
 ### tests
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     add_subdirectory(tests)
 endif()
 
@@ -40,10 +42,6 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 
-### Utilities: print all variables
 if(PRINT_ALL_VARS)
-    get_cmake_property(_variableNames VARIABLES)
-    foreach (_variableName ${_variableNames})
-        message(STATUS "${_variableName}=${${_variableName}}")
-    endforeach()
+    print_all_variables()
 endif()

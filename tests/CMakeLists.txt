@@ -6,14 +6,18 @@ project(glibrary_tests VERSION 1.0
 
 ### Only do these if this is the main project, and not if it is included through add_subdirectory
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    include(CTest)
-
     set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../cmake" ${CMAKE_MODULE_PATH})
     include(clhep)
     include(xercesc)
 endif()
 
 # only run if the proper library is found
+# TODO: can we add clhep dependency here so this will compile after clhep is built?
+
+#include(CMakePrintHelpers) # to print variables with cmake_print_variables
+#cmake_print_variables(CLHEP_FOUND)
+
+
 #if(CLHEP_FOUND)
     add_subdirectory(clhep)
 #endif()

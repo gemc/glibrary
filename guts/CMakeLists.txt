@@ -14,9 +14,10 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(glibrary)
 endif()
 
+include(clhep)
 
-
-
+glibrary_find_package(CLHEP)
+cmake_print_variables(CLHEP_INCLUDE_DIRS)
 
 
 

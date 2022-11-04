@@ -3,7 +3,7 @@ include(CMakePrintHelpers) # to print variables with cmake_print_variables
 function(GLIBRARY_FIND_PACKAGE PACKAGE_TO_FIND)
 
     find_package(${PACKAGE_TO_FIND} QUIET)
-    cmake_print_variables("${PACKAGE_TO_FIND}_FOUND")
+    # cmake_print_variables("${PACKAGE_TO_FIND}_FOUND")
 
     if(${PACKAGE_TO_FIND}_FOUND)
         message(STATUS "\n*** ${PACKAGE_TO_FIND} found ***")
@@ -27,6 +27,15 @@ function(REQUIRE_OUT_OF_SOURCE_BUILD)
     if(EXISTS "${LOC_PATH}")
         message(FATAL_ERROR "\nYou cannot build in a source directory (or any directory with a CMakeLists.txt file)\nPlease make a build subdirectory or use -B <build_dir> with cmake\n")
     endif()
+
+endfunction()
+
+function(PRINT_ALL_VARIABLES)
+
+    get_cmake_property(_variableNames VARIABLES)
+    foreach (_variableName ${_variableNames})
+        message(CMAKE Variable: "${_variableName} = ${${_variableName}}")
+    endforeach()
 
 endfunction()
 
