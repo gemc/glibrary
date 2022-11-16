@@ -336,7 +336,7 @@ namespace CADMesh {
 
 namespace File {
 
-class BuiltInReader : public Reader {
+class BuiltInReader final : public Reader {
 public:
 	BuiltInReader() : Reader("BuiltInReader"){};
 	
@@ -459,7 +459,7 @@ void MeshNotFound(G4String origin, G4String name);
 
 namespace CADMesh {
 
-class TessellatedMesh : public CADMeshTemplate<TessellatedMesh> {
+class TessellatedMesh final : public CADMeshTemplate<TessellatedMesh> {
 	using CADMeshTemplate::CADMeshTemplate;
 	
 public:

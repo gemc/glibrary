@@ -3,6 +3,11 @@
 
 // Cadmesh single header library
 // https://github.com/christopherpoole/CADMesh
+// Modifications: had to mark these 2 classes 'final'
+// - BuiltInReader
+// - TessellatedMesh
+// https://en.cppreference.com/w/cpp/language/final
+// and why: https://devblogs.microsoft.com/oldnewthing/20200619-00/?p=103877
 #include "CADMesh.hh"
 
 G4VSolid* G4CadSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
