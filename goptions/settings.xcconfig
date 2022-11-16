@@ -7,4 +7,4 @@ CONFIGURATION_BUILD_DIR = $MYBUILDDIR
 // includes
 HEADER_SEARCH_PATHS = $GLIB_HEADS
 
-
+// OTHER_LDFLAGS = -all_load -ObjC ${MYBUILDDIR}/libguts.dylib

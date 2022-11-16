@@ -8,3 +8,8 @@ CONFIGURATION_BUILD_DIR = $MYBUILDDIR
 HEADER_SEARCH_PATHS = $GLIB_HEADS $CLHEP_HEADS $GEANT4_HEADS
 
 
+OTHER_LDFLAGS = -all_load -ObjC ${CLHEP_LIB} \
+                                ${GEANT4_LIBS}/libG4global.dylib \
+                                ${GEANT4_LIBS}/libG4geometry.dylib  \
+                                ${GEANT4_LIBS}/libG4graphics_reps.dylib \
+                                ${GEANT4_LIBS}/libG4materials.dylib

@@ -7,3 +7,7 @@ CONFIGURATION_BUILD_DIR = $MYBUILDDIR
 // includes and framework search paths
 HEADER_SEARCH_PATHS    = $GLIB_HEADS $QT_HEADS
 FRAMEWORK_SEARCH_PATHS = $QTFRAMES
+
+OTHER_LDFLAGS = -all_load -ObjC ${QTFRAMES}/QtCore.framework/QtCore \
+                                ${QTFRAMES}/QtGui.framework/QtGui \
+										  ${QTFRAMES}/QtWidgets.framework/QtWidgets

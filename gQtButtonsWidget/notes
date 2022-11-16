@@ -1,10 +1,16 @@
 
+## From Scratch:
 
-open $QTDIR/lib
+* Library Target:
 
-  - QtCore.framework
-  - QtGUI.framework
-  - QtWidgets.framework
+Sources:
+
+* Example Target:
+
+Sources:
+
+
+
 
 
 $QTDIR/bin/moc

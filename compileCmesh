@@ -1,5 +1,7 @@
 #!/bin/csh -f
 
+# This is now obsolete as glibrary uses header-only CADMESH
+
 # making sure we're using the right compiler
 setenv CC gcc
 setenv CXX g++

@@ -1,5 +1,5 @@
-## Glibrary Options (GOPTIONS)
-
+# TODO: this will not account for the dependencies of guts... how to do that?
+# OTHER_LDFLAGS = -all_load -ObjC ${MYBUILDDIR}/libguts.dylib
 
 
 ## From Scratch:

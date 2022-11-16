@@ -235,7 +235,7 @@ public:
 	Items GetItems();
 	
 	void Backup();
-	void BackupTo(int position);
+	void BackupTo(size_t position);
 	
 	std::string Next();
 	std::string Peek();
@@ -751,7 +751,7 @@ inline void Lexer::Backup() {
 	}
 }
 
-inline void Lexer::BackupTo(int position) {
+inline void Lexer::BackupTo(size_t position) {
 	auto s = input_.substr(position, position_ - position);
 	line_ -= std::count(s.begin(), s.end(), '\n');
 	

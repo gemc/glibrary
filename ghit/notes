@@ -1,16 +1,12 @@
 
-open $CLHEP_BASE_DIR/lib
+## From Scratch:
 
-	- libCLHEP-version.dylib
+* Library Target:
 
-open $G4ROOT/$GEANT4_VERSION/lib
+Sources:
 
-	- libG4digits_hits.dylib
-	- libG4global.dylib
-	- ibG4graphics_reps.dylib
+* Example Target:
 
-For the example:
+Sources:
 
-	- libG4global.dylib
-	- track
-	- gtouchable
+
