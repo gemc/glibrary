@@ -1,8 +1,10 @@
+import os
+import sys
+
 from init_env import init_environment
 
 # load needed environment for all glibraries
 env = init_environment('glibrary clhep geant4 qt5 gcadmesh')
-env.Append(CXXFLAGS=['-std=c++17'])
 
 gdata                = SConscript('gdata/SConscript',                exports='env')
 textProgressBar      = SConscript('textProgressBar/SConscript',      exports='env')
@@ -23,7 +25,13 @@ gtranslationTable    = SConscript('gtranslationTable/SConscript',    exports='en
 gphysics             = SConscript('gphysics/SConscript',             exports='env')
 
 # output plugins
+if os.environ.get('ROOTSYS') is not None:
+    ROOTSYS = os.environ['ROOTSYS']
+    libsRootDLL    = SConscript('gstreamer/SConscriptROOTDLL')
+    libsJlabSRODLL = SConscript('gstreamer/SConscriptJLABSRODLL')
+else:
+    print("Warning: ROOT not found. Skipping ROOT output gstreamer plugins ")
+
+
 libsTextDLL    = SConscript('gstreamer/SConscriptTEXTDLL')
-libsRootDLL    = SConscript('gstreamer/SConscriptROOTDLL')
-libsJlabSRODLL = SConscript('gstreamer/SConscriptJLABSRODLL')
 

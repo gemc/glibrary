@@ -15,9 +15,9 @@ else:
 	print("Error: ROOT not found")
 	sys.exit(1)
 
-
-env.Append(CPPPATH = [Dir('factories/ROOT')])
 env.Append(CXXFLAGS=['-std=c++20'])
+env.Append(CPPPATH = [Dir('factories/ROOT')])
+
 # needed for the plugin so we can use install_name_tool to change path for DMG installation
 env.Append(SHLINKFLAGS=['-headerpad_max_install_names'])
 
