@@ -1,3 +1,16 @@
+
+## From Scratch:
+
+* Library Target:
+
+Sources:
+
+* Example Target:
+
+Sources:
+
+
+
 open $G4ROOT/$GEANT4_VERSION/lib
 
 	- libG4global.dylib

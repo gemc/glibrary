@@ -3,7 +3,7 @@
 // Remember to change the moc path in the Build rules
 
 // location of libraries
-JLAB_SOFTWARE = /opt/jlab_software/2.6/macosx12-clang14
+JLAB_SOFTWARE = /opt/jlab_software/2.6/macosx13-clang14
 
 // build directory
 MYBUILDDIR = /Users/ungaro/builds
@@ -25,16 +25,24 @@ CCDB_HEADS   = $CCDB_ROOT/include
 CLHEP_VERSION = 2.4.5.1
 CLHEP_ROOT    = $JLAB_SOFTWARE/clhep/$CLHEP_VERSION
 CLHEP_HEADS   = $CLHEP_ROOT/include $CLHEP_ROOT/include/CLHEP
+CLHEP_LIB     = $CLHEP_ROOT/lib/libCLHEP-${CLHEP_VERSION}.dylib
+
+// xerces lib
+XERCESC_LIB     = $CLHEP_ROOT/lib/libCLHEP-${CLHEP_VERSION}.dylib
+
 
 // GEANT4
 GEANT4_VERSION = 11.0.3
 GEANT4_ROOT    = $JLAB_SOFTWARE/geant4/$GEANT4_VERSION
 GEANT4_HEADS   = $GEANT4_ROOT/include/Geant4
+GEANT4_LIBS    = $GEANT4_ROOT/lib
+
 
 // ROOT
 ROOT_VERSION = 6.26.06
 ROOTSYS      = $JLAB_SOFTWARE/root/$ROOT_VERSION
 ROOT_HEADS   = $ROOTSYS/include/root
+ROOT_LIBS    = $JLAB_SOFTWARE/root/$ROOT_VERSION/lib/root
 
 
 // GLIBRARY

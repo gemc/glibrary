@@ -1,21 +1,15 @@
 
+## From Scratch:
 
-open $CLHEP_BASE_DIR/lib
+* Library Target:
 
-	- libCLHEP-version.dylib
+Sources:
 
+* Example Target:
 
-open $G4ROOT/$GEANT4_VERSION/lib
-
-	- libG4geometry.dylib
-	- libG4global.dylib
-	- ibG4graphics_reps.dylib
-	- libG4materials.dylib
+Sources:
 
 
-open $GLIBRARY/lib
-
-	- cadmesh
 
 
 

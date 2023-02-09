@@ -1,10 +1,10 @@
 
+## From Scratch:
 
-open $G4ROOT/$GEANT4_VERSION/lib
+* Library Target:
 
-	- libG4intercoms.dylib
+Sources:
 
+* Example Target:
 
-Glibrary:
-
-
+Sources:

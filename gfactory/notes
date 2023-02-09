@@ -1,5 +1,20 @@
-Note: the scons gplugin CANNOT be used when running xcode to load the gplugins, and viceversa
 
+## From Scratch:
+
+* Library Target:
+
+Sources:
+
+* Example Target:
+
+Sources:
+
+
+
+
+
+
+Note: the scons gplugin CANNOT be used when running xcode to load the gplugins, and viceversa
 
 The comments below do not apply if scons is used.
 

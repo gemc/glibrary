@@ -1,8 +1,12 @@
-open $CLHEP_BASE_DIR/lib
 
-	- libCLHEP-version.dylib
+## From Scratch:
 
-open $G4ROOT/$GEANT4_VERSION/lib
+* Library Target:
 
-	- libG4event.dylib
-	- libG4particles.dylib
+Sources:
+
+* Example Target:
+
+Sources:
+
+

@@ -1,15 +1,10 @@
 
->> For the library:
+## From Scratch:
 
-open $QTDIR/lib
+* Library Target:
 
-	- QtCore.framework
-	- QtGui.framework
-	- QtWidgets.framework
+Sources:
 
+* Example Target:
 
->> For the example:
-
-	- QtCore.framework
-	- QtWidgets.framework
-
+Sources:
