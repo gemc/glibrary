@@ -3,18 +3,15 @@ from init_env import init_environment
 import os
 import sys
 
-if os.environ.get('ROOTSYS') is not None:
-	ROOTSYS = os.environ['ROOTSYS']
-else:
-	print("Error: ROOT not found")
-	sys.exit(1)
+BINROOT =  os.popen('root-config --bindir').readline()
 
-if os.path.exists(ROOTSYS):
-	env = init_environment('glibrary geant4 clhep root')
+if BINROOT:
+    print("Using ROOT from root-config in: " + BINROOT)
 else:
-	print("Error: ROOT not found")
-	sys.exit(1)
+    print("Warning: root-config not found. Skipping ROOT output gstreamer plugins ")
+    sys.exit(1)
 
+env = init_environment('glibrary geant4 clhep root')
 env.Append(CXXFLAGS=['-std=c++20'])
 env.Append(CPPPATH = [Dir('factories/ROOT')])
 
