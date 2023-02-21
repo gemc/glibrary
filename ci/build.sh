@@ -72,7 +72,6 @@ export GLIBRARY=`pwd`
 echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
-./compileCmesh
 compileGLibrary
 if [ $? -ne 0 ]; then
 	echo building glibrary failed
@@ -85,5 +84,3 @@ if [ $? -ne 0 ]; then
 	echo building gemc failed
 	exit 1
 fi
-
-cp $GLIBRARY/lib/gstreamer*.gplugin $GPLUGIN_PATH
