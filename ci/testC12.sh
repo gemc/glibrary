@@ -3,18 +3,23 @@
 # Purpose: Runs the CLAS12 test in clas12-system
 
 # Container run:
-# docker run -it --rm jeffersonlab/gemc:3.0 sh
+# docker run -it --rm jeffersonlab/gemc3:1.0 sh
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/testC12.sh -s ft
 
-if [[ -z "${G3CLAS12_VERSION}" ]]; then
-	# load environment if we're on the container
-	# notice the extra argument to the source command
-	TERM=xterm # source script use tput for colors, TERM needs to be specified
-	FILE=/etc/profile.d/jlab.sh
-	test -f $FILE && source $FILE keepmine
+# if we are in the docker container, we need to load the modules
+if [[ -z "${DISTTAG}" ]]; then
+    echo "\nNot in container"
 else
-	echo glibrary ci/testC12: environment already defined
+    echo "\nIn container: ${DISTTAG}"
+    TERM=xterm # source script use tput for colors, TERM needs to be specified
+    source /usr/share/Modules/init/sh
+    source /work/ceInstall/setup.sh
+    module load gemc3/1.0
+    if [[ $? != 0 ]]; then
+        echo "Error loading gemc3 module"
+	    exit 1
+    fi
 fi
 
 Help()
