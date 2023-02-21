@@ -70,6 +70,6 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-cd $JLAB_ROOT/$JLAB_VERSION/noarch/sci-g/$SCIG_VERSION
+cd $SCIG
 
 ./ci/tests.sh -e $example -t
