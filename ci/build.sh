@@ -40,16 +40,6 @@ function checkLibsExistence {
 	libExtension=".so"
 	[[ $OSTYPE == 'darwin'* ]] && libExtension=".dylib"
 
-	# cadmesh
-	for lib in assimp cadmesh
-	do
-		ls lib/lib$lib$libExtension
-		if [ $? -ne 0 ]; then
-			echo $lib not present
-			exit 1
-		fi
-	done
-
 	# plugins
 	libExtension=".gplugin"
 	for lib in gstreamerJLABSROFactory gstreamerROOTFactory gstreamerTEXTFactory
