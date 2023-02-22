@@ -15,7 +15,7 @@ else
     TERM=xterm # source script use tput for colors, TERM needs to be specified
     source /usr/share/Modules/init/sh
     source /work/ceInstall/setup.sh
-    module load gemc3/1.0
+	module load gemc3/1.0
     if [[ $? != 0 ]]; then
         echo "Error loading gemc3 module"
 	    exit 1
@@ -28,9 +28,13 @@ function compileGLibrary {
 	echo
 	echo Compiling Glibrary with options: "$copt"
 	scons $copt
+	if [ $? -ne 0 ]; then
+    	echo building gemc failed
+    	exit 1
+    fi
 	echo
 	echo Compilation completed, content of lib:
-		ls -ltrh lib/
+	ls -ltrh lib/
 }
 
 function checkLibsExistence {
@@ -60,8 +64,12 @@ function compileGEMC {
 	echo Compiling GEMC with options: "$copt"
 	cd $GEMC
 	scons $copt
+	if [ $? -ne 0 ]; then
+    	echo building gemc failed
+    	exit 1
+    fi
 	echo
-	echo Compilation completed
+	echo Compilation completed. Content of gemc/src:
 	ls -ltrh ./
 
 }
@@ -73,14 +81,6 @@ echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 compileGLibrary
-if [ $? -ne 0 ]; then
-	echo building glibrary failed
-	exit 1
-fi
-
 checkLibsExistence
 compileGEMC
-if [ $? -ne 0 ]; then
-	echo building gemc failed
-	exit 1
-fi
+

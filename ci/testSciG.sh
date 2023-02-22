@@ -64,12 +64,11 @@ export GLIBRARY=`pwd`
 echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
-./ci/build.sh # build glibrary / gemc and install plugins to $GPLUGIN_PATH
-if [ $? -ne 0 ]; then
-	echo building gemc / glibrary failed
-	exit 1
-fi
+# build glibrary / gemc and install plugins to $GPLUGIN_PATH
+# notice the gemc version is the one in the compiler, here we are
+# recompiling it using the checked out glibrary
+./ci/build.sh
 
+# using the just compiled gemc and the container sci-g
 cd $SCIG
-
 ./ci/tests.sh -e $example -t
