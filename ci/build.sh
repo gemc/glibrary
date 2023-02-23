@@ -77,7 +77,7 @@ function compileGEMC {
 # using the checked out GLIBRARY
 # for some reason DYLD_LIBRARY_PATH is not passed to this script
 export GLIBRARY=`pwd`
-echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
+echo GLIBRARY is $GLIBRARY
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 compileGLibrary

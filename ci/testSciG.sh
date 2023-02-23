@@ -58,17 +58,29 @@ done
 
 
 
-# using the checked out GLIBRARY
-export GLIBRARY=`pwd`
-# for some reason DYLD_LIBRARY_PATH is not passed to this script
-echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
-export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
-# build glibrary / gemc and install plugins to $GPLUGIN_PATH
+# build glibrary / gemc
 # notice the gemc version is the one in the compiler, here we are
 # recompiling it using the checked out glibrary
 ./ci/build.sh
 
+# using the checked out GLIBRARY
+# for some reason DYLD_LIBRARY_PATH is not passed to this script
+export GLIBRARY=`pwd`
+echo GLIBRARY is $GLIBRARY
+export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
+
+
+
 # using the just compiled gemc and the container sci-g
 cd $SCIG
+
+# install plugins to GPLUGIN_PATH
+export GPLUGIN_PATH=`pwd`/systemsTxtDB
+cp    $GLIBRARY/lib/gstreamer*                     $GPLUGIN_PATH/
+cp -r $GLIBRARY/gdynamicDigitization/dosimeterData $GPLUGIN_PATH/
+echo
+echo GLIBRARY Test GPLUGIN_PATH content:
+ls -lrt $GPLUGIN_PATH/
+
 ./ci/tests.sh -e $example -t
