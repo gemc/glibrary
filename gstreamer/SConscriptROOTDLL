@@ -40,5 +40,7 @@ env.Replace(SHLIBPREFIX = "")
 env.Append(LIBS = ['gdata', 'guts'])
 
 # destination library is one dir up - relative to this SConscript
-root_dll = env.SharedLibrary(source = rootSources, target='../lib/gstreamerROOTFactory')
-Depends(root_dll, '../lib/libgdata.a')
+root_dll = env.SharedLibrary(source = rootSources, target='../plugins/gstreamerROOTFactory')
+Requires(root_dll, '../lib/libgdata.a')
+Requires(root_dll, '../lib/libtextProgressBar.a')
+Requires(root_dll, '../lib/libgsystem.a')

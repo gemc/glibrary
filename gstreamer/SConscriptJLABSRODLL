@@ -36,5 +36,9 @@ env.Replace(SHLIBPREFIX = "")
 env.Append(LIBS = ['gdata', 'guts'])
 
 # destination library is one dir up - relative to this SConscript
-jsro_dll = env.SharedLibrary(source = jsroSources, target='../lib/gstreamerJLABSROFactory')
-Depends(jsro_dll, '../lib/libgdata.a')
+jsro_dll = env.SharedLibrary(source = jsroSources, target='../plugins/gstreamerJLABSROFactory')
+Requires(jsro_dll, '../lib/libgdata.a')
+Requires(jsro_dll, '../lib/libtextProgressBar.a')
+Requires(jsro_dll, '../lib/libgsystem.a')
+
+
