@@ -2,7 +2,6 @@
 .DS_Store
 *.o
 *.os
-lib
 guts/example
 goptions/simpleExample
 goptions/structureExample
