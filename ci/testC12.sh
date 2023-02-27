@@ -56,20 +56,21 @@ while getopts ":hs:" option; do
    esac
 done
 
-
+# build glibrary / gemc
+# notice the gemc version is the one in the container, here we are
+# recompiling it using the checked out glibrary
+./ci/build.sh
 
 # using the checked out GLIBRARY
 export GLIBRARY=`pwd`
-# for some reason DYLD_LIBRARY_PATH is not passed to this script
+export GPLUGIN_PATH=$GLIBRARY/plugin
+echo
 echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
+
+# for some reason DYLD_LIBRARY_PATH is not passed to this script
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
-./ci/build.sh # build glibrary / gemc and install plugins to $GPLUGIN_PATH
-if [ $? -ne 0 ]; then
-	echo building gemc / glibrary failed
-	exit 1
-fi
 
-cd $JLAB_SOFTWARE/clas12-systems/$G3CLAS12_VERSION
-
+# using the just compiled gemc and the container clas12-system
+cd $CLAS12_SYSTEMS
 ./ci/tests.sh -s $detector -t
