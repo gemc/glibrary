@@ -29,7 +29,7 @@ function compileGLibrary {
 	echo Compiling Glibrary with options: "$copt"
 	scons $copt
 	if [ $? -ne 0 ]; then
-    	echo building gemc failed
+    	echo building glibrary failed
     	exit 1
     fi
 	echo
@@ -40,6 +40,7 @@ function compileGLibrary {
 function checkLibsExistence {
 	echo
 	echo Checking libraries existence
+
 	# shared (dynamic) library extension is different on linux/darwin
 	libExtension=".so"
 	[[ $OSTYPE == 'darwin'* ]] && libExtension=".dylib"
@@ -77,8 +78,12 @@ function compileGEMC {
 # using the checked out GLIBRARY
 # for some reason DYLD_LIBRARY_PATH is not passed to this script
 export GLIBRARY=`pwd`
+eho
 echo GLIBRARY is $GLIBRARY
+echo
+cat $SCONS_BM/loadroot.py
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
+
 
 compileGLibrary
 checkLibsExistence
