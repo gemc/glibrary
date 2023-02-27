@@ -31,7 +31,6 @@ BINROOT =  os.popen('root-config --bindir').readline()
 
 if BINROOT:
     libsRootDLL    = SConscript('gstreamer/SConscriptROOTDLL')
-    libsJlabSRODLL = SConscript('gstreamer/SConscriptJLABSRODLL')
     Requires(libsRootDLL, textProgressBar)
     Depends(libsRootDLL, textProgressBar)
 else:
@@ -39,3 +38,4 @@ else:
 
 
 libsTextDLL    = SConscript('gstreamer/SConscriptTEXTDLL')
+libsJlabSRODLL = SConscript('gstreamer/SConscriptJLABSRODLL')

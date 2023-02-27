@@ -4,7 +4,8 @@
 
 # Container run:
 # docker run -it --rm jeffersonlab/gemc3:1.0 sh
-# git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
+# git clone http://github.com/gemc/glibrary         /root/glibrary && cd /root/glibrary
+# git clone http://github.com/maureeungaro/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/build.sh
 
 # if we are in the docker container, we need to load the modules
@@ -76,16 +77,13 @@ function compileGEMC {
 }
 
 # using the checked out GLIBRARY
-# for some reason DYLD_LIBRARY_PATH is not passed to this script
 export GLIBRARY=`pwd`
+export GPLUGIN_PATH=$GLIBRARY/plugin
 echo
-echo GLIBRARY is $GLIBRARY
-echo
-cat SConstruct
-echo
-cat gstreamer/SConscriptROOTDLL
-export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
+echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
 
+# for some reason DYLD_LIBRARY_PATH is not passed to this script
+export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 compileGLibrary
 checkLibsExistence

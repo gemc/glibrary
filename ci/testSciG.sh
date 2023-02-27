@@ -74,6 +74,15 @@ export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 cd $SCIG
 
 # install plugins to GPLUGIN_PATH
+# using the checked out GLIBRARY
+export GLIBRARY=`pwd`
+export GPLUGIN_PATH=$GLIBRARY/plugin
+echo
+echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
+
+# for some reason DYLD_LIBRARY_PATH is not passed to this script
+export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
+
 export GPLUGIN_PATH=`pwd`/systemsTxtDB
 cp    $GLIBRARY/lib/gstreamer*                     $GPLUGIN_PATH/
 cp -r $GLIBRARY/gdynamicDigitization/dosimeterData $GPLUGIN_PATH/
