@@ -57,8 +57,6 @@ while getopts ":he:" option; do
 done
 
 
-
-
 # build glibrary / gemc
 # notice the gemc version is the one in the compiler, here we are
 # recompiling it using the checked out glibrary

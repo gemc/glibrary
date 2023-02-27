@@ -78,10 +78,12 @@ function compileGEMC {
 # using the checked out GLIBRARY
 # for some reason DYLD_LIBRARY_PATH is not passed to this script
 export GLIBRARY=`pwd`
-eho
+echo
 echo GLIBRARY is $GLIBRARY
 echo
-cat $SCONS_BM/loadroot.py
+cat SConstruct
+echo
+cat gstreamer/SConscriptROOTDLL
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 
 
