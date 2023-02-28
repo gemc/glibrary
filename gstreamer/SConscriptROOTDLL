@@ -23,7 +23,7 @@ env.Append(CPPPATH = [Dir('factories/ROOT')])
 # needed for the plugin so we can use install_name_tool to change path for DMG installation
 env.Append(SHLINKFLAGS=['-headerpad_max_install_names'])
 
-rootSources = [
+plugin_sources = [
 					'factories/ROOT/gRootTree.cc',
 					'factories/ROOT/gstreamerROOTFactory.cc',
 					'factories/ROOT/gstreamerROOTConnection.cc',
@@ -45,7 +45,7 @@ env.Replace(SHLIBPREFIX = "")
 env.Append(LIBS = ['gdata', 'guts'])
 
 # destination library is one dir up - relative to this SConscript
-root_dll = env.SharedLibrary(source = rootSources, target = plugin_output)
+root_dll = env.SharedLibrary(source = plugin_sources, target = plugin_output)
 Requires(root_dll, '../lib/libgdata.a')
 Requires(root_dll, '../lib/libtextProgressBar.a')
 Requires(root_dll, '../lib/libgsystem.a')
