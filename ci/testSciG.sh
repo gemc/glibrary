@@ -5,6 +5,7 @@
 # Container run:
 # docker run -it --rm jeffersonlab/gemc3:1.0 sh
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
+# git clone http://github.com/maureeungaro/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/testSciG.sh -e examples/dosimeter
 
 # if we are in the docker container, we need to load the modules

@@ -16,7 +16,7 @@ else
     TERM=xterm # source script use tput for colors, TERM needs to be specified
     source /usr/share/Modules/init/sh
     source /work/ceInstall/setup.sh
-	module load gemc3/1.0
+	  module load gemc3/1.0
     if [[ $? != 0 ]]; then
         echo "Error loading gemc3 module"
 	    exit 1
@@ -50,7 +50,7 @@ function checkLibsExistence {
 	libExtension=".gplugin"
 	for lib in gstreamerJLABSROFactory gstreamerROOTFactory gstreamerTEXTFactory
 	do
-		ls lib/$lib$libExtension
+		ls $GPLUGIN_PATH/$lib$libExtension
 		if [ $? -ne 0 ]; then
 			echo $lib not present
 			exit 1

@@ -5,6 +5,7 @@
 # Container run:
 # docker run -it --rm jeffersonlab/gemc3:1.0 sh
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
+# git clone http://github.com/maureeungaro/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/testC12.sh -s ft
 
 # if we are in the docker container, we need to load the modules
@@ -69,7 +70,6 @@ echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
 
 # for some reason DYLD_LIBRARY_PATH is not passed to this script
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
-
 
 # using the just compiled gemc and the container clas12-system
 cd $CLAS12_SYSTEMS
