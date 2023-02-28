@@ -1,9 +1,7 @@
 
 .DS_Store
-.sconsign.dblite
 *.o
 *.os
-lib
 guts/example
 goptions/simpleExample
 goptions/structureExample

@@ -24,15 +24,18 @@ gdynamicDigitization = SConscript('gdynamicDigitization/SConscript', exports='en
 gtranslationTable    = SConscript('gtranslationTable/SConscript',    exports='env')
 gphysics             = SConscript('gphysics/SConscript',             exports='env')
 
+
 # output plugins
+# notice dependencies are taken care of in the SConscript below
 BINROOT =  os.popen('root-config --bindir').readline()
 
 if BINROOT:
     libsRootDLL    = SConscript('gstreamer/SConscriptROOTDLL')
-    libsJlabSRODLL = SConscript('gstreamer/SConscriptJLABSRODLL')
+    Requires(libsRootDLL, textProgressBar)
+    Depends(libsRootDLL, textProgressBar)
 else:
     print("Warning: root-config not found. Skipping ROOT output gstreamer plugins ")
 
 
 libsTextDLL    = SConscript('gstreamer/SConscriptTEXTDLL')
-
+libsJlabSRODLL = SConscript('gstreamer/SConscriptJLABSRODLL')

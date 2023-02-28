@@ -21,7 +21,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
     include(clhep)
     include(xercesc)
-    #include(geant4)
+    include(geant4)
     include(glibrary)
 endif()
 
