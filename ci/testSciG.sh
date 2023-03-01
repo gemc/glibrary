@@ -62,9 +62,9 @@ done
 # recompiling it using the checked out glibrary
 ./ci/build.sh
 
-# using the checked out GLIBRARY
-#export GLIBRARY=`pwd`
-#export GPLUGIN_PATH=$GLIBRARY/plugins
+# using the checked out GLIBRARY - notice we need to set these here again
+export GLIBRARY=`pwd`
+export GPLUGIN_PATH=$GLIBRARY/plugins
 echo
 echo "TESTSCIG.SH: GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH"
 
