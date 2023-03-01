@@ -63,10 +63,10 @@ done
 ./ci/build.sh
 
 # using the checked out GLIBRARY
-export GLIBRARY=`pwd`
-export GPLUGIN_PATH=$GLIBRARY/plugin
+#export GLIBRARY=`pwd`
+#export GPLUGIN_PATH=$GLIBRARY/plugins
 echo
-echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
+echo "TESTSCIG.SH: GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH"
 
 # for some reason DYLD_LIBRARY_PATH is not passed to this script
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
