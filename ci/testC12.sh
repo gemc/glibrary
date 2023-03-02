@@ -3,7 +3,7 @@
 # Purpose: Runs the CLAS12 test in clas12-system
 
 # Container run:
-# docker run -it --rm jeffersonlab/gemc3:1.0 sh
+# docker run -it --rm jeffersonlab/gemc3:1.0c12s sh
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
 # git clone http://github.com/maureeungaro/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/testC12.sh -s ft
@@ -13,14 +13,7 @@ if [[ -z "${DISTTAG}" ]]; then
     echo "\nNot in container"
 else
     echo "\nIn container: ${DISTTAG}"
-    TERM=xterm # source script use tput for colors, TERM needs to be specified
-    source /usr/share/Modules/init/sh
-    source /work/ceInstall/setup.sh
-    module load gemc3/1.0
-    if [[ $? != 0 ]]; then
-        echo "Error loading gemc3 module"
-	    exit 1
-    fi
+    source  /app/localSetup.sh
 fi
 
 Help()
