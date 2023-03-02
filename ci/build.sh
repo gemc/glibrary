@@ -10,67 +10,66 @@
 
 # if we are in the docker container, we need to load the modules
 if [[ -z "${DISTTAG}" ]]; then
-    echo "\nNot in container"
+  echo "\nNot in container"
 else
-    echo "\nIn container: ${DISTTAG}"
-    source  /app/localSetup.sh
+  echo "\nIn container: ${DISTTAG}"
+  source /app/localSetup.sh
 fi
 
 function compileGLibrary {
-	# getting number of available CPUS
-	copt=" -j"`getconf _NPROCESSORS_ONLN`" OPT=1"
-	echo
-	echo Compiling Glibrary with options: "$copt"
-	scons $copt
-	if [ $? -ne 0 ]; then
-    	echo building glibrary failed
-    	exit 1
-    fi
-	echo
-	echo Compilation completed, content of lib:
-	ls -ltrh lib/
+  # getting number of available CPUS
+  copt=" -j"$(getconf _NPROCESSORS_ONLN)" OPT=1"
+  echo
+  echo Compiling Glibrary with options: "$copt"
+  scons $copt
+  if [ $? -ne 0 ]; then
+    echo building glibrary failed
+    exit 1
+  fi
+  echo
+  echo "BUILD.SH: GLIBRARY Compilation completed, content of ./lib:"
+  ls -ltrh lib/
 }
 
 function checkLibsExistence {
-	echo
-	echo Checking libraries existence
+  echo
+  echo Checking libraries existence
 
-	# shared (dynamic) library extension is different on linux/darwin
-	libExtension=".so"
-	[[ $OSTYPE == 'darwin'* ]] && libExtension=".dylib"
+  # shared (dynamic) library extension is different on linux/darwin
+  libExtension=".so"
+  [[ $OSTYPE == 'darwin'* ]] && libExtension=".dylib"
 
-	# plugins
-	libExtension=".gplugin"
-	for lib in gstreamerJLABSROFactory gstreamerROOTFactory gstreamerTEXTFactory
-	do
-		ls $GPLUGIN_PATH/$lib$libExtension
-		if [ $? -ne 0 ]; then
-			echo $lib not present
-			exit 1
-		fi
-	done
+  # plugins
+  libExtension=".gplugin"
+  for lib in gstreamerJLABSROFactory gstreamerROOTFactory gstreamerTEXTFactory; do
+    ls $GPLUGIN_PATH/$lib$libExtension
+    if [ $? -ne 0 ]; then
+      echo $lib not present
+      exit 1
+    fi
+  done
 }
 
-
 function compileGEMC {
-	# getting number of available CPUS
-	copt=" -j"`getconf _NPROCESSORS_ONLN`" OPT=1"
-	echo
-	echo Compiling GEMC with options: "$copt"
-	cd $GEMC
-	scons $copt
-	if [ $? -ne 0 ]; then
-    	echo building gemc failed
-    	exit 1
-    fi
-	echo
-	echo Compilation completed. Content of gemc/src:
-	ls -ltrh ./
+  # getting number of available CPUS
+  copt=" -j"$(getconf _NPROCESSORS_ONLN)" OPT=1"
+  echo
+  echo Compiling GEMC with options: "$copt"
+  cd $GEMC
+  scons $copt
+  if [ $? -ne 0 ]; then
+    echo building gemc failed
+    exit 1
+  fi
+  echo
+  echo "BUILD.SH: GEMC Compilation completed, content of ./:"
+
+  ls -ltrh ./
 
 }
 
 # using the checked out GLIBRARY
-export GLIBRARY=`pwd`
+export GLIBRARY=$(pwd)
 export GPLUGIN_PATH=$GLIBRARY/plugins
 echo
 echo "BUILD.SH: GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH"
@@ -81,4 +80,3 @@ export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
 compileGLibrary
 checkLibsExistence
 compileGEMC
-
