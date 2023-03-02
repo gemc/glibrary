@@ -13,6 +13,9 @@ import os
 
 env = init_environment('glibrary geant4 clhep')
 
+# standard pre and suffix for gemc plugins and path
+env.Replace(SHLIBSUFFIX = ".gplugin")
+env.Replace(SHLIBPREFIX = "")
 plugins_dir_s   = os.environ.get('GPLUGIN_PATH')
 plugins_dir     = os.path.realpath(plugins_dir_s)
 plugin_output   =  plugins_dir  + '/' + 'gstreamerTEXTFactory'
@@ -35,10 +38,6 @@ plugin_sources = [
 				  'factories/TEXT/stream/publishPayload.cc'
 				  ]
 
-
-# standard pre and suffix for gemc plugins
-env.Replace(SHLIBSUFFIX = ".gplugin")
-env.Replace(SHLIBPREFIX = "")
 
 # notice: these two libraries needs to be added explicitly, with also the dependency below,
 # as the env scanner may run at a time where the libraries are not built yet

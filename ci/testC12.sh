@@ -3,8 +3,9 @@
 # Purpose: Runs the CLAS12 test in clas12-system
 
 # Container run:
-# docker run -it --rm jeffersonlab/gemc3:1.0 sh
+# docker run -it --rm jeffersonlab/gemc3:1.0c12s sh
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
+# git clone http://github.com/maureeungaro/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/testC12.sh -s ft
 
 # if we are in the docker container, we need to load the modules
@@ -12,14 +13,7 @@ if [[ -z "${DISTTAG}" ]]; then
     echo "\nNot in container"
 else
     echo "\nIn container: ${DISTTAG}"
-    TERM=xterm # source script use tput for colors, TERM needs to be specified
-    source /usr/share/Modules/init/sh
-    source /work/ceInstall/setup.sh
-    module load gemc3/1.0
-    if [[ $? != 0 ]]; then
-        echo "Error loading gemc3 module"
-	    exit 1
-    fi
+    source  /app/localSetup.sh
 fi
 
 Help()
@@ -63,13 +57,12 @@ done
 
 # using the checked out GLIBRARY
 export GLIBRARY=`pwd`
-export GPLUGIN_PATH=$GLIBRARY/plugin
+export GPLUGIN_PATH=$GLIBRARY/plugins
 echo
-echo GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH
+echo "TESTC12.SH: GLIBRARY is $GLIBRARY, GPLUGIN_PATH is $GPLUGIN_PATH"
 
 # for some reason DYLD_LIBRARY_PATH is not passed to this script
 export DYLD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GLIBRARY}/lib
-
 
 # using the just compiled gemc and the container clas12-system
 cd $CLAS12_SYSTEMS
