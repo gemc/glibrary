@@ -1,10 +1,7 @@
-- Check github action workflows
-- add PROJECTNUMBER support in makeDoxyfileForLibrary
-
-- for now we need to append this to the SConstruct and inside each glibrary SConstruct
-env.Append(CXXFLAGS=['-std=c++17'])
+- Add verification tests for various gparticle options (flat in theta or cos(theta),
+  flat in phi or cos(phi), flat in energy or log(energy), etc.)
 
 
-Add this at the top of each class definition
+- Add this at the top of each class definition
 // Class GMAPCOORDINATES
 // Thread Type: GLOBAL
