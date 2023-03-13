@@ -116,10 +116,20 @@ G4ThreeVector Gparticle::calculateBeamDirection() {
 
 	double thetaRad = 0;
 
-
 	if (thetaModel == "ct") {
-		thetaRad = acos(G4UniformRand()*(cos(theta/CLHEP::rad - delta_theta/CLHEP::rad) - cos(theta/CLHEP::rad + delta_theta/CLHEP::rad))
-							 + cos(theta/CLHEP::rad + delta_theta/CLHEP::rad)) / CLHEP::rad;
+
+        double lower = (theta - delta_theta)/CLHEP::rad;
+        double upper = (theta + delta_theta)/CLHEP::rad;
+
+        // generate random cos(theta) in range [lower, upper]
+        do {
+            thetaRad = acos(1 - 2 * G4UniformRand()) ;
+        } while (thetaRad < lower || thetaRad > upper);
+
+        // notice the formula below doesn't work because cos(theta) = cos(-theta)
+        // would need to add cases for theta - delta_theta < 0 and theta + delta_theta > pi
+        //		thetaRad = acos(G4UniformRand()*(cos(theta - delta_theta/CLHEP::rad) - cos(theta/CLHEP::rad + delta_theta/CLHEP::rad))
+        //							 + cos(theta/CLHEP::rad + delta_theta/CLHEP::rad)) / CLHEP::rad;
 
 	} else if (thetaModel == "flat") {
 		thetaRad =  randomize(theta/CLHEP::rad, delta_theta/CLHEP::rad, momentumGaussianSpread) ;
@@ -128,8 +138,9 @@ G4ThreeVector Gparticle::calculateBeamDirection() {
 		gexit(EC__GPARTICLEWRONGTHETAMODEL);
 	}
 
-	double phiRad = randomize(phi/CLHEP::rad, delta_phi/CLHEP::rad, momentumGaussianSpread) ;
 
+
+    double phiRad = randomize(phi/CLHEP::rad, delta_phi/CLHEP::rad, momentumGaussianSpread) ;
 
 	G4ThreeVector pdir = G4ThreeVector(
 												  cos(phiRad)*sin(thetaRad),
