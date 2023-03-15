@@ -123,6 +123,7 @@ def printGemcMD(version):
 		lstr = '---\n'
 		lstr += 'layout: default\n'
 		lstr += 'title: Geant4 Physics\n'
+		lstr += 'description: Explore and select Geant4 Physics modules\n'
 		lstr += 'order: 2\n'
 		lstr += '---\n'
 		lstr += '\n'
