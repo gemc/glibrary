@@ -118,13 +118,13 @@ def printGemcHelp():
 # notice we print directly on ../../home/_documentation
 def printGemcMD(version):
 
-	jekyllFileName='../../home/_documentation/physistExtList.md'
+	jekyllFileName='../../home/_documentation/geant4Physics.md'
 	with open(jekyllFileName, 'w') as dn:
 		lstr = '---\n'
 		lstr += 'layout: default\n'
 		lstr += 'title: Geant4 Physics\n'
 		lstr += 'description: Explore and select Geant4 Physics modules\n'
-		lstr += 'order: 2\n'
+		lstr += 'order: 40\n'
 		lstr += '---\n'
 		lstr += '\n'
 		lstr += 'The Geant4 Physics is determined with the option **physicsList**. By default, gemc uses **FTFP_BERT** .\n'
