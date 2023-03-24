@@ -121,10 +121,14 @@ G4ThreeVector Gparticle::calculateBeamDirection() {
         double lower = (theta - delta_theta)/CLHEP::rad;
         double upper = (theta + delta_theta)/CLHEP::rad;
 
-        // generate random cos(theta) in range [lower, upper]
-        do {
-            thetaRad = acos(1 - 2 * G4UniformRand()) ;
-        } while (thetaRad < lower || thetaRad > upper);
+        if ( lower < upper ) {
+            // generate random cos(theta) in range [lower, upper]
+            do {
+                thetaRad = acos(1 - 2 * G4UniformRand());
+            } while (thetaRad < lower || thetaRad > upper);
+        } else {
+            thetaRad = theta/CLHEP::rad;
+        }
 
         // notice the formula below doesn't work because cos(theta) = cos(-theta)
         // would need to add cases for theta - delta_theta < 0 and theta + delta_theta > pi
