@@ -23,10 +23,10 @@ GDigitizedData* GParticleCounterDigitization::digitizeHit(GHit *ghit, size_t hit
 
 	gdata->includeVariable(identity.getName(), identity.getValue()             );
 	gdata->includeVariable("hitn",             (int) hitn                      );
-	gdata->includeVariable("eTot",             ghit->getTotalEnergyDeposited() );
+	gdata->includeVariable("totEdep",          ghit->getTotalEnergyDeposited() );
 	gdata->includeVariable("time",             ghit->getAverageTime()          );
 	gdata->includeVariable("pid",              ghit->getPid()                  );
-	gdata->includeVariable("kine",             ghit->getE()                    );
+	gdata->includeVariable("totalE",           ghit->getE()                    );
 
 	return gdata;
 }
