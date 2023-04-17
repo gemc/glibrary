@@ -19,6 +19,13 @@ void GSystemCADFactory::loadGeometry(GSystem *s, int verbosity)
 		cerr << FATALERRORL << " CAD Directory >" << s->getFilePath() << "< not found." << endl;
 		gexit(EC__GDIRNOTFOUND);
 	}
+
+    // if the file cad.json is found in dirLocation, modify the gvolumes accordingly
+
+    for(auto& [volumeName, gvolume] : *s->getGVolumesMap() ) {
+        cout << " volume: " << volumeName << endl;
+    }
+
 }
 
 

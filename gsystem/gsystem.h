@@ -29,7 +29,7 @@ private:
 	// map containing the volumes
 	// the key is system + volume name;
 	// the names must be unique in each system
-	// each system name must be unique
+	// name must be unique
 	map<string, GVolume*> *gvolumesMap;
 
 	// materials are part of a system and cannot be shared among systems
