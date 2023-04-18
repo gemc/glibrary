@@ -171,7 +171,7 @@ int EventDispenser::processEvents()
 			int ntotalSubRuns = ( lastSubRunNEvents > 0 ? nsubRuns + 1 : nsubRuns);
 			for ( int s = 0; s < nsubRuns; s++ ) {
 				if(verbosity >= GVERBOSITY_SUMMARY) {
-                    int upToNevents = totalSoFar + nEventBuffer;
+                    // int upToNevents = totalSoFar + nEventBuffer;
 					string log = "  " + string(EVENTDISPENSERLOGMSGITEM) + " Sub run: " + to_string(s+1) + "/" + to_string(ntotalSubRuns)
 					+ ", processing events " + to_string(totalSoFar) + " → " + to_string(totalSoFar);
 					gLogMessage(log);

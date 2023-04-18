@@ -116,7 +116,7 @@ G4World::G4World(GWorld *gworld, GOptions* gopts) {
 					// calling loadG4System
 					// if a new system cannot be loaded, false is returned and the volumes added to thisIterationRemainingVolumes
 					if(g4systemFactory[g4Factory]->loadG4System(gopts, gvolume, g4volumesMap) == false) {
-						thisIterationRemainingVolumes.push_back(gvolume);
+                        if ( gvolume->getExistence() ) { thisIterationRemainingVolumes.push_back(gvolume); }
 					}
 				} else {
 					G4cerr << FATALERRORL << "g4systemFactory factory <" << g4Factory << "> not found in map." << endl;

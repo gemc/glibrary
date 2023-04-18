@@ -84,6 +84,7 @@ public:
 	inline const string getColor()      const {return color;}
 	inline const bool   isVisible()     const {return visible;}
 	inline const int    getStyle()      const {return style;}
+    inline const bool   getExistence()  const {return exist;}
 
 	inline const string getPos()   const {return pos;}
 	inline const string getRot()   const {return rot;}
@@ -100,10 +101,13 @@ public:
 
 	inline const string getDescription()  const {return description;}
 
-	// assign modifier
-	void applyShift(string s)    {shift = s;}
-	void applyTilt(string t)     {tilt  = t;}
-	void modifyExistence(bool e) {exist = e;}
+	// assign modifiers
+	void applyShift(string s)      {shift = s;}
+	void applyTilt(string t)       {tilt  = t;}
+	void modifyExistence(bool e)   {exist = e;}
+    void resetMotherName(string m) {motherName = m;}
+    void setColor(string c)        {color = c;}
+    void setMaterial(string m)     {material = m;}
 
 	// imported volumes
 	string getImportedFile() {return importFilename;}

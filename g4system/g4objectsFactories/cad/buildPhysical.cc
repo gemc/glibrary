@@ -7,6 +7,9 @@
 // TODO: print everything about this volume if verbosity
 G4VPhysicalVolume* G4CadSystemFactory::buildPhysical(GOptions* gopt, GVolume *s, map<string, G4Volume*> *g4s)
 {
+    if ( ! s->getExistence() ) {
+        return nullptr;
+    }
 	string g4name = s->getG4Name();
 	bool verbosity = getVerbosity(gopt, g4name);
 
