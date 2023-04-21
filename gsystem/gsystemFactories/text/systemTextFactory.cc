@@ -53,8 +53,15 @@ ifstream* GSystemTextFactory::gSystemTextFileStream(GSystem *system, string SYST
 		}
 	}
 	
-	// at this point file was not found, error if it was a geometry file
+	// at this point file was not found
+    // this couldl be ok if we are looking for the materials file - if the system annotation is 'mats_only'
 	if ( SYSTEMTYPE == GTEXTGEOMTYPE ) {
+        if ( system->getAnnotations() == "mats_only" ) {
+            if ( verbosity >= GVERBOSITY_SUMMARY ) {
+                cout << GSYSTEMLOGHEADER << "File " << fname << " not found, but this is ok because the system annotation is 'mats_only'" << endl;
+            }
+            return nullptr;
+        }
 		cerr << GSYSTEMLOGHEADER << "File " << fname << " not found " << endl;
 		gexit(EC__GSETUPFILENOTOFOUND);
 	}

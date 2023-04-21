@@ -11,6 +11,7 @@ void from_json(const json& j, JSystem& det) {
 	j.at("system").get_to(det.system);
 	j.at("factory").get_to(det.factory);
 	j.at("variation").get_to(det.variation);
+    j.at("annotations").get_to(det.annotations);
 	j.at("runno").get_to(det.runno);
 }
 
@@ -87,11 +88,18 @@ vector<GOption> defineOptions() {
 		{GDESC, "runno (optional, default is 1)"},
 		{GDFLT, 1}
 	};
+
+    json jsonSystemAnnotationsTag = {
+        {GNAME, "annotations"},
+        {GDESC, "annotations. Examples: \"mats_only\" (optional, default is \"None\")"},
+        {GDFLT, "None"}
+    };
 	
 	json jsonDetectorOption = {
 		jsonSystemNameTag,
 		jsonSystemFactoryTag,
 		jsonSystemVariationTag,
+        jsonSystemAnnotationsTag,
 		jsonSystemRunnoTag
 	};
 	

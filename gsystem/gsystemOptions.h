@@ -13,6 +13,7 @@ struct JSystem {
 	string system;
 	string factory;
 	string variation;
+    string annotations;
 	int runno;
 };
 

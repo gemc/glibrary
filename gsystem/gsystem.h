@@ -16,7 +16,7 @@ class GSystem
 	
 public:
 	// constructor, from command line or jcard
-	GSystem(string givenname, string factory, string variation, int verbosity);
+	GSystem(string givenname, string factory, string variation, int verbosity, int runno = 0, string annotations = "none");
 
 private:
 
@@ -25,6 +25,8 @@ private:
 	string path;                    // Absolute/relative path
 	string factoryName;             // Name of actory that builds the detector
 	string variation = "default";   // Variation of the detector. Default is "default"
+    int runno;                      // Run number
+    string annotations;             // Annotations of the detector. Default is "none" (no annotations). "mats_only" means that only materials are loaded.
 
 	// map containing the volumes
 	// the key is system + volume name;
@@ -41,6 +43,7 @@ public:
 	inline const string getFactoryName() const { return factoryName; }
 	inline const string getVariation()   const { return variation; }
 	inline const string getFilePath()    const { return path + "/" + name; }
+    inline const string getAnnotations() const { return annotations; }
 
 
 	// MARK: GVOLUMES
