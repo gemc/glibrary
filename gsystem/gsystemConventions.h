@@ -28,19 +28,25 @@
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
 #define GSYSTEMNOMODIFIER          "noModifier"
 
-#define GEMCDB_ENV        "GEMCDB_ENV"
+// class factory names
+#define GEMCDB_ENV         "GEMCDB_ENV"
 #define GSYSTEMTXTFACTORY  "GSystemTEXTFactory"
+#define GSYSTEMJSOFACTORY  "GSystemJSONFactory"
 #define GSYSTEMCADFACTORY  "GSystemCADFactory"
 #define GSYSTEMGDMLFACTORY "GSystemGDMLFactory"
 #define GSYSTEMYSQLFACTORY "GSystemMYSQLFactory"
+#define GSYSTESQLTFACTORY  "GSystemSQLiteFactory"
 
 #define ROOTWORLDGVOLUMENAME "root"
 #define MOTHEROFUSALL        "akasha"
 #define GSYSTEM_DELIMITER    "/"
 
-#define GSYSTEMTEXTFACTORY   "text"
-#define GSYSTEMCADTFACTORY   "cad"
-#define GSYSTEMGDMLTFACTORY  "gdml"
-#define GSYSTEMMYSQLTFACTORY "mysql"
+// factory labels
+#define GSYSTEMTEXTFACTORY    "TEXT"
+#define GSYSTEMJSONFACTORY    "JSON"
+#define GSYSTEMCADTFACTORY    "CAD"
+#define GSYSTEMGDMLTFACTORY   "GDML"
+#define GSYSTEMMYSQLTFACTORY  "MYSQL"
+#define GSYSTEMSQLITETFACTORY "SQLITE"
 
 #endif
