@@ -6,7 +6,7 @@
 #include "gutilities.h"
 using namespace std;
 
-#include <math.h>       /* fabs */
+//#include <math.h>       /* fabs */
 
 // contructor from digitization and gidentity strings
 // called in GDetectorConstruction::ConstructSDandField

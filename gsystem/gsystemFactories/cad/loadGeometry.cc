@@ -50,6 +50,14 @@ void GSystemCADFactory::loadGeometry(GSystem *s, int verbosity)
                     if ( material != nullptr ) {
                         gvolume->setMaterial(material);
                     }
+                    auto digitization = vmod["digitization"];
+                    if ( digitization != nullptr ) {
+                        gvolume->setDigitization(digitization);
+                    }
+                    auto identifier = vmod["identifier"];
+                    if ( identifier != nullptr ) {
+                        gvolume->setGIdentity(identifier);
+                    }
                 }
             }
 

@@ -75,7 +75,11 @@ public:
 	inline const string getG4Name()       const {return g4name;}
 	inline const string getG4MotherName() const {return g4motherName;}
 
-	inline vector<double> getDetectorDimensions() const {return getG4NumbersFromString(parameters);}
+	inline vector<double> getDetectorDimensions() const {
+        if (parameters == UNINITIALIZEDSTRINGQUANTITY ) {
+            return { 0 };
+        } else { return getG4NumbersFromString(parameters); }
+    }
 
 	inline const string getType()       const {return type;}
 	inline const string getParameters() const {return parameters;}
@@ -108,6 +112,8 @@ public:
     void resetMotherName(string m) {motherName = m;}
     void setColor(string c)        {color = c;}
     void setMaterial(string m)     {material = m;}
+    void setDigitization(string d) {digitization = d;}
+    void setGIdentity(string g)    {gidentity = g;}
 
 	// imported volumes
 	string getImportedFile() {return importFilename;}
