@@ -44,6 +44,7 @@ public:
 	inline const string getVariation()   const { return variation; }
 	inline const string getFilePath()    const { return path + "/" + name; }
     inline const string getAnnotations() const { return annotations; }
+    inline const int    getRunno()       const { return runno; }
 
 
 	// MARK: GVOLUMES

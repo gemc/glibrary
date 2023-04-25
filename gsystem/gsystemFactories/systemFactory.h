@@ -15,8 +15,6 @@ using std::ifstream;
 using std::cout;
 using std::endl;
 
-
-
 // system factory
 class GSystemFactory
 {
@@ -48,6 +46,10 @@ public:
 		loadMaterials(system, verbosity);
 		loadGeometry(system, verbosity);
 	}
+
+    virtual void closeSystem() {
+        possibleLocationOfFiles.clear();
+    }
 
 	virtual ~GSystemFactory() = default;
 

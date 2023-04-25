@@ -2,7 +2,6 @@
 #define SYSTEMTEXTFACTORY_H 1
 
 // gsystem
-#include "systemTextFactory.h"
 #include "systemFactory.h"
 
 // file types

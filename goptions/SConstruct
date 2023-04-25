@@ -24,6 +24,6 @@ structuredExample          = env.Program(source = 'examples/structureExample.cc'
 cumulativeStructureExample = env.Program(source = 'examples/cumulativeStructureExample.cc', target = 'cumulativeStructureExample')
 
 # example(s) depend on the library existance
-Depends(simpleExample,              lib);
-Depends(structuredExample,          simpleExample);
-Depends(cumulativeStructureExample, structuredExample);
+Requires(simpleExample,              lib);
+Requires(structuredExample,          simpleExample);
+Requires(cumulativeStructureExample, structuredExample);

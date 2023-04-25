@@ -1,5 +1,8 @@
 #include "ctofRoutinesExample.h"
 
+#include <iostream>
+using namespace std;
+
 bool CTofRoutineExample::defineReadoutSpecs() {
 
 	float     timeWindow = 10;                  // electronic readout time-window of the detector

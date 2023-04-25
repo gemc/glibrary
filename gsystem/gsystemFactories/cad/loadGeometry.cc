@@ -13,7 +13,7 @@ void GSystemCADFactory::loadGeometry(GSystem *s, int verbosity)
 		vector<string> cadFiles = getListOfFilesInDirectory(dirLocation, {".stl"});
 
 		for(auto cf: cadFiles) {
-			s->addVolumeFromFile(GSYSTEMCADTFACTORY, dirLocation + "/" + cf, verbosity);
+			s->addVolumeFromFile(GSYSTEMCADTFACTORYLABEL, dirLocation + "/" + cf, verbosity);
 		}
 
         // if the file cad__<variation>.json is found in dirLocation, modify the gvolumes accordingly

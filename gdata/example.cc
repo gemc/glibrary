@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 
 		// calling gheader with verbosity 1 for debugging purposes
 		GEventDataCollectionHeader *gheader = new GEventDataCollectionHeader(evn, evn, 1);
-		GEventDataCollection *eventData = new GEventDataCollection(gheader, 1);
+		//GEventDataCollection *eventData = new GEventDataCollection(gheader, 1);
 
 		// hit with null G4Step (not used)
 		// a bitset
