@@ -27,7 +27,10 @@ GWorld::GWorld(GOptions* gopts) {
 	// loading gsystemsMap with GSystems
 	for (auto& jsystem: jsystems) {
 		string keyName = gutilities::getFileFromPath(jsystem.system);
-		(*gsystemsMap)[keyName] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity,  jsystem.runno, jsystem.annotations);
+		(*gsystemsMap)[keyName] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity,
+                                              jsystem.runno,
+                                              jsystem.annotations,
+                                              jsystem.sqlite_file);
 	}
 
 	// projecting options onto vector of GModifiers

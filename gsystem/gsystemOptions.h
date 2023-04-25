@@ -15,6 +15,7 @@ struct JSystem {
 	string variation;
     string annotations;
 	int runno;
+    string sqlite_file;
 };
 
 void from_json(const json& j, JSystem& det);

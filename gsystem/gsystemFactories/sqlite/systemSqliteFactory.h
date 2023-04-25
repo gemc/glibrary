@@ -27,8 +27,12 @@ private:
     void initialize_sqlite_db(GSystem *system, int verbosity);
 
     sqlite3 *db = nullptr;
+    string system_name = "na";
+    string sqlite_file = "na";
     string variation = "default";
     int runno = 0;
+
+
 };
 
 #endif

@@ -16,7 +16,10 @@ class GSystem
 	
 public:
 	// constructor, from command line or jcard
-	GSystem(string givenname, string factory, string variation, int verbosity, int runno = 0, string annotations = "none");
+	GSystem(string givenname, string factory, string variation, int verbosity,
+            int runno = 0,
+            string annotations = "none",
+            string sqlite_file = "none");
 
 private:
 
@@ -26,7 +29,8 @@ private:
 	string factoryName;             // Name of actory that builds the detector
 	string variation = "default";   // Variation of the detector. Default is "default"
     int runno;                      // Run number
-    string annotations;             // Annotations of the detector. Default is "none" (no annotations). "mats_only" means that only materials are loaded.
+    string annotations;             // Annotations of the detector. "mats_only" means that only materials are loaded.
+    string sqlite_file;             // database
 
 	// map containing the volumes
 	// the key is system + volume name;
@@ -45,6 +49,7 @@ public:
 	inline const string getFilePath()    const { return path + "/" + name; }
     inline const string getAnnotations() const { return annotations; }
     inline const int    getRunno()       const { return runno; }
+    inline const string getSqliteFile()  const { return sqlite_file; }
 
 
 	// MARK: GVOLUMES

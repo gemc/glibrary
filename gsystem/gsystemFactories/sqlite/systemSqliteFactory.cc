@@ -9,6 +9,7 @@ using namespace gutilities;
 using namespace std;
 
 
+
 GSystemSQLiteFactory::GSystemSQLiteFactory() {
 	
 }
@@ -17,23 +18,21 @@ GSystemSQLiteFactory::GSystemSQLiteFactory() {
 
 void GSystemSQLiteFactory::initialize_sqlite_db(GSystem *system, int verbosity)
 {
-    variation = system->getVariation();
-    runno = system->getRunno();
+    system_name = system->getName();
+    variation   = system->getVariation();
+    runno       = system->getRunno();
+    sqlite_file = system->getSqliteFile();
 
-    string db_filename = system->getName();
-
-    int rc = sqlite3_open(db_filename.c_str(), &db);
+    // sqlite3_open_v2 will return SQLITE_OK (0) on success if the file exist (note: even if it's not an sql db)
+    int rc = sqlite3_open_v2(sqlite_file.c_str(), &db, SQLITE_OPEN_READWRITE, NULL);
 
     if( rc ) {
-        cerr << GSYSTEMLOGHEADER << "Sqlite database " << db_filename << " not found " << endl;
+        cerr << GSYSTEMLOGHEADER << "Sqlite database " << sqlite_file << " not found " << endl;
         gexit(EC__GSETUPFILENOTOFOUND);
 
     } else {
-        cout << GSYSTEMLOGHEADER << "Sqlite database >" <<  KMAG << db_filename << RST  << "< opened successfully" << endl;
+        cout << GSYSTEMLOGHEADER << "Sqlite database >" <<  KMAG << sqlite_file << RST  << "< opened successfully" << endl;
     }
-
-
-    //sqlite3_close(db);
 
 
 }
@@ -41,6 +40,6 @@ void GSystemSQLiteFactory::initialize_sqlite_db(GSystem *system, int verbosity)
 void GSystemSQLiteFactory::closeSystem() {
     sqlite3_close(db);
     possibleLocationOfFiles.clear();
-    cout << GSYSTEMLOGHEADER << "Sqlite database " <<  KMAG << RST  << "closed successfully" << endl;
+    cout << GSYSTEMLOGHEADER << "Sqlite database >" <<  KMAG << sqlite_file << RST  << "<  closed successfully" << endl;
 
 }

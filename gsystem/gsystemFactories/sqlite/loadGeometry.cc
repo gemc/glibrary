@@ -6,6 +6,23 @@
 
 // c++
 #include <iostream>
+using std::to_string;
+
+
+// SQLite will call this callback function for each record processed in
+// each SELECT statement executed within the SQL argument.
+// uncomment for debugging
+static int callback(void *data, int argc, char **argv, char **azColName){
+    int i;
+    fprintf(stderr, "%s: ", (const char*)data);
+
+    for(i = 0; i<argc; i++){
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+
+    printf("\n");
+    return 0;
+}
 
 void GSystemSQLiteFactory::loadGeometry(GSystem *system, int verbosity)
 {
@@ -13,6 +30,15 @@ void GSystemSQLiteFactory::loadGeometry(GSystem *system, int verbosity)
         initialize_sqlite_db(system, verbosity);
     }
 
+    char *zErrMsg = 0;
+    const char* data = "Callback function called";
+
+    string sql_query = "SELECT * from geometry ;";
+    //where system = '" + system_name;
+//    sql_query += "' and variation = '" + variation ;
+//    sql_query += "' and runno = " + to_string(runno) + ";";
+
+    int rc = sqlite3_exec(db, sql_query.c_str(), callback, (void*)data, &zErrMsg);
 
 
 //
