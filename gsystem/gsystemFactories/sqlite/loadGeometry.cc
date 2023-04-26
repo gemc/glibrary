@@ -6,13 +6,11 @@
 
 // c++
 #include <iostream>
+
 using namespace std;
 
 
-
-
-void GSystemSQLiteFactory::loadGeometry(GSystem *system, int verbosity)
-{
+void GSystemSQLiteFactory::loadGeometry(GSystem *system, int verbosity) {
     if (db == nullptr) {
         initialize_sqlite_db(system, verbosity);
     }
@@ -36,18 +34,15 @@ void GSystemSQLiteFactory::loadGeometry(GSystem *system, int verbosity)
         for (int i = 0; i < sqlite3_column_count(stmt); i++) {
             if (verbosity >= GVERBOSITY_DETAILS) {
                 cout << GSYSTEMLOGHEADER << "<sqlite> column: " << KRED << sqlite3_column_name(stmt, i)
-                 << " = " << sqlite3_column_text(stmt, i) << RST << " (column " << i << ")" << endl;
+                     << " = " << sqlite3_column_text(stmt, i) << RST << " (column " << i << ")" << endl;
             }
             // matching gvolume constructor order
-            if ( i > 3) { gvolumePars.push_back((char *) sqlite3_column_text(stmt, i)); }
+            if (i > 3) { gvolumePars.push_back((char *) sqlite3_column_text(stmt, i)); }
         }
-        // adding variation and runno
-//        string variation = (char *) sqlite3_column_text(stmt, 2);
-//        string runno = (char *) sqlite3_column_text(stmt, 3);
-//        gvolumePars.push_back(variation);
-//        gvolumePars.push_back(runno);
+
         system->addGVolume(gvolumePars, verbosity);
         gvolumePars.clear();
+        if (verbosity >= GVERBOSITY_DETAILS) { cout << endl; }
     }
     if (rc != SQLITE_DONE) {
         cerr << GSYSTEMLOGHEADER << "Sqlite database error:" << sqlite3_errmsg(db) << endl;
@@ -55,34 +50,5 @@ void GSystemSQLiteFactory::loadGeometry(GSystem *system, int verbosity)
     }
     sqlite3_finalize(stmt);
 
-
-
-//    int rc = sqlite3_exec(db, sql_query.c_str(), callback, (void*)data, &zErrMsg);
-
-
-//
-//    if ( IN != nullptr) {
-//
-//        if (verbosity >= GVERBOSITY_SUMMARY) {
-//            cout << GSYSTEMLOGHEADER << "Loading <text> geometry for <" << KWHT << system->getName() << RST << ">"
-//                 << endl;
-//        }
-//
-//        // loading volumes
-//        while (!IN->eof()) {
-//
-//            string dbline;
-//            getline(*IN, dbline);
-//
-//            if (!dbline.size())
-//                continue;
-//
-//            // extract gvolume parameters
-//            vector <string> gvolumePars = gutilities::getStringVectorFromStringWithDelimiter(dbline, "|");
-//            system->addGVolume(gvolumePars, verbosity);
-//        }
-//
-//        IN->close();
-//    }
 }
 

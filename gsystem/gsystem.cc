@@ -119,7 +119,7 @@ GVolume* GSystem::getGVolume(string volumeName) const {
 
 // MARK: GMATERIALS
 
-// add gmaterial using parameters (TEXT or MYSQL factories)
+// add gmaterial using parameters (TEXT or SQL factories)
 void GSystem::addGMaterial(vector<string> pars, int verbosity) {
 
 	string materialName = pars[0];
