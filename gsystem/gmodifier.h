@@ -21,7 +21,7 @@ public:
 			cout << GSYSTEMLOGHEADER <<  "volume " << name << " modified with:";
 			if (  shift != GSYSTEMNOMODIFIER) cout << " - shift: "     << shift   ;
 			if (  tilts != GSYSTEMNOMODIFIER) cout << " - tilts: "     << tilts   ;
-			if ( !isPresent )         cout << " - existance: " << isPresent ;
+			if ( !isPresent )         cout << " - existence: " << isPresent ;
 			cout << endl;
 		}
 	}

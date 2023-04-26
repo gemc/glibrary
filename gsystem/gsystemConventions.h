@@ -5,7 +5,7 @@
 // The volumes and materials in each system must have an unique name
 
 // number of database pars defining a gvolume and a gmaterial
-#define GVOLUMENUMBEROFPARS    19
+#define GVOLUMENUMBEROFPARS    21
 #define GMATERIALNUMBEROFPARS  18
 
 // must match the API definitions
@@ -24,23 +24,23 @@
 #define EC__GMATERIALOPTICALPROPERTYMISMATCH 206
 #define EC__GMATERIALNOTFOUND                207
 #define EC__GVOLUMENAMECONTAINSINVALID       208
+#define EC__GSQLITEERROR                     209
 
 #define GSYSTEMLOGHEADER           " ❖ GSystem ▸ "
 #define GSYSTEMNOMODIFIER          "noModifier"
 
-#define GEMCDB_ENV        "GEMCDB_ENV"
-#define GSYSTEMTXTFACTORY  "GSystemTEXTFactory"
-#define GSYSTEMCADFACTORY  "GSystemCADFactory"
-#define GSYSTEMGDMLFACTORY "GSystemGDMLFactory"
-#define GSYSTEMYSQLFACTORY "GSystemMYSQLFactory"
+#define GEMCDB_ENV           "GEMCDB_ENV"
 
 #define ROOTWORLDGVOLUMENAME "root"
 #define MOTHEROFUSALL        "akasha"
 #define GSYSTEM_DELIMITER    "/"
 
-#define GSYSTEMTEXTFACTORY   "text"
-#define GSYSTEMCADTFACTORY   "cad"
-#define GSYSTEMGDMLTFACTORY  "gdml"
-#define GSYSTEMMYSQLTFACTORY "mysql"
+// factory labels
+#define GSYSTEMTEXTFACTORYLABEL    "TEXT"
+#define GSYSTEMJSONFACTORYLABEL    "JSON"
+#define GSYSTEMCADTFACTORYLABEL    "CAD"
+#define GSYSTEMGDMLTFACTORYLABEL   "GDML"
+#define GSYSTEMMYSQLTFACTORYLABEL  "MYSQL"
+#define GSYSTEMSQLITETFACTORYLABEL "SQLITE"
 
 #endif

@@ -2,7 +2,7 @@
 #define SYSTEMGDMLFACTORY_H 1
 
 // gsystem
-#include "../systemFactory.h"
+#include "systemFactory.h"
 
 // system factory
 class GSystemGDMLFactory : GSystemFactory

@@ -65,6 +65,10 @@ private:
 	string g4name;          ///< Name of the g4volume
 	string g4motherName;    ///< Name of the g4 Mother volume
 
+    // variation and run number for this gvolume
+    string variation;
+    int    runno;
+
 	friend ostream &operator<<(ostream &stream, GVolume); ///< Logs infos on screen.
 
 public:
@@ -75,7 +79,11 @@ public:
 	inline const string getG4Name()       const {return g4name;}
 	inline const string getG4MotherName() const {return g4motherName;}
 
-	inline vector<double> getDetectorDimensions() const {return getG4NumbersFromString(parameters);}
+	inline vector<double> getDetectorDimensions() const {
+        if (parameters == UNINITIALIZEDSTRINGQUANTITY ) {
+            return { 0 };
+        } else { return getG4NumbersFromString(parameters); }
+    }
 
 	inline const string getType()       const {return type;}
 	inline const string getParameters() const {return parameters;}
@@ -84,6 +92,7 @@ public:
 	inline const string getColor()      const {return color;}
 	inline const bool   isVisible()     const {return visible;}
 	inline const int    getStyle()      const {return style;}
+    inline const bool   getExistence()  const {return exist;}
 
 	inline const string getPos()   const {return pos;}
 	inline const string getRot()   const {return rot;}
@@ -100,10 +109,15 @@ public:
 
 	inline const string getDescription()  const {return description;}
 
-	// assign modifier
-	void applyShift(string s)    {shift = s;}
-	void applyTilt(string t)     {tilt  = t;}
-	void modifyExistence(bool e) {exist = e;}
+	// assign modifiers
+	void applyShift(string s)      {shift = s;}
+	void applyTilt(string t)       {tilt  = t;}
+	void modifyExistence(bool e)   {exist = e;}
+    void resetMotherName(string m) {motherName = m;}
+    void setColor(string c)        {color = c;}
+    void setMaterial(string m)     {material = m;}
+    void setDigitization(string d) {digitization = d;}
+    void setGIdentity(string g)    {gidentity = g;}
 
 	// imported volumes
 	string getImportedFile() {return importFilename;}

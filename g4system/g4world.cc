@@ -36,18 +36,20 @@ G4World::G4World(GWorld *gworld, GOptions* gopts) {
 		string factory = s.second->getFactoryName();
 		string g4Factory = g4FactoryNameFromSystemFactory(factory);
 
-		if(factory == GSYSTEMTEXTFACTORY || factory == GSYSTEMMYSQLTFACTORY) {
+        // registering factories
+		if(factory == GSYSTEMTEXTFACTORYLABEL || factory == GSYSTEMSQLITETFACTORYLABEL || factory == GSYSTEMMYSQLTFACTORYLABEL || factory == GSYSTEMJSONFACTORYLABEL) {
 			// if factory not found, registering it in the manager and loading it into the map
 			if(g4systemFactory.find(g4Factory) == g4systemFactory.end()) {
 				g4SystemManager.RegisterObjectFactory<G4NativeSystemFactory>(g4Factory);
 			}
-		} else if(factory == GSYSTEMCADTFACTORY) {
+		} else if(factory == GSYSTEMCADTFACTORYLABEL) {
 			// if factory not found, registering it in the manager and loading it into the map
-			if(g4systemFactory.find(G4SYSTEMCADFACTORY) == g4systemFactory.end()) {
+			if(g4systemFactory.find(GSYSTEMCADTFACTORYLABEL) == g4systemFactory.end()) {
 				g4SystemManager.RegisterObjectFactory<G4CadSystemFactory>(g4Factory);
 			}
 		}
-		
+
+        // factories are registered, creating them
 		if ( g4systemFactory.find(g4Factory) == g4systemFactory.end() ) {
 			g4systemFactory[g4Factory] = g4SystemManager.CreateObject<G4ObjectsFactory>(g4Factory);
 		}
@@ -116,7 +118,7 @@ G4World::G4World(GWorld *gworld, GOptions* gopts) {
 					// calling loadG4System
 					// if a new system cannot be loaded, false is returned and the volumes added to thisIterationRemainingVolumes
 					if(g4systemFactory[g4Factory]->loadG4System(gopts, gvolume, g4volumesMap) == false) {
-						thisIterationRemainingVolumes.push_back(gvolume);
+                        if ( gvolume->getExistence() ) { thisIterationRemainingVolumes.push_back(gvolume); }
 					}
 				} else {
 					G4cerr << FATALERRORL << "g4systemFactory factory <" << g4Factory << "> not found in map." << endl;
@@ -177,9 +179,9 @@ G4World::G4World(GWorld *gworld, GOptions* gopts) {
 
 
 string G4World::g4FactoryNameFromSystemFactory(string factory) {
-	if ( factory == GSYSTEMTEXTFACTORY || factory == GSYSTEMMYSQLTFACTORY ) {
+    if(factory == GSYSTEMTEXTFACTORYLABEL || factory == GSYSTEMSQLITETFACTORYLABEL || factory == GSYSTEMMYSQLTFACTORYLABEL || factory == GSYSTEMJSONFACTORYLABEL) {
 		return G4SYSTEMNATFACTORY;
-	} else if ( factory == GSYSTEMCADTFACTORY ) {
+	} else if ( factory == GSYSTEMCADTFACTORYLABEL ) {
 		return G4SYSTEMCADFACTORY;
 	} else {
 		cerr << FATALERRORL << "g4systemFactory factory <" << factory << "> not found in g4FactoryNameFromSystemFactory." << endl;

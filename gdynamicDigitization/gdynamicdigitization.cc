@@ -15,6 +15,15 @@ GTrueInfoData* GDynamicDigitization::collectTrueInformation(GHit *ghit, size_t h
 {
 	GTrueInfoData* trueInfoData = new GTrueInfoData(ghit);
 
+
+    vector<GIdentifier> identities = ghit->getGID();
+
+    // loop over all identities
+    for ( auto& identity: identities ) {
+        trueInfoData->includeVariable(identity.getName(), identity.getValue() );
+    }
+
+
 	// notices:
 	// we do each var hitbit group loop separately in case some are not filled
 

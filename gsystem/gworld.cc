@@ -9,6 +9,7 @@
 #include "gsystemFactories/text/systemTextFactory.h"
 #include "gsystemFactories/cad/systemCadFactory.h"
 #include "gsystemFactories/gdml/systemGdmlFactory.h"
+#include "gsystemFactories/sqlite/systemSqliteFactory.h"
 
 // c++
 using std::cerr;
@@ -26,7 +27,10 @@ GWorld::GWorld(GOptions* gopts) {
 	// loading gsystemsMap with GSystems
 	for (auto& jsystem: jsystems) {
 		string keyName = gutilities::getFileFromPath(jsystem.system);
-		(*gsystemsMap)[keyName] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity);
+		(*gsystemsMap)[keyName] = new GSystem(jsystem.system, jsystem.factory, jsystem.variation, verbosity,
+                                              jsystem.runno,
+                                              jsystem.annotations,
+                                              jsystem.sqlite_file);
 	}
 
 	// projecting options onto vector of GModifiers
@@ -49,27 +53,32 @@ GWorld::GWorld(GOptions* gopts) {
 	// if a factory is not existing already, registering it in the manager, instantiating it, and loading it into the map
 
 	// text factory created no matter what, needed to create ROOT volume
-	gSystemManager.RegisterObjectFactory<GSystemTextFactory>(GSYSTEMTXTFACTORY);
+	gSystemManager.RegisterObjectFactory<GSystemTextFactory>(GSYSTEMTEXTFACTORYLABEL);
 	
-	if ( systemFactory.find(GSYSTEMTEXTFACTORY) == systemFactory.end() ) {
-		systemFactory[GSYSTEMTEXTFACTORY] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTXTFACTORY);
+	if ( systemFactory.find(GSYSTEMTEXTFACTORYLABEL) == systemFactory.end() ) {
+		systemFactory[GSYSTEMTEXTFACTORYLABEL] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMTEXTFACTORYLABEL);
 	}
 	
 	for (auto& [gsystemName, gsystem] : *gsystemsMap) {
 		
 		string factoryName = gsystem->getFactoryName();
 
-		if(factoryName == GSYSTEMCADTFACTORY) {
+		if(factoryName == GSYSTEMCADTFACTORYLABEL) {
 			if(systemFactory.find(factoryName) == systemFactory.end()) {
-				gSystemManager.RegisterObjectFactory<GSystemCADFactory>(GSYSTEMCADFACTORY);
-				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMCADFACTORY);
+				gSystemManager.RegisterObjectFactory<GSystemCADFactory>(factoryName);
+				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(factoryName);
 			}
-		}  else if(factoryName == GSYSTEMGDMLTFACTORY) {
+		}  else if(factoryName == GSYSTEMGDMLTFACTORYLABEL) {
 			if(systemFactory.find(factoryName) == systemFactory.end()) {
-				gSystemManager.RegisterObjectFactory<GSystemGDMLFactory>(GSYSTEMGDMLFACTORY);
-				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(GSYSTEMGDMLFACTORY);
+				gSystemManager.RegisterObjectFactory<GSystemGDMLFactory>(factoryName);
+				systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(factoryName);
 			}
-		}
+		} else if (factoryName == GSYSTEMSQLITETFACTORYLABEL) {
+            if(systemFactory.find(factoryName) == systemFactory.end()) {
+                gSystemManager.RegisterObjectFactory<GSystemSQLiteFactory>(factoryName);
+                systemFactory[factoryName] = gSystemManager.CreateObject<GSystemFactory>(factoryName);
+            }
+        }
 	}
 
 	// done with gSystemManager
@@ -82,6 +91,7 @@ GWorld::GWorld(GOptions* gopts) {
 		if(systemFactory.find(factory) != systemFactory.end()) {
 			systemFactory[factory]->addPossibleFileLocation(getDirFromPath(gopts->jcardFilename));
 			systemFactory[factory]->loadSystem(gsystem, verbosity);
+            systemFactory[factory]->closeSystem();
 		} else {
 			cerr << FATALERRORL << "systemFactory factory <" << factory << "> not found for " << gsystemName << endl;
 			gexit(EC__FACTORYNOTFOUND);
@@ -105,7 +115,7 @@ GWorld::GWorld(GOptions* gopts) {
 	// using the text factory
 	
 	string worldVolumeDefinition = gopts->getString("worldVolume");
-	(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, GSYSTEMTEXTFACTORY, "default", verbosity);
+	(*gsystemsMap)[ROOTWORLDGVOLUMENAME] = new GSystem(ROOTWORLDGVOLUMENAME, GSYSTEMTEXTFACTORYLABEL, "default", verbosity);
 	(*gsystemsMap)[ROOTWORLDGVOLUMENAME]->addROOTVolume(worldVolumeDefinition);
 
 	// applying gvolumes modifiers

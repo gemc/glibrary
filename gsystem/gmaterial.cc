@@ -21,17 +21,22 @@ GMaterial::GMaterial(string s, vector<string> pars) : system(s)
 		int i=0;
 		
 		name         = removeAllSpacesFromString(pars[i++]);
-		description  = pars[i++];
 		density      = stod(removeAllSpacesFromString(pars[i++]));
 
 		// sets components and amounts
 		setComponentsFromString(pars[i++]);
 
+        // description
+        description  = pars[i++];
+
+        // optical properties
 		getMaterialPropertyFromString(pars[i++], "photonEnergy");
 		getMaterialPropertyFromString(pars[i++], "indexOfRefraction");
 		getMaterialPropertyFromString(pars[i++], "absorptionLength");
 		getMaterialPropertyFromString(pars[i++], "reflectivity");
 		getMaterialPropertyFromString(pars[i++], "efficiency");
+
+        // scintillation properties
 		getMaterialPropertyFromString(pars[i++], "fastcomponent");
 		getMaterialPropertyFromString(pars[i++], "slowcomponent");
 
@@ -42,6 +47,7 @@ GMaterial::GMaterial(string s, vector<string> pars) : system(s)
 		yieldratio         = stod(removeLeadingAndTrailingSpacesFromString(pars[i++]));
 		birkConstant       = stod(removeLeadingAndTrailingSpacesFromString(pars[i++]));
 
+        // other optical processes
 		getMaterialPropertyFromString(pars[i++], "rayleigh");
 
 	}
@@ -52,7 +58,6 @@ ostream &operator<<(ostream &stream, GMaterial gMat)
 {
 	stream  << endl;
 	stream << "   - Material: "    << gMat.name     << "  in system  " <<  gMat.system << ": " <<  endl;
-	stream << "     " << gMat.description << endl;
 	stream << "     Density:          "    << gMat.density      << endl;
 	if ( gMat.components.size() > 0 ) {
 		stream << "     Composition:          "    << endl;
@@ -61,6 +66,7 @@ ostream &operator<<(ostream &stream, GMaterial gMat)
 			stream << "       ・ " << gMat.components[m] << quantity << " " << gMat.amounts[m] << endl;
 		}
 	}
+    stream << "     Description: " << gMat.description << endl;
 	stream  << endl;
 
 	return stream;

@@ -21,4 +21,4 @@ env.Append(LIBS = 'gtouchable')
 example = env.Program(source = 'example.cc', target = 'example')
 
 # example(s) depend on the library existance
-Depends(example,  lib);
+Requires(example,  lib);

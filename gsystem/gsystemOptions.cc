@@ -11,7 +11,9 @@ void from_json(const json& j, JSystem& det) {
 	j.at("system").get_to(det.system);
 	j.at("factory").get_to(det.factory);
 	j.at("variation").get_to(det.variation);
+    j.at("annotations").get_to(det.annotations);
 	j.at("runno").get_to(det.runno);
+    j.at("sqlite_file").get_to(det.sqlite_file);
 }
 
 // method to return a vector of GDetectors from a structured option
@@ -87,12 +89,26 @@ vector<GOption> defineOptions() {
 		{GDESC, "runno (optional, default is 1)"},
 		{GDFLT, 1}
 	};
+
+    json jsonSystemAnnotationsTag = {
+        {GNAME, "annotations"},
+        {GDESC, "annotations. Examples: \"mats_only\" (optional, default is \"none\")"},
+        {GDFLT, "none"}
+    };
+
+    json jsonSystemSqliteFileTag = {
+        {GNAME, "sqlite_file"},
+        {GDESC, "sqlite file name (optional, default is \"none\")"},
+        {GDFLT, "none"}
+    };
 	
 	json jsonDetectorOption = {
 		jsonSystemNameTag,
 		jsonSystemFactoryTag,
 		jsonSystemVariationTag,
-		jsonSystemRunnoTag
+        jsonSystemAnnotationsTag,
+		jsonSystemRunnoTag,
+        jsonSystemSqliteFileTag
 	};
 	
 	vector<string> help;

@@ -9,7 +9,7 @@
 bool G4ObjectsFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
 {
 	// checking if it's a copy, replica or solid operation
-	// they are mutually exclusve
+	// they are mutually exclusive
 	string copyOf    = s->getCopyOf();
 	string replicaOf = s->getReplicaOf();
 	string solidsOpr = s->getSolidsOpr();

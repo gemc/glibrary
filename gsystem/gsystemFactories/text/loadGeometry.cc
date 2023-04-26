@@ -1,36 +1,38 @@
 // gsystem
 #include "systemTextFactory.h"
 
-// mlibrary
+// glibrary
 #include "gutilities.h"
 
 // c++
 #include <iostream>
 
-void GSystemTextFactory::loadGeometry(GSystem *system, int verbosity)
-{
-	// will exit if not found
-	ifstream *IN = gSystemTextFileStream(system, GTEXTGEOMTYPE, verbosity);
+void GSystemTextFactory::loadGeometry(GSystem *system, int verbosity) {
+    // will exit if not found
+    ifstream *IN = gSystemTextFileStream(system, GTEXTGEOMTYPE, verbosity);
 
-	if(verbosity >= GVERBOSITY_SUMMARY) {
-		cout << GSYSTEMLOGHEADER << "Loading <text> geometry for <" << KWHT << system->getName() << RST << ">" << endl;
-	}
+    if (IN != nullptr) {
 
-	// loading volumes
-	while(!IN->eof()) {
+        if (verbosity >= GVERBOSITY_SUMMARY) {
+            cout << GSYSTEMLOGHEADER << "Loading <text> geometry for <" << KWHT << system->getName() << RST << ">"
+                 << endl;
+        }
 
-		string dbline;
-		getline(*IN, dbline);
+        // loading volumes
+        while (!IN->eof()) {
 
-		if(!dbline.size())
-			continue;
+            string dbline;
+            getline(*IN, dbline);
 
-		// extract gvolume parameters
-		vector<string> gvolumePars = gutilities::getStringVectorFromStringWithDelimiter(dbline, "|");
-		system->addGVolume(gvolumePars, verbosity);
-	}
+            if (!dbline.size())
+                continue;
 
-	IN->close();
+            // extract gvolume parameters
+            vector <string> gvolumePars = gutilities::getStringVectorFromStringWithDelimiter(dbline, "|");
+            system->addGVolume(gvolumePars, verbosity);
+        }
 
+        IN->close();
+    }
 }
 

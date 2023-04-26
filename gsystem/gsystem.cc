@@ -11,10 +11,13 @@
 using namespace std;
 
 // init system based on name, factory, variation and run number
-GSystem::GSystem(string n, string f, string v, int verbosity) :
+GSystem::GSystem(string n, string f, string v, int verbosity, int r, string notes, string sqlf):
 factoryName(f),
-variation(v) {
-
+variation(v),
+runno(r),
+annotations(notes),
+sqlite_file(sqlf)
+{
 	path = gutilities::getDirFromPath(n);
 	name = gutilities::getFileFromPath(n);
 	
@@ -38,6 +41,9 @@ variation(v) {
 // build and add a gvolume to the map from system parameters
 void GSystem::addGVolume(vector<string> pars, int verbosity) {
 
+    pars.push_back(variation);
+    pars.push_back(to_string(runno));
+
 	string voumeName = pars[0];
 
 	if(gvolumesMap->find(voumeName) == gvolumesMap->end()) {
@@ -46,6 +52,7 @@ void GSystem::addGVolume(vector<string> pars, int verbosity) {
 			cout << GSYSTEMLOGHEADER << "Adding gVolume <" << voumeName << "> to gvolumesMap with name as key"<< endl;
 		}
 		(*gvolumesMap)[voumeName] = new GVolume(name, pars);
+
 		if(verbosity >= GVERBOSITY_DETAILS) {
 			cout << *(*gvolumesMap)[voumeName] ;
 		}
@@ -77,10 +84,10 @@ void GSystem::addVolumeFromFile(string importType, string filename, int verbosit
 
 	// order is defined in gvolume.cc
 	pars.push_back(gvolumeName);                           // 01 name
-	pars.push_back(ROOTWORLDGVOLUMENAME);                  // 02 mother: by default is ROOTWORLDGVOLUMENAME
 	pars.push_back(importType);                            // 03 type
 	pars.push_back(UNINITIALIZEDSTRINGQUANTITY);           // 04 parameters
 	pars.push_back("G4_AIR");                              // 05 material: default is air
+    pars.push_back(ROOTWORLDGVOLUMENAME);                  // 02 mother: by default is ROOTWORLDGVOLUMENAME
 	pars.push_back("0*cm, 0*cm, 0*cm");                    // 06 pos
 	pars.push_back("0*deg, 0*deg, 0*deg");                 // 07 rot
 	pars.push_back(UNINITIALIZEDSTRINGQUANTITY);           // 08 emfield
@@ -112,7 +119,7 @@ GVolume* GSystem::getGVolume(string volumeName) const {
 
 // MARK: GMATERIALS
 
-// add gmaterial using parameters (TEXT or MYSQL factories)
+// add gmaterial using parameters (TEXT or SQL factories)
 void GSystem::addGMaterial(vector<string> pars, int verbosity) {
 
 	string materialName = pars[0];
