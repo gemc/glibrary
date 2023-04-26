@@ -29,7 +29,6 @@ void GSystemSQLiteFactory::initialize_sqlite_db(GSystem *system, int verbosity)
     if( rc ) {
         cerr << GSYSTEMLOGHEADER << "Sqlite database " << sqlite_file << " not found " << endl;
         gexit(EC__GSETUPFILENOTOFOUND);
-
     } else {
         cout << GSYSTEMLOGHEADER << "Sqlite database >" <<  KMAG << sqlite_file << RST  << "< opened successfully" << endl;
     }

@@ -27,11 +27,11 @@ GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 			cerr << FATALERRORL << "the gVolume name <" << name << "> contains the invalid characther: <" << GSYSTEM_DELIMITER << ">. Exiting." << endl;
 			gexit(EC__GVOLUMENAMECONTAINSINVALID);
 		}
-		
-		motherName   = removeAllSpacesFromString(pars[i++]);
-		type         = removeAllSpacesFromString(pars[i++]);
+
+        type         = removeAllSpacesFromString(pars[i++]);
 		parameters   = removeLeadingAndTrailingSpacesFromString(pars[i++]);
 		material     = removeAllSpacesFromString(pars[i++]);
+        motherName   = removeAllSpacesFromString(pars[i++]);
 		pos          = removeLeadingAndTrailingSpacesFromString(pars[i++]);
 		rot          = removeLeadingAndTrailingSpacesFromString(pars[i++]);
 		emfield      = removeAllSpacesFromString(pars[i++]);
@@ -53,6 +53,8 @@ GVolume::GVolume(string s, vector<string> pars, string importPath) : system(s)
 		g4motherName = UNINITIALIZEDSTRINGQUANTITY;
 		
 		description  = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+        variation    = removeLeadingAndTrailingSpacesFromString(pars[i++]);
+        runno        = stoi(removeAllSpacesFromString(pars[i++]));
 
 		// modifiers - accessed through options/jcard
 		shift = GSYSTEMNOMODIFIER;
@@ -79,16 +81,18 @@ ostream &operator<<(ostream &stream, GVolume gVol)
 	
 	stream  << endl;
 	stream << "   - Name:            "    << gVol.name     << "  -  " <<  gVol.description << endl;
-	stream << "   - Mother:          "    << gVol.motherName      << endl;
 	stream << "   - Type:            "    << gVol.type        << endl;
 	stream << "   - Parameters:      "    << gVol.parameters  << endl;
 	stream << "   - Material:        "    << gVol.material << endl;
-	stream << "   - E.M. Field:      "    << gVol.emfield << endl;
+    stream << "   - Mother:          "    << gVol.motherName      << endl;
 	stream << "   - Positions:       "    << gVol.pos << endl;
 	stream << "   - Rotation(s):     "    << gVol.rot << endl;
+    stream << "   - E.M. Field:      "    << gVol.emfield << endl;
 	stream << "   - Digitization:    "    << gVol.digitization << endl;
 	stream << "   - GIdentity:       "    << gVol.gidentity << endl;
 	stream << "   - Col, Vis, Style: "    << gVol.color   << ", " << visibility << ", "  << style << endl;
+    stream << "   - Variation:       "    << gVol.variation << endl;
+    stream << "   - Run Number:      "    << gVol.runno << endl;
 	stream  << endl;
 
 	return stream;
@@ -107,10 +111,10 @@ GVolume::GVolume(string rootVolumeDefinition) {
 	}
 
 	name         = ROOTWORLDGVOLUMENAME;
-	motherName       = MOTHEROFUSALL;
 	type         = rootDefinitions[0];
 	parameters   = volumeParameters;
 	material     = rootDefinitions.back();
+    motherName    = MOTHEROFUSALL;
 	pos          = DEFAULTPOSITION;
 	rot          = DEFAULTROTATION;
 	emfield      = UNINITIALIZEDSTRINGQUANTITY;

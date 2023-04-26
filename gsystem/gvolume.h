@@ -65,6 +65,10 @@ private:
 	string g4name;          ///< Name of the g4volume
 	string g4motherName;    ///< Name of the g4 Mother volume
 
+    // variation and run number for this gvolume
+    string variation;
+    int    runno;
+
 	friend ostream &operator<<(ostream &stream, GVolume); ///< Logs infos on screen.
 
 public:

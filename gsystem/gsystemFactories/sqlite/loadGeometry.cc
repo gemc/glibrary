@@ -6,23 +6,10 @@
 
 // c++
 #include <iostream>
-using std::to_string;
+using namespace std;
 
 
-// SQLite will call this callback function for each record processed in
-// each SELECT statement executed within the SQL argument.
-// uncomment for debugging
-static int callback(void *data, int argc, char **argv, char **azColName){
-    int i;
-    fprintf(stderr, "%s: ", (const char*)data);
 
-    for(i = 0; i<argc; i++){
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-
-    printf("\n");
-    return 0;
-}
 
 void GSystemSQLiteFactory::loadGeometry(GSystem *system, int verbosity)
 {
@@ -30,15 +17,47 @@ void GSystemSQLiteFactory::loadGeometry(GSystem *system, int verbosity)
         initialize_sqlite_db(system, verbosity);
     }
 
-    char *zErrMsg = 0;
-    const char* data = "Callback function called";
-
     string sql_query = "SELECT * from geometry ;";
     //where system = '" + system_name;
 //    sql_query += "' and variation = '" + variation ;
 //    sql_query += "' and runno = " + to_string(runno) + ";";
 
-    int rc = sqlite3_exec(db, sql_query.c_str(), callback, (void*)data, &zErrMsg);
+
+    sqlite3_stmt *stmt;
+    int rc = sqlite3_prepare_v2(db, sql_query.c_str(), -1, &stmt, NULL);
+    if (rc != SQLITE_OK) {
+        cerr << GSYSTEMLOGHEADER << "Sqlite database error:" << sqlite3_errmsg(db) << endl;
+        gexit(EC__GSQLITEERROR);
+    }
+    vector <string> gvolumePars;
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+
+        // looping over columns
+        for (int i = 0; i < sqlite3_column_count(stmt); i++) {
+            if (verbosity >= GVERBOSITY_DETAILS) {
+                cout << GSYSTEMLOGHEADER << "<sqlite> column: " << KRED << sqlite3_column_name(stmt, i)
+                 << " = " << sqlite3_column_text(stmt, i) << RST << " (column " << i << ")" << endl;
+            }
+            // matching gvolume constructor order
+            if ( i > 3) { gvolumePars.push_back((char *) sqlite3_column_text(stmt, i)); }
+        }
+        // adding variation and runno
+//        string variation = (char *) sqlite3_column_text(stmt, 2);
+//        string runno = (char *) sqlite3_column_text(stmt, 3);
+//        gvolumePars.push_back(variation);
+//        gvolumePars.push_back(runno);
+        system->addGVolume(gvolumePars, verbosity);
+        gvolumePars.clear();
+    }
+    if (rc != SQLITE_DONE) {
+        cerr << GSYSTEMLOGHEADER << "Sqlite database error:" << sqlite3_errmsg(db) << endl;
+        gexit(EC__GSQLITEERROR);
+    }
+    sqlite3_finalize(stmt);
+
+
+
+//    int rc = sqlite3_exec(db, sql_query.c_str(), callback, (void*)data, &zErrMsg);
 
 
 //
