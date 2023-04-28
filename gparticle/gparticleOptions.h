@@ -15,7 +15,6 @@ vector<GOption> defineOptions();
 
 struct JParticle {
 	string pname;
-	int pid;
 	int multiplicity;
 	
 	float p;

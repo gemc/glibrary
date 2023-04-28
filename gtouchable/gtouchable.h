@@ -66,7 +66,7 @@ public:
 private:
 	// set by sensitive detector constructor
 	GTouchableType  gType;
-	vector<GIdentifier> gidentity;  ///< Uniquely identify a sensitive element
+	vector<GIdentifier> gidentity;  // Uniquely identify a sensitive element
 	bool verbosity;
 
 	// set in sensitiveDetector::ProcessHit

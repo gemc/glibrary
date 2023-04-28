@@ -136,8 +136,8 @@ vector<GOption> defineOptions() {
 	// g4display verbosity
 	json jsonMessageVerbosity = {
 		{GNAME, "g4displayv"},
-		{GDESC, GVERBOSITY_DESCRIPTION},
-		{GDFLT, 0}
+        {GDESC, "Verbosity for g4display. " + string(GVERBOSITY_DESCRIPTION)},
+        {GDFLT, 0}
 	};
 	goptions.push_back(GOption(jsonMessageVerbosity));
 	

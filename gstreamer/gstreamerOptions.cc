@@ -38,10 +38,10 @@ vector<GOption> defineOptions() {
 	
 	vector<GOption> goptions;
 	
-	// two verbosities: one for events, one for streaming
+	// two verbosity: one for events, one for streaming
 	json jsonGStreamerEventVerbosity = {
 		{GNAME, "geventstreamv"},
-		{GDESC, GVERBOSITY_DESCRIPTION},
+        {GDESC, "Verbosity for gstreamer. " + string(GVERBOSITY_DESCRIPTION)},
 		{GDFLT, 0}
 	};
 	goptions.push_back(GOption(jsonGStreamerEventVerbosity));

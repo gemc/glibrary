@@ -32,7 +32,7 @@ static void close_lib(dlhandle handle);
 struct DynamicLib {
 
 private:
-	std::string   dlFileName;  ///< dynamic library file
+	std::string   dlFileName;  // dynamic library file
 	int verbosity = 0;
 
 	bool doesFileExists(const std::string& name) {
@@ -44,7 +44,7 @@ private:
 public:
 	// default constructor
 	DynamicLib() = default;
-	dlhandle handle = nullptr;   ///< posix handle of the dynamic library
+	dlhandle handle = nullptr;   // posix handle of the dynamic library
 
 	DynamicLib(std::string path, int v = 0) : dlFileName(path), verbosity(v), handle(nullptr) {
 

@@ -12,8 +12,8 @@ vector<GOption> defineOptions() {
 	
 	json jsonG4WorldVerbosity = {
 		{GNAME, G4SYSTEMVERBOSITY},
-		{GDESC, GVERBOSITY_DESCRIPTION},
-		{GDFLT, 1}
+        {GDESC, "Verbosity for g4system. " + string(GVERBOSITY_DESCRIPTION)},
+        {GDFLT, 1}
 	};
 	goptions.push_back(GOption(jsonG4WorldVerbosity));
 	

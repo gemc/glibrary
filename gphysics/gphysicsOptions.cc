@@ -17,7 +17,7 @@ vector<GOption> defineOptions() {
 	
 	json jsonGPhysVerbosity = {
 		{GNAME, GPHYSVERBOSITY},
-		{GDESC, GVERBOSITY_DESCRIPTION},
+        {GDESC, "Verbosity for gphysics. " + string(GVERBOSITY_DESCRIPTION)},
 		{GDFLT, 0}
 	};
 	goptions.push_back(GOption(jsonGPhysVerbosity));
