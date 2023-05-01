@@ -53,7 +53,11 @@ done
 # build glibrary / gemc
 # notice the gemc version is the one in the container, here we are
 # recompiling it using the checked out glibrary
-./ci/build.sh
+./ci/build.sh # build glibrary / gemc
+if [ $? -ne 0 ]; then
+  echo glibrary / gemc build failed
+	exit 1
+fi
 
 # using the checked out GLIBRARY - notice we need to set these here again
 export GLIBRARY=`pwd`
