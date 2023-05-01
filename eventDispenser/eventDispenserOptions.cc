@@ -14,8 +14,9 @@ vector<GOption> defineOptions() {
 	
 	json jsonEDVerbosity = {
 		{GNAME, "edistv"},
-		{GDESC, GVERBOSITY_DESCRIPTION},
-		{GDFLT, 0}
+        {GDESC, "Verbosity for eventDispenser. " + string(GVERBOSITY_DESCRIPTION)},
+
+        {GDFLT, 0}
 	};
 	goptions.push_back(GOption(jsonEDVerbosity));
 	

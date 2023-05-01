@@ -164,7 +164,7 @@ vector<GOption> defineOptions() {
 	// gsystem verbosiry
 	json jsonVerbosityOption = {
 		{GNAME, "gsystemv"},
-		{GDESC, "verbosity for gsystem. " + string(GVERBOSITY_DESCRIPTION)},
+		{GDESC, "Verbosity for gsystem. " + string(GVERBOSITY_DESCRIPTION)},
 		{GDFLT, 0}
 	};
 	goptions.push_back(GOption(jsonVerbosityOption));

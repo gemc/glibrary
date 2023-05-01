@@ -47,88 +47,88 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 	string type = s->getType();
 
 	if(type == "G4Box") {
-		thisG4Volume->setSolid(new G4Box(g4name,     ///< name
-													pars[0],    ///< half length in X
-													pars[1],    ///< half length in Y
-													pars[2]     ///< half length in Z
+		thisG4Volume->setSolid(new G4Box(g4name,     // name
+													pars[0],    // half length in X
+													pars[1],    // half length in Y
+													pars[2]     // half length in Z
 													), verbosity
 									  );
 
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Tubs") {
-		thisG4Volume->setSolid(new G4Tubs(g4name,    ///< name
-													 pars[0],   ///< Inner radius
-													 pars[1],   ///< Outer radius
-													 pars[2],   ///< Half length in z
-													 pars[3],   ///< Starting phi angle
-													 pars[4]    ///< Delta Phi angle
+		thisG4Volume->setSolid(new G4Tubs(g4name,    // name
+													 pars[0],   // Inner radius
+													 pars[1],   // Outer radius
+													 pars[2],   // Half length in z
+													 pars[3],   // Starting phi angle
+													 pars[4]    // Delta Phi angle
 													 ), verbosity
 									  );
 
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Sphere") {
-		thisG4Volume->setSolid(new G4Sphere(g4name,   ///< name
-													 pars[0],    ///< Inner radius
-													 pars[1],    ///< Outer radius
-													 pars[2],    ///< Starting phi angle
-													 pars[3],    ///< Delta Phi angle
-													 pars[4],    ///< Starting delta angle
-													 pars[5]     ///< Delta delta angle
+		thisG4Volume->setSolid(new G4Sphere(g4name,   // name
+													 pars[0],    // Inner radius
+													 pars[1],    // Outer radius
+													 pars[2],    // Starting phi angle
+													 pars[3],    // Delta Phi angle
+													 pars[4],    // Starting delta angle
+													 pars[5]     // Delta delta angle
 													 ), verbosity
 									  );
 
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4CutTubs") {
-		thisG4Volume->setSolid(new G4CutTubs(g4name,    ///< name
-														 pars[0],   ///< Inner radius
-														 pars[1],   ///< Outer radius
-														 pars[2],   ///< Half length in z
-														 pars[3],   ///< Starting phi angle
-														 pars[4],   ///< Delta Phi angle
-														 G4ThreeVector(pars[5], pars[6], pars[7]),    ///< Outside Normal at -z
-														 G4ThreeVector(pars[8], pars[9], pars[10])    ///< Outside Normal at +z
+		thisG4Volume->setSolid(new G4CutTubs(g4name,    // name
+														 pars[0],   // Inner radius
+														 pars[1],   // Outer radius
+														 pars[2],   // Half length in z
+														 pars[3],   // Starting phi angle
+														 pars[4],   // Delta Phi angle
+														 G4ThreeVector(pars[5], pars[6], pars[7]),    // Outside Normal at -z
+														 G4ThreeVector(pars[8], pars[9], pars[10])    // Outside Normal at +z
 														 ), verbosity
 									  );
 
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Cons") {
-		thisG4Volume->setSolid(new G4Cons(g4name,    ///< name
-													 pars[0],   ///< Inside radius at -pDz
-													 pars[1],   ///< Outside radius at -pDz
-													 pars[2],   ///< Inside radius at +pDz
-													 pars[3],   ///< Outside radius at +pDz
-													 pars[4],   ///< Half length in z
-													 pars[5],   ///< Starting phi angle
-													 pars[6]    ///< Delta Phi angle
+		thisG4Volume->setSolid(new G4Cons(g4name,    // name
+													 pars[0],   // Inside radius at -pDz
+													 pars[1],   // Outside radius at -pDz
+													 pars[2],   // Inside radius at +pDz
+													 pars[3],   // Outside radius at +pDz
+													 pars[4],   // Half length in z
+													 pars[5],   // Starting phi angle
+													 pars[6]    // Delta Phi angle
 													 ), verbosity
 									  );
 
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Para") {
-		thisG4Volume->setSolid(new G4Para(g4name,    ///< name
-													 pars[0],   ///< Half length in x
-													 pars[1],   ///< Half length in y
-													 pars[2],   ///< Half length in z
-													 pars[3],   ///< Angle formed by the y axis and by the plane joining the centre of the faces parallel to the z-x plane at -dy and +dy
-													 pars[4],   ///< Polar angle of the line joining the centres of the faces at -dz and +dz in z
-													 pars[5]    ///< Azimuthal angle of the line joining the centres of the faces at -dz and +dz in z
+		thisG4Volume->setSolid(new G4Para(g4name,    // name
+													 pars[0],   // Half length in x
+													 pars[1],   // Half length in y
+													 pars[2],   // Half length in z
+													 pars[3],   // Angle formed by the y axis and by the plane joining the centre of the faces parallel to the z-x plane at -dy and +dy
+													 pars[4],   // Polar angle of the line joining the centres of the faces at -dz and +dz in z
+													 pars[5]    // Azimuthal angle of the line joining the centres of the faces at -dz and +dz in z
 													 ), verbosity
 									  );
 
 		return thisG4Volume->getSolid();
 
 	} else 	if(type == "G4Trd") {
-		thisG4Volume->setSolid(new G4Trd(g4name,    ///< name
-													pars[0],   ///< Half-length along x at the surface positioned at -dz
-													pars[1],   ///< Half-length along x at the surface positioned at +dz
-													pars[2],   ///< Half-length along y at the surface positioned at -dz
-													pars[3],   ///< Half-length along y at the surface positioned at +dz
-													pars[4]    ///< Half-length along z axis
+		thisG4Volume->setSolid(new G4Trd(g4name,    // name
+													pars[0],   // Half-length along x at the surface positioned at -dz
+													pars[1],   // Half-length along x at the surface positioned at +dz
+													pars[2],   // Half-length along y at the surface positioned at -dz
+													pars[3],   // Half-length along y at the surface positioned at +dz
+													pars[4]    // Half-length along z axis
 													), verbosity
 									  );
 		return thisG4Volume->getSolid();
@@ -142,27 +142,27 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 
 		// Right Angular Wedge (4 parameters)
 		if ( pars.size() == 4 ) {
-			thisG4Volume->setSolid(new G4Trap(g4name,    ///< name
-														 pars[0],   ///< Length along Z
-														 pars[1],   ///< Length along Y
-														 pars[2],   ///< Length along X wider side
-														 pars[3]    ///< Length along X at the narrower side (plTX<=pX)
+			thisG4Volume->setSolid(new G4Trap(g4name,    // name
+														 pars[0],   // Length along Z
+														 pars[1],   // Length along Y
+														 pars[2],   // Length along X wider side
+														 pars[3]    // Length along X at the narrower side (plTX<=pX)
 														 ), verbosity
 										  );
 			// general trapezoid (11 parameters)
 		} else if ( pars.size() == 11) {
-			thisG4Volume->setSolid(new G4Trap(g4name,     ///< name
-														 pars[0],    ///< Half Z length - distance from the origin to the bases
-														 pars[1],    ///< Polar angle of the line joining the centres of the bases at -/+pDz
-														 pars[2],    ///<  Azimuthal angle of the line joining the centre of the base at -pDz to the centre of the base at +pDz
-														 pars[3],    ///< Half Y length of the base at -pDz
-														 pars[4],    ///< Half Y length of the base at +pDz
-														 pars[5],    ///< Half X length at smaller Y of the base at -pDz
-														 pars[6],    ///< Half X length at bigger Y of the base at -pDz
-														 pars[7],    ///< Half X length at smaller Y of the base at +pDz
-														 pars[8],    ///< Half X length at bigger y of the base at +pDz
-														 pars[9],    ///< Angle between the Y-axis and the centre line of the base at -pDz (lower endcap)
-														 pars[10]    ///< Angle between the Y-axis and the centre line of the base at +pDz (upper endcap)
+			thisG4Volume->setSolid(new G4Trap(g4name,     // name
+														 pars[0],    // Half Z length - distance from the origin to the bases
+														 pars[1],    // Polar angle of the line joining the centres of the bases at -/+pDz
+														 pars[2],    //  Azimuthal angle of the line joining the centre of the base at -pDz to the centre of the base at +pDz
+														 pars[3],    // Half Y length of the base at -pDz
+														 pars[4],    // Half Y length of the base at +pDz
+														 pars[5],    // Half X length at smaller Y of the base at -pDz
+														 pars[6],    // Half X length at bigger Y of the base at -pDz
+														 pars[7],    // Half X length at smaller Y of the base at +pDz
+														 pars[8],    // Half X length at bigger y of the base at +pDz
+														 pars[9],    // Angle between the Y-axis and the centre line of the base at -pDz (lower endcap)
+														 pars[10]    // Angle between the Y-axis and the centre line of the base at +pDz (upper endcap)
 														 ), verbosity
 										  );
 
@@ -179,8 +179,8 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 			pt[6] = G4ThreeVector(pars[18], pars[19], pars[20]);
 			pt[7] = G4ThreeVector(pars[21], pars[22], pars[23]);
 
-			thisG4Volume->setSolid(new G4Trap(g4name,  ///< name
-														 pt       ///< Coordinates of the vertices
+			thisG4Volume->setSolid(new G4Trap(g4name,  // name
+														 pt       // Coordinates of the vertices
 														 ), verbosity
 										  );
 
@@ -207,13 +207,13 @@ G4VSolid* G4NativeSystemFactory::buildSolid(GOptions* gopt, GVolume *s, map<stri
 			rOuter[zpl] = pars[3 + 2*zplanes + zpl] ;
 		}
 
-		thisG4Volume->setSolid(new G4Polycone(g4name,         ///< name
-														  phistart,       ///< Initial Phi starting angle
-														  phitotal,       ///< Total Phi angle
-														  zplanes,        ///< Number of z planes
-														  zPlane,         ///< z coordinate of corners
-														  rInner,         ///< Tangent distance to inner surface
-														  rOuter          ///< Tangent distance to outer surface, verbosity
+		thisG4Volume->setSolid(new G4Polycone(g4name,         // name
+														  phistart,       // Initial Phi starting angle
+														  phitotal,       // Total Phi angle
+														  zplanes,        // Number of z planes
+														  zPlane,         // z coordinate of corners
+														  rInner,         // Tangent distance to inner surface
+														  rOuter          // Tangent distance to outer surface, verbosity
 														  ), verbosity
 									  );
 

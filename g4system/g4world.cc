@@ -17,7 +17,6 @@ using namespace std;
 
 G4World::G4World(GWorld *gworld, GOptions* gopts) {
 
-
 	// instantiating volumes map
 	g4volumesMap   = new map<string, G4Volume*>;
 	g4materialsMap = new map<string, G4Material*>;

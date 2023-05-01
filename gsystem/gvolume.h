@@ -21,55 +21,55 @@ public:
 	GVolume(string rootVolumeDefinition); // special constructor for root volume
 
 private:
-	string         system; ///< System of provenience
-	string           name; ///< Name of the volume
-	string     motherName; ///< Mother Volume name
-	string    description; ///< Volume Description, for documentation
-	string importFilename; ///< For imports, filename with path, set with the import factory
+	string         system; // System of provenience
+	string           name; // Name of the volume
+	string     motherName; // Mother Volume name
+	string    description; // Volume Description, for documentation
+	string importFilename; // For imports, filename with path, set with the import factory
 	
 	// solid parameters
-	string        type;    ///< solid type. This follows the GEANT4 definitions
-	string  parameters;    ///< vector of parameters used in the geant4 solid constructor
+	string        type;    // solid type. This follows the GEANT4 definitions
+	string  parameters;    // vector of parameters used in the geant4 solid constructor
 
 	// solid visualization style
-	bool        visible;   ///< visibility of the detector: 0=invisible 1=visible
-	int           style;   ///< Visual style: 0=wireframe 1=solid
-	string        color;   ///< 6(7) digits colors in RRGGBB format. Last optional digit is transparency
+	bool        visible;   // visibility of the detector: 0=invisible 1=visible
+	int           style;   // Visual style: 0=wireframe 1=solid
+	string        color;   // 6(7) digits colors in RRGGBB format. Last optional digit is transparency
 
 	// logical attributes
-	string     material;   ///< Volume Material name.
-	string     emfield;    ///< Magnetic Field. Possible choices: "inherit", "fieldName", "noField"
+	string     material;   // Volume Material name.
+	string     emfield;    // Magnetic Field. Possible choices: "inherit", "fieldName", "noField"
 
 	// physical attributes
-	string          pos;   ///< Defines the position relative to the mother volume
-	string          rot;   ///< Define the rotation Matrix, defined by rotations along x,y,z axis relative to the mother volume
-	string        shift;   ///< Position modifier
-	string         tilt;   ///< Rotation modifier
-	bool          exist;   ///< Existance modifier
+	string          pos;   // Defines the position relative to the mother volume
+	string          rot;   // Define the rotation Matrix, defined by rotations along x,y,z axis relative to the mother volume
+	string        shift;   // Position modifier
+	string         tilt;   // Rotation modifier
+	bool          exist;   // Existance modifier
 
-	string  digitization;   ///< Assigns digitization type and collection ID
-	string  gidentity;      ///< String with identifiers in it. Example: 'sector: 2, layer: 4, wire; 33'
+	string  digitization;   // Assigns digitization type and collection ID
+	string  gidentity;      // String with identifiers in it. Example: 'sector: 2, layer: 4, wire; 33'
 
 	// special cases
-	string       copyOf;   ///< name of gvolume to copy from
-	string    replicaOf;   ///< name of gvolume to replica from
-	string    solidsOpr;   ///< solids operation
+	string       copyOf;   // name of gvolume to copy from
+	string    replicaOf;   // name of gvolume to replica from
+	string    solidsOpr;   // solids operation
 	
-	int         pCopyNo;   ///< should be set to 0 for the first volume of a given type
+	int         pCopyNo;   // should be set to 0 for the first volume of a given type
 
 	// mirrors
 	string       mirror;
 
 	// the map key names used in geant4 contains the system name
 	// these are assigned by gworld after all voumes are loaded
-	string g4name;          ///< Name of the g4volume
-	string g4motherName;    ///< Name of the g4 Mother volume
+	string g4name;          // Name of the g4volume
+	string g4motherName;    // Name of the g4 Mother volume
 
     // variation and run number for this gvolume
     string variation;
     int    runno;
 
-	friend ostream &operator<<(ostream &stream, GVolume); ///< Logs infos on screen.
+	friend ostream &operator<<(ostream &stream, GVolume); // Logs infos on screen.
 
 public:
 	inline const string getSystem()       const {return system;}
