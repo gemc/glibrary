@@ -54,7 +54,7 @@ ifstream* GSystemTextFactory::gSystemTextFileStream(GSystem *system, string SYST
 	}
 	
 	// at this point file was not found
-    // this couldl be ok if we are looking for the materials file - if the system annotation is 'mats_only'
+    // this coulLd be ok if we are looking for the materials file - if the system annotation is 'mats_only'
 	if ( SYSTEMTYPE == GTEXTGEOMTYPE ) {
         if ( system->getAnnotations() == "mats_only" ) {
             if ( verbosity >= GVERBOSITY_SUMMARY ) {
