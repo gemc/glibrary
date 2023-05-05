@@ -53,6 +53,11 @@ public:
 	// to register a new gtouchable in the sensitive detector gtouchable map
 	GTouchable(string digitization, string gidentityString, vector<double> dimensions, bool verb = false);
 
+    // copy constructor called in the non-overloaded processTouchable:
+    // used in case the stepTimeIndex of the hit is different from the gtouchable one
+    GTouchable(const GTouchable* baseGT, int newTimeIndex);
+
+
 	// copy constructor called in processTouchable
 	// used for energy sharing (keeps time as is)
 	// need to provide the gidentity
@@ -74,12 +79,12 @@ private:
 	int trackId;
 	
 	// set by processGTouchable in the digitization plugin. Defaulted to 1. Used to share energy / create new hits.
-	// Energy Multiplier. By default it is 1, but energy could be shared (or created) among volumes
+	// Energy Multiplier. By default, it is 1, but energy could be shared (or created) among volumes
 	float  eMultiplier;
 	
 	// stepTimeAtElectronicsIndex is used to determine if a hit is within
 	// an existing detector readout electronic time window
-	// stepTimeAtElectronicsIndex is set using using assignStepTimeAtElectronicsIndex
+	// stepTimeAtElectronicsIndex is set using assignStepTimeAtElectronicsIndex
 	// in gDynamicDigitization using the greadoutSpecs
 	int stepTimeAtElectronicsIndex;
 
@@ -87,7 +92,7 @@ private:
 	friend ostream &operator<<(ostream &stream, GTouchable gtouchable);
 
 	// could be used in GDynamicDigitization when the dimensions are needed
-	vector<double> detectorDimenions;
+	vector<double> detectorDimensions;
 
 public:
 	// Overloaded "==" operator for the class 'GTouchable'
@@ -101,10 +106,12 @@ public:
 
 	inline void assignStepTimeAtElectronicsIndex(int timeIndex) { stepTimeAtElectronicsIndex = timeIndex; }
 
+    inline const int getStepTimeAtElectronicsIndex() const { return stepTimeAtElectronicsIndex; }
+
 // api
 public:
 	inline const vector<GIdentifier> getIdentity() const {return gidentity;}
-	inline const vector<double> getDetectorDimensions() const {return detectorDimenions;}
+	inline const vector<double> getDetectorDimensions() const {return detectorDimensions;}
 
 };
 

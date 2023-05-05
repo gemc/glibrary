@@ -4,19 +4,19 @@
 
 // glibrary
 #include "gutilities.h"
+#include "gutsConventions.h"
 using namespace std;
 
-//#include <math.h>       /* fabs */
 
-// contructor from digitization and gidentity strings
+// constructor from digitization and gidentity strings
 // called in GDetectorConstruction::ConstructSDandField
 // to register a new gtouchable in the sensitive detector gtouchable map
 GTouchable::GTouchable(string digitization, string gidentityString, vector<double> dimensions, bool verb) :
 verbosity(verb),
 trackId(0),
 eMultiplier(1),
-stepTimeAtElectronicsIndex(0),
-detectorDimenions(dimensions) {
+stepTimeAtElectronicsIndex(GTOUCHABLEUNSETTIMEINDEX),
+detectorDimensions(dimensions) {
 
 	// gtype from digitization
 	if ( digitization == FLUXNAME ) {
@@ -43,6 +43,21 @@ detectorDimenions(dimensions) {
 	}
 
 }
+
+
+// copy constructor called in the non-overloaded processTouchable:
+// used in case the stepTimeIndex of the hit is different from the gtouchable one
+GTouchable::GTouchable(const GTouchable* baseGT, int newTimeIndex) {
+    gType         = baseGT->gType;
+    gidentity     = baseGT->gidentity;
+    verbosity     = baseGT->verbosity;
+    trackId       = baseGT->trackId;
+    eMultiplier   = baseGT->eMultiplier;
+    detectorDimensions = baseGT->detectorDimensions;
+    stepTimeAtElectronicsIndex = newTimeIndex;
+}
+
+
 
 // copy constructor called in processTouchable
 // weight and time can be set by processTouchable
@@ -71,8 +86,19 @@ detectorDimenions(dimensions) {
 // Overloaded "==" operator for the class 'GTouchable'
 bool GTouchable::operator == (const GTouchable& that) const
 {
+    if (verbosity) {
+        cout << " Touchable comparison:  " << endl;
+        for (size_t i=0; i<that.gidentity.size(); i++) {
+            string comparisonResult = ( this->gidentity[i].getValue() == that.gidentity[i].getValue() ) ? " ✅" : " ❌";
+            cout << "   " << this->gidentity[i] << " " <<  that.gidentity[i] << comparisonResult <<  endl;
+        }
+        if (this->gType == readout) {
+            string cellIndexCompariton = (this->stepTimeAtElectronicsIndex == that.stepTimeAtElectronicsIndex) ? " ✅" : " ❌";
+            cout << "   time index: " << this->stepTimeAtElectronicsIndex << " " << that.stepTimeAtElectronicsIndex << cellIndexCompariton << endl;
+        }
+    }
 
-	// first, compare size of identity
+    // first, compare size of identity
 	// this should never happen because the same sensitivity should be assigned the same identifier structure
 	if (this->gidentity.size() != that.gidentity.size()) {
 		if (verbosity) {
@@ -81,17 +107,15 @@ bool GTouchable::operator == (const GTouchable& that) const
 		return false;
 	}
 
-	if (verbosity) {
-		cout << " Touchable comparison:  " << endl;
-		for (size_t i=0; i<that.gidentity.size(); i++) {
-			cout << this->gidentity[i] << " " <<  that.gidentity[i] << endl;
-		}
-	}
 
-	// now compare that the identity is actuallty the same
+
+	// now compare that the identity is actually the same
 	// return false if something is different
 	for (size_t i=0; i<that.gidentity.size(); i++) {
 		if ( this->gidentity[i].getValue() != that.gidentity[i].getValue() ) {
+            if (verbosity) {
+                cout << " Touchable gidentity  are different: " << this->gidentity[i] << " " << that.gidentity[i] << endl;
+            }
 			return false;
 		}
 	}
@@ -115,35 +139,32 @@ bool GTouchable::operator == (const GTouchable& that) const
 // ostream GTouchable
 ostream &operator<<(ostream &stream, GTouchable gtouchable) {
 
-	stream << "   ・ ";
+	stream << " GTouchable: ";
 	for ( auto& gid: gtouchable.gidentity ) {
-
-		stream << gid ;
+		stream << KRED << gid ;
 		if ( gid.getName() != gtouchable.gidentity.back().getName() ) {
 			stream << ", ";
 		} else {
-			stream << std::endl;
+			stream << RST ;
 		}
 	}
 	switch (gtouchable.gType) {
 		case readout:
 			// compare the time cell
-			stream << "   ・ type: readout " << std::endl;
+			stream << KGRN << " (readout), " << RST << " multiplier: " << gtouchable.eMultiplier << ", time cell index: " << gtouchable.stepTimeAtElectronicsIndex ;
 			break;
 		case flux:
-			stream << "   ・ type: flux " << std::endl;
+			stream << KGRN << " (flux), " << RST << " g4 track id: " << gtouchable.trackId;
 			break;
 		case dosimeter:
-			stream << "   ・ type: dosimeter " << std::endl;
+			stream << KGRN << " (dosimeter), " << RST << " g4 track id: " << gtouchable.trackId ;
 			break;
 		case particleCounter:
-			stream << "   ・ type: particleCounter " << std::endl;
+			stream << KGRN << " (particleCounter), " << RST << " g4 track id: " << gtouchable.trackId ;
 			break;
 	}
 
-	stream << "   ・ energy multiplier: " << gtouchable.eMultiplier << std::endl;
-	stream << "   ・ time cell index: " << gtouchable.stepTimeAtElectronicsIndex << std::endl;
-	stream << "   ・ g4 track id: " << gtouchable.trackId << std::endl;
+
 	return stream;
 }
 
