@@ -8,5 +8,6 @@
 #define FLUXNAME      "flux"
 #define COUNTERNAME   "particleCounter"
 #define DOSIMETERNAME "dosimeter"
+#define GTOUCHABLEUNSETTIMEINDEX -1
 
 #endif

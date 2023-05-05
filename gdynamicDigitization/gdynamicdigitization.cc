@@ -4,6 +4,7 @@
 // glibrary
 #include "gtranslationTableConventions.h"
 #include "gdataConventions.h"
+#include "gtouchableConventions.h"
 
 // c++
 using std::cerr;
@@ -133,15 +134,21 @@ float GDynamicDigitization:: processStepTime(GTouchable *gTouchID, G4Step* thisS
 }
 
 
-// if not overloaded, returns a vector with a single touchable, with cell time index based on processStepTime
+// if not overloaded, returns:
+// a vector with a single touchable, with cell time index based on processStepTime if the time index is the same as the gTouchID's (or if it wasn't set)
+// a vectory with two touchables, one with the original gtouchID time index, and one with the new one
 vector<GTouchable*> GDynamicDigitization::processTouchable(GTouchable *gTouchID, G4Step* thisStep) {
-	
+
 	float stepTimeAtElectronics = processStepTime(gTouchID, thisStep);
-	
-	gTouchID->assignStepTimeAtElectronicsIndex(readoutSpecs->timeCellIndex(stepTimeAtElectronics));
-	
-	return { gTouchID };
-	
+    float stepTimeAtElectronicsIndex = readoutSpecs->timeCellIndex(stepTimeAtElectronics);
+
+    if ( stepTimeAtElectronicsIndex == gTouchID->getStepTimeAtElectronicsIndex() || gTouchID->getStepTimeAtElectronicsIndex() == GTOUCHABLEUNSETTIMEINDEX) {
+        gTouchID->assignStepTimeAtElectronicsIndex(stepTimeAtElectronicsIndex);
+        return { gTouchID };
+    } else {
+        return { gTouchID, new GTouchable(gTouchID, stepTimeAtElectronicsIndex) };
+    }
+
 }
 
 
