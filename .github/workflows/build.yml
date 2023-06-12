@@ -25,9 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
       - name: Build GLibrary and Gemc
-        uses: gitboard-io/gitboard-action@main
+        run: |
+          ./ci/build.sh
+      - uses: gitboard-io/gitboard-action@main
         with:
           username: maureeungaro
           key: 3d8e9059-a164-4bea-9541-1cb8789d805b
-        run: |
-          ./ci/build.sh
+
