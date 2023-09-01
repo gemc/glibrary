@@ -5,22 +5,34 @@ project("gtouchable"
         DESCRIPTION "Provides the glibrary"
         LANGUAGES CXX)
 
+set(LIB_NAME ${PROJECT_NAME})
+set(EX_NAME ${PROJECT_NAME}_example)
+
 # add target and set C++ standard
-add_library(${PROJECT_NAME} SHARED)
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
+add_library(${LIB_NAME} SHARED)
+add_executable(${EX_NAME})
+
+target_compile_features(${LIB_NAME} PRIVATE cxx_std_20)
+target_compile_features(${EX_NAME} PRIVATE cxx_std_20)
 
 # add include directories, public so who depends on this library will also link to them
-target_include_directories(${PROJECT_NAME} PUBLIC ${ALL_CLHEP_INCS} ${GLIBRARIES_INC_DIRS})
+target_include_directories(${LIB_NAME} PRIVATE ${ALL_CLHEP_INCS} ${GLIBRARIES_INC_DIRS})
 
 # add link library, public so who depends on this library will also link to them
-target_link_libraries(${PROJECT_NAME} PUBLIC guts)
+target_link_libraries(${LIB_NAME} PRIVATE guts)
+
 
 # sources
-target_sources(${PROJECT_NAME} PRIVATE
+target_sources(${LIB_NAME} PRIVATE
         gtron.cc gtouchable.cc)
 
-install(TARGETS ${PROJECT_NAME}
+# example
+target_sources(${EX_NAME} PRIVATE
+        example.cc)
+
+install(TARGETS ${LIB_NAME} ${EX_NAME}
         LIBRARY DESTINATION ${INSTALL_DIR}/lib
+        RUNTIME DESTINATION ${INSTALL_DIR}/bin
         INCLUDES DESTINATION ${INSTALL_DIR}/include
 )
 

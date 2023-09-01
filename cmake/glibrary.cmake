@@ -18,15 +18,14 @@ endif ()
 ###  dependencies
 include(clhep)
 include(geant4)
+include(xercesc)
 include(gfunctions)
+
 
 
 # make sure we're not in the source directory
 require_out_of_source_build()
 
-if (PRINT_ALL_VARS)
-    print_all_variables()
-endif ()
 
 set(INSTALL_DIR "${GLIBRARY_ROOT}/install")
 
@@ -52,3 +51,8 @@ set(GLIBRARIES_INC_DIRS
 )
 
 set(ALL_CLHEP_INCS ${CLHEP_INCLUDE_DIRS} ${CMAKE_BINARY_DIR}/clhep-build)
+
+
+if (PRINT_ALL_VARS)
+    print_all_variables()
+endif ()

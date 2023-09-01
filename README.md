@@ -38,6 +38,14 @@ To run the tests using 12 cores:
 
 `ctest --test-dir build -j 12`
 
+## Clion setup
+
+Loaded from ~/clion.setup, created by:
+
+```
+export -p > ~/clion.setup
+```
+
 
 ## Validation
 
