@@ -19,9 +19,10 @@ env.Append(LIBS = 'goptions')
 
 
 # builds the example(s)
-simpleExample              = env.Program(source = 'examples/simpleExample.cc',              target = 'simpleExample')
-structuredExample          = env.Program(source = 'examples/structureExample.cc',           target = 'structureExample')
-cumulativeStructureExample = env.Program(source = 'examples/cumulativeStructureExample.cc', target = 'cumulativeStructureExample')
+simpleExample              = env.Program(source = 'examples/simple.cc',                target = 'simpleExample')
+structuredExample          = env.Program(source = 'examples/structured.cc',            target = 'structureExample')
+cumulativeStructureExample = env.Program(source = 'examples/cumulative_structured.cc', target = 'cumulativeStructureExample')
+# cumulativeStructureExample = env.Program(source = 'examples/advanced.cc',              target = 'advanced')
 
 # example(s) depend on the library existance
 Requires(simpleExample,              lib);

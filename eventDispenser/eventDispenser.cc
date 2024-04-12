@@ -127,7 +127,7 @@ int EventDispenser::getTotalNumberOfEvents()
 
 // this will:
 // initiate all available gdynamic plugins for each run
-// run beamOn for each run
+// execute run/beamOn for each run
 // log on screen infos if enough verbosity
 int EventDispenser::processEvents()
 {
@@ -209,8 +209,3 @@ void EventDispenser::showDigitizationParameters(string system, vector<string> di
 		cout << "  " << EVENTDISPENSERLOGMSGITEM << " " << system << ": " << dp << endl;
 	}
 }
-
-
-
-
-

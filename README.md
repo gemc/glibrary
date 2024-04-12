@@ -2,15 +2,39 @@
 
 various utility libraries for gemc
 
-### CMake
+### Meson
+
+```
+meson setup build --native-file=release.ini
+cd build
+meson configure -Dprefix=$GLIBRARY
+meson install
+```
+
+
+
+
+
+## Meson utilities
+
+
+```
+meson setup build --native-file=release.ini --wipe
+meson compile 
+meson compile -v 
+meson compile  --clean
+meson test 
+meson test -v
+```
+
 
 
 ## Dependencies
 
 By default, cmake will try to use a local installation of these dependencies:
 
-| [CLHEP](https://proj-clhep.web.cern.ch/proj-clhep/) | [XercesC](https://xerces.apache.org) | [Geant4](https://geant4.web.cern.ch) | [Cadmesh](https://github.com/christopherpoole/CADMesh) | [qt5](https://www.qt.io) |
-|:---------------------------------------------------:|:------------------------------------:|:------------------------------------:|:------------------------------------------------------:|:------------------------:|
+|  [CLHEP](https://proj-clhep.web.cern.ch)   | [XercesC](https://xerces.apache.org) | [Geant4](https://geant4.org) | [Cadmesh](https://github.com/christopherpoole/CADMesh) | [qt5](https://www.qt.io) |
+|:------------------------------------------:|:------------------------------------:|:----------------------------:|:------------------------------------------------------:|:------------------------:|
 
 If a dependency is not found cmake will try to build it.
 
@@ -23,28 +47,6 @@ cmake -S . -B build
 cmake --build build -j 12 --target install
 ```
 
-### Options:
-
-Add the `-L` option to list all the available options:
-
-```
-PRINT_ALL_VARS:BOOL=OFF
-RUN_TESTS:BOOL=OFF
-```
-
-### CTests
-
-To run the tests using 12 cores:
-
-`ctest --test-dir build -j 12`
-
-## Clion setup
-
-Loaded from ~/clion.setup, created by:
-
-```
-export -p > ~/clion.setup
-```
 
 
 ## Validation
