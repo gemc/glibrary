@@ -4,7 +4,6 @@ project('guts', 'cpp',
 )
 project_description = 'Various c++ conventions and string utilities'
 
-
 lib_sources = files([
                         'gutilities.cc',
                         'gutsConventions.cc'
@@ -13,25 +12,33 @@ lib_headers = files([
                         'gutilities.h',
                         'gutsConventions.h'
                     ])
-#guts_dep = declare_dependency(
-#    sources : lib_sources
-#)
 
 # dependencies. assuming PKG_CONFIG_PATH is set to the directory containing the .pc files
-clhep = dependency('clhep', version : '>=2.4.7.1', required : true)
-
+clhep_dep = dependency('clhep', version : '>=2.4.7.1', required : true)
 
 # compile the source files to a shared library
-lib = static_library(meson.project_name(), lib_sources, install : true, dependencies : clhep)
+guts_lib = static_library(meson.project_name(), lib_sources, install : true, dependencies : [clhep_dep])
 install_headers(lib_headers)
 
-# examples and tests
+# declare guts dependencies
+guts_dep = declare_dependency(
+    link_with : guts_lib
+)
+
+# examples sources and arguments
 examples = {
-    'string_vector_from_string': [files(['examples/string_vector_from_string.cc']), ['akasha enkil marius']]
+    'string_vector_from_string' : [files(['examples/string_vector_from_string.cc']), ['akasha enkil marius']]
 }
 
+
+
+
+
+
+
+# examples compilation  and tests
 foreach name, sources_and_arguments : examples
-    exe = executable(name, sources_and_arguments[0], link_with : lib, install : true)
+    exe = executable(name, sources_and_arguments[0], link_with : guts_lib, install : true)
     test(name + 'test', exe, args : sources_and_arguments[1])
 endforeach
 
@@ -41,7 +48,7 @@ pkg = import('pkgconfig')
 pkg.generate(
     name : meson.project_name(),
     description : project_description,
-    requires : [clhep], # pkg-config dependencies only
+    requires : [clhep_dep], # pkg-config dependencies only
     version : meson.project_version(),
-    libraries : lib,
+    libraries : guts_lib,
 )

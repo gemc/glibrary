@@ -6,12 +6,13 @@
 	#
 	# Corresponding command line example:
 	#
-	# -gdetector={detector: experiments/clas12/rtpc; factory: TEXT; variation: rga_fall2018;}
+	# -gdetector={detector: experiments/clas12; factory: SQLITE; variation: rga_fall2018;}
 	#
 	# as an example we use carriage return to organize the fields
 
 	"gdetector": {
-		"detector": "experiments/clas12/rtpc",
-		"factory": "TEXT"
+		"detector": "experiments/clas12",
+		"factory": "SQLITE",
+		"variation": "rga_fall2018"
 	}
 }

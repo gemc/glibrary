@@ -95,8 +95,12 @@ int main(int argc, char* argv[])
 	cout << " Accessing projected structure GDetector: " << endl << endl;
 	cout << " detector: " << gdet.detector << ", factory: " << gdet.factory << ", variation: " << gdet.variation << endl;
 	cout << endl;
-	
-	return EXIT_SUCCESS;
+
+    if (gdet.detector == "experiments/clas12" && gdet.factory == "SQLITE" && gdet.variation == "rga_fall2018") {
+        return EXIT_SUCCESS;
+    }
+
+	return EXIT_FAILURE;
 }
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
