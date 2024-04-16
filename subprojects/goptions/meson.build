@@ -13,16 +13,17 @@ lib_headers = files([
                         'goptionsConventions.h'
                     ])
 
-incs = include_directories('../guts')
-guts = dependency('guts')
+# dependencies. assuming PKG_CONFIG_PATH is set to the directory containing the .pc files
+this_library_depends_on = [dependency('guts')]
 
-# compile the source files to a shared library
-goptions_lib = static_library(meson.project_name(), lib_sources, install : true, include_directories : incs)
+# compile the source files to a library
+this_library = static_library(meson.project_name(), lib_sources, install : true, dependencies : this_library_depends_on)
 install_headers(lib_headers)
 
 # declare goptions dependencies
 goptions_dep = declare_dependency(
-    link_with : goptions_lib
+    link_with : this_library,
+    dependencies : this_library_depends_on
 )
 
 # examples sources and arguments
@@ -38,7 +39,7 @@ examples = {
 
 # examples compilation  and tests
 foreach name, sources_and_arguments : examples
-    exe = executable(name, sources_and_arguments[0], link_with : goptions_lib, install : true, dependencies : [guts], include_directories : incs)
+    exe = executable(name, sources_and_arguments[0], link_with : this_library, install : true, dependencies : this_library_depends_on)
     test(name + 'test', exe, args : sources_and_arguments[1])
 endforeach
 
@@ -48,7 +49,7 @@ pkg = import('pkgconfig')
 pkg.generate(
     name : meson.project_name(),
     description : project_description,
-    requires : 'guts', # pkg-config dependencies only
+    requires : this_library_depends_on, # pkg-config dependencies only
     version : meson.project_version(),
-    libraries : goptions_lib,
+    libraries : this_library,
 )

@@ -14,15 +14,16 @@ lib_headers = files([
                     ])
 
 # dependencies. assuming PKG_CONFIG_PATH is set to the directory containing the .pc files
-clhep_dep = dependency('clhep', version : '>=2.4.7.1', required : true)
+this_library_depends_on = [dependency('clhep', version : '>=2.4.7.1', required : true)]
 
-# compile the source files to a shared library
-guts_lib = static_library(meson.project_name(), lib_sources, install : true, dependencies : [clhep_dep])
+# compile the source files to a library
+this_library = static_library(meson.project_name(), lib_sources, install : true, dependencies : this_library_depends_on)
 install_headers(lib_headers)
 
 # declare guts dependencies
 guts_dep = declare_dependency(
-    link_with : guts_lib
+    link_with : this_library,
+    dependencies : this_library_depends_on
 )
 
 # examples sources and arguments
@@ -38,7 +39,7 @@ examples = {
 
 # examples compilation  and tests
 foreach name, sources_and_arguments : examples
-    exe = executable(name, sources_and_arguments[0], link_with : guts_lib, install : true)
+    exe = executable(name, sources_and_arguments[0], link_with : this_library, install : true)
     test(name + 'test', exe, args : sources_and_arguments[1])
 endforeach
 
@@ -48,7 +49,7 @@ pkg = import('pkgconfig')
 pkg.generate(
     name : meson.project_name(),
     description : project_description,
-    requires : [clhep_dep], # pkg-config dependencies only
+    requires : this_library_depends_on, # pkg-config dependencies only
     version : meson.project_version(),
-    libraries : guts_lib,
+    libraries : this_library,
 )

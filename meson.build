@@ -3,7 +3,7 @@ project('glibrary', 'cpp',
 )
 project_description = 'Various c++ libraries'
 
-
+#subproject('guts')
 
 guts     = dependency('guts',     fallback : ['guts',     'guts_dep'])
 goptions = dependency('goptions', fallback : ['goptions', 'goptions_dep'])
