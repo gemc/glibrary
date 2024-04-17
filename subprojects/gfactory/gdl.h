@@ -1,7 +1,7 @@
 #ifndef  GDYNAMICLIB_H
 #define  GDYNAMICLIB_H  1
 
-// gutilities conventions
+// glibrary: for color logs definitions
 #include "gutsConventions.h"
 
 // c++ plugin loading functions
