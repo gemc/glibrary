@@ -21,4 +21,4 @@ env.Append(LIBS = 'textProgressBar')
 example = env.Program(source = 'example.cc', target = 'example')
 
 # example(s) depend on the library existance
-Depends(example,  lib);
+Depends(example,  lib)

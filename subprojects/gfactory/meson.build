@@ -16,7 +16,7 @@ this_library_depends_on = [dependency('guts')]
 install_headers(lib_headers)
 
 # declare goptions dependencies
-goptions_dep = declare_dependency(
+gfactory_dep = declare_dependency(
     dependencies : this_library_depends_on
 )
 
