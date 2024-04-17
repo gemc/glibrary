@@ -20,7 +20,7 @@ guts = dependency('guts')
 
 geant4_dep = dependency('Geant4', version : '>=11.2.0', required : true, modules : ['Geant4::G4digits_hits'])
 
-incs = include_directories([ '../gdynamicDigitization', '../ghit',
+incs = include_directories([ '../gdynamicDigitization',
                              '../gdata', '../gtranslationTable'])
 
 # compile the source files to a shared library

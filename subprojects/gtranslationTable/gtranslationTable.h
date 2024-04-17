@@ -2,7 +2,7 @@
 #define GTRANSLATIONTABLE_H  1
 
 // glibrary
-#include "gtron.h"
+#include "gelectronic.h"
 
 // c++
 #include <string>

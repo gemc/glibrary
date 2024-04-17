@@ -9,12 +9,11 @@ run_meson() {
   	cd ..
 }
 
-sprojects='guts goptions gfactory textProgressBar gtouchable ghit'
+projects='guts goptions gfactory textProgressBar gtouchable ghit gtranslationTable'
 
-
-echo " "
-for s in $=sprojects
+for s in $=projects
 do
+  echo " "
   echo " Running Meson for "$s
   cd "subprojects/$s" || exit
   run_meson

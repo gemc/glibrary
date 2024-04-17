@@ -20,5 +20,5 @@ int main(int argc, char* argv[])
 	// cout << " ctof energy multiplier: " << ctof.getEnergyMultiplier() << endl;
 
 
-    return 1;
+    return EXIT_SUCCESS;
 }
