@@ -1,7 +1,7 @@
 // gtouchable
-#include "gtron.h"
+#include "gelectronic.h"
 
-// glibrary
+// glibrary for UNINITIALIZEDNUMBERQUANTITY, etc
 #include "gutsConventions.h"
 
 // c++

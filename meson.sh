@@ -9,7 +9,7 @@ run_meson() {
   	cd ..
 }
 
-sprojects='guts goptions gfactory textProgressBar'
+sprojects='guts goptions gfactory textProgressBar gtouchable'
 
 
 echo " "
