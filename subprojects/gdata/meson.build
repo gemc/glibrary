@@ -1,21 +1,33 @@
-project('goptions', 'cpp',
+project('gdata', 'cpp',
         default_options : ['cpp_std=c++20'],
         version : run_command('git', 'describe', '--tags', '--abbrev=0', check : true).stdout().strip()
 )
-project_description = 'GOptions framework'
+project_description = 'GData framework: events and data collections'
 
 lib_sources = files([
-                        'goption.cc',
-                        'goptions.cc'
+                        'event/gDigitizedData.cc',
+                        'event/gTrueInfoData.cc',
+                        'event/gDataCollection.cc',
+                        'event/gEventDataCollectionHeader.cc',
+                        'event/gEventDataCollection.cc',
+                        'frame/gIntegralPayload.cc',
+                        'frame/gFrameDataCollectionHeader.cc',
+                        'frame/gFrameDataCollection.cc'
                     ])
 lib_headers = files([
-                        'json.hpp',
-                        'goptions.h',
-                        'goptionsConventions.h'
+                        'gdataConventions.h',
+                        'event/gDigitizedData.h',
+                        'event/gTrueInfoData.h',
+                        'event/gDataCollection.h',
+                        'event/gEventDataCollectionHeader.h',
+                        'event/gEventDataCollection.h',
+                        'frame/gIntegralPayload.h',
+                        'frame/gFrameDataCollectionHeader.h',
+                        'frame/gFrameDataCollection.h'
                     ])
 
 # dependencies. assuming PKG_CONFIG_PATH is set to the directory containing the .pc files
-this_library_depends_on = [dependency('guts')]
+this_library_depends_on = [dependency('goptions'), dependency('ghit')]
 
 # compile the source files to a library
 this_library = static_library(meson.project_name(), lib_sources, install : true, dependencies : this_library_depends_on)
@@ -29,8 +41,7 @@ goptions_dep = declare_dependency(
 
 # examples sources and arguments
 examples = {
-    'simple' : [files(['examples/simple.cc']), [meson.current_source_dir() + '/examples/simple.jcard']],
-    'structured' : [files(['examples/structured.cc']), [meson.current_source_dir() + '/examples/structured.jcard']]
+    'event_data' : [files(['examples/event_data.cc']), ['']],
 }
 
 

@@ -9,7 +9,7 @@ run_meson() {
   	cd ..
 }
 
-projects='guts goptions gfactory textProgressBar gtouchable ghit gtranslationTable'
+projects='guts goptions gfactory textProgressBar gtouchable ghit gtranslationTable gdata'
 
 for s in $=projects
 do
