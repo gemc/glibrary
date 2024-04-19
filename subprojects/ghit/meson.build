@@ -23,7 +23,7 @@ this_library = static_library(meson.project_name(), lib_sources, install : true,
 install_headers(lib_headers)
 
 # declare goptions dependencies
-textProgressBar_dep = declare_dependency(
+ghit_dep = declare_dependency(
     link_with : this_library,
     dependencies : this_library_depends_on
 )

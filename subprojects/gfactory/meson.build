@@ -1,4 +1,4 @@
-project('goptions', 'cpp',
+project('gfactory', 'cpp',
         default_options : ['cpp_std=c++20'],
         version : run_command('git', 'describe', '--tags', '--abbrev=0', check : true).stdout().strip()
 )
@@ -29,7 +29,7 @@ shared_libs = {
 
 # shared_libs compilation
 foreach name, sources : shared_libs
-    this_library = shared_library(name, sources, install : true, dependencies : this_library_depends_on, name_suffix: 'gplugin', name_prefix: '')
+    this_dlls = shared_library(name, sources, install : false, dependencies : this_library_depends_on, name_suffix: 'gplugin', name_prefix: '')
 endforeach
 
 
@@ -41,7 +41,7 @@ examples = {
 
 # examples compilation  and tests
 foreach name, sources : examples
-    exe = executable(name, sources, link_with : this_library, install : true, dependencies : this_library_depends_on)
+    exe = executable(name, sources, install : true, dependencies : this_library_depends_on)
     test(name + 'test', exe)
 endforeach
 
@@ -51,6 +51,5 @@ pkg.generate(
     name : meson.project_name(),
     description : project_description,
     requires : this_library_depends_on, # pkg-config dependencies only
-    version : meson.project_version(),
-    libraries : this_library,
+    version : meson.project_version()
 )

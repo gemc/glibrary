@@ -8,7 +8,8 @@ lib_sources = files([
                         'gtranslationTable.cc'
                     ])
 lib_headers = files([
-                        'gtranslationTable.h'
+                        'gtranslationTable.h',
+                        'gtranslationTableConventions.h'
                     ])
 
 # dependencies. assuming PKG_CONFIG_PATH is set to the directory containing the .pc files
@@ -19,7 +20,7 @@ this_library = static_library(meson.project_name(), lib_sources, install : true,
 install_headers(lib_headers)
 
 # declare goptions dependencies
-goptions_dep = declare_dependency(
+gtranslationTable_dep = declare_dependency(
     link_with : this_library,
     dependencies : this_library_depends_on
 )

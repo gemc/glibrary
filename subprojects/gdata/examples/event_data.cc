@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	for (int evn = 1; evn <= nevents ; evn++ ) {
 
 		// calling gheader with verbosity 1 for debugging purposes
-		GEventDataCollectionHeader *gheader = new GEventDataCollectionHeader(evn, evn, 1);
+		// GEventDataCollectionHeader *gheader = new GEventDataCollectionHeader(evn, evn, 1);
 		//GEventDataCollection *eventData = new GEventDataCollection(gheader, 1);
 
 		// hit with null G4Step (not used)
@@ -50,4 +50,3 @@ int main(int argc, char* argv[])
 
 	return EXIT_SUCCESS;
 }
-

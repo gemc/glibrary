@@ -8,8 +8,8 @@
 #include "gdl.h"
 #include "gtouchable.h"
 #include "ghit.h"
-#include "event/gDigitizedData.h"
-#include "event/gTrueInfoData.h"
+#include "gDigitizedData.h"
+#include "gTrueInfoData.h"
 #include "gtranslationTable.h"
 
 // c++

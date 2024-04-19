@@ -16,33 +16,38 @@ lib_headers = files([
                     ])
 
 # dependencies. assuming PKG_CONFIG_PATH is set to the directory containing the .pc files
-this_library_depends_on = [dependency('guts')]
+this_library_depends_on = [dependency('ghit'), dependency('gdata'), dependency('gtranslationTable'), dependency('gtouchable')]
 
 # compile the source files to a library
 this_library = static_library(meson.project_name(), lib_sources, install : true, dependencies : this_library_depends_on)
 install_headers(lib_headers)
 
 # declare goptions dependencies
-goptions_dep = declare_dependency(
+gdynamicDigitization_dep = declare_dependency(
     link_with : this_library,
     dependencies : this_library_depends_on
 )
 
-# examples sources and arguments
-examples = {
-    'simple' : [files(['examples/simple.cc']), [meson.current_source_dir() + '/examples/simple.jcard']],
-    'structured' : [files(['examples/structured.cc']), [meson.current_source_dir() + '/examples/structured.jcard']]
+# dynamic plugins sources and arguments
+shared_libs = {
+    'ctofRoutinesExample' : [files(['examples/ctofRoutinesExample.cc'])],
 }
 
+# shared_libs compilation
+foreach name, sources : shared_libs
+    this_dlls = shared_library(name, sources, install : false, dependencies : this_library_depends_on, name_suffix: 'gplugin', name_prefix: '', link_with : this_library)
+endforeach
 
 
-
-
+# examples sources and arguments
+examples = {
+    'plugin_load_example' : [files(['examples/plugin_load_example.cc'])]
+}
 
 # examples compilation  and tests
-foreach name, sources_and_arguments : examples
-    exe = executable(name, sources_and_arguments[0], link_with : this_library, install : true, dependencies : this_library_depends_on)
-    test(name + 'test', exe, args : sources_and_arguments[1])
+foreach name, sources : examples
+    exe = executable(name, sources, link_with : this_library, install : true, dependencies : this_library_depends_on)
+    test(name + 'test', exe)
 endforeach
 
 

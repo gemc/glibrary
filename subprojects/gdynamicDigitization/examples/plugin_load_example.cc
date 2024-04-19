@@ -19,7 +19,6 @@ int main(int argc, char* argv[])
 
 	GManager manager("example", 1);
 
-
 	// using dynamicRoutines map
 	map<string, GDynamicDigitization*> dynamicRoutines;
 	dynamicRoutines["ctof"] = manager.LoadAndRegisterObjectFromLibrary<GDynamicDigitization>("ctofRoutinesExample");
@@ -39,7 +38,5 @@ int main(int argc, char* argv[])
 	globalCtof2->loadConstants(1, "original");
 	globalCtof3->loadConstants(1, "original");
 
-
-	return 1;
+	return EXIT_SUCCESS;
 }
-

@@ -3,7 +3,7 @@
 
 // glibrary
 #include "gdynamicdigitization.h"
-#include "gutsConventions.h"
+//#include "gutsConventions.h"
 
 class GFluxDigitization : public GDynamicDigitization {
 
@@ -62,5 +62,3 @@ private:
 
 
 #endif
-
-

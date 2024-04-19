@@ -6,7 +6,7 @@ project_description = 'GTouchable and GIdentifier Library'
 
 lib_sources = files([
                         'gelectronic.cc',
-                        'gtouchable.h',
+                        'gtouchable.cc',
                     ])
 lib_headers = files([
                         'gelectronic.h',
@@ -22,7 +22,7 @@ this_library = static_library(meson.project_name(), lib_sources, install : true,
 install_headers(lib_headers)
 
 # declare goptions dependencies
-textProgressBar_dep = declare_dependency(
+gtouchable_dep = declare_dependency(
     link_with : this_library
 )
 
