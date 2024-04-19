@@ -1,6 +1,6 @@
 sub_dir_name = meson.current_source_dir().split('/').get(-1)
 LD += {
-    'name' :sub_dir_name,
+    'name' : sub_dir_name,
     'sources' : files([
                           'gutilities.cc',
                           'gutsConventions.cc'
@@ -11,6 +11,7 @@ LD += {
                       ]),
 
     'dependencies' : [dependency('clhep', version : '>=2.4.7.1', required : true)],
+    'plugins' : {},
     'examples' : {
         'string_vector_from_string' : [files(['examples/string_vector_from_string.cc']), ['akasha enkil marius']]
     }

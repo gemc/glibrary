@@ -15,33 +15,61 @@ all_includes = []
 
 subdir('guts')
 subdir('goptions')
+subdir('gfactory')
+subdir('textProgressBar')
+subdir('gtouchable')
 
+
+# compilation loop
 foreach L : LD
     this_deps = L['dependencies']
     this_lib_name = L['name']
-    this_library = static_library(
-        this_lib_name,
-        L['sources'],
-        install : true,
-        dependencies : this_deps,
-        include_directories : all_includes,
-    )
+    sources = L['sources']
+
+    if sources.length() > 0
+        this_library = static_library(
+            this_lib_name,
+            sources,
+            install : true,
+            dependencies : this_deps,
+            include_directories : all_includes,
+        )
+        all_libs += this_library
+        all_deps += this_deps
+
+    endif
+
+    # header files
     install_headers(L['headers'])
+
+    # plugins
+    foreach name, sources : L['plugins']
+        shared_library(
+            name,
+            sources[0],
+            install : sources[1],
+            include_directories : all_includes + this_lib_name,
+            link_with : all_libs + this_library,
+            name_suffix : 'gplugin',
+            name_prefix : ''
+        )
+    endforeach
+
+    # examples
     foreach name, sources_and_arguments : L['examples']
         exe = executable(
             name,
             sources_and_arguments[0],
             install : true,
-            include_directories : all_includes + L['name'],
+            include_directories : all_includes + this_lib_name,
             link_with : all_libs + this_library
         )
-        test(L['name'] + ' test >  ' + name,
+        test(' ## ' + this_lib_name + ' test ##  >>  ' + name,
              exe,
              args : sources_and_arguments[1])
     endforeach
-    all_libs += this_library
-    all_deps += this_deps
-    all_includes += this_lib_name
+
+    all_includes +=  this_lib_name
 endforeach
 
 

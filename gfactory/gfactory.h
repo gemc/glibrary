@@ -143,7 +143,7 @@ public:
 			}
 		}
 		// warning message already given if plugin not found
-		 cout << GFACTORYLOGITEM << " GManager: plugin " << name << " could not be loaded " << endl;
+		// cout << GFACTORYLOGITEM << " GManager: plugin " << name << " could not be loaded " << endl;
 		return nullptr;
 	}
 
