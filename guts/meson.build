@@ -9,27 +9,9 @@ LD += {
                           'gutilities.h',
                           'gutsConventions.h'
                       ]),
+
     'dependencies' : [dependency('clhep', version : '>=2.4.7.1', required : true)],
-    'include_directories' : [],
     'examples' : {
         'string_vector_from_string' : [files(['examples/string_vector_from_string.cc']), ['akasha enkil marius']]
     }
 }
-
-
-
-
-
-#
-## examples sources and arguments
-#examples = {
-#    'string_vector_from_string' : [files(['examples/string_vector_from_string.cc']), ['akasha enkil marius']]
-#}
-#
-#
-#
-#
-#
-#
-#
-## examples compilation  and tests
