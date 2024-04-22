@@ -3,7 +3,7 @@
 
 
 // qt
-#include <QtWidgets>
+#include <Headers/QtWidgets>
 
 // glibrary
 #include "goptions.h"
@@ -18,4 +18,3 @@ public:
 
 
 #endif
-

@@ -2,7 +2,7 @@
 #define  G4DISPLAYSLICE_H 1
 
 // qt
-#include <QtWidgets>
+#include <Headers/QtWidgets>
 
 // glibrary
 #include "goptions.h"

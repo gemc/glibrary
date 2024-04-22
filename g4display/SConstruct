@@ -16,9 +16,3 @@ lib = SConscript('SConscript', exports='env')
 #
 # manually appending this library so the example can be compiled
 env.Append(LIBS = 'g4display')
-
-# builds the example
-example = env.Program(source = 'example.cc', target = 'example')
-
-# example(s) depend on the library existance
-Depends(example,  lib);

@@ -10,7 +10,7 @@ LD += {
                           'ghit.h',
                           'ghitConventions.h'
                       ]),
-    'dependencies' : [dependency('Geant4', version : '>=11.2.0', modules : ['Geant4::G4digits_hits'], required : true)],
+    'dependencies' : [geant4],
     'examples' : {
         'basic_hit' : [files(['examples/simple.cc']), ['']]
     }

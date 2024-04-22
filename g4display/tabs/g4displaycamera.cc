@@ -1,5 +1,5 @@
 // g4display
-#include "g4displayOptions.h"
+#include "../g4displayOptions.h"
 #include "g4displaycamera.h"
 using namespace g4display;
 
@@ -114,4 +114,3 @@ void G4DisplayCamera::changeLightDirection()
 	string command = "/vis/viewer/set/lightsThetaPhi " + to_string(lightTheta->value()) + " " + to_string(lightPhi->value());
 	G4UImanager::GetUIpointer()->ApplyCommand(command);
 }
-
