@@ -9,7 +9,7 @@ run_meson() {
   	cd ..
 }
 
-projects='     ghit gtranslationTable gdata gtouchable'
+projects='      gtranslationTable gdata gtouchable'
 
 for s in $=projects
 do

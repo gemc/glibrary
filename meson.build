@@ -18,6 +18,7 @@ subdir('goptions')
 subdir('gfactory')
 subdir('textProgressBar')
 subdir('gtouchable')
+subdir('ghit')
 
 
 # compilation loop
@@ -61,6 +62,7 @@ foreach L : LD
             name,
             sources_and_arguments[0],
             install : true,
+            dependencies : this_deps,
             include_directories : all_includes + this_lib_name,
             link_with : all_libs + this_library
         )
@@ -84,7 +86,7 @@ pkg = import('pkgconfig')
 pkg.generate(
     name : meson.project_name(),
     description : project_description,
-    requires : all_deps, # pkg-config dependencies only
+    #requires : all_deps, # pkg-config dependencies only
     version : meson.project_version(),
     libraries : all_libs
 )
