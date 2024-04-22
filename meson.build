@@ -23,6 +23,7 @@ subdir('ghit')
 subdir('gtranslationTable')
 subdir('gdata')
 subdir('gdynamicDigitization')
+subdir('eventDispenser')
 
 
 # compilation loop

@@ -17,11 +17,11 @@ using namespace std;
 EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*> *gDDGlobal) : gDigitizationGlobal(gDDGlobal) {
 	verbosity        = gopt->getInt("edistv");
 	string filename  = gopt->getString("runWeightsFile");
-	variation        = gopt->getString("dVariation");
+	//variation        = gopt->getString("dVariation");
 	userRunno        = gopt->getInt("userRunno");
 	nEventBuffer     = gopt->getInt("maxebuffer");
 	neventsToProcess = gopt->getInt("n");
-	elog             = gopt->getInt("elog");
+	//elog             = gopt->getInt("elog");
 
 	// nothing to do here
 	if(neventsToProcess == 0) return;
