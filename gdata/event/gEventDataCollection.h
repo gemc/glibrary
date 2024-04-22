@@ -3,7 +3,7 @@
 
 // gdata
 #include "gEventDataCollectionHeader.h"
-#include "gdataConventions.h"
+#include "../gdataConventions.h"
 #include "gDataCollection.h"
 
 // c++

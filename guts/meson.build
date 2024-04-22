@@ -11,7 +11,6 @@ LD += {
                       ]),
 
     'dependencies' : [dependency('clhep', version : '>=2.4.7.1', required : true)],
-    'plugins' : {},
     'examples' : {
         'string_vector_from_string' : [files(['examples/string_vector_from_string.cc']), ['akasha enkil marius']]
     }

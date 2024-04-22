@@ -1,6 +1,6 @@
 // gdata
 #include "gDigitizedData.h"
-#include "gdataConventions.h"
+#include "../gdataConventions.h"
 
 // gutilities for the conventions and gexit
 #include "gutilities.h"

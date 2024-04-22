@@ -4,7 +4,7 @@
 // gdata
 #include "gFrameDataCollectionHeader.h"
 #include "gIntegralPayload.h"
-#include "gdataConventions.h"
+#include "../gdataConventions.h"
 
 // c++
 #include <vector>
@@ -57,4 +57,3 @@ private:
 
 
 #endif
-

@@ -10,8 +10,6 @@ LD += {
                           'goptions.h',
                           'goptionsConventions.h'
                       ]),
-    'dependencies' : [],
-    'plugins' : {},
     'examples' : {
         'basic_option' : [files(['examples/simple.cc']), [meson.current_source_dir() + '/examples/simple.jcard']],
         'structured' : [files(['examples/structured.cc']), [meson.current_source_dir() + '/examples/structured.jcard']]

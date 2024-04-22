@@ -1,13 +1,10 @@
 sub_dir_name = meson.current_source_dir().split('/').get(-1)
 LD += {
     'name' : sub_dir_name,
-    'sources' : files([
-                      ]),
     'headers' : files([
                           'gdl.h',
                           'gfactory.h'
                       ]),
-    'dependencies' : [],
     'plugins' : {
         'fordFactory' : [files(['examples/FordFactory.cc']), false],
         'teslaFactory' : [files(['examples/TeslaFactory.cc']), false],

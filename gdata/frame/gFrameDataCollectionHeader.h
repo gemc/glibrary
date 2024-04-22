@@ -2,7 +2,7 @@
 #define  GFRAMEHEADER_H  1
 
 // gdata
-#include "gutsConventions.h"
+#include "../gdataConventions.h"
 
 // glibrary
 #include "goptions.h"         // GVERBOSITY

@@ -2,7 +2,7 @@
 #define  GEVENTHEADER_H  1
 
 // gdata
-#include "gdataConventions.h"
+#include "../gdataConventions.h"
 
 // glibrary
 #include "goptions.h"         // GVERBOSITY

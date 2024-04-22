@@ -11,7 +11,6 @@ LD += {
                           'ghitConventions.h'
                       ]),
     'dependencies' : [dependency('Geant4', version : '>=11.2.0', modules : ['Geant4::G4digits_hits'], required : true)],
-    'plugins' : {},
     'examples' : {
         'basic_hit' : [files(['examples/simple.cc']), ['']]
     }

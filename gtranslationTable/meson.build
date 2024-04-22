@@ -2,13 +2,14 @@ sub_dir_name = meson.current_source_dir().split('/').get(-1)
 LD += {
     'name' : sub_dir_name,
     'sources' : files([
-                          'textProgressBar.cc'
+                          'gtranslationTable.cc'
+
                       ]),
     'headers' : files([
-                          'textProgressBar.h',
-                          'textProgressBarConventions.h'
+                          'gtranslationTable.h',
+                          'gtranslationTableConventions.h'
                       ]),
     'examples' : {
-        'simple_bar' : [files(['examples/bar.cc']), ['']]
+        'basic_tt' : [files(['examples/simple.cc']), ['']],
     }
 }

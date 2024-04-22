@@ -12,6 +12,7 @@ LD = []
 all_libs = []
 all_deps = []
 all_includes = []
+empty_dict = { 'na' : [''] }
 
 subdir('guts')
 subdir('goptions')
@@ -19,42 +20,48 @@ subdir('gfactory')
 subdir('textProgressBar')
 subdir('gtouchable')
 subdir('ghit')
+subdir('gtranslationTable')
+subdir('gdata')
 
 
 # compilation loop
 foreach L : LD
-    this_deps = L['dependencies']
-    this_lib_name = L['name']
-    sources = L['sources']
+    this_lib_name = L['name'] # key name must be present
 
-    if sources.length() > 0
+    sources = L.get('sources', [''])
+    this_deps = L.get('dependencies', [])
+    plugins = L.get('plugins', empty_dict)
+    additional_includes = L.get('additional_includes', [''])
+
+    if not sources.contains('')
         this_library = static_library(
             this_lib_name,
             sources,
             install : true,
             dependencies : this_deps,
-            include_directories : all_includes,
+            include_directories : all_includes + additional_includes,
         )
         all_libs += this_library
         all_deps += this_deps
-
     endif
 
     # header files
     install_headers(L['headers'])
 
     # plugins
-    foreach name, sources : L['plugins']
-        shared_library(
-            name,
-            sources[0],
-            install : sources[1],
-            include_directories : all_includes + this_lib_name,
-            link_with : all_libs + this_library,
-            name_suffix : 'gplugin',
-            name_prefix : ''
-        )
-    endforeach
+    if plugins != empty_dict
+        foreach name, sources : plugins
+            shared_library(
+                name,
+                sources[0],
+                install : sources[1],
+                include_directories : all_includes + this_lib_name,
+                link_with : all_libs + this_library,
+                name_suffix : 'gplugin',
+                name_prefix : ''
+            )
+        endforeach
+    endif
 
     # examples
     foreach name, sources_and_arguments : L['examples']

@@ -11,8 +11,6 @@ LD += {
                           'gtouchable.h',
                           'gtouchableConventions.h'
                       ]),
-    'dependencies' : [],
-    'plugins' : {},
     'examples' : {
         'basic_gtouchable' : [files(['examples/simple.cc']), ['']]
     }
