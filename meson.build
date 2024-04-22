@@ -22,6 +22,7 @@ subdir('gtouchable')
 subdir('ghit')
 subdir('gtranslationTable')
 subdir('gdata')
+subdir('gdynamicDigitization')
 
 
 # compilation loop
@@ -39,7 +40,7 @@ foreach L : LD
             sources,
             install : true,
             dependencies : this_deps,
-            include_directories : all_includes + additional_includes,
+            include_directories : all_includes + additional_includes
         )
         all_libs += this_library
         all_deps += this_deps
@@ -55,6 +56,7 @@ foreach L : LD
                 name,
                 sources[0],
                 install : sources[1],
+                dependencies : this_deps,
                 include_directories : all_includes + this_lib_name,
                 link_with : all_libs + this_library,
                 name_suffix : 'gplugin',
@@ -79,6 +81,7 @@ foreach L : LD
     endforeach
 
     all_includes +=  this_lib_name
+    all_includes += additional_includes
 endforeach
 
 

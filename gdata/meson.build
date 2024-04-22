@@ -22,7 +22,7 @@ LD += {
                           'frame/gFrameDataCollectionHeader.h',
                           'frame/gFrameDataCollection.h'
                       ]),
-    'additional_includes' : include_directories('event'),
+    'additional_includes' : ['gdata/event'],
     'dependencies' : [dependency('Geant4', version : '>=11.2.0', modules : ['Geant4::G4digits_hits'], required : true)],
     'examples' : {
         'event_data' : [files(['examples/event_data.cc']), ['']],
