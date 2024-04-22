@@ -14,7 +14,7 @@ LD += {
                       ]),
     'dependencies' : [dependency('Geant4', version : '>=11.2.0', modules : ['Geant4::G4digits_hits'], required : true)],
     'plugins' : {
-        'ctofRoutinesExample' : [files(['examples/ctofRoutinesExample.cc']), false],
+        'CTofRoutineExample' : [files(['examples/ctofRoutinesExample.cc']), false],
     },
     'examples' : {
         'plugin_load_example' : [files(['examples/plugin_load_example.cc']), ['']]

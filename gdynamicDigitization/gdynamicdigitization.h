@@ -22,117 +22,121 @@
 class GTouchableModifiers {
 
 public:
-	// abstract destructor
-	GTouchableModifiers(vector<string> touchableNames);
+    // abstract destructor
+    GTouchableModifiers(vector <string> touchableNames);
 
 private:
-	// only one of these maps can be filled with values:
-	// the size of the map is used by processGTouchableModifiers
+    // only one of these maps can be filled with values:
+    // the size of the map is used by processGTouchableModifiers
 
-	// vector is pair: (id, weight)
-	map<string, vector<double> > modifierWeightsMap;
+    // vector is pair: (id, weight)
+    map <string, vector<double>> modifierWeightsMap;
 
-	// vector is triplet: (id, weight, time)
-	map<string, vector<double> > modifierWeightsAndTimesMap;
+    // vector is triplet: (id, weight, time)
+    map <string, vector<double>> modifierWeightsAndTimesMap;
 
 // api
 public:
 
-	// insert new values
-	void insertIdAndWeight(string touchableName, int idValue, double weight);
-	void insertIdWeightAndTime(string touchableName, int idValue, double weight, double time);
+    // insert new values
+    void insertIdAndWeight(string touchableName, int idValue, double weight);
 
-	// normalize a map using totalWeight
-	void assignOverallWeight(string touchableName, double totalWeight);
+    void insertIdWeightAndTime(string touchableName, int idValue, double weight, double time);
 
-	inline bool isWeightsOnly() {
-		return modifierWeightsMap.size() > 0;
-	}
+    // normalize a map using totalWeight
+    void assignOverallWeight(string touchableName, double totalWeight);
 
-	// get vectors from modifierWeightsMap using touchableName
-	inline vector<double> getModifierWeightsVector(string touchableName) {
-		// this will crash if user request a key not declared in the constructor
-		return modifierWeightsMap[touchableName];
-	}
+    inline bool isWeightsOnly() {
+        return modifierWeightsMap.size() > 0;
+    }
 
-	// get vectors from modifierWeightsAndTimesMap using touchableName
-	inline vector<double> getModifierWeightsAndTimeVector(string touchableName) {
-		// this will crash if user request a key not declared in the constructor
-		return modifierWeightsAndTimesMap[touchableName];
-	}
+    // get vectors from modifierWeightsMap using touchableName
+    inline vector<double> getModifierWeightsVector(string touchableName) {
+        // this will crash if user request a key not declared in the constructor
+        return modifierWeightsMap[touchableName];
+    }
+
+    // get vectors from modifierWeightsAndTimesMap using touchableName
+    inline vector<double> getModifierWeightsAndTimeVector(string touchableName) {
+        // this will crash if user request a key not declared in the constructor
+        return modifierWeightsAndTimesMap[touchableName];
+    }
 };
 
 
 class GDynamicDigitization {
 
 public:
-	// abstract destructor
-	virtual ~GDynamicDigitization() = default;
+    // not declared: default constructor
 
-	// the time used in processTouchable
-	virtual float processStepTime(GTouchable *gTouchID, G4Step* thisStep);
-	
-	// change the GTouchable in sensitiveDetector::ProcessHit
-	// by default the touchable is not changed and the gtouchable is assigned a time index based
-	// on the readout specs and the step time
-	// this function can be overloaded by plugin methods
-	// notice that this returns a vector of touchables, as one g4step can produce multiple hits
-	virtual vector<GTouchable*> processTouchable(GTouchable *gTouchID, G4Step* thisStep);
+    // abstract destructor
+    virtual ~GDynamicDigitization() = default;
 
-	// need to document exactly what this does and if it's still needed
-	vector<GTouchable*> processGTouchableModifiers(GTouchable *gTouchID, GTouchableModifiers gmods);
+    // the time used in processTouchable
+    virtual float processStepTime(GTouchable *gTouchID, G4Step *thisStep);
 
-	
-	// filter true information into GTrueInfoHit
-	// this integrates all available information built in GHit::addHitInfosForBitset
-	GTrueInfoData *collectTrueInformation(GHit *ghit, size_t hitn);
+    // change the GTouchable in sensitiveDetector::ProcessHit
+    // by default the touchable is not changed and the gtouchable is assigned a time index based
+    // on the readout specs and the step time
+    // this function can be overloaded by plugin methods
+    // notice that this returns a vector of touchables, as one g4step can produce multiple hits
+    virtual vector<GTouchable *> processTouchable(GTouchable *gTouchID, G4Step *thisStep);
 
-	// digitize true information into GDigitizedHit
-	virtual GDigitizedData *digitizeHit(GHit *ghit, size_t hitn) {return nullptr;}
+    // need to document exactly what this does and if it's still needed
+    vector<GTouchable *> processGTouchableModifiers(GTouchable *gTouchID, GTouchableModifiers gmods);
 
-	// loads the digitization constants
-	// return false for failure
-	virtual bool loadConstants(int runno, string variation) { return false; }
 
-	// loads the translation table
-	// return false for failure
-	virtual bool loadTT(int runno, string variation) { return false; }
+    // filter true information into GTrueInfoHit
+    // this integrates all available information built in GHit::addHitInfosForBitset
+    GTrueInfoData *collectTrueInformation(GHit *ghit, size_t hitn);
 
-	// this will set the gdata variable TIMEATELECTRONICS used by RunAction to identify the eventFrameIndex
-	// and will include in gdata the translation table (hardware address crate/slot/channel)
-	// this will exit with error if the TT is not defined
-	// notice time is an int (assumed unit: ns)
-	void chargeAndTimeAtHardware(int time, int q, GHit *ghit, GDigitizedData *gdata);
+    // digitize true information into GDigitizedHit
+    virtual GDigitizedData *digitizeHit(GHit *ghit, size_t hitn) { return nullptr; }
 
-		
-	// mandatory initialization of readout specs
-	virtual bool defineReadoutSpecs() = 0;
+    // loads the digitization constants
+    // return false for failure
+    virtual bool loadConstants(int runno, string variation) { return false; }
 
-	GReadoutSpecs *readoutSpecs = nullptr;
-	GTranslationTable *translationTable = nullptr;
+    // loads the translation table
+    // return false for failure
+    virtual bool loadTT(int runno, string variation) { return false; }
 
-	// method to dynamically load factories
-	static GDynamicDigitization* instantiate(const dlhandle handle) {
-				
-		if (handle == nullptr) return nullptr;
+    // this will set the gdata variable TIMEATELECTRONICS used by RunAction to identify the eventFrameIndex
+    // and will include in gdata the translation table (hardware address crate/slot/channel)
+    // this will exit with error if the TT is not defined
+    // notice time is an int (assumed unit: ns)
+    void chargeAndTimeAtHardware(int time, int q, GHit *ghit, GDigitizedData *gdata);
 
-		void *maker = dlsym(handle , "GDynamicDigitizationFactory");
 
-		if (maker == nullptr) return nullptr;
+    // mandatory initialization of readout specs
+    virtual bool defineReadoutSpecs() = 0;
 
-		typedef GDynamicDigitization* (*fptr)();
+    GReadoutSpecs *readoutSpecs = nullptr;
+    GTranslationTable *translationTable = nullptr;
 
-		// static_cast not allowed here
-		// see http://stackoverflow.com/questions/573294/when-to-use-reinterpret-cast
-		// need to run the DLL GDynamicFactory function that returns the factory
-		fptr func = reinterpret_cast<fptr>(reinterpret_cast<void*>(maker));
+    // method to dynamically load factories
+    static GDynamicDigitization *instantiate(const dlhandle handle) {
 
-		return func();
-	}
+        if (handle == nullptr) return nullptr;
 
-	// logging: using
-	string gdMessageHeader = "   ⎍ ";
-	void gDLogMessage(std::string message);
+        void *maker = dlsym(handle, "GDynamicDigitizationFactory");
+
+        if (maker == nullptr) return nullptr;
+
+        typedef GDynamicDigitization *(*fptr)();
+
+        // static_cast not allowed here
+        // see http://stackoverflow.com/questions/573294/when-to-use-reinterpret-cast
+        // need to run the DLL GDynamicFactory function that returns the factory
+        fptr func = reinterpret_cast<fptr>(reinterpret_cast<void *>(maker));
+
+        return func();
+    }
+
+    // logging: using
+    string gdMessageHeader = "   ⎍ ";
+
+    void gDLogMessage(std::string message);
 
 };
 

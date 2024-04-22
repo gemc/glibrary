@@ -141,9 +141,10 @@ public:
 			if(thisDLHandle != nullptr) {
 				return T::instantiate(thisDLHandle);
 			}
-		}
-		// warning message already given if plugin not found
-		// cout << GFACTORYLOGITEM << " GManager: plugin " << name << " could not be loaded " << endl;
+		} else {
+            // warning message already given if plugin not found
+            std::cerr << FATALERRORL << " GManager: plugin " << name << " could not be loaded " << std::endl;
+        }
 		return nullptr;
 	}
 

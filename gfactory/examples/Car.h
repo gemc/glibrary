@@ -3,34 +3,33 @@
 
 #include "gdl.h"
 
-class Car
-{
+class Car {
 public:
-	virtual void go() = 0;
-	virtual ~Car() = default;
+    virtual void go() = 0;
 
-	float generalCarVar = 44;
+    virtual ~Car() = default;
 
-	// method to dynamically load factories
-	static Car* instantiate(const dlhandle handle) {
+    float generalCarVar = 44;
 
-		if (handle == nullptr) return nullptr;
+    // method to dynamically load factories
+    static Car *instantiate(const dlhandle handle) {
 
-		void *maker = dlsym(handle , "CarFactory");
+        if (handle == nullptr) return nullptr;
 
-		if (maker == nullptr) return nullptr;
+        void *maker = dlsym(handle, "CarFactory");
 
-		typedef Car* (*fptr)();
+        if (maker == nullptr) return nullptr;
 
-		// static_cast not allowed here
-		// see http://stackoverflow.com/questions/573294/when-to-use-reinterpret-cast
-		// need to run the DLL CarFactory function that returns the factory
-		fptr func = reinterpret_cast<fptr>(reinterpret_cast<void*>(maker));
+        typedef Car *(*fptr)();
 
-		return func();
-	}
+        // static_cast not allowed here
+        // see http://stackoverflow.com/questions/573294/when-to-use-reinterpret-cast
+        // need to run the DLL CarFactory function that returns the factory
+        fptr func = reinterpret_cast<fptr>(reinterpret_cast<void *>(maker));
+
+        return func();
+    }
 };
-
 
 
 #endif // CAR_H

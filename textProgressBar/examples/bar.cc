@@ -9,7 +9,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 
-	int nevents = 400000000;
+	int nevents = 100000000;
 
 	TextProgressBar bar(30, "  index progress: ", 1, nevents);
 

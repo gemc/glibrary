@@ -65,7 +65,7 @@ int main()
 
 
 	// B manages Cars. Notice, we do not need the derived class headers here!
-	// PRAGMA: These two names must match in the registerDL and in the LoadAndRegisterObjectFromLibrary:
+	// PRAGMA: These two names must match in registerDL and in  LoadAndRegisterObjectFromLibrary:
 	// tesla
 	// that's ok but need to spit error if that doesn't happen
 	GManager managerB("exampleB", 1); // no verbosity of 1
@@ -83,7 +83,6 @@ int main()
 	cout << " Shape pointers: " << fff["triangle"] << " " << aShape << endl;
 	cout << " Car pointers: " << ggg["ford"] << " " << aCar << endl;
 
-
 	cout << "generalCarVar from factory map: " << ggg["tesla"]->generalCarVar << endl;
 
 	// why this need to be cleared here, and not after the factories are
@@ -91,6 +90,3 @@ int main()
 	managerB.clearDLMap();
 
 }
-
-
-

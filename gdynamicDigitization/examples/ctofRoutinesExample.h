@@ -10,7 +10,9 @@
 class CTofRoutineExample : public GDynamicDigitization {
 
 public:
-	// mandatory readout specs definitions
+    // constructor not needed
+
+    // mandatory readout specs definitions
 	bool defineReadoutSpecs();
 
 	bool loadConstants(int runno, string variation);
@@ -23,6 +25,8 @@ private:
 	string var4;
 };
 
-
+extern "C" GDynamicDigitization* GDynamicDigitizationFactory(void) {
+    return static_cast<GDynamicDigitization*>(new CTofRoutineExample);
+}
 
 #endif
