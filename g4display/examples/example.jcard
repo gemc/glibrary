@@ -9,7 +9,6 @@
 		"phi": "30*deg"
 	},
 
-
 	"+scenetext": [
 		{ "text": "hello world" },
 		{ "text": "hello again", "size": 30, "x": 0.2, "color": "green" }

@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
 	delete g4SceneProperties;
 
     // if -b command line option is given, print a message
-    if (gopts->getSwitch("batch")) {
+    if (gopts->getSwitch("no_display")) {
         cout << "Exiting after displaying the UI" << endl;
         return EXIT_SUCCESS;
     }

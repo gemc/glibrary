@@ -7,8 +7,8 @@
 #include "gvolume.h"
 
 // g4system
-#include "g4systemConventions.h"
-#include "g4volume.h"
+#include "../g4systemConventions.h"
+#include "../g4volume.h"
 
 // geant4
 #include "G4VSolid.hh"

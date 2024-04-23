@@ -9,7 +9,7 @@ class G4Volume
 {
 
 private:
-	int verbosity;
+   // [[maybe_unused]] int verbosity;
 	G4VSolid*             solidVolume;   // Solid Volume
 	G4LogicalVolume*    logicalVolume;   // Logical Volume
 	G4VPhysicalVolume* physicalVolume;   // Physical Volume
@@ -19,13 +19,12 @@ public:
 	G4LogicalVolume*   getLogical()  const { if(logicalVolume)  return logicalVolume;  else return nullptr;}
 	G4VPhysicalVolume* getPhysical() const { if(physicalVolume) return physicalVolume; else return nullptr;}
 
-	void setSolid(G4VSolid* s, int verbosity);
-	void setLogical(G4LogicalVolume* l, int verbosity);
-	void setPhysical(G4VPhysicalVolume* p, int verbosity);
+	void setSolid(G4VSolid* s, int verb);
+	void setLogical(G4LogicalVolume* l, int verb);
+	void setPhysical(G4VPhysicalVolume* p, int verb);
 
 };
 
 
 
 #endif
-

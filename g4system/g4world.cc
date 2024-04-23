@@ -31,8 +31,8 @@ G4World::G4World(GWorld *gworld, GOptions* gopts) {
 
 	// registering factories in the manager
 	// and adding them to g4systemFactory
-	for(auto &s : *gworld->getSystemsMap()) {
-		string factory = s.second->getFactoryName();
+	for(auto &syst : *gworld->getSystemsMap()) {
+		string factory = syst.second->getFactoryName();
 		string g4Factory = g4FactoryNameFromSystemFactory(factory);
 
         // registering factories
@@ -272,7 +272,7 @@ bool G4World::createG4Material(const GMaterial *gmaterial, int verbosity) {
 
 
 
-void G4World::buildDefaultMaterialsElementsAndIsotopes(int verbosity) {
+void G4World::buildDefaultMaterialsElementsAndIsotopes([[maybe_unused]] int verbosity) {
 
 	// isotopes not yet defined, defining them for the first time
 

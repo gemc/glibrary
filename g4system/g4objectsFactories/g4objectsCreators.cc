@@ -3,8 +3,8 @@
 using namespace gutilities;
 
 // g4system
-#include "g4systemConventions.h"
-#include "g4objectsFactories/g4objectsFactory.h"
+#include "../g4systemConventions.h"
+#include "g4objectsFactory.h"
 
 
 G4VSolid* G4ObjectsFactory::getSolidFromMap(string vname, map<string, G4Volume*> *g4s) const

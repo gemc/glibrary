@@ -2,8 +2,8 @@
 #include "gutilities.h"
 
 // g4system
-#include "g4systemConventions.h"
-#include "g4objectsFactories/g4objectsFactory.h"
+#include "../g4systemConventions.h"
+#include "g4objectsFactory.h"
 
 
 bool G4ObjectsFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
@@ -55,7 +55,7 @@ bool G4ObjectsFactory::checkSolidDependencies(bool verbosity, GVolume *s, map<st
 	return true;
 }
 
-bool G4ObjectsFactory::checkLogicalDependencies(bool verbosity, GVolume *s, map<string, G4Volume*> *g4s)
+bool G4ObjectsFactory::checkLogicalDependencies([[maybe_unused]] bool verbosity, [[maybe_unused]] GVolume *s, [[maybe_unused]] map<string, G4Volume*> *g4s)
 {
 	// PRAGMA TODO
 	// check material here
@@ -95,5 +95,3 @@ bool G4ObjectsFactory::checkPhysicalDependencies(bool verbosity, GVolume *s, map
 	}
 	return true;
 }
-
-

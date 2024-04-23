@@ -2,8 +2,8 @@
 #define G4NATIVESYSTEMFACTORY_H 1
 
 // g4system
-#include "g4systemConventions.h"
-#include "g4objectsFactories/g4objectsFactory.h"
+#include "../../g4systemConventions.h"
+#include "../g4objectsFactory.h"
 
 #include "gutilities.h"
 
@@ -53,4 +53,3 @@ private:
 
 
 #endif
-

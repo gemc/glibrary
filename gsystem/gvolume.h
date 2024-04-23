@@ -88,11 +88,11 @@ public:
 	inline const string getType()       const {return type;}
 	inline const string getParameters() const {return parameters;}
 	inline const string getMaterial()   const {return material;}
-	inline const int    getPCopyNo()    const {return pCopyNo;}
+	inline  int    getPCopyNo()    const {return pCopyNo;}
 	inline const string getColor()      const {return color;}
-	inline const bool   isVisible()     const {return visible;}
-	inline const int    getStyle()      const {return style;}
-    inline const bool   getExistence()  const {return exist;}
+	inline bool   isVisible()     const {return visible;}
+	inline int    getStyle()      const {return style;}
+    inline bool   getExistence()  const {return exist;}
 
 	inline const string getPos()   const {return pos;}
 	inline const string getRot()   const {return rot;}

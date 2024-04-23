@@ -48,7 +48,7 @@ public:
 	inline const string getVariation()   const { return variation; }
 	inline const string getFilePath()    const { return path + "/" + name; }
     inline const string getAnnotations() const { return annotations; }
-    inline const int    getRunno()       const { return runno; }
+    inline int    getRunno()       const { return runno; }
     inline const string getSqliteFile()  const { return sqlite_file; }
 
 

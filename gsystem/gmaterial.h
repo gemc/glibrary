@@ -72,8 +72,8 @@ public:
 	inline const string getName()         const {return name;}
 	inline const string getDescription()  const {return description;}
 	
-	inline const int            getNcomponents()        const;
-	inline const double         getDensity()            const {return density;}
+	inline int            getNcomponents()        const;
+	inline double         getDensity()            const {return density;}
 	inline const vector<string> getComponents()         const {return components;}
 	inline const vector<double> getAmounts()            const {return amounts;}
 
@@ -87,18 +87,18 @@ public:
 	// scintillation properties
 	inline const vector<double> getFastcomponent()      const {return fastcomponent;}
 	inline const vector<double> getSlowcomponent()      const {return slowcomponent;}
-	inline const double         getScintillationyield() const {return scintillationyield;}
-	inline const double         getResolutionscale()    const {return resolutionscale;}
-	inline const double         getFasttimeconstant()   const {return fasttimeconstant;}
-	inline const double         getSlowtimeconstant()   const {return slowtimeconstant;}
-	inline const double         getYieldratio()         const {return yieldratio;}
-	inline const double         getBirkConstant()       const {return birkConstant;}
+	inline double         getScintillationyield() const {return scintillationyield;}
+	inline double         getResolutionscale()    const {return resolutionscale;}
+	inline double         getFasttimeconstant()   const {return fasttimeconstant;}
+	inline double         getSlowtimeconstant()   const {return slowtimeconstant;}
+	inline double         getYieldratio()         const {return yieldratio;}
+	inline double         getBirkConstant()       const {return birkConstant;}
 
 	// other optical properties
 	inline const vector<double> getRayleigh()           const {return rayleigh;}
 
 	// return true if this is a chemical formula (the sum of all components amounts is > 1 )
-	inline const bool isChemicalFormula() const {
+	inline bool isChemicalFormula() const {
 		return accumulate(amounts.begin(), amounts.end(), 0) > 1;
 	}
 

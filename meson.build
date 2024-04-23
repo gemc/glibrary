@@ -40,6 +40,7 @@ geant4_deps = declare_dependency(
     compile_args : Geant4_flags
 )
 
+sqlite_dep = dependency('sqlite3', required : false)
 
 
 # init lists
@@ -48,7 +49,6 @@ LD = []
 all_libs = []
 all_deps = []
 all_includes = []
-moc_sources = []
 empty_dict = { 'na' : [''] }
 
 
@@ -65,6 +65,8 @@ subdir('gdata')
 subdir('gdynamicDigitization')
 subdir('eventDispenser')
 subdir('g4display')
+subdir('gsystem')
+subdir('g4system')
 
 
 # compilation loop
@@ -76,9 +78,10 @@ foreach L : LD
     plugins = L.get('plugins', empty_dict)
     additional_includes = L.get('additional_includes', [''])
     moc_headers = L.get('moc_headers', [''])
+    moc_sources = []
 
     if not moc_headers.contains('')
-        moc_sources += qt5.compile_moc(headers : moc_headers,
+        moc_sources = qt5.compile_moc(headers : moc_headers,
                                        dependencies : this_deps)
     endif
 
@@ -144,9 +147,6 @@ foreach L : LD
         all_includes += this_lib_name
     endif
 endforeach
-
-
-
 
 
 

@@ -6,7 +6,7 @@
 #include "gutsConventions.h"
 
 // gsystem
-#include "gsystem.h"
+#include "../gsystem.h"
 
 // c++
 #include <fstream>

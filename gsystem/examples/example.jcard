@@ -22,16 +22,9 @@
 			"factory": "text",
 			"variation": "rgb_spring2019",
 			"runno": 11
-		},
-
-		# forward detector
-		{
-			"system": "experiments/clas12/ltcc",
-			"factory": "cad"
 		}
 	],
 
-	"gsetupV": 1,
 
 
 	"+gmodifier": [
