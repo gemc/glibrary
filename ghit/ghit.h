@@ -75,9 +75,9 @@ public:
 	inline const vector<G4ThreeVector> getGlobalPositions() const { return globalPositions;}
 	inline const vector<G4ThreeVector> getLocalPositions()  const { return localPositions; }
 	inline const vector<int> getPids()                      const { return pids;}
-	inline const int getPid()                               const { return pids.front();}
-	inline const vector<float> getEs()                      const { return Es;}
-	inline const float getE()                               const { return Es.front();}
+	inline int getPid()                               const { return pids.front();}
+	inline vector<float> getEs()                      const { return Es;}
+	inline float getE()                               const { return Es.front();}
 	inline const string getProcessName()                    const { return processName; }
 
 	// calculated quantities
@@ -126,4 +126,3 @@ inline void GHit::operator delete(void *hit)
 
 
 #endif
-

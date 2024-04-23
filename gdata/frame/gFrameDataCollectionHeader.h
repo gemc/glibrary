@@ -31,8 +31,8 @@ public:
 	}
 	
 	// getters
-	inline long int const getFrameID() const { return frameID; }
-	inline long int const getTime() const { return time_ns(); }
+	inline long int getFrameID() const { return frameID; }
+	inline long int getTime() const { return time_ns(); }
 	
 	
 private:

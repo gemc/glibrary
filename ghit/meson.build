@@ -10,7 +10,7 @@ LD += {
                           'ghit.h',
                           'ghitConventions.h'
                       ]),
-    'dependencies' : [geant4],
+    'dependencies' : [geant4_deps, clhep_deps],
     'examples' : {
         'basic_hit' : [files(['examples/simple.cc']), ['']]
     }

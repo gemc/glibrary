@@ -122,6 +122,9 @@ G4DisplaySlice::G4DisplaySlice(GOptions* gopt, QWidget* parent) : QWidget(parent
 void G4DisplaySlice::slice()
 {
 	G4UImanager *g4uim = G4UImanager::GetUIpointer();
+    if (g4uim == nullptr) {
+        return;
+    }
 
 	// can't have a mix of wireframe / solid when doing a slice.
 	// forcing all to be solid
@@ -169,4 +172,3 @@ void G4DisplaySlice::clearSlices()
 	sliceYActi->setChecked(false);
 	sliceZActi->setChecked(false);
 }
-

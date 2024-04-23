@@ -34,7 +34,7 @@ public:
 	inline const HitBitSet getHitBitSet() const { return hitBitSet; }
 
 	// for readout detectors, return the index time cell in the timewindow
-	inline const int timeCellIndex(float time) const {
+	inline int timeCellIndex(float time) const {
 		return (int) (floor((time - gridStartTime)/timeWindow) + 1);
 	}
 	

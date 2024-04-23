@@ -18,7 +18,7 @@ bool CTofRoutineExample::defineReadoutSpecs() {
 }
 
 
-bool CTofRoutineExample::loadConstants(int runno, string variation) {
+bool CTofRoutineExample::loadConstants(int runno, [[maybe_unused]] string variation) {
     var1 = 2.0;
     var2[0] = 1;
     var2[0] = 2;

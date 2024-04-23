@@ -9,8 +9,8 @@ using std::thread;
 
 // emulation of a run of 10 events
 // PRAGMA TODO: fix example, add stream example
-int main(int argc, char* argv[])
-{
+//int main(int argc, char* argv[])
+int main() {
 
 	int nevents = 10;
 

@@ -30,9 +30,9 @@ public:
     bool operator==(const GIdentifier &gid) const { return this->idValue == gid.idValue; }
 
     // api
-    inline const string getName() const { return idName; }
+    inline string getName() const { return idName; }
 
-    inline const int getValue() const { return idValue; }
+    inline int getValue() const { return idValue; }
 
 private:
     string idName;
@@ -102,11 +102,11 @@ public:
     // void assignTimeAtElectronics(float t) {timeAtElectronics = t;}
     inline void assignTrackId(int tid) { trackId = tid; }
 
-    inline const float getEnergyMultiplier() const { return eMultiplier; }
+    inline float getEnergyMultiplier() const { return eMultiplier; }
 
     inline void assignStepTimeAtElectronicsIndex(int timeIndex) { stepTimeAtElectronicsIndex = timeIndex; }
 
-    inline const int getStepTimeAtElectronicsIndex() const { return stepTimeAtElectronicsIndex; }
+    inline int getStepTimeAtElectronicsIndex() const { return stepTimeAtElectronicsIndex; }
 
 // api
 public:

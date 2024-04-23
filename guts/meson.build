@@ -10,7 +10,7 @@ LD += {
                           'gutsConventions.h'
                       ]),
 
-    'dependencies' : [dependency('clhep', version : '>=2.4.7.1', required : true)],
+    'dependencies' : [clhep_deps],
     'examples' : {
         'string_vector_from_string' : [files(['examples/string_vector_from_string.cc']), ['akasha enkil marius']]
     }

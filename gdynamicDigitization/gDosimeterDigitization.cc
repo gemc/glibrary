@@ -54,7 +54,7 @@ GDigitizedData* GDosimeterDigitization::digitizeHit(GHit *ghit, size_t hitn) {
 using std::ifstream;
 
 // loads digitization constants
-bool GDosimeterDigitization::loadConstants(int runno, string variation) {
+bool GDosimeterDigitization::loadConstants([[maybe_unused]] int runno, [[maybe_unused]] string variation) {
 
 	// Niel Data
 	// key is PID

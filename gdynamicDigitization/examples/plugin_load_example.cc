@@ -15,7 +15,8 @@ using namespace std;
 
 
 //! example of main declaring GOptions
-int main(int argc, char *argv[]) {
+//int main(int argc, char *argv[]) {
+int main() {
 
     GManager manager("example", 10);
 

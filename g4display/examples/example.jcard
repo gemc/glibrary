@@ -1,6 +1,6 @@
 {
 	"g4view": {
-		"viewer": "OGLIQt",
+		"viewer": "OGL",
 		"segsPerCircle": 100
 	},
 

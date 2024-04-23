@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	// main window
 	QMainWindow *window = new QMainWindow();
 	window->setWindowTitle(QString::fromUtf8("displayUI example"));
-	window->resize(600, 800);
+	// window->resize(600, 800);
 
 	// controls
 	G4Controls *g4controls = new G4Controls(gopts, window);
@@ -42,4 +42,3 @@ int main(int argc, char* argv[])
 	return app.exec();
 
 }
-

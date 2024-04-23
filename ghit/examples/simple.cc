@@ -13,7 +13,8 @@ using namespace std;
 // it is not needed in the sconscript (not sure why yet)
 // G4ThreadLocal G4Allocator<GHit>* GHitAllocator = 0;
 
-int main(int argc, char* argv[])
+//int main(int argc, char* argv[])
+int main()
 {
 
 //	GTouchable *ctof = new GTouchable(readout, {GIdentifier("paddle", 22)});

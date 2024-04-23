@@ -63,16 +63,16 @@ EventDispenser::EventDispenser(GOptions* gopt, map<string, GDynamicDigitization*
 	}
 }
 
-void EventDispenser::setNumberOfEvents(int nevts) {
+void EventDispenser::setNumberOfEvents(int nevents_to_process) {
 	runEvents.clear();
-	runEvents[userRunno] = nevts;
+	runEvents[userRunno] = nevents_to_process;
 }
 
 
-void EventDispenser::distributeEvents(int nevts)
+void EventDispenser::distributeEvents(int nevents_to_process)
 {
 	// now randomizing the run of each event
-	TextProgressBar bar(50, string(EVENTDISPENSERLOGMSGITEM) + " Distributing events according to run weights ", 0, nevts);
+	TextProgressBar bar(50, string(EVENTDISPENSERLOGMSGITEM) + " Distributing events according to run weights ", 0, nevents_to_process);
 
 	// generating random number
 	// reference: http://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
@@ -80,7 +80,7 @@ void EventDispenser::distributeEvents(int nevts)
 	mt19937 generator(randomDevice());
 	uniform_real_distribution<> randomDistribution(0, 1);
 
-	for(int i=0; i<nevts; i++) {
+	for(int i=0; i<nevents_to_process; i++) {
 		double randomNumber = randomDistribution(generator);
 
 		double ww = 0;
@@ -96,11 +96,11 @@ void EventDispenser::distributeEvents(int nevts)
 }
 
 // TODO: fix this as ntot is not used
-void EventDispenser::printRunsDetails(int neventsToProcess)
+void EventDispenser::printRunsDetails(int nevents_to_process)
 {
 	//	int ntot = 0;
 
-	cout << EVENTDISPENSERLOGMSGITEM << " EventDispenser initialized with " << neventsToProcess << " events distributed among " << runWeights.size() << " runs:" << endl;
+	cout << EVENTDISPENSERLOGMSGITEM << " EventDispenser initialized with " << nevents_to_process << " events distributed among " << runWeights.size() << " runs:" << endl;
 
 	if(verbosity >= GVERBOSITY_SUMMARY) {
 

@@ -21,9 +21,7 @@ LD += {
                               'tabs/g4displaycamera.h',
                               'tabs/g4displayslice.h'
                           ]),
-    'dependencies' : [geant4, dependency('gl')],
-#    'dependencies' : [geant4, GL],
-
+    'dependencies' : [geant4_deps, qt5_deps, clhep_deps],
     'additional_includes' : ['g4display/tabs'],
     'examples' : {
         'basic_display' : [files(['examples/example.cc']), ['examples/example.jcard']],

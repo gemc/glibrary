@@ -12,7 +12,7 @@ LD += {
                           'ginternalDigitization.h',
                           'greadoutSpecs.h'
                       ]),
-    'dependencies' : [dependency('Geant4', version : '>=11.2.0', modules : ['Geant4::G4digits_hits'], required : true)],
+    'dependencies' : [geant4_deps, clhep_deps],
     'plugins' : {
         'CTofRoutineExample' : [files(['examples/ctofRoutinesExample.cc']), false],
     },

@@ -58,7 +58,7 @@ private:
 	// set at constructor, from the hit
 	vector<GIdentifier> gidentity;
 
-	bool const validVarName(string varName, int which) const;
+	bool validVarName(string varName, int which) const;
 
 };
 

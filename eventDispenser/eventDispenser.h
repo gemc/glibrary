@@ -32,9 +32,9 @@ private:
 	vector<int> listOfRuns;
 
 	// fill the number of events map
-	void distributeEvents(int neventsToProcess);
+	void distributeEvents(int nevents_to_process);
 
-	void printRunsDetails(int neventsToProcess);
+	void printRunsDetails(int nevents_to_process);
 
 	int currentRunIndex;
 

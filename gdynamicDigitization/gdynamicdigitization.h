@@ -90,16 +90,16 @@ public:
     // this integrates all available information built in GHit::addHitInfosForBitset
     GTrueInfoData *collectTrueInformation(GHit *ghit, size_t hitn);
 
-    // digitize true information into GDigitizedHit
-    virtual GDigitizedData *digitizeHit(GHit *ghit, size_t hitn) { return nullptr; }
+    // digitize true information into GDigitizedHit. Suppressing warning for unused parameter
+    virtual GDigitizedData *digitizeHit([[maybe_unused]] GHit *ghit, [[maybe_unused]] size_t hitn) { return nullptr; }
 
     // loads the digitization constants
     // return false for failure
-    virtual bool loadConstants(int runno, string variation) { return false; }
+    virtual bool loadConstants([[maybe_unused]] int runno, [[maybe_unused]] string variation) { return false; }
 
     // loads the translation table
     // return false for failure
-    virtual bool loadTT(int runno, string variation) { return false; }
+    virtual bool loadTT([[maybe_unused]] int runno, [[maybe_unused]] string variation) { return false; }
 
     // this will set the gdata variable TIMEATELECTRONICS used by RunAction to identify the eventFrameIndex
     // and will include in gdata the translation table (hardware address crate/slot/channel)

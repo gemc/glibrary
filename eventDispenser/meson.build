@@ -10,7 +10,7 @@ LD += {
                           'eventDispenserOptions.h',
                           'eventDispenserConventions.h'
                       ]),
-    'dependencies' : [dependency('Geant4', version : '>=11.2.0', modules : ['Geant4::G4digits_hits'], required : true)],
+    'dependencies' : [geant4_deps, clhep_deps],
     'examples' : {
         'basic_dispenser' : [files(['examples/simple.cc']), ['']]
     }

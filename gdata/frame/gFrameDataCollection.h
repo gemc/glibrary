@@ -38,12 +38,12 @@ public:
 	// integral payload: integrated quantity
 	void addIntegralPayload(vector<int> payload, int verbosity);
 	void addEvent(int evn);
-	bool const shouldWriteFrame() const;
+	bool shouldWriteFrame() const;
 
 	// getters
 	inline const GFrameDataCollectionHeader* getHeader()         const { return gheader; }
 	inline const vector<GIntegralPayload*>* getIntegralPayload() const { return integralPayloads; }
-	inline const long int getFrameID()                           const { return gheader->getFrameID(); }
+	inline long int getFrameID()                           const { return gheader->getFrameID(); }
 
 private:
 	int verbosity;

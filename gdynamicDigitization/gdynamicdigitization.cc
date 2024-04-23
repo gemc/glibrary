@@ -129,7 +129,7 @@ void GTouchableModifiers::assignOverallWeight(string tname, double totalWeight) 
 }
 
 // if not overloaded, the time used in processTouchable is simply the step time
-float GDynamicDigitization:: processStepTime(GTouchable *gTouchID, G4Step* thisStep) {
+float GDynamicDigitization:: processStepTime([[maybe_unused]] GTouchable *gTouchID, [[maybe_unused]] G4Step* thisStep) {
 	return thisStep->GetPostStepPoint()->GetGlobalTime();
 }
 
@@ -153,7 +153,7 @@ vector<GTouchable*> GDynamicDigitization::processTouchable(GTouchable *gTouchID,
 
 
 
-vector<GTouchable*> GDynamicDigitization::processGTouchableModifiers(GTouchable *gTouchID, GTouchableModifiers gmods) {
+vector<GTouchable*> GDynamicDigitization::processGTouchableModifiers([[maybe_unused]] GTouchable *gTouchID, [[maybe_unused]] GTouchableModifiers gmods) {
 
 	vector<GTouchable*> touchables;
 	

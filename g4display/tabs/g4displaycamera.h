@@ -2,7 +2,7 @@
 #define  G4DISPLAYCAMERA_H 1
 
 // qt
-#include <Headers/QtWidgets>
+#include <QtWidgets>
 
 // glibrary
 #include "goptions.h"

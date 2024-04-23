@@ -4,7 +4,7 @@
 // c++
 using namespace std;
 
-void GFrameDataCollection::addIntegralPayload(vector<int> payload, int verbosity) {
+void GFrameDataCollection::addIntegralPayload(vector<int> payload, int v) {
 
 	if (payload.size() == 5 ) {
 		int crate   = payload[0];
@@ -13,7 +13,7 @@ void GFrameDataCollection::addIntegralPayload(vector<int> payload, int verbosity
 		int charge  = payload[3];
 		int time    = payload[4];
 
-		GIntegralPayload *gpayload = new GIntegralPayload(crate, slot, channel, charge, time, verbosity);
+		GIntegralPayload *gpayload = new GIntegralPayload(crate, slot, channel, charge, time, v);
 		integralPayloads->push_back(gpayload);
 		
 	} else {
@@ -22,5 +22,3 @@ void GFrameDataCollection::addIntegralPayload(vector<int> payload, int verbosity
 	}
 
 }
-
-
