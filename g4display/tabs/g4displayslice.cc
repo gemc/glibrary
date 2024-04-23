@@ -6,7 +6,7 @@
 using namespace std;
 
 
-G4DisplaySlice::G4DisplaySlice(GOptions* gopt, QWidget* parent) : QWidget(parent)
+G4DisplaySlice::G4DisplaySlice([[maybe_unused]] GOptions* gopt, QWidget* parent) : QWidget(parent)
 {
 	// x slice
 	sliceXEdit = new QLineEdit(tr("0"));

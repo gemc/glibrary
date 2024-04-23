@@ -17,6 +17,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+
 	QApplication app(argc, argv);
 
 	GOptions *gopts = new GOptions(argc, argv, g4display::defineOptions());
@@ -29,7 +30,6 @@ int main(int argc, char* argv[])
 	// main window
 	QMainWindow *window = new QMainWindow();
 	window->setWindowTitle(QString::fromUtf8("displayUI example"));
-	// window->resize(600, 800);
 
 	// controls
 	G4Controls *g4controls = new G4Controls(gopts, window);
@@ -39,6 +39,15 @@ int main(int argc, char* argv[])
 	window->show();
 	delete g4SceneProperties;
 
-	return app.exec();
+    // if -b command line option is given, print a message
+    if (gopts->getSwitch("batch")) {
+        cout << "Exiting after displaying the UI" << endl;
+        return EXIT_SUCCESS;
+    }
+
+
+    app.exec();
+
+    return EXIT_SUCCESS;
 
 }

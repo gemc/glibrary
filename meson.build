@@ -16,13 +16,12 @@ qt5_deps = dependency('qt5', modules : ['Core', 'Gui', 'Widgets'], required : tr
 
 clhep_deps = dependency('clhep', version : '>=2.4.7.1', required : true)
 
-# obtained by not specifying modules
-# notice: these give a -I path containing QtWidgets, a binary. So we have to use #include <QtWidgets> instead of #include <QtWidgets>
-#geant4_deps = dependency('Geant4', version : '>=11.2.0',
-#                         modules : ['Geant4::G4digits_hits'],
+# geant4 notice: the cmake dependency include clhep and a lot of stuff that is not working
+# geant4_deps = dependency('Geant4', version : '>=11.2.0',
 #                         modules : ['Geant4::G4zlib', 'Geant4::G4tools', 'Geant4::G4ptl', 'Geant4::G4analysis', 'Geant4::G4digits_hits', 'Geant4::G4error_propagation', 'Geant4::G4event', 'Geant4::G4geometry', 'Geant4::G4global', 'Geant4::G4graphics_reps', 'Geant4::G4intercoms', 'Geant4::G4interfaces', 'Geant4::G4materials', 'Geant4::G4parmodels', 'Geant4::G4particles', 'Geant4::G4geomtext', 'Geant4::G4mctruth', 'Geant4::G4gdml', 'Geant4::G4physicslists', 'Geant4::G4processes', 'Geant4::G4readout', 'Geant4::G4run', 'Geant4::G4track', 'Geant4::G4tracking', 'Geant4::G4FR', 'Geant4::G4visHepRep', 'Geant4::G4RayTracer', 'Geant4::G4Tree', 'Geant4::G4VRML', 'Geant4::G4GMocren', 'Geant4::G4vis_management', 'Geant4::G4modeling', 'Geant4::G4ToolsSG', 'Geant4::G4OpenGL', 'Geant4::G4visQt3D'],
 #                         required : true)
 
+# setting things up manually instead
 Geant4_inc_dirs = []
 Geant4_flags = []
 g4_cflags = run_command('geant4-config', '--cflags', check : true).stdout().strip().split()
@@ -38,7 +37,6 @@ Geant4_link_args = run_command('geant4-config', '--libs', check : true).stdout()
 geant4_deps = declare_dependency(
     include_directories : Geant4_inc_dirs,
     link_args : Geant4_link_args,
-    #link_with : Geant4_link_args,
     compile_args : Geant4_flags
 )
 
