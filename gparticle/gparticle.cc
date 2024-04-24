@@ -63,7 +63,7 @@ Gparticle::Gparticle(gparticle::JParticle jparticle) {
 // for G4GeneralParticleSource API check:
 // https://geant4.kek.jp/lxr/source/event/include/G4ParticleGun.hh
 // https://geant4.kek.jp/lxr/source/event/src/G4ParticleGun.cc
-void Gparticle::shootParticle(G4ParticleGun *particleGun, G4Event *anEvent, int verbosity) {
+void Gparticle::shootParticle(G4ParticleGun *particleGun, G4Event *anEvent, [[maybe_unused]] int verb) {
 
     auto particleTable = G4ParticleTable::GetParticleTable();
 

@@ -15,8 +15,7 @@ int main(int argc, char* argv[])
 	GOptions *gopts = new GOptions(argc, argv, gphysics::defineOptions());
 	gopts->printSettings(false);
 	
-	auto gphysics = new GPhysics(gopts);
+	[[maybe_unused]] auto gphysics = new GPhysics(gopts);
 
 	return EXIT_SUCCESS;
 }
-

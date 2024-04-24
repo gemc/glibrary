@@ -10,13 +10,14 @@ project_description = 'Various C++ libraries'
 
 
 
-# qt: https://mesonbuild.com/Qt5-module.html
+# qt: pkg-config. https://mesonbuild.com/Qt5-module.html
 qt5 = import('qt5')
-qt5_deps = dependency('qt5', modules : ['Core', 'Gui', 'Widgets'], required : true)
+qt5_deps = dependency('qt5', modules : ['Core', 'Gui', 'Widgets'])
 
+# clhep: pkg-config
 clhep_deps = dependency('clhep', version : '>=2.4.7.1', required : true)
 
-# geant4 notice: the cmake dependency include clhep and a lot of stuff that is not working
+# geant4: no pkg-config. The cmake dependency include clhep and a lot of stuff that is not working
 # geant4_deps = dependency('Geant4', version : '>=11.2.0',
 #                         modules : ['Geant4::G4zlib', 'Geant4::G4tools', 'Geant4::G4ptl', 'Geant4::G4analysis', 'Geant4::G4digits_hits', 'Geant4::G4error_propagation', 'Geant4::G4event', 'Geant4::G4geometry', 'Geant4::G4global', 'Geant4::G4graphics_reps', 'Geant4::G4intercoms', 'Geant4::G4interfaces', 'Geant4::G4materials', 'Geant4::G4parmodels', 'Geant4::G4particles', 'Geant4::G4geomtext', 'Geant4::G4mctruth', 'Geant4::G4gdml', 'Geant4::G4physicslists', 'Geant4::G4processes', 'Geant4::G4readout', 'Geant4::G4run', 'Geant4::G4track', 'Geant4::G4tracking', 'Geant4::G4FR', 'Geant4::G4visHepRep', 'Geant4::G4RayTracer', 'Geant4::G4Tree', 'Geant4::G4VRML', 'Geant4::G4GMocren', 'Geant4::G4vis_management', 'Geant4::G4modeling', 'Geant4::G4ToolsSG', 'Geant4::G4OpenGL', 'Geant4::G4visQt3D'],
 #                         required : true)
@@ -33,14 +34,20 @@ foreach cflag : g4_cflags
         Geant4_flags += cflag
     endif
 endforeach
+G4_link_args = []
 Geant4_link_args = run_command('geant4-config', '--libs', check : true).stdout().strip().split()
+foreach link_arg : Geant4_link_args
+    if link_arg.contains('geant4') or link_arg.contains('G4')
+        G4_link_args += link_arg
+    endif
+endforeach
 geant4_deps = declare_dependency(
     include_directories : Geant4_inc_dirs,
-    link_args : Geant4_link_args,
+    link_args : G4_link_args,
     compile_args : Geant4_flags
 )
 
-sqlite_dep = dependency('sqlite3', required : false)
+sqlite_dep = dependency('sqlite3')
 
 
 # init lists
@@ -67,6 +74,8 @@ subdir('eventDispenser')
 subdir('g4display')
 subdir('gsystem')
 subdir('g4system')
+subdir('gparticle')
+subdir('gphysics')
 
 
 # compilation loop
@@ -82,7 +91,7 @@ foreach L : LD
 
     if not moc_headers.contains('')
         moc_sources = qt5.compile_moc(headers : moc_headers,
-                                       dependencies : this_deps)
+                                      dependencies : this_deps)
     endif
 
     if not sources.contains('')
@@ -100,64 +109,68 @@ foreach L : LD
         foreach dep : this_deps
             if not all_deps.contains(dep)
                 all_deps += dep
+#                type = dep.type_name()
+#                if type == 'internal'
+#                    message('Internal dependency: ' + dep.get_variable(internal: 'link_args', default_value: 'na') + ', name: ' + dep.name())
+#                endif
             endif
         endforeach
     endif
 
-    # header files
-    install_headers(L['headers'])
+        # header files
+        install_headers(L['headers'])
 
-    #  plugins
-    if plugins != empty_dict
-        foreach name, sources : plugins
-            shared_library(
+        #  plugins
+        if plugins != empty_dict
+            foreach name, sources : plugins
+                shared_library(
+                    name,
+                    sources[0],
+                    install : sources[1],
+                    dependencies : this_deps,
+                    include_directories : all_includes + this_lib_name,
+                    link_with : all_libs,
+                    name_suffix : 'gplugin',
+                    name_prefix : ''
+                )
+            endforeach
+        endif
+
+        # examples
+        foreach name, sources_and_arguments : L['examples']
+            exe = executable(
                 name,
-                sources[0],
-                install : sources[1],
+                sources_and_arguments[0],
+                install : true,
                 dependencies : this_deps,
                 include_directories : all_includes + this_lib_name,
-                link_with : all_libs,
-                name_suffix : 'gplugin',
-                name_prefix : ''
+                link_with : all_libs
             )
+            test(' ## ' + this_lib_name + ' test ##  >>  ' + name,
+                 exe,
+                 args : sources_and_arguments[1])
         endforeach
-    endif
 
-    # examples
-    foreach name, sources_and_arguments : L['examples']
-        exe = executable(
-            name,
-            sources_and_arguments[0],
-            install : true,
-            dependencies : this_deps,
-            include_directories : all_includes + this_lib_name,
-            link_with : all_libs
-        )
-        test(' ## ' + this_lib_name + ' test ##  >>  ' + name,
-             exe,
-             args : sources_and_arguments[1])
-    endforeach
-
-    foreach include_dir : additional_includes
-        if not all_includes.contains(include_dir)
-            all_includes += include_dir
+        foreach include_dir : additional_includes
+            if not all_includes.contains(include_dir)
+                all_includes += include_dir
+            endif
+        endforeach
+        if not all_includes.contains(this_lib_name)
+            all_includes += this_lib_name
         endif
     endforeach
-    if not all_includes.contains(this_lib_name)
-        all_includes += this_lib_name
-    endif
-endforeach
 
 
 
 
 
-# generate pkg-config file
-pkg = import('pkgconfig')
-pkg.generate(
-    name : meson.project_name(),
-    description : project_description,
-    #requires : all_deps, # pkg-config dependencies only
-    version : meson.project_version(),
-    libraries : all_libs
-)
+    # generate pkg-config file
+    pkg = import('pkgconfig')
+    pkg.generate(
+        name : meson.project_name(),
+        description : project_description,
+        #requires : all_deps, # pkg-config dependencies only
+        version : meson.project_version(),
+        libraries : all_libs
+    )

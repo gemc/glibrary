@@ -25,6 +25,6 @@ LD += {
     'additional_includes' : ['gdata/event'],
     'dependencies' : [geant4_deps, clhep_deps],
     'examples' : {
-        'event_data' : [files(['examples/event_data.cc']), ['']],
+        'gdata_event' : [files(['examples/event_data.cc']), ['']],
     }
 }

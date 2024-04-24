@@ -11,7 +11,7 @@ LD += {
                           'goptionsConventions.h'
                       ]),
     'examples' : {
-        'basic_option' : [files(['examples/simple.cc']), [meson.current_source_dir() + '/examples/simple.jcard']],
-        'structured' : [files(['examples/structured.cc']), [meson.current_source_dir() + '/examples/structured.jcard']]
+        'goption_basic' : [files(['examples/simple.cc']), [meson.current_source_dir() + '/examples/simple.jcard']],
+        'goption_structured' : [files(['examples/structured.cc']), [meson.current_source_dir() + '/examples/structured.jcard']]
     }
 }
