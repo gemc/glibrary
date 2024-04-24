@@ -65,8 +65,6 @@ GOptions::GOptions(int argc, char *argv[], vector<GOption> goptionDefinitions)
 		printOptionsWebHelp();
 	}
 
-
-
 	// parsing command line to check if any switch is turned on
 	for(int i=1; i<argc; i++) {
 		string candidateSwitch = string(argv[i]);
@@ -387,7 +385,7 @@ vector<GOption> &operator += (vector<GOption> &original, vector<GOption> options
 	for(const auto &optionToadd : optionsToAdd) {
 		original.push_back(optionToadd);
 	}
-	
+
 	return original;
 }
 
@@ -453,4 +451,3 @@ void GOptions::printOptionsWebHelp()
 	cout << RST << endl;
 	exit(EXIT_SUCCESS);
 }
-

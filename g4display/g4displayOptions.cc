@@ -144,9 +144,6 @@ namespace g4display {
         goptions += addViewTextsOptions();
 
 
-        // batch option
-        goptions.push_back(GOption("no_display", "batch mode. No GUI is displayed"));
-
         return goptions;
     }
 

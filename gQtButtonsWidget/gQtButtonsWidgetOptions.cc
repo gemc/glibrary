@@ -4,11 +4,14 @@
 namespace gQtButtonsWidget {
 
 // returns array of options definitions
-vector<GOption> defineOptions() {
-	
-	vector<GOption> goptions;
-	
-	return goptions;
-}
+    vector<GOption> defineOptions() {
+
+        vector<GOption> goptions;
+
+        // "gui" switch
+        //goptions.push_back(GOption("gui", "use Graphical User Interface"));
+
+        return goptions;
+    }
 
 }

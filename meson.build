@@ -76,6 +76,7 @@ subdir('gsystem')
 subdir('g4system')
 subdir('gparticle')
 subdir('gphysics')
+subdir('gQtButtonsWidget')
 
 
 # compilation loop
@@ -88,10 +89,15 @@ foreach L : LD
     additional_includes = L.get('additional_includes', [''])
     moc_headers = L.get('moc_headers', [''])
     moc_sources = []
+    qrc_sources = L.get('qrc_sources', [''])
+
 
     if not moc_headers.contains('')
         moc_sources = qt5.compile_moc(headers : moc_headers,
                                       dependencies : this_deps)
+    endif
+    if not qrc_sources.contains('')
+        qt5.compile_resources(sources: qrc_sources)
     endif
 
     if not sources.contains('')

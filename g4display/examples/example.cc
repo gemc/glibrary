@@ -39,14 +39,9 @@ int main(int argc, char* argv[])
 	window->show();
 	delete g4SceneProperties;
 
-    // if -b command line option is given, print a message
-    if (gopts->getSwitch("no_display")) {
-        cout << "Exiting after displaying the UI" << endl;
-        return EXIT_SUCCESS;
+    if (gopts->getSwitch("gui")) {
+        return app.exec();
     }
-
-
-    app.exec();
 
     return EXIT_SUCCESS;
 
