@@ -1,7 +1,7 @@
 // gstreamer
 #include "../gstreamerJLABSROFactory.h"
 
-bool GstreamerJSROFactory::publishPayload(const vector<GIntegralPayload *> *payload) {
+bool GstreamerJSROFactory::publishPayload([[maybe_unused]] const vector<GIntegralPayload *> *payload) {
     if (ofile == nullptr) return false;
 
     static constexpr int header_offset = sizeof(DataFrameHeader) / 4;

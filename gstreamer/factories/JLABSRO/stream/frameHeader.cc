@@ -5,7 +5,7 @@
 #include<vector>
 #include <iostream>
 
-bool GstreamerJSROFactory::publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader) 
+bool GstreamerJSROFactory::publishFrameHeader([[maybe_unused]] const GFrameDataCollectionHeader *gframeHeader)
 {
 	if(ofile == nullptr) return false;
 	

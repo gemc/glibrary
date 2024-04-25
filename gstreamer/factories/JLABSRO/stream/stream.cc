@@ -87,7 +87,7 @@ bool GstreamerJSROFactory::startStream(const GFrameDataCollection *frameRunData)
 }
 
 
-bool GstreamerJSROFactory::endStream(const GFrameDataCollection *frameRunData) {
+bool GstreamerJSROFactory::endStream([[maybe_unused]] const GFrameDataCollection *frameRunData) {
     if (ofile == nullptr) return false;
 
 

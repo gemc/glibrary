@@ -44,19 +44,24 @@ sqlite_dep = dependency('sqlite3')
 # Doing this manually
 root_cmake = dependency('root', version : '>=6.28.04')
 
-if root_cmake.found()
-    ROOT_link_args = []
+if get_option('use_root')
 
-    ROOT_inc_dirs = include_directories(run_command('root-config', '--incdir', check : true).stdout().strip())
-    ROOT_config_link_args = run_command('root-config', '--libs', check : true).stdout().strip().split()
-    foreach link_arg : ROOT_config_link_args
-        if link_arg.contains('root') or link_arg.contains('Core') or link_arg.contains('RIO') or link_arg.contains('Tree')
-            ROOT_link_args += link_arg
-        endif
-    endforeach
+    if root_cmake.found()
+        ROOT_link_args = []
 
-    root_deps = declare_dependency(
-        include_directories : ROOT_inc_dirs,
-        link_args : ROOT_link_args,
-    )
+        ROOT_inc_dirs = include_directories(run_command('root-config', '--incdir', check : true).stdout().strip())
+        ROOT_config_link_args = run_command('root-config', '--libs', check : true).stdout().strip().split()
+        foreach link_arg : ROOT_config_link_args
+            if link_arg.contains('root') or link_arg.contains('Core') or link_arg.contains('RIO') or link_arg.contains('Tree')
+                ROOT_link_args += link_arg
+            endif
+        endforeach
+
+        root_deps = declare_dependency(
+            include_directories : ROOT_inc_dirs,
+            link_args : ROOT_link_args,
+        )
+    endif
+else
+    root_deps = dependency('dummy-root-dep', required : false)
 endif
