@@ -26,10 +26,10 @@ GSplash::GSplash(string imageName) : splash(nullptr)
 			gexit(EC__NOSPLASHENVFOUND);
 		}
 
-		cout << " Need to add gutilities and goptions but loading image from environment" << endl;
+		cout << " TODO: Need to add gutilities and goptions but loading image from environment" << endl;
 
 	} else {
-		string resourceImage = ":/" + imageName;
+		string resourceImage = ":" + imageName;
 
 		QPixmap pixmap(resourceImage.c_str());
 		splash = new QSplashScreen(pixmap);
@@ -47,4 +47,3 @@ void GSplash::message(string msg) {
 		qApp->processEvents();
 	}
 }
-

@@ -24,6 +24,6 @@ LD += {
     'dependencies' : [geant4_deps, qt5_deps, clhep_deps],
     'additional_includes' : ['g4display/tabs'],
     'examples' : {
-        'basic_display' : [files(['examples/example.cc']), [meson.current_source_dir() + '/examples/example.jcard', '-no_display']],
+        'basic_display' : [files(['examples/example.cc']), [meson.current_source_dir() + '/examples/example.jcard']],
     }
 }

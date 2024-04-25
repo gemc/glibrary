@@ -12,7 +12,7 @@ LD += {
     'moc_headers' : files([
                               'gQtButtonsWidget.h'
                           ]),
-    'qrc_sources' : files([
+    'qrc_examples_sources' : files([
                               'examples/exampleResources.qrc'
                           ]),
     'dependencies' : [qt5_deps],
