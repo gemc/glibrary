@@ -1,5 +1,5 @@
 // gstreamer
-#include "gstreamerTEXTFactory.h"
+#include "../gstreamerTEXTFactory.h"
 
 bool GstreamerTextFactory::publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader) 
 {
@@ -11,5 +11,3 @@ bool GstreamerTextFactory::publishFrameHeader(const GFrameDataCollectionHeader *
 
 	return true;
 }
-
-

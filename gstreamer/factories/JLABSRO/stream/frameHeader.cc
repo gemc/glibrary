@@ -1,5 +1,5 @@
 // gstreamer
-#include "gstreamerJLABSROFactory.h"
+#include "../gstreamerJLABSROFactory.h"
 
 // c++
 #include<vector>
@@ -19,5 +19,3 @@ bool GstreamerJSROFactory::publishFrameHeader(const GFrameDataCollectionHeader *
 	
 	
 }
-
-

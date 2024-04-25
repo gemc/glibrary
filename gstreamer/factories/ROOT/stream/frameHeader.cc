@@ -1,11 +1,8 @@
 // gstreamer
-#include "gstreamerROOTFactory.h"
+#include "../gstreamerROOTFactory.h"
 
-bool GstreamerRootFactory::publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader) 
-{
-	if(rootfile == nullptr) return false;
+bool GstreamerRootFactory::publishFrameHeader(const GFrameDataCollectionHeader *gframeHeader) {
+    if (rootfile == nullptr) return false;
 
-	return true;
+    return true;
 }
-
-

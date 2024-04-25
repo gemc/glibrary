@@ -1,16 +1,16 @@
 // gstreamer
-#include "gstreamerROOTFactory.h"
+#include "../gstreamerROOTFactory.h"
 
-bool GstreamerRootFactory::publishEventDigitizedData(const string detectorName, const vector<GDigitizedData*>* digitizedData) {
+bool GstreamerRootFactory::publishEventDigitizedData(const string detectorName, const vector<GDigitizedData *> *digitizedData) {
 
-	if(rootfile == nullptr) return false;
+    if (rootfile == nullptr) return false;
 
-	// get or instantiate root tree from the map
-	if ( digitizedData->size() ) {
-		GRootTree *digitizedDataTree = getOrInstantiateDigitizedDataTree(detectorName, digitizedData->front() );
+    // get or instantiate root tree from the map
+    if (digitizedData->size()) {
+        GRootTree *digitizedDataTree = getOrInstantiateDigitizedDataTree(detectorName, digitizedData->front());
 
-		return digitizedDataTree->fillTree(digitizedData);
-	}
+        return digitizedDataTree->fillTree(digitizedData);
+    }
 
-	return false;
+    return false;
 }

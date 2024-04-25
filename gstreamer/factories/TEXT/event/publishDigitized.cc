@@ -1,5 +1,5 @@
 // gstreamer
-#include "gstreamerTEXTFactory.h"
+#include "../gstreamerTEXTFactory.h"
 
 bool GstreamerTextFactory::publishEventDigitizedData(const string detectorName, const vector<GDigitizedData*>* digitizedData) {
 

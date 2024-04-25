@@ -1,5 +1,5 @@
 // gstreamer
-#include "gstreamerROOTFactory.h"
+#include "../gstreamerROOTFactory.h"
 
 bool GstreamerRootFactory::startEvent(const GEventDataCollection* eventData)
 {

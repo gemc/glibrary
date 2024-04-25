@@ -3,7 +3,7 @@
 
 
 // pragma todo: pass someting like map<string, bitset> to each detector to decide which data to publish
-map<string, bool> GStreamer::publishEventRunData(const GOptions *gopts, const vector<GEventDataCollection*> runData) {
+map<string, bool> GStreamer::publishEventRunData([[maybe_unused]]  const GOptions *gopts, const vector<GEventDataCollection*> runData) {
 
 	map<string, bool> gstreamReport;
 
@@ -32,7 +32,7 @@ map<string, bool> GStreamer::publishEventRunData(const GOptions *gopts, const ve
 
 
 // stream an individual frame
-map<string, bool> GStreamer::publishFrameRunData(const GOptions *gopts, const GFrameDataCollection* frameRunData) {
+map<string, bool> GStreamer::publishFrameRunData([[maybe_unused]] const GOptions *gopts, const GFrameDataCollection* frameRunData) {
 	map<string, bool> gstreamReport;
 
 	gstreamReport["Frame Stream report #1 <startStream>: "] = startStream(frameRunData);
@@ -42,4 +42,3 @@ map<string, bool> GStreamer::publishFrameRunData(const GOptions *gopts, const GF
 
 	return gstreamReport;
 }
-

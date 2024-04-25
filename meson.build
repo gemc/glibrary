@@ -33,6 +33,7 @@ subdir('gparticle')
 subdir('gphysics')
 subdir('gQtButtonsWidget')
 subdir('gsplash')
+subdir('gstreamer')
 
 
 # compilation loop
@@ -76,10 +77,6 @@ foreach L : LD
         foreach dep : this_deps
             if not all_deps.contains(dep)
                 all_deps += dep
-                #                type = dep.type_name()
-                #                if type == 'internal'
-                #                    message('Internal dependency: ' + dep.get_variable(internal: 'link_args', default_value: 'na') + ', name: ' + dep.name())
-                #                endif
             endif
         endforeach
     endif

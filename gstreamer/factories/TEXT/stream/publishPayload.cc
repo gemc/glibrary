@@ -1,5 +1,5 @@
 // gstreamer
-#include "gstreamerTEXTFactory.h"
+#include "../gstreamerTEXTFactory.h"
 
 bool GstreamerTextFactory::publishPayload(const vector<GIntegralPayload*> *payload)
 {
@@ -20,5 +20,3 @@ bool GstreamerTextFactory::publishPayload(const vector<GIntegralPayload*> *paylo
 
 	return true;
 }
-
-

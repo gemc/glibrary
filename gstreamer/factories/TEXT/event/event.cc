@@ -1,5 +1,5 @@
 // gstreamer
-#include "gstreamerTEXTFactory.h"
+#include "../gstreamerTEXTFactory.h"
 
 bool GstreamerTextFactory::startEvent(const GEventDataCollection* eventData)
 {

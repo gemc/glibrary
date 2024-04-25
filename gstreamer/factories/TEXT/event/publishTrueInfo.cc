@@ -1,5 +1,5 @@
 // gstreamer
-#include "gstreamerTEXTFactory.h"
+#include "../gstreamerTEXTFactory.h"
 
 bool GstreamerTextFactory::publishEventTrueInfoData(const string detectorName, const vector<GTrueInfoData*>* trueInfoData) {
 

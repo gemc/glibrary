@@ -6,10 +6,9 @@
 using namespace std;
 
 
-int main(int argc, char* argv[])
+int main()
 {
 
 
-	return 1;
+	return EXIT_SUCCESS;
 }
-
