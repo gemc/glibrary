@@ -1,2 +1,0 @@
-# this is an option because root has many warnings.
-option('use_root', type: 'boolean', value: false, description: 'If false, do not look for root')
