@@ -5,3 +5,8 @@
 - Add this at the top of each class definition
 // Class GMAPCOORDINATES
 // Thread Type: GLOBAL
+
+
+
+
+- cmake: move common code onto glibrary

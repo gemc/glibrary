@@ -3,7 +3,7 @@
 # Purpose: Runs the example in sci-g
 
 # Container run:
-# docker run -it --rm jeffersonlab/gemc3:1.0 sh
+# docker run -it --rm jeffersonlab/gemc3:dev-fedora36 sh
 # git clone http://github.com/gemc/glibrary /root/glibrary && cd /root/glibrary
 # git clone http://github.com/maureeungaro/glibrary /root/glibrary && cd /root/glibrary
 # ./ci/testSciG.sh -e examples/dosimeter
